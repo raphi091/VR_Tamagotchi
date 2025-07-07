@@ -1,0 +1,35 @@
+using System.Collections.Generic;
+using Microsoft.Unity.VisualStudio.Editor;
+using UnityEngine;
+
+public enum personalityTepy
+{
+    None,
+    Grumpy, //까칠함
+    Timid, //소심함
+    Curious //호기심
+}
+
+public enum foodTepy
+{
+    None,
+    Dry, // 건식
+    Wet, // 습식
+    Treat // 간식
+}
+
+[CreateAssetMenu(fileName = "NewPetPersonality", menuName = "Pet/PersonalityData")]
+public class PersonalityData_LES : ScriptableObject
+{
+    [Header("성격종류")]
+    public personalityTepy tepy;
+    [Tooltip("친밀도")] public float intimacy;
+    [Tooltip("행복도")] public float Happiness;
+    [Tooltip("이름")] public string name;
+    [Tooltip("나이")] public int age;
+    [Tooltip("성별")] public List<Image> sexuality;
+    [Tooltip("먹이")] public foodTepy foodTepy;
+    [Tooltip("체력")] public float health;
+    [Tooltip("배변활동")] public float bowel_movement;
+}
+
