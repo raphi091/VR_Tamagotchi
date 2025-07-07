@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using CustomInspector;
 using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 
@@ -21,6 +22,7 @@ public enum foodTepy
 [CreateAssetMenu(fileName = "NewPetPersonality", menuName = "Pet/PersonalityData")]
 public class PersonalityData_LES : ScriptableObject
 {
+
     [Header("성격종류")]
     public personalityTepy tepy;
     [Tooltip("친밀도")] public float intimacy;
@@ -31,5 +33,7 @@ public class PersonalityData_LES : ScriptableObject
     [Tooltip("먹이")] public foodTepy foodTepy;
     [Tooltip("체력")] public float health;
     [Tooltip("배변활동")] public float bowel_movement;
+    [Tooltip("이동 속도"), AsRange(0,10)] public Vector2 walkSpeed;
+    [Tooltip("이동 반경")] public float MovingRang;
 }
 
