@@ -33,7 +33,7 @@ public class PersonalityData_LES : ScriptableObject
     [Tooltip("먹이")] public foodTepy foodTepy;
     [Tooltip("체력")] public float health;
     [Tooltip("배변활동")] public float bowel_movement;
-    [Tooltip("이동 속도"), AsRange(0,10)] public Vector2 walkSpeed;
+    [Tooltip("이동 속도"), AsRange(0,10)] public float walkSpeed;
     [Tooltip("이동 반경")] public float MovingRang;
 }
 
