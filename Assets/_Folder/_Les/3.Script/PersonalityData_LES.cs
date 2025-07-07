@@ -26,14 +26,21 @@ public class PersonalityData_LES : ScriptableObject
     [Header("성격종류")]
     public personalityTepy tepy;
     [Tooltip("친밀도")] public float intimacy;
-    [Tooltip("행복도")] public float Happiness;
     [Tooltip("이름")] public string name;
     [Tooltip("나이")] public int age;
     [Tooltip("성별")] public List<Image> sexuality;
     [Tooltip("먹이")] public foodTepy foodTepy;
-    [Tooltip("체력")] public float health;
     [Tooltip("배변활동")] public float bowel_movement;
-    [Tooltip("이동 속도"), AsRange(0,10)] public float walkSpeed;
+    [Tooltip("이동 속도"), Range(0f,10f)] public float walkSpeed;
     [Tooltip("이동 반경")] public float MovingRang;
-}
 
+    [HorizontalLine("낯가림 수치", color: FixedColor.Cyan),HideField] public bool _b0;
+    [Tooltip("이동 속도"), Range(0f,10f)] public float Shy_walkSpeed;
+    [Tooltip("이동 반경")] public float Sky_MovingRang;
+
+    [HorizontalLine("활발할 때 수치", color: FixedColor.Cyan),HideField] public bool _b1;
+    [Tooltip("이동 속도"), Range(0f,10f)] public float Active_walkSpeed;
+    [Tooltip("이동 반경")] public float Active_MovingRang;
+    
+    
+}
