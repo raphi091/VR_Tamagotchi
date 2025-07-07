@@ -16,17 +16,44 @@ public class DogFSM_K : MonoBehaviour
     public enum State { Setup, Wander, Playing, Interaction, Hunger, Toilet}
     [Header("AI 상태")]
     [SerializeField] private State currentState;
-    // [SerializeField] private PetData data;
+    [SerializeField] private PersonalityData_LES data;
 
     private Transform player;
     private NavMeshAgent agent;
     private CharacterController controller;
     private Animator animator;
     private float lastStateChangeTime;
+    private float hungerpercent;
+    private float bowelpercent;
     private bool isWandering;
 
     private Coroutine currentStateCoroutine;
 
+    private void Awake()
+    {
+        if (!TryGetComponent(out agent))
+            Debug.LogWarning("DogFSM ] NavMeshAgent 없음");
+
+        if (!TryGetComponent(out controller))
+            Debug.LogWarning("DogFSM ] CharacterController 없음");
+
+        if (!TryGetComponent(out animator))
+            Debug.LogWarning("DogFSM ] Animator 없음");
+
+        hungerpercent = 80f;
+        bowelpercent = data.bowel_movement;
+    }
+
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
+    private void Update()
+    {
+        hungerpercent -= Time.deltaTime * 0.6f;
+        bowelpercent -= Time.deltaTime * 0.6f;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -106,8 +133,14 @@ public class DogFSM_K : MonoBehaviour
         {
             yield return null;
 
-            // 배고플때
-            // 배변활동
+            if (bowelpercent <= 10f)
+            {
+                EnterState(State.Toilet);
+            }
+            if (hungerpercent <= 10f)
+            {
+                EnterState(State.Hunger);
+            }
 
             if (isWandering)
             {
@@ -122,18 +155,35 @@ public class DogFSM_K : MonoBehaviour
                 if (Time.time > lastStateChangeTime + 5f)
                 {
                     int randAction = Random.Range(0, 10);
+                    float rang;
+                    float movespeed;
 
                     if (randAction < 5)
                     {
-
-                        Vector3 randomDirection = Random.insideUnitSphere * 2 /*data.wanderRadius*/;
+                        if (data.intimacy >= 80)
+                        {
+                            rang = data.Active_MovingRang;
+                            movespeed = data.Active_walkSpeed;
+                        }
+                        else if (data.intimacy >= 20)
+                        {
+                            rang = data.MovingRang;
+                            movespeed = data.walkSpeed;
+                        }
+                        else
+                        {
+                            rang = data.Sky_MovingRang;
+                            movespeed = data.Shy_walkSpeed;
+                        }           
+                        
+                        Vector3 randomDirection = Random.insideUnitSphere * rang;
                         randomDirection += transform.position;
 
                         NavMeshHit hit;
-                        NavMesh.SamplePosition(randomDirection, out hit, 2 /*data.wanderRadius*/, 1);
+                        NavMesh.SamplePosition(randomDirection, out hit, rang, 1);
                         Vector3 finalPosition = hit.position;
 
-                        agent.speed = 2 /*data.walkspeed*/;
+                        agent.speed = movespeed;
                         agent.SetDestination(finalPosition);
                         agent.isStopped = false;
                         isWandering = true;
@@ -156,6 +206,8 @@ public class DogFSM_K : MonoBehaviour
 
     private IEnumerator Play_co()
     {
+        // 애니메이션 확인 후 작업
+
         yield return null;
 
         EnterState(State.Wander);
