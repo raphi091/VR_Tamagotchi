@@ -134,11 +134,19 @@ public class DogFSM_K : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        if (other.CompareTag("PlayerHand") && currentState == State.Stroking)
+        {
+            EnterState(State.Interaction);
+        }
+
         if (other.CompareTag("Player"))
         {
             // "나 이제 갈게" 라고 매니저에게 알림
             DogInteractionManager_K.instance.CancelRequest(this);
-            EnterState(State.Wander);
+            if (isSelected)
+            {
+                ReturnToWander();
+            }
         }
     }
 
@@ -356,17 +364,17 @@ public class DogFSM_K : MonoBehaviour
         cubeRenderer.material.color = Color.blue;
         //TEMP
 
-        Debug.Log("쓰다듬기 시작!");
+        Debug.Log("쓰다듬는 중...");
         agent.isStopped = true;
 
-        // "Stroking" 애니메이션을 여기서 재생할 수 있습니다.
-        // animator.SetTrigger("Stroking");
+        // "Stroking_Loop" 같은 반복 애니메이션을 여기서 재생할 수 있습니다.
+        // animator.SetBool("isStroking", true);
 
-        // 3초 동안 쓰다듬는 애니메이션을 재생한다고 가정
-        yield return new WaitForSeconds(3f);
-
-        // 쓰다듬기가 끝나면, 다시 다른 상호작용을 기다리는 'Interaction' 상태로 돌아갑니다.
-        EnterState(State.Interaction);
+        // OnTriggerExit에 의해 상태가 변경될 때까지 이 상태를 무한히 유지합니다.
+        while (true)
+        {
+            yield return null;
+        }
     }
 
     public void CommandSit()
@@ -496,8 +504,7 @@ public class DogFSM_K : MonoBehaviour
 
         Debug.Log($"{name}: 저 왔어요!");
 
-        // 도착한 후에는 상호작용을 위해 Interaction 상태로 전환
-        EnterState(State.Interaction);
+        EnterState(State.InteractionRequest);
     }
 
     public State GetCurrentState()
