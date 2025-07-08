@@ -8,6 +8,9 @@ public class DogInteractionManager_K : MonoBehaviour
 
     private List<DogFSM_K> requestingDogs = new List<DogFSM_K>();
 
+    private DogFSM_K activeDog = null;
+
+
     private void Awake()
     {
         if (instance == null)
@@ -30,7 +33,7 @@ public class DogInteractionManager_K : MonoBehaviour
         }
     }
 
-    // 강아지가 상호작용 요청을 취소할 때 (플레이어 영역을 벗어날 때)
+    // 강아지가 상호작용 요청을 취소할 때
     public void CancelRequest(DogFSM_K dog)
     {
         if (requestingDogs.Contains(dog))
@@ -42,29 +45,60 @@ public class DogInteractionManager_K : MonoBehaviour
     // 플레이어가 특정 강아지를 '선택'했을 때 호출하는 함수
     public void SelectDog(DogFSM_K selectedDog)
     {
-        if (!requestingDogs.Contains(selectedDog))
+        if (!requestingDogs.Contains(selectedDog)) return;
+
+        DogFSM_K.State dogState = selectedDog.GetCurrentState();
+
+        switch (dogState)
         {
-            Debug.Log("이 강아지는 상호작용을 요청한 상태가 아닙니다.");
-            return;
+            case DogFSM_K.State.Hunger:
+                // 강아지가 배고픈 상태라면, 바로 '간식 주기' 로직을 실행
+                Debug.Log($"[Manager] {selectedDog.name}은(는) 배고픈 상태입니다. 간식을 줍니다.");
+                selectedDog.ReceiveSnack();
+                // 간식을 주면 상호작용이 끝났으므로, 다른 강아지들도 Wander 상태로 돌려보냄
+                DeselectAllDogs();
+                break;
+
+            case DogFSM_K.State.InteractionRequest:
+                // 일반적인 상호작용 요청이라면, 이전과 동일하게 선택 절차를 진행
+                Debug.Log($"[Manager] {selectedDog.name}을(를) 상호작용 대상으로 선택합니다.");
+                ConfirmAndDeselectOthers(selectedDog);
+                break;
+
+            default:
+                // 그 외 다른 상태라면 일단 선택 절차 진행
+                ConfirmAndDeselectOthers(selectedDog);
+                break;
         }
+    }
 
-        Debug.Log($"{selectedDog.name} 선택됨! 상호작용을 시작합니다.");
+    public DogFSM_K GetActiveDog()
+    {
+        return activeDog;
+    }
 
-        // 선택된 강아지에게는 상호작용 시작 신호를 보냄
-        selectedDog.StartInteraction();
+    private void ConfirmAndDeselectOthers(DogFSM_K selectedDog)
+    {
+        activeDog = selectedDog;
+        activeDog.ConfirmSelection();
 
-        // 선택받지 못한 나머지 강아지들을 순회하며 Wander 상태로 돌려보냄
         for (int i = requestingDogs.Count - 1; i >= 0; i--)
         {
-            DogFSM_K dog = requestingDogs[i];
-            if (dog != selectedDog)
+            if (requestingDogs[i] != selectedDog)
             {
-                Debug.Log($"{dog.name}은(는) 선택받지 못해 Wander 상태로 돌아갑니다.");
-                dog.ReturnToWander();
+                requestingDogs[i].ReturnToWander();
             }
         }
+        requestingDogs.Clear();
+    }
 
-        // 모든 결정이 끝났으므로 요청 목록을 비움
+    // 모든 강아지를 Wander 상태로 되돌리는 함수
+    private void DeselectAllDogs()
+    {
+        for (int i = requestingDogs.Count - 1; i >= 0; i--)
+        {
+            requestingDogs[i].ReturnToWander();
+        }
         requestingDogs.Clear();
     }
 }

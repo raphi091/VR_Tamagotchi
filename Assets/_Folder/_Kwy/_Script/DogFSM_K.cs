@@ -14,25 +14,33 @@ public class DogFSM_K : MonoBehaviour
     배고프면 간식
     */
 
-    public enum State { Setup, Wander, Playing, Interaction, Stroking, Sit, Liedown, Hunger, Toilet}
+    public enum State { Setup, Wander, Playing, InteractionRequest, Interaction, Stroking, Sit, Liedown, Called, Hunger, Toilet}
     [Header("AI 상태")]
     [SerializeField] private State currentState;
     [SerializeField] private PersonalityData_LES data;
     [SerializeField] private Transform ToiletPoint;
+    [SerializeField] private Transform EatPoint;
 
-    private Transform player;
     private NavMeshAgent agent;
     private CharacterController controller;
     private Animator animator;
+    private Transform player;
+
     private float rotationSpeed = 10f;
     private float lastStateChangeTime;
     private float hungerpercent;
     private float bowelpercent;
+    private bool isSelected = false;
     private bool isWandering;
     private bool isHunger = false;
     private bool isBowel = false;
 
     private Coroutine currentStateCoroutine;
+
+
+    //TEMP
+    private Renderer cubeRenderer;
+    //TEMP
 
 
     private void Awake()
@@ -46,8 +54,15 @@ public class DogFSM_K : MonoBehaviour
         if (!TryGetComponent(out animator))
             Debug.LogWarning("DogFSM ] Animator 없음");
 
+        agent.updatePosition = false;
+        agent.updateRotation = false;
+
         hungerpercent = 80f;
         bowelpercent = data.bowel_movement;
+
+        //TEMP
+        cubeRenderer = GetComponentInChildren<Renderer>();
+        //TEMP
     }
 
     private void Start()
@@ -67,16 +82,14 @@ public class DogFSM_K : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
-        Vector3 finalMoveDelta;
-
-        finalMoveDelta = agent.velocity * Time.deltaTime;
+        Vector3 moveDelta = agent.velocity * Time.deltaTime;
 
         if (!controller.isGrounded)
         {
-            finalMoveDelta.y -= 20f * Time.deltaTime;
+            moveDelta.y -= 20f * Time.deltaTime;
         }
 
-        controller.Move(finalMoveDelta);
+        controller.Move(moveDelta);
     }
 
     //private void OnAnimatorMove()
@@ -106,15 +119,16 @@ public class DogFSM_K : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag("PlayerHand") && isSelected)
+        {
+            EnterState(State.Stroking);
+            return;
+        }
+
         if (other.CompareTag("Player"))
         {
-            // "나 상호작용하고 싶어!" 라고 매니저에게 요청
+            EnterState(State.InteractionRequest);
             DogInteractionManager_K.instance.RequestInteraction(this);
-
-            // 플레이어 근처에서 기다리는 상태로 전환 (선택적)
-            // EnterState(State.WaitingForSelection); 
-            // 혹은 기존 Interaction_co 코루틴이 플레이어를 바라보며 기다리므로 그대로 사용 가능
-            EnterState(State.Interaction);
         }
     }
 
@@ -128,7 +142,7 @@ public class DogFSM_K : MonoBehaviour
         }
     }
 
-    private void EnterState(State newState)
+    private void EnterState(State newState, object data = null)
     {
         if (currentStateCoroutine != null)
         {
@@ -160,14 +174,23 @@ public class DogFSM_K : MonoBehaviour
             case State.Playing:
                 currentStateCoroutine = StartCoroutine(Play_co());
                 break;
+            case State.InteractionRequest:
+                currentStateCoroutine = StartCoroutine(InteractionRequest_co());
+                break;
             case State.Interaction:
                 currentStateCoroutine = StartCoroutine(Interaction_co());
                 break;
             case State.Stroking:
+                currentStateCoroutine = StartCoroutine(Stroking_co());
                 break;
             case State.Sit:
+                currentStateCoroutine = StartCoroutine(Sit_co());
                 break;
             case State.Liedown:
+                currentStateCoroutine = StartCoroutine(Liedown_co());
+                break;
+            case State.Called:
+                currentStateCoroutine = StartCoroutine(Called_co(data as Transform));
                 break;
             case State.Hunger:
                 currentStateCoroutine = StartCoroutine(Hunger_co());
@@ -187,6 +210,10 @@ public class DogFSM_K : MonoBehaviour
 
     private IEnumerator Wander_co()
     {
+        //TEMP
+        cubeRenderer.material.color = Color.white;
+        //TEPM
+
         agent.isStopped = true;
         agent.ResetPath();
         isWandering = false;
@@ -276,8 +303,12 @@ public class DogFSM_K : MonoBehaviour
         EnterState(State.Wander);
     }
 
-    private IEnumerator Interaction_co()
+    private IEnumerator InteractionRequest_co()
     {
+        //TEMP
+        cubeRenderer.material.color = Color.gray;
+        //TEMP
+
         agent.isStopped = true;
         agent.ResetPath();
 
@@ -292,27 +323,142 @@ public class DogFSM_K : MonoBehaviour
         }
     }
 
-    public void StartInteraction()
+    private IEnumerator Interaction_co()
     {
-        // 이 함수가 호출되면, 진짜 상호작용(쓰다듬기, 손 주기 등)을 받을 준비를 함
-        // 현재 Interaction 상태의 코루틴이 이미 플레이어를 바라보고 있으므로
-        // 추가적인 상태 전환 없이 그대로 대기하면 됩니다.
-        Debug.Log($"{name}: 제가 선택되었군요! 다음 상호작용을 기다립니다.");
+        //TEMP
+        cubeRenderer.material.color = Color.green;
+        //TEMP
+
+        // 이 상태에 들어왔다는 것은 이미 선택이 완료되었다는 의미
+        while (isSelected) // isSelected가 false가 될 때까지 대기
+        {
+            // 여기서 쓰다듬기, 손 주기 등 구체적인 상호작용을 기다리거나 처리
+            yield return null;
+        }
+        EnterState(State.Wander); // 선택이 해제되면 Wander로 복귀
     }
 
-    // 매니저가 "넌 선택되지 않았어"라고 호출해 줄 함수
+    public void ConfirmSelection()
+    {
+        isSelected = true;
+        EnterState(State.Interaction);
+    }
+
     public void ReturnToWander()
     {
-        // 즉시 Wander 상태로 돌아감
+        isSelected = false;
         EnterState(State.Wander);
+    }
+
+    private IEnumerator Stroking_co()
+    {
+        //TEMP
+        cubeRenderer.material.color = Color.blue;
+        //TEMP
+
+        Debug.Log("쓰다듬기 시작!");
+        agent.isStopped = true;
+
+        // "Stroking" 애니메이션을 여기서 재생할 수 있습니다.
+        // animator.SetTrigger("Stroking");
+
+        // 3초 동안 쓰다듬는 애니메이션을 재생한다고 가정
+        yield return new WaitForSeconds(3f);
+
+        // 쓰다듬기가 끝나면, 다시 다른 상호작용을 기다리는 'Interaction' 상태로 돌아갑니다.
+        EnterState(State.Interaction);
+    }
+
+    public void CommandSit()
+    {
+        // 상호작용 대기 상태일 때만 '앉아' 명령을 수행
+        if (currentState == State.Interaction)
+        {
+            EnterState(State.Sit);
+        }
+    }
+
+    private IEnumerator Sit_co()
+    {
+        //TEMP
+        cubeRenderer.material.color = Color.yellow;
+        //TEMP
+
+        Debug.Log($"{name}: 앉습니다.");
+        agent.isStopped = true; // 앉는 동안은 움직이지 않음
+
+        // "Sit" 애니메이션을 여기서 재생
+        // animator.SetTrigger("Sit");
+
+        // 5초 동안 앉아있음
+        yield return new WaitForSeconds(5f);
+
+        // "StandUp" 애니메이션을 여기서 재생
+        // animator.SetTrigger("StandUp");
+
+        // 앉기가 끝나면 다시 다른 상호작용을 기다리는 'Interaction' 상태로 복귀
+        EnterState(State.Interaction);
+    }
+
+    public void CommandLiedown()
+    {
+        // 상호작용 대기 상태일 때만 '엎드려' 명령을 수행
+        if (currentState == State.Interaction)
+        {
+            EnterState(State.Liedown);
+        }
+    }
+
+    private IEnumerator Liedown_co()
+    {
+        Debug.Log($"{name}: 엎드립니다.");
+        agent.isStopped = true; // 앉는 동안은 움직이지 않음
+
+        // "Sit" 애니메이션을 여기서 재생
+        // animator.SetTrigger("Liedown");
+
+        // 5초 동안 앉아있음
+        yield return new WaitForSeconds(5f);
+
+        // "StandUp" 애니메이션을 여기서 재생
+        // animator.SetTrigger("StandUp");
+
+        // 앉기가 끝나면 다시 다른 상호작용을 기다리는 'Interaction' 상태로 복귀
+        EnterState(State.Interaction);
     }
 
     private IEnumerator Hunger_co()
     {
+        //TEMP
+        cubeRenderer.material.color = Color.red;
+        //TEMP
+        
+        Debug.Log($"{name}: 배고파요! 주인을 따라다닙니다.");
         isHunger = true;
-        agent.SetDestination(player.position);
+        agent.isStopped = false;
 
-        yield return StartCoroutine(Chasing_co());
+        while (isHunger)
+        {
+            // 0.25초마다 한 번씩 플레이어의 위치로 목적지를 갱신
+            agent.SetDestination(player.position);
+            yield return new WaitForSeconds(0.25f);
+        }
+
+        EnterState(State.Wander);
+    }
+
+    public void ReceiveSnack()
+    {
+        if (currentState == State.Hunger)
+        {
+            Debug.Log($"{name}: 간식 고맙습니다!");
+            hungerpercent = 100f;
+            isHunger = false;
+
+            // 친밀도를 올리거나 행복해하는 애니메이션을 잠시 보여줄 수 있음
+            // animator.SetTrigger("Happy");
+            data.intimacy += 5;
+        }
     }
 
     private IEnumerator Toilet_co()
@@ -323,72 +469,39 @@ public class DogFSM_K : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         isBowel = false;
+        bowelpercent = 100f;
         EnterState(State.Wander);
     }
 
-    private IEnumerator Chasing_co()
+    public void BeCalled(Transform target)
     {
-        if (currentStateCoroutine != null)
+        // 다른 중요한 상태(상호작용 중 등)가 아닐 때만 호출에 응답
+        if (currentState == State.Wander || currentState == State.Playing)
         {
-            StopCoroutine(currentStateCoroutine);
+            EnterState(State.Called, target);
         }
+    }
 
+    private IEnumerator Called_co(Transform target)
+    {
+        Debug.Log($"{name}: 부르셨나요? 지금 갑니다!");
         agent.isStopped = false;
-        agent.speed = data.walkSpeed;
+        agent.SetDestination(target.position);
 
-        float repathTimer = 0f;
-        float repathInterval = 0.2f;
-
-        while (true)
+        // 목표 지점에 도착할 때까지 대기
+        while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance)
         {
             yield return null;
-
-            repathTimer -= Time.deltaTime;
-            if (repathTimer <= 0f)
-            {
-                repathTimer = repathInterval;
-                agent.SetDestination(player.position);
-            }
-
-            agent.speed = data.walkSpeed;
-            agent.isStopped = false;
-            agent.SetDestination(player.position);
-
-            yield return null;
         }
+
+        Debug.Log($"{name}: 저 왔어요!");
+
+        // 도착한 후에는 상호작용을 위해 Interaction 상태로 전환
+        EnterState(State.Interaction);
     }
 
-    public void ReceiveInteraction(string interactionType)
+    public State GetCurrentState()
     {
-        if (currentState != State.Interaction) return;
-
-        Debug.Log($"플레이어로부터 '{interactionType}' 상호작용을 받았습니다!");
-
-        // 전달된 상호작용 타입에 따라 다른 행동을 시작
-        switch (interactionType)
-        {
-            case "Pat":
-                // 쓰다듬기 애니메이션을 재생하는 코루틴 등을 시작
-                StartCoroutine(Patting_co());
-                break;
-            case "ShakeHand":
-                // 악수하는 코루틴 시작
-                // StartCoroutine(ShakeHand_co());
-                break;
-        }
-    }
-
-    private IEnumerator Patting_co()
-    {
-        // "쓰다듬기" 애니메이션 재생
-        // animator.SetTrigger("Patting");
-        Debug.Log("강아지를 쓰다듬습니다...");
-
-        yield return new WaitForSeconds(3f); // 3초 동안 애니메이션 재생
-
-        // 상호작용이 끝났으니 다시 배회 상태로 돌아갈 수 있지만,
-        // 여기서는 플레이어가 벗어날 때까지 계속 상호작용을 기다리게 둡니다.
-        // 플레이어가 영역을 나가면 OnTriggerExit가 Wander 상태로 바꿔줄 것입니다.
-        Debug.Log("쓰다듬기 완료. 다음 상호작용 대기 중...");
+        return currentState;
     }
 }
