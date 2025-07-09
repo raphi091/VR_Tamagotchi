@@ -12,7 +12,7 @@ public class PlayerDogCommander_K : MonoBehaviour
     [Header("근거리 명령 (선택된 강아지 대상)")]
     public InputActionReference sitAction; // '앉아' 명령에 사용할 버튼
     public InputActionReference lieDownAction; // '엎드려' 명령에 사용할 버튼
-    public InputActionReference Action; // '엎드려' 명령에 사용할 버튼
+    public InputActionReference catchAction; // '엎드려' 명령에 사용할 버튼
 
     private DogInteractionManager_K interactionManager;
 
@@ -22,20 +22,22 @@ public class PlayerDogCommander_K : MonoBehaviour
         interactionManager = DogInteractionManager_K.instance;
 
         // 각 입력 액션이 수행될 때(버튼이 눌릴 때) 해당하는 함수를 연결(구독)합니다.
-        callAction.action.performed += context => CallDog();
-        sitAction.action.performed += context => TryCommandSit();
-        lieDownAction.action.performed += context => TryCommandLieDown();
+        callAction.action.performed += CallDog;
+        sitAction.action.performed += TryCommandSit;
+        lieDownAction.action.performed += TryCommandLieDown;
+        catchAction.action.performed += TryCommandCatch;
     }
 
     private void OnDestroy()
     {
         // 오브젝트가 파괴될 때, 연결했던 함수들을 해제(구독 취소)합니다.
-        callAction.action.performed -= context => CallDog();
-        sitAction.action.performed -= context => TryCommandSit();
-        lieDownAction.action.performed -= context => TryCommandLieDown();
+        callAction.action.performed -= CallDog;
+        sitAction.action.performed -= TryCommandSit;
+        lieDownAction.action.performed -= TryCommandLieDown;
+        catchAction.action.performed -= TryCommandCatch;
     }
 
-    private void CallDog()
+    private void CallDog(InputAction.CallbackContext context)
     {
         RaycastHit hit;
         if (Physics.Raycast(rightHandController.position, rightHandController.forward, out hit, 50f))
@@ -48,7 +50,7 @@ public class PlayerDogCommander_K : MonoBehaviour
         }
     }
 
-    private void TryCommandSit()
+    private void TryCommandSit(InputAction.CallbackContext context)
     {
         DogFSM_K activeDog = interactionManager.GetActiveDog();
         if (activeDog != null)
@@ -57,7 +59,7 @@ public class PlayerDogCommander_K : MonoBehaviour
         }
     }
 
-    private void TryCommandLieDown()
+    private void TryCommandLieDown(InputAction.CallbackContext context)
     {
         DogFSM_K activeDog = interactionManager.GetActiveDog();
         if (activeDog != null)
@@ -66,7 +68,7 @@ public class PlayerDogCommander_K : MonoBehaviour
         }
     }
 
-    private void TryCommandCatch()
+    private void TryCommandCatch(InputAction.CallbackContext context)
     {
         // if (손에 막대기가 없으면) return;
 

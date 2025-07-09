@@ -77,13 +77,25 @@ public class LobbyManager_J : MonoBehaviour
 
         void SetupPreviewCards()
         {
-            for (int i = 0; i < displayCards.Length; i++)
+        // 1. 데이터의 원천인 temporaryClassPets(Dictionary)를 기준으로 반복합니다.
+        int index = 0;
+        foreach (var entry in temporaryClassPets)
+        {
+            // 2. 카드가 배열의 범위를 벗어나지 않는지 확인합니다.
+            if (index < displayCards.Length)
             {
-                string className = displayCards[i].GetClassName();
-                List<PetStatusData_J> petsToShow = temporaryClassPets[className];
-                displayCards[i].SetupCard(className, petsToShow);
+                // 3. Dictionary에서 key(반 이름)와 value(펫 리스트)를 먼저 꺼냅니다.
+                string className = entry.Key;
+                List<PetStatusData_J> petsToShow = entry.Value;
+
+                // 4. 이렇게 꺼내온 유효한 정보를 카드에 전달하여 설정을 완료합니다.
+                displayCards[index].SetupCard(className, petsToShow);
+
+                // 5. 다음 카드로 넘어가기 위해 인덱스를 증가시킵니다.
+                index++;
             }
         }
+    }
 
 
         public void OnClickContinue()
@@ -99,7 +111,7 @@ public class LobbyManager_J : MonoBehaviour
         GameManager.instance.CreateNewGameData(className, selectedPets);
 
         // 3. 게임 씬으로 이동
-        SceneManager.LoadScene("IndoorScene");
+        SceneManager.LoadScene("H_Indoor");
         //GameManager
     }
 }

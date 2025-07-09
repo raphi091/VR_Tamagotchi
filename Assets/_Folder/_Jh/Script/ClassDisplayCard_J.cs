@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClassDisplayCard_J : MonoBehaviour
+public class ClassDisplayCard_J : MonoBehaviour, H_UI
 {
     public PetDisplaySlot_J[] petSlots = new PetDisplaySlot_J[3];
 
@@ -42,8 +42,12 @@ public class ClassDisplayCard_J : MonoBehaviour
     }
 
     // 카드를 클릭했을 때 로비 매니저에게 알림
-    private void OnMouseDown()
+    public void OnPress()
     {
-       FindObjectOfType<LobbyManager_J>().OnSelectClass(this.className);
+        FindObjectOfType<LobbyManager_J>().OnSelectClass(this.className);
+    }
+
+    public void OnRelease()
+    {
     }
 }
