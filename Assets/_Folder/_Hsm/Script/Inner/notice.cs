@@ -31,7 +31,8 @@ public class notice : MonoBehaviour
         {
             Debug.LogError("notice.cs:gesipan이나 view가 널ㅇlㅁ");
             return;
-        }  
+        }
+        else
         {
             view.SetActive(!view.activeSelf);
             Debug.Log("ToggleGesipan");

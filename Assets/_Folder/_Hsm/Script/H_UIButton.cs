@@ -5,23 +5,23 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
 
 
-public class H_UIButton : MonoBehaviour
+public class H_UIButton : MonoBehaviour, H_UI
 {
     public Color pressedcolor = Color.blue;
     public Color originalColor;
     public MeshRenderer meshR;
 
+
     private void Start()
     {
         originalColor = meshR.material.color;
-        Debug.Log("0");
+        //Debug.Log("0");
     }
 
     public void OnPress()
     {
         meshR.material.color = pressedcolor;
-        Debug.Log("click");
-
+        //Debug.Log("click");
     }
 
     public void OnRelease()
@@ -29,4 +29,5 @@ public class H_UIButton : MonoBehaviour
         meshR.material.color = originalColor;
     }
 
+    
 }
