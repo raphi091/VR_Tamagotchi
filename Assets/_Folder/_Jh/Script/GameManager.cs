@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         // 게임 플레이 씬(실내 또는 실외)일 경우에만 초기화 로직 실행
-        if (scene.name == "IndoorScene" || scene.name == "OutdoorScene")
+        if (scene.name == "H_Indoor" || scene.name == "H_0utdoor")
         {
             InitializeGame();
         }

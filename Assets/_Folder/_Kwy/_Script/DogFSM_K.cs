@@ -48,7 +48,7 @@ public class DogFSM_K : MonoBehaviour
 
 
     //TEMP
-    private Renderer cubeRenderer;
+    public Renderer cubeRenderer;
     //TEMP
 
 
@@ -69,9 +69,6 @@ public class DogFSM_K : MonoBehaviour
         hungerpercent = 80f;
         bowelpercent = 100f;
 
-        //TEMP
-        cubeRenderer = GetComponentInChildren<Renderer>();
-        //TEMP
     }
 
     private void Start()
@@ -228,7 +225,8 @@ public class DogFSM_K : MonoBehaviour
     private IEnumerator Wander_co()
     {
         //TEMP
-        cubeRenderer.material.color = Color.white;
+        if (cubeRenderer != null)
+            cubeRenderer.material.color = Color.white;
         //TEPM
 
         agent.isStopped = true;
@@ -323,7 +321,8 @@ public class DogFSM_K : MonoBehaviour
     private IEnumerator InteractionRequest_co()
     {
         //TEMP
-        cubeRenderer.material.color = Color.gray;
+        if (cubeRenderer != null)
+            cubeRenderer.material.color = Color.gray;
         //TEMP
 
         agent.isStopped = true;
@@ -343,7 +342,8 @@ public class DogFSM_K : MonoBehaviour
     private IEnumerator Interaction_co()
     {
         //TEMP
-        cubeRenderer.material.color = Color.green;
+        if (cubeRenderer != null)
+            cubeRenderer.material.color = Color.green;
         //TEMP
 
         // 이 상태에 들어왔다는 것은 이미 선택이 완료되었다는 의미
@@ -370,7 +370,8 @@ public class DogFSM_K : MonoBehaviour
     private IEnumerator Stroking_co()
     {
         //TEMP
-        cubeRenderer.material.color = Color.blue;
+        if (cubeRenderer != null)
+            cubeRenderer.material.color = Color.blue;
         //TEMP
 
         Debug.Log("쓰다듬는 중...");
@@ -398,7 +399,8 @@ public class DogFSM_K : MonoBehaviour
     private IEnumerator Sit_co()
     {
         //TEMP
-        cubeRenderer.material.color = Color.yellow;
+        if (cubeRenderer != null)
+            cubeRenderer.material.color = Color.yellow;
         //TEMP
 
         Debug.Log($"{name}: 앉습니다.");
@@ -429,7 +431,8 @@ public class DogFSM_K : MonoBehaviour
     private IEnumerator Liedown_co()
     {
         //TEMP
-        cubeRenderer.material.color = Color.magenta;
+        if (cubeRenderer != null)
+            cubeRenderer.material.color = Color.magenta;
         //TEMP
 
         Debug.Log($"{name}: 엎드립니다.");
@@ -461,7 +464,8 @@ public class DogFSM_K : MonoBehaviour
     private IEnumerator Hunger_co()
     {
         //TEMP
-        cubeRenderer.material.color = Color.red;
+        if (cubeRenderer != null)
+            cubeRenderer.material.color = Color.red;
         //TEMP
         
         Debug.Log($"{name}: 배고파요! 주인을 따라다닙니다.");

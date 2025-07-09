@@ -52,5 +52,7 @@ public class PetController_J : MonoBehaviour
 
         // 5. 모든 설정이 끝났으니 오브젝트를 활성화
         this.gameObject.SetActive(true);
+
+        GetComponent<DogFSM_K>().cubeRenderer = GetComponentInChildren<Renderer>();
     }
 }
