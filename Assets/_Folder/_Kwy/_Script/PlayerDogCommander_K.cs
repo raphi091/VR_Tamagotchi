@@ -20,21 +20,24 @@ public class PlayerDogCommander_K : MonoBehaviour
     {
         // DogInteractionManager 인스턴스를 한번만 찾아와서 저장해 둡니다.
         interactionManager = DogInteractionManager_K.instance;
+    }
 
+    private void OnEnable()
+    {
         // 각 입력 액션이 수행될 때(버튼이 눌릴 때) 해당하는 함수를 연결(구독)합니다.
         callAction.action.performed += CallDog;
         sitAction.action.performed += TryCommandSit;
         lieDownAction.action.performed += TryCommandLieDown;
-        catchAction.action.performed += TryCommandCatch;
+        // catchAction.action.performed += TryCommandCatch;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         // 오브젝트가 파괴될 때, 연결했던 함수들을 해제(구독 취소)합니다.
         callAction.action.performed -= CallDog;
         sitAction.action.performed -= TryCommandSit;
         lieDownAction.action.performed -= TryCommandLieDown;
-        catchAction.action.performed -= TryCommandCatch;
+        // catchAction.action.performed -= TryCommandCatch;
     }
 
     private void CallDog(InputAction.CallbackContext context)

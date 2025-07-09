@@ -74,6 +74,8 @@ public class DogInteractionManager_K : MonoBehaviour
 
     public DogFSM_K GetActiveDog()
     {
+        if (requestingDogs.Count == 0) return null;
+
         return activeDog;
     }
 
