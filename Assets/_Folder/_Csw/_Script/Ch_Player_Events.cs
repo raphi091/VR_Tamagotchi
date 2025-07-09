@@ -1,10 +1,16 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit; // XR Interaction Toolkit 네임스페이스 추가
 
-public class Ch_VRDogSelector : MonoBehaviour
+public class Ch_Player_Events : MonoBehaviour
 {
     // XR Ray Interactor의 'Select Entered' 이벤트에 연결할 함수
     // SelectEnterEventArgs를 통해 어떤 오브젝트가 선택됐는지 정보를 받아옵니다.
+    
+    private bool isCatchable = false;
+    private GameObject throwableTarget=null;
+    public bool IsCatchable {get => isCatchable; set => isCatchable = value; }
+    public GameObject ThrowableTarget { get => throwableTarget; set => throwableTarget = value; }
+    
     public void OnDogSelected(SelectEnterEventArgs args)
     {
         // 선택된 오브젝트(Interactable)의 게임 오브젝트를 가져옴
@@ -25,4 +31,27 @@ public class Ch_VRDogSelector : MonoBehaviour
             }
         }
     }
+
+    public void OnThrowableGrabbed(SelectEnterEventArgs args)
+    {
+        GameObject throwableObject = args.interactableObject.transform.gameObject;
+
+        if (throwableObject.CompareTag("Throwable")&&ThrowableTarget==null)
+        {
+            isCatchable = true;
+            throwableTarget = throwableObject.transform.gameObject;
+        }
+    }
+
+    public void OnThrowableReleased(SelectExitEventArgs args)
+    {
+        GameObject throwableObject = args.interactableObject.transform.gameObject;
+
+        if (throwableObject.CompareTag("Throwable"))
+        {
+            isCatchable = false;
+            throwableTarget = null;
+        }
+    }
+    
 }
