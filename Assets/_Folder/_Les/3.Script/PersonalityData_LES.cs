@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using CustomInspector;
-using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 
 public enum personalityTepy

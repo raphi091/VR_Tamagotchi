@@ -1,23 +1,9 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public enum timetable
-{
-    none,
-    morning_report, //아침 보고
-    period_1, //1교시
-    period_2, //2교시
-    lunch_time, //점심시간
-    period_3, //3교시
-    period_4, //4교시 : 개별관리
-    final_report // 최종 보고
-}
-
 public class GameManager_LES : MonoBehaviour
 {
     public static GameManager_LES Instance; // 싱글톤으로 키세팅매니저 저장
-
-    private timetable currentTimetable;
 
     private void Awake()
     {
@@ -31,8 +17,6 @@ public class GameManager_LES : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    public timetable CurrentTimetable => currentTimetable;
 
     public void Main_To_InSide()
     {
