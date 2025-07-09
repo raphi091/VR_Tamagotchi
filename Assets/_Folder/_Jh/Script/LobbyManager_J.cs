@@ -7,6 +7,8 @@ public class LobbyManager : MonoBehaviour
 {
     public Button continueButton;
     private string saveFilePath;
+    public string sceneName;
+    
 
     void Start()
     {
@@ -24,12 +26,12 @@ public class LobbyManager : MonoBehaviour
             File.Delete(saveFilePath);
         }
         // 새 게임은 무조건 'IndoorScene' (1교시 씬)으로 이동
-        SceneManager.LoadScene("IndoorScene_J");
+        SceneManager.LoadScene(sceneName);
     }
 
     public void OnClickContinue()
     {
         // 이어하기도 무조건 'IndoorScene' (1교시 씬)으로 이동
-        SceneManager.LoadScene("IndoorScene_J");
+        SceneManager.LoadScene(sceneName);
     }
 }
