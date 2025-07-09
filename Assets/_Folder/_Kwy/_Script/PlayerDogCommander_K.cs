@@ -42,6 +42,7 @@ public class PlayerDogCommander_K : MonoBehaviour
 
     private void CallDog(InputAction.CallbackContext context)
     {
+        if (interactionManager == null) return;
         RaycastHit hit;
         if (Physics.Raycast(rightHandController.position, rightHandController.forward, out hit, 50f))
         {
@@ -55,6 +56,7 @@ public class PlayerDogCommander_K : MonoBehaviour
 
     private void TryCommandSit(InputAction.CallbackContext context)
     {
+        if (interactionManager == null) return;
         DogFSM_K activeDog = interactionManager.GetActiveDog();
         if (activeDog != null)
         {
@@ -64,6 +66,7 @@ public class PlayerDogCommander_K : MonoBehaviour
 
     private void TryCommandLieDown(InputAction.CallbackContext context)
     {
+        if (interactionManager == null) return;
         DogFSM_K activeDog = interactionManager.GetActiveDog();
         if (activeDog != null)
         {
@@ -73,6 +76,7 @@ public class PlayerDogCommander_K : MonoBehaviour
 
     private void TryCommandCatch(InputAction.CallbackContext context)
     {
+        if (interactionManager == null) return;
         // if (손에 막대기가 없으면) return;
 
         DogFSM_K activeDog = interactionManager.GetActiveDog();
