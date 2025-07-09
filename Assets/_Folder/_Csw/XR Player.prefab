@@ -279,7 +279,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 55
   m_InteractionLayers:
-    m_Bits: 1
+    m_Bits: 4294967295
   m_AttachTransform: {fileID: 1036327374695766081}
   m_KeepSelectedTargetValid: 1
   m_DisableVisualsWhenBlockedInGroup: 1
@@ -4808,7 +4808,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 55
   m_InteractionLayers:
-    m_Bits: 1
+    m_Bits: 4294967295
   m_AttachTransform: {fileID: 3175743219735209281}
   m_KeepSelectedTargetValid: 1
   m_DisableVisualsWhenBlockedInGroup: 1
@@ -4895,7 +4895,7 @@ MonoBehaviour:
   m_ConeCastAngle: 3
   m_RaycastMask:
     serializedVersion: 2
-    m_Bits: 2147483681
+    m_Bits: 33
   m_RaycastTriggerInteraction: 1
   m_RaycastSnapVolumeInteraction: 1
   m_HitClosestOnly: 0
@@ -5507,6 +5507,7 @@ MonoBehaviour:
   callAction: {fileID: 2307464322626738743, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   sitAction: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   lieDownAction: {fileID: 3279264004350380116, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  Action: {fileID: 0}
 --- !u!114 &497028222701335477
 MonoBehaviour:
   m_ObjectHideFlags: 0
