@@ -4601,7 +4601,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1733051516}
-        m_TargetAssemblyTypeName: UIButton, Assembly-CSharp
+        m_TargetAssemblyTypeName: H_UIButton, Assembly-CSharp
         m_MethodName: OnPress
         m_Mode: 1
         m_Arguments:
@@ -6149,6 +6149,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e6e2316bb99b940a25ddbdf1c467ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rightHandController: {fileID: 6358203982828642905}
+  selectAction: {fileID: 3279264004350380116, guid: c348712bda248c246b8c49b3db54643f, type: 3}
 --- !u!4 &8958522805456946185
 Transform:
   m_ObjectHideFlags: 0
