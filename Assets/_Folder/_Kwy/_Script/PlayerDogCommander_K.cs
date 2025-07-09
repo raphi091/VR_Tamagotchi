@@ -12,6 +12,7 @@ public class PlayerDogCommander_K : MonoBehaviour
     [Header("근거리 명령 (선택된 강아지 대상)")]
     public InputActionReference sitAction; // '앉아' 명령에 사용할 버튼
     public InputActionReference lieDownAction; // '엎드려' 명령에 사용할 버튼
+    public InputActionReference Action; // '엎드려' 명령에 사용할 버튼
 
     private DogInteractionManager_K interactionManager;
 
@@ -42,19 +43,16 @@ public class PlayerDogCommander_K : MonoBehaviour
             DogFSM_K dog = hit.collider.GetComponent<DogFSM_K>();
             if (dog != null)
             {
-                // 레이저에 맞은 강아지에게 '이리와' 명령을 전달합니다.
-                dog.BeCalled(this.transform); // this.transform은 XR Origin의 위치
+                dog.BeCalled(this.transform);
             }
         }
     }
 
     private void TryCommandSit()
     {
-        // 매니저를 통해 현재 선택된 강아지가 있는지 확인합니다.
         DogFSM_K activeDog = interactionManager.GetActiveDog();
         if (activeDog != null)
         {
-            // 선택된 강아지에게 '앉아' 명령을 전달합니다.
             activeDog.CommandSit();
         }
     }
@@ -64,9 +62,18 @@ public class PlayerDogCommander_K : MonoBehaviour
         DogFSM_K activeDog = interactionManager.GetActiveDog();
         if (activeDog != null)
         {
-            // DogFSM_K 스크립트에 CommandLieDown() 함수를 만들어야 합니다.
-            // activeDog.CommandLieDown();
-            Debug.Log($"{activeDog.name}에게 엎드려 명령을 시도합니다. (함수 구현 필요)");
+            activeDog.CommandLiedown();
+        }
+    }
+
+    private void TryCommandCatch()
+    {
+        // if (손에 막대기가 없으면) return;
+
+        DogFSM_K activeDog = interactionManager.GetActiveDog();
+        if (activeDog != null)
+        {
+            activeDog.CommandCatch();
         }
     }
 }

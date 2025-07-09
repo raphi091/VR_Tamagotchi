@@ -12,9 +12,12 @@ public class DogFSM_K : MonoBehaviour
     자유놀기 혼자 논다 (친밀도에 따라 확률적으로 같이 논다)
     가까이 다가가면 상호작용 할지 안할지
     배고프면 간식
+
+    옮겨야하는 값
+    친밀도, 배고픔지수, 배변활동지수, 모델링, 데이터
     */
 
-    public enum State { Setup, Wander, Playing, InteractionRequest, Interaction, Stroking, Sit, Liedown, Called, Hunger, Toilet}
+    public enum State { Setup, Wander, Playing, InteractionRequest, Interaction, Stroking, Sit, Liedown, w, Called, Hunger, Toilet}
     [Header("AI 상태")]
     [SerializeField] private State currentState;
     [SerializeField] private PersonalityData_LES data;
@@ -26,6 +29,7 @@ public class DogFSM_K : MonoBehaviour
     private Animator animator;
     private Transform player;
 
+    private float currentintimacy;
     private float rotationSpeed = 10f;
     private float lastStateChangeTime;
     private float hungerpercent;
@@ -36,6 +40,11 @@ public class DogFSM_K : MonoBehaviour
     private bool isBowel = false;
 
     private Coroutine currentStateCoroutine;
+
+    public PersonalityData_LES Data => data;
+    public float Currentintimacy => currentintimacy;
+    public float Hungerpercent => hungerpercent;
+    public float Bowelpercent => bowelpercent;
 
 
     //TEMP
@@ -58,7 +67,7 @@ public class DogFSM_K : MonoBehaviour
         agent.updateRotation = false;
 
         hungerpercent = 80f;
-        bowelpercent = data.bowel_movement;
+        bowelpercent = 100f;
 
         //TEMP
         cubeRenderer = GetComponentInChildren<Renderer>();
@@ -259,12 +268,12 @@ public class DogFSM_K : MonoBehaviour
 
                     if (randAction < 7)
                     {
-                        if (data.intimacy >= 80)
+                        if (currentintimacy >= 80)
                         {
                             rang = data.Active_MovingRang;
                             movespeed = data.Active_walkSpeed;
                         }
-                        else if (data.intimacy >= 20)
+                        else if (currentintimacy >= 20)
                         {
                             rang = data.MovingRang;
                             movespeed = data.walkSpeed;
@@ -439,6 +448,16 @@ public class DogFSM_K : MonoBehaviour
         EnterState(State.Interaction);
     }
 
+    public void CommandCatch()
+    {
+        
+    }
+
+    private IEnumerator Catch_co()
+    {
+        yield return null;
+    }
+
     private IEnumerator Hunger_co()
     {
         //TEMP
@@ -469,7 +488,7 @@ public class DogFSM_K : MonoBehaviour
 
             // 친밀도를 올리거나 행복해하는 애니메이션을 잠시 보여줄 수 있음
             // animator.SetTrigger("Happy");
-            data.intimacy += 5;
+            currentintimacy += 5;
         }
     }
 
