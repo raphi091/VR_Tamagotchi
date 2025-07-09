@@ -1,15 +1,25 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+public enum Gender { Male, Female }
+public enum foodType
+{
+    Dry, // °Ç½Ä
+    Wet, // ½À½Ä
+    Treat // °£½Ä
+}
+
 [System.Serializable]
 public class PetStatusData_J
 {
     public string petName;
     public int modelIndex;
     public int personalityIndex;
-    public PersonalityData_LES data;
 
-    public foodTepy foodTepy;
+    public Gender gender;
+    public int age;
+
+    public foodType foodType;
     public float intimacyper;
     public float hungerper;
     public float bowelper;
@@ -19,11 +29,10 @@ public class PetStatusData_J
         this.modelIndex = modelIdx;
         this.personalityIndex = personalityIdx;
         this.petName = "´ó´óÀÌ";
-        data = new PersonalityData_LES
-        {
-            tepy = personalityTepy.None
-        };
-        foodTepy = foodTepy.None;
+
+        this.gender = (Gender)Random.Range(0, 2);
+        this.age = Random.Range(1, 4);
+        this.foodType = (foodType)Random.Range(0, 3);
 
         this.intimacyper = 0f;
         this.hungerper = 80f;

@@ -1,27 +1,20 @@
 using CustomInspector;
 using UnityEngine;
 
-public enum personalityTepy
+public enum personalityType
 {
-    None,
     Grumpy, //까칠함
     Timid, //소심함
     Curious //호기심
 }
 
-public enum foodTepy
-{
-    None,
-    Dry, // 건식
-    Wet, // 습식
-    Treat // 간식
-}
+
 
 [CreateAssetMenu(fileName = "NewPetPersonality", menuName = "Pet/PersonalityData")]
 public class PersonalityData_LES : ScriptableObject
 {
     [Header("성격종류")]
-    public personalityTepy tepy;
+    public personalityType type;
     [Tooltip("이동 속도"), Range(0f,10f)] public float walkSpeed;
     [Tooltip("이동 반경")] public float MovingRang;
 

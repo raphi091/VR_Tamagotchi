@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.IO;
+using System.Collections.Generic;
 
 public class LobbyManager_J : MonoBehaviour
 {
@@ -22,6 +23,9 @@ public class LobbyManager_J : MonoBehaviour
     public GameObject newGameButton;
     public GameObject continueButton;
     public GameObject popUp;
+    public ClassDisplayCard_J[] displayCards;
+
+    private Dictionary<string, List<PetStatusData_J>> temporaryClassPets;
     private string saveFilePath;
 
     void Start()
@@ -40,22 +44,62 @@ public class LobbyManager_J : MonoBehaviour
         {
             File.Delete(saveFilePath);
         }
-        // 새 게임은 무조건 'IndoorScene' (1교시 씬)으로 이동
-        //SceneManager.LoadScene("H_Indoor");
+        CreateTemporaryPetData();
+
         newGameButton.SetActive(false);
         continueButton.SetActive(false);
 
         popUp.SetActive(true);
+        SetupPreviewCards();
     }
 
-    public void OnClickContinue()
+    void CreateTemporaryPetData()
+    {
+        temporaryClassPets = new Dictionary<string, List<PetStatusData_J>>();
+        string[] classNames = { "햇님반", "달님반", "별님반" };
+
+        foreach (string className in classNames)
+        {
+            List<PetStatusData_J> petsForThisClass = new List<PetStatusData_J>();
+            for (int i = 0; i < 3; i++) // 각 반마다 3마리씩 생성
+            {
+                int profileIdx = Random.Range(0, DatabaseManager_J.instance.petProfiles.Count);
+                int personalityIdx = Random.Range(0, DatabaseManager_J.instance.personalities.Count);
+                int nameIdx = Random.Range(0, DatabaseManager_J.instance.PetNames.Count);
+
+                PetStatusData_J tempPet = new PetStatusData_J(profileIdx, personalityIdx);
+                tempPet.petName = DatabaseManager_J.instance.PetNames[nameIdx];
+                petsForThisClass.Add(tempPet);
+            }
+            temporaryClassPets.Add(className, petsForThisClass);
+        }
+    }
+
+        void SetupPreviewCards()
+        {
+            for (int i = 0; i < displayCards.Length; i++)
+            {
+                string className = displayCards[i].GetClassName();
+                List<PetStatusData_J> petsToShow = temporaryClassPets[className];
+                displayCards[i].SetupCard(className, petsToShow);
+            }
+        }
+
+
+        public void OnClickContinue()
     {
         // 이어하기도 무조건 'IndoorScene' (1교시 씬)으로 이동
         SceneManager.LoadScene("H_Indoor");
     }
-    public void OnSelectClass()
+    public void OnSelectClass(string className)
     {
-        
+        List<PetStatusData_J> selectedPets = temporaryClassPets[className];
+
+        // 2. GameManager에게 선택된 3마리의 데이터로 새 게임을 만들라고 명령
+        GameManager.instance.CreateNewGameData(className, selectedPets);
+
+        // 3. 게임 씬으로 이동
+        SceneManager.LoadScene("IndoorScene");
         //GameManager
     }
 }

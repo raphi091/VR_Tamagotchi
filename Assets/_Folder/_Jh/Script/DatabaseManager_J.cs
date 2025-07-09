@@ -6,9 +6,12 @@ public class DatabaseManager_J : MonoBehaviour
 {
     public static DatabaseManager_J instance;
 
-    public List<GameObject> allModels;
+    
+    public List<PetProFile_LES> petProfiles;
     public List<PersonalityData_LES> personalities;
     public List<string> PetNames;
+    public Sprite maleIcon;
+    public Sprite femaleIcon;
 
     private void Awake()
     {

@@ -1,64 +1,91 @@
 using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance = null;
+
+    public List<PetController_J> petsInScene = new List<PetController_J>();
     // 예시: 반에 들어갈 펫의 수
     private const int PETS_PER_CLASS = 3;
 
-    void Start()
+    private void Awake()
     {
-        // 게임 시작 시 데이터 불러오기
-        DataManager_J.instance.LoadGameData();
-
-        // 만약 저장된 데이터가 없다면 (처음 시작)
-        if (DataManager_J.instance.gameData.allPetData.Count == 0)
+        if (instance == null)
         {
-            Debug.Log("저장된 데이터 없음, 반 선택 UI 활성화!");
-            // 여기서 반 선택 UI를 보여주는 로직을 실행합니다.
+            instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            // 저장된 데이터가 있다면 해당 데이터로 펫들을 생성합니다.
-            InstantiateSavedPets();
+            Destroy(gameObject);
         }
     }
 
-    // UI 버튼에 연결할 함수
-    public void OnClassSelected(string className)
+    private void OnEnable()
     {
-        Debug.Log(className + " 선택됨! 펫을 랜덤으로 생성합니다.");
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    // 씬 로드가 완료되면 이 함수가 실행됩니다.
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // 게임 플레이 씬(실내 또는 실외)일 경우에만 초기화 로직 실행
+        if (scene.name == "IndoorScene" || scene.name == "OutdoorScene")
+        {
+            InitializeGame();
+        }
+    }
+
+    // 게임 초기화 함수
+    void InitializeGame()
+    {
+        // 이어하기의 경우, DataManager는 이미 로비에서 로드되었거나,
+        // 새 게임의 경우 LobbyManager가 데이터를 이미 만들어 둔 상태임.
+        // 따라서 여기서는 펫 배치에만 집중.
+        if (DataManager_J.instance.gameData != null && DataManager_J.instance.gameData.allPetData.Count > 0)
+        {
+            UpdatePlacedPets();
+        }
+    }
+
+    // 로비에서 호출할 새 게임 데이터 생성 전용 함수
+    public void CreateNewGameData(string className, List<PetStatusData_J> petsToCreate)
+    {
+        Debug.Log(className + "으로 새 게임을 시작합니다.");
+
+        // 1. 데이터 객체 초기화
+        DataManager_J.instance.gameData = new GameData();
+
+        // 2. 반 이름과 전달받은 펫 리스트를 그대로 저장
         DataManager_J.instance.gameData.selectedClassName = className;
-
-        // 반에 들어갈 펫들을 랜덤으로 생성
-        for (int i = 0; i < PETS_PER_CLASS; i++)
-        {
-            // 모델과 성격을 랜덤으로 선택
-            int randomModelIndex = Random.Range(0, DatabaseManager_J.instance.allModels.Count);
-            int randomPersonalityIndex = Random.Range(0, DatabaseManager_J.instance.personalities.Count);
-
-            // 데이터 생성 후 DataManager에 추가
-            PetStatusData_J newPet = new PetStatusData_J(randomModelIndex, randomPersonalityIndex);
-
-            // 이름 랜덤으로 선택
-            int randomNameIndex = Random.Range(0, DatabaseManager_J.instance.PetNames.Count);
-            newPet.petName = DatabaseManager_J.instance.PetNames[randomNameIndex];
-
-            DataManager_J.instance.gameData.allPetData.Add(newPet);
-        }
-
-        // 펫들을 씬에 실제로 생성
-        InstantiateSavedPets();
+        DataManager_J.instance.gameData.allPetData = petsToCreate;
     }
 
-    // 저장된 데이터를 바탕으로 펫 오브젝트들을 씬에 생성하는 함수
-    void InstantiateSavedPets()
+    // 배치된 펫들에게 데이터를 적용하는 함수
+    void UpdatePlacedPets()
     {
-        foreach (PetStatusData_J petData in DataManager_J.instance.gameData.allPetData)
+        petsInScene.Clear();
+        petsInScene.AddRange(FindObjectsOfType<PetController_J>());
+
+        List<PetStatusData_J> loadedPetData = DataManager_J.instance.gameData.allPetData;
+
+        for (int i = 0; i < petsInScene.Count; i++)
         {
-            // 데이터에 맞는 모델 프리팹 가져오기
-            GameObject petPrefab = DatabaseManager_J.instance.allModels[petData.modelIndex];
-            // 펫 생성
-            GameObject petInstance = Instantiate(petPrefab, Vector3.zero, Quaternion.identity);
-            // 여기에 펫의 이름, 성격 정보 등을 petInstance에 넘겨주는 로직 추가
+            if (i < loadedPetData.Count)
+            {
+                petsInScene[i].ApplyData(loadedPetData[i]);
+            }
+            else
+            {
+                petsInScene[i].gameObject.SetActive(false);
+            }
         }
     }
 
@@ -68,10 +95,15 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("하루가 종료되어 게임을 자동 저장합니다.");
 
-        // 현재 펫들의 수치를 gameData에 업데이트하는 로직이 필요합니다.
-        // 예: for (int i=0; i < allPets.Count; i++) {
-        //         DataManager.instance.gameData.allPetData[i].hunger_level = allPets[i].currentHunger;
-        //     }
+        foreach (PetController_J pet in petsInScene)
+        {
+            if (pet.gameObject.activeSelf)
+            {
+                pet.petData.hungerper = pet.currentHunger;
+                pet.petData.intimacyper = pet.currentIntimacy;
+                pet.petData.bowelper = pet.currentBowel;
+            }
+        }
 
         // 업데이트된 데이터로 저장 실행
         DataManager_J.instance.SaveGameData();
