@@ -16,12 +16,14 @@ public class H_UIButton : MonoBehaviour
         originalColor = meshR.material.color;
         Debug.Log("0");
     }
+
     public void OnPress()
     {
         meshR.material.color = pressedcolor;
         Debug.Log("click");
 
     }
+
     public void OnRelease()
     {
         meshR.material.color = originalColor;

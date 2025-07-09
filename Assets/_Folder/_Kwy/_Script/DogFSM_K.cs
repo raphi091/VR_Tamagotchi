@@ -419,6 +419,10 @@ public class DogFSM_K : MonoBehaviour
 
     private IEnumerator Liedown_co()
     {
+        //TEMP
+        cubeRenderer.material.color = Color.magenta;
+        //TEMP
+
         Debug.Log($"{name}: 엎드립니다.");
         agent.isStopped = true; // 앉는 동안은 움직이지 않음
 
