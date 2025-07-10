@@ -1030,10 +1030,34 @@ MonoBehaviour:
       m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 497028222701335477}
+        m_TargetAssemblyTypeName: Ch_Player_Events, Assembly-CSharp
+        m_MethodName: OnThrowableGrabbed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 497028222701335477}
+        m_TargetAssemblyTypeName: Ch_Player_Events, Assembly-CSharp
+        m_MethodName: OnThrowableReleased
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_StartingHoverFilters: []
   m_StartingSelectFilters: []
   m_OnHoverEntered:
@@ -5507,7 +5531,7 @@ MonoBehaviour:
   callAction: {fileID: 2307464322626738743, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   sitAction: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   lieDownAction: {fileID: 3279264004350380116, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  Action: {fileID: 0}
+  catchAction: {fileID: 0}
 --- !u!114 &497028222701335477
 MonoBehaviour:
   m_ObjectHideFlags: 0
