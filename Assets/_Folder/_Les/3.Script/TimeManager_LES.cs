@@ -1,11 +1,14 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TimeManager_LES : MonoBehaviour
 {
     public static TimeManager_LES instance = null;
     public TextMeshProUGUI time; //시간 표시용
+
+    public Canvas canvas;
 
     //시간 로직
     public float speed = 60f; // 실제 1초 = 60 게임 시간초
@@ -51,7 +54,7 @@ public class TimeManager_LES : MonoBehaviour
         }
 
         // 씬로드
-
+        SceneManager.LoadScene("H_Outdoor", LoadSceneMode.Single);
     }
 
     public void OutdoorTime()
@@ -72,6 +75,7 @@ public class TimeManager_LES : MonoBehaviour
         }
 
         // 씬로드(오후 보고 로직)
+        SceneManager.LoadScene("H_Indoor", LoadSceneMode.Single);
     }
 
     public void DisplayTime(float gameTimeSec)
