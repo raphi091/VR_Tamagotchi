@@ -107,7 +107,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 2
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!65 &480060333693071307
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -141,11 +141,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e0a1e38b8a1d504e98e3e566796a665, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
   data: {fileID: 0}
+  currentState: 0
   ToiletPoint: {fileID: 0}
   EatPoint: {fileID: 0}
   mouthTransform: {fileID: 0}
+  player: {fileID: 0}
   cubeRenderer: {fileID: 0}
 --- !u!114 &3948621093088205327
 MonoBehaviour:

@@ -5,6 +5,8 @@ public class Ch_Player_Events : MonoBehaviour
 {
     // XR Ray Interactor의 'Select Entered' 이벤트에 연결할 함수
     // SelectEnterEventArgs를 통해 어떤 오브젝트가 선택됐는지 정보를 받아옵니다.
+
+    public float selectThreshold;
     
     private bool isCatchable = false;
     private GameObject throwableTarget=null;
@@ -26,8 +28,12 @@ public class Ch_Player_Events : MonoBehaviour
 
             if (dogFSM != null)
             {
-                // 매니저에게 이 강아지를 선택했다고 알림
-                DogInteractionManager_K.instance.SelectDog(dogFSM);
+                float dis = Vector3.Distance(transform.position, dogFSM.transform.position);
+
+                if (dis > selectThreshold)
+                    dogFSM.BeCalled(transform);
+                else
+                    DogInteractionManager_K.instance.SelectDog(dogFSM);
             }
         }
     }
