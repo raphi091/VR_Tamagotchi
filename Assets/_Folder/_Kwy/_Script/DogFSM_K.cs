@@ -17,20 +17,20 @@ public class DogFSM_K : MonoBehaviour
     친밀도, 배고픔지수, 배변활동지수, 모델링, 데이터
     */
 
+    public PersonalityData_LES data;
     public enum State { Setup, Wander, Playing, InteractionRequest, Interaction, Stroking, Sit, Liedown, Catch, Called, Hunger, Toilet}
     [Header("AI 상태")]
     [SerializeField] private State currentState;
-    [SerializeField] private PersonalityData_LES data;
 
     [SerializeField] private Transform ToiletPoint;
     [SerializeField] private Transform EatPoint;
 
     public Transform mouthTransform;
+    public Transform player;
 
     private NavMeshAgent agent;
     private CharacterController controller;
     private Animator animator;
-    private Transform player;
 
     private float currentintimacy;
     private float rotationSpeed = 10f;
@@ -76,7 +76,6 @@ public class DogFSM_K : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
         EnterState(State.Setup);
     }
 

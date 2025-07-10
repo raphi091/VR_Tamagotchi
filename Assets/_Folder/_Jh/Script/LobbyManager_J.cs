@@ -101,7 +101,7 @@ public class LobbyManager_J : MonoBehaviour
         public void OnClickContinue()
     {
         // 이어하기도 무조건 'IndoorScene' (1교시 씬)으로 이동
-        SceneManager.LoadScene("H_Indoor");
+        GameManager.instance.GoToScene("H_Indoor");
     }
     public void OnSelectClass(string className)
     {
@@ -111,7 +111,7 @@ public class LobbyManager_J : MonoBehaviour
         GameManager.instance.CreateNewGameData(className, selectedPets);
 
         // 3. 게임 씬으로 이동
-        SceneManager.LoadScene("H_Indoor");
+        GameManager.instance.GoToScene("H_Indoor");
         //GameManager
     }
 }

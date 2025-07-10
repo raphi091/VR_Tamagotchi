@@ -51,15 +51,9 @@ public class PetController_J : MonoBehaviour
         this.currentBowel = data.bowelper;
 
         DogFSM_K fsm = GetComponent<DogFSM_K>();
-        Transform mouth = modelPrefab.transform.Find("_MOUSE_");
-        if(mouth != null)
-        {
-            fsm.mouthTransform = mouth;
-        }
-        else
-        {
-            Debug.LogWarning("_MOUSE_ 트랜스폼을 찾을 수 없습니다. 물어오기 실패");
-        }
+        fsm.mouthTransform = transform.FindSlot("_MOUSE_", "MOUSE");
+        fsm.data = DatabaseManager_J.instance.personalities[data.personalityIndex];
+        fsm.player = GameObject.FindGameObjectWithTag("Player").transform;
 
         // 5. 모든 설정이 끝났으니 오브젝트를 활성화
         this.gameObject.SetActive(true);

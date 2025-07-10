@@ -12,7 +12,6 @@ public class PlayerDogCommander_K : MonoBehaviour
     [Header("근거리 명령 (선택된 강아지 대상)")]
     public InputActionReference sitAction; // '앉아' 명령에 사용할 버튼
     public InputActionReference lieDownAction; // '엎드려' 명령에 사용할 버튼
-    public InputActionReference catchAction; // '엎드려' 명령에 사용할 버튼
 
     private DogInteractionManager_K interactionManager;
 
