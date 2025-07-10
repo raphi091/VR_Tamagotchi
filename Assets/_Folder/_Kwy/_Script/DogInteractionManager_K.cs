@@ -45,6 +45,7 @@ public class DogInteractionManager_K : MonoBehaviour
     // 플레이어가 특정 강아지를 '선택'했을 때 호출하는 함수
     public void SelectDog(DogFSM_K selectedDog)
     {
+        Debug.Log(requestingDogs.Count);
         if (!requestingDogs.Contains(selectedDog)) return;
 
         DogFSM_K.State dogState = selectedDog.GetCurrentState();

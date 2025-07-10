@@ -135,7 +135,7 @@ public class DogFSM_K : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
-            if (currentState == State.Wander || currentState == State.Playing)
+            if (currentState == State.Wander || currentState == State.Playing || currentState == State.Called)
             {
                 EnterState(State.InteractionRequest);
                 DogInteractionManager_K.instance.RequestInteraction(this);

@@ -13,6 +13,7 @@ public class Ch_Player_Events : MonoBehaviour
     public bool IsCatchable {get => isCatchable; set => isCatchable = value; }
     public GameObject ThrowableTarget { get => throwableTarget; set => throwableTarget = value; }
     
+    
     public void OnDogSelected(SelectEnterEventArgs args)
     {
         // 선택된 오브젝트(Interactable)의 게임 오브젝트를 가져옴
@@ -30,12 +31,42 @@ public class Ch_Player_Events : MonoBehaviour
             {
                 float dis = Vector3.Distance(transform.position, dogFSM.transform.position);
 
-                if (dis > selectThreshold)
+                if (dis >= selectThreshold)
+                {
+                    Debug.Log("dis:1");
                     dogFSM.BeCalled(transform);
+                }
                 else
+                {
+                    Debug.Log("dis:2");
                     DogInteractionManager_K.instance.SelectDog(dogFSM);
+                }
             }
         }
+    }
+
+    public void OnDogSit(SelectEnterEventArgs args)
+    {
+        Debug.Log("Enter dog");
+        GameObject selectedObject = args.interactableObject.transform.gameObject;
+        if (selectedObject.CompareTag("Dog"))
+        {
+            DogFSM_K dogFSM = selectedObject.GetComponent<DogFSM_K>();
+            Debug.Log($"{selectedObject.name}: 앉아");
+            dogFSM.CommandSit();
+        }
+
+    }
+    
+    public void OnDogLie(SelectEnterEventArgs args)
+    {
+        GameObject selectedObject = args.interactableObject.transform.gameObject;
+        if (selectedObject.CompareTag("Dog"))
+        {
+            DogFSM_K dogFSM = selectedObject.GetComponent<DogFSM_K>();
+            dogFSM.CommandLiedown();
+        }
+
     }
 
     public void OnThrowableGrabbed(SelectEnterEventArgs args)
