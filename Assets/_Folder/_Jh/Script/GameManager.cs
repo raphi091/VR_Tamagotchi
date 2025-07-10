@@ -7,8 +7,6 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
 
     public List<PetController_J> petsInScene = new List<PetController_J>();
-    // 예시: 반에 들어갈 펫의 수
-    private const int PETS_PER_CLASS = 3;
 
     private void Awake()
     {
@@ -39,34 +37,35 @@ public class GameManager : MonoBehaviour
         // 게임 플레이 씬(실내 또는 실외)일 경우에만 초기화 로직 실행
         if (scene.name == "H_Indoor" || scene.name == "H_0utdoor")
         {
-            InitializeGame();
-        }
-    }
-
-    // 게임 초기화 함수
-    void InitializeGame()
-    {
-        // 이어하기의 경우, DataManager는 이미 로비에서 로드되었거나,
-        // 새 게임의 경우 LobbyManager가 데이터를 이미 만들어 둔 상태임.
-        // 따라서 여기서는 펫 배치에만 집중.
-        if (DataManager_J.instance.gameData != null && DataManager_J.instance.gameData.allPetData.Count > 0)
-        {
             UpdatePlacedPets();
         }
     }
 
-    // 로비에서 호출할 새 게임 데이터 생성 전용 함수
-    public void CreateNewGameData(string className, List<PetStatusData_J> petsToCreate)
+    public void SaveChangesToDataManager()
     {
-        Debug.Log(className + "으로 새 게임을 시작합니다.");
-
-        // 1. 데이터 객체 초기화
-        DataManager_J.instance.gameData = new GameData();
-
-        // 2. 반 이름과 전달받은 펫 리스트를 그대로 저장
-        DataManager_J.instance.gameData.selectedClassName = className;
-        DataManager_J.instance.gameData.allPetData = petsToCreate;
+        Debug.Log("현재 펫들의 최신 상태를 DataManager에 업데이트합니다.");
+        foreach (PetController_J pet in petsInScene)
+        {
+            if (pet.gameObject.activeSelf)
+            {
+                // PetController의 실시간 값을 영구 데이터(petData)에 덮어쓰기
+                pet.petData.hungerper = pet.currentHunger;
+                pet.petData.intimacyper = pet.currentIntimacy;
+                pet.petData.bowelper = pet.currentBowel;
+            }
+        }
     }
+
+    public void GoToScene(string sceneName)
+    {
+        // 1. 씬을 떠나기 전에 현재 상태를 먼저 DataManager에 저장한다.
+        SaveChangesToDataManager();
+
+        // 2. 원하는 씬으로 이동한다.
+        Debug.Log(sceneName + "으로 이동합니다...");
+        SceneManager.LoadScene(sceneName);
+    }
+
 
     // 배치된 펫들에게 데이터를 적용하는 함수
     void UpdatePlacedPets()
@@ -89,21 +88,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // 로비에서 호출할 새 게임 데이터 생성 전용 함수
+    public void CreateNewGameData(string className, List<PetStatusData_J> petsToCreate)
+    {
+        Debug.Log(className + "으로 새 게임을 시작합니다.");
+
+        // 1. 데이터 객체 초기화
+        DataManager_J.instance.gameData = new GameData();
+
+        // 2. 반 이름과 전달받은 펫 리스트를 그대로 저장
+        DataManager_J.instance.gameData.selectedClassName = className;
+        DataManager_J.instance.gameData.allPetData = petsToCreate;
+    }
+
 
     // 하루가 지났을 때 호출될 함수
     public void EndOfDay()
     {
         Debug.Log("하루가 종료되어 게임을 자동 저장합니다.");
 
-        foreach (PetController_J pet in petsInScene)
-        {
-            if (pet.gameObject.activeSelf)
-            {
-                pet.petData.hungerper = pet.currentHunger;
-                pet.petData.intimacyper = pet.currentIntimacy;
-                pet.petData.bowelper = pet.currentBowel;
-            }
-        }
+        SaveChangesToDataManager();
 
         // 업데이트된 데이터로 저장 실행
         DataManager_J.instance.SaveGameData();
