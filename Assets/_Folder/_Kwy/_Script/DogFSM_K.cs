@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -17,12 +17,15 @@ public class DogFSM_K : MonoBehaviour
     친밀도, 배고픔지수, 배변활동지수, 모델링, 데이터
     */
 
-    public enum State { Setup, Wander, Playing, InteractionRequest, Interaction, Stroking, Sit, Liedown, w, Called, Hunger, Toilet}
+    public enum State { Setup, Wander, Playing, InteractionRequest, Interaction, Stroking, Sit, Liedown, Catch, Called, Hunger, Toilet}
     [Header("AI 상태")]
     [SerializeField] private State currentState;
     [SerializeField] private PersonalityData_LES data;
+
     [SerializeField] private Transform ToiletPoint;
     [SerializeField] private Transform EatPoint;
+
+    public Transform mouthTransform;
 
     private NavMeshAgent agent;
     private CharacterController controller;
@@ -133,8 +136,11 @@ public class DogFSM_K : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
-            EnterState(State.InteractionRequest);
-            DogInteractionManager_K.instance.RequestInteraction(this);
+            if (currentState == State.Wander || currentState == State.Playing)
+            {
+                EnterState(State.InteractionRequest);
+                DogInteractionManager_K.instance.RequestInteraction(this);
+            }
         }
     }
 
@@ -202,6 +208,9 @@ public class DogFSM_K : MonoBehaviour
                 break;
             case State.Liedown:
                 currentStateCoroutine = StartCoroutine(Liedown_co());
+                break;
+            case State.Catch:
+                currentStateCoroutine = StartCoroutine(Catch_co(data as Transform));
                 break;
             case State.Called:
                 currentStateCoroutine = StartCoroutine(Called_co(data as Transform));
@@ -451,14 +460,69 @@ public class DogFSM_K : MonoBehaviour
         EnterState(State.Interaction);
     }
 
-    public void CommandCatch()
+    public void CommandCatch(Transform target)
     {
-        
+        if (currentState == State.Interaction)
+        {
+            EnterState(State.Catch, target);
+        }
     }
 
-    private IEnumerator Catch_co()
+    private IEnumerator Catch_co(Transform target)
     {
-        yield return null;
+        // 0. 목표물이 유효한지 확인
+        if (target == null)
+        {
+            Debug.LogWarning("물어올 대상이 없습니다!");
+            EnterState(State.Interaction); // 목표가 없으면 바로 상호작용 상태로 복귀
+            yield break; // 코루틴 즉시 종료
+        }
+
+        // TEMP: 상태 표시용 색상 변경
+        if (cubeRenderer != null)
+            cubeRenderer.material.color = Color.cyan;
+        // TEMP
+
+        Debug.Log($"{name}: {target.name} 물어올게요!");
+        agent.isStopped = false;
+
+        // 1. 목표물(막대기)을 향해 이동
+        agent.SetDestination(target.position);
+
+        // 목표물에 도착할 때까지 대기
+        while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance)
+        {
+            yield return null;
+        }
+
+        // 2. 목표물 줍기
+        Debug.Log("잡았다!");
+        // 목표물에 붙어있는 스크립트를 가져와서 '줍기' 함수 호출
+        Ch_Throwable item = target.GetComponent<Ch_Throwable>();
+        if (item != null)
+        {
+            item.GetPickedUpBy(mouthTransform); // 입 위치로 아이템을 옮김
+        }
+
+        // 3. 플레이어에게 돌아가기
+        Debug.Log("주인님에게 돌아갑니다!");
+        agent.SetDestination(player.position);
+
+        // 플레이어에게 도착할 때까지 대기
+        while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance)
+        {
+            yield return null;
+        }
+
+        // 4. 목표물 내려놓기
+        Debug.Log("가져왔어요!");
+        if (item != null)
+        {
+            item.Drop(); // 아이템 내려놓기 함수 호출
+        }
+
+        // 5. 임무 완수 후 다시 상호작용 대기 상태로 복귀
+        EnterState(State.Interaction);
     }
 
     private IEnumerator Hunger_co()

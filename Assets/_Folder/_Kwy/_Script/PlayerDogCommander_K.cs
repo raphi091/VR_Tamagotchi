@@ -28,7 +28,6 @@ public class PlayerDogCommander_K : MonoBehaviour
         callAction.action.performed += CallDog;
         sitAction.action.performed += TryCommandSit;
         lieDownAction.action.performed += TryCommandLieDown;
-        // catchAction.action.performed += TryCommandCatch;
     }
 
     private void OnDisable()
@@ -37,7 +36,6 @@ public class PlayerDogCommander_K : MonoBehaviour
         callAction.action.performed -= CallDog;
         sitAction.action.performed -= TryCommandSit;
         lieDownAction.action.performed -= TryCommandLieDown;
-        // catchAction.action.performed -= TryCommandCatch;
     }
 
     private void CallDog(InputAction.CallbackContext context)
@@ -71,18 +69,6 @@ public class PlayerDogCommander_K : MonoBehaviour
         if (activeDog != null)
         {
             activeDog.CommandLiedown();
-        }
-    }
-
-    private void TryCommandCatch(InputAction.CallbackContext context)
-    {
-        if (interactionManager == null) return;
-        // if (손에 막대기가 없으면) return;
-
-        DogFSM_K activeDog = interactionManager.GetActiveDog();
-        if (activeDog != null)
-        {
-            activeDog.CommandCatch();
         }
     }
 }
