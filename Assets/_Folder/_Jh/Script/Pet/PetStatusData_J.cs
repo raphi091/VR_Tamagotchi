@@ -4,9 +4,9 @@ using System.Collections.Generic;
 public enum Gender { Male, Female }
 public enum foodType
 {
-    Dry, // °Ç½Ä
-    Wet, // ½À½Ä
-    Treat // °£½Ä
+    Dry, // ê±´ì‹
+    Wet, // ìŠµì‹
+    Treat // ê°„ì‹
 }
 
 [System.Serializable]
@@ -28,7 +28,7 @@ public class PetStatusData_J
     {
         this.modelIndex = modelIdx;
         this.personalityIndex = personalityIdx;
-        this.petName = "´ó´óÀÌ";
+        this.petName = "ëŒ•ëŒ•ì´";
 
         this.gender = (Gender)Random.Range(0, 2);
         this.age = Random.Range(1, 4);
@@ -48,7 +48,7 @@ public class GameData
 
     public GameData()
     {
-        selectedClassName = "¹ÌÁ¤";
+        selectedClassName = "ë¯¸ì •";
         allPetData = new List<PetStatusData_J>();
     }
 }

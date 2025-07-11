@@ -9,7 +9,7 @@ public class PetDisplaySlot_J : MonoBehaviour
     public Image petPictureUI;
     public TextMeshProUGUI nameText;
 
-    // »çÁø°ú ÀÌ¸§À» ¹Ş¾Æ UI¸¦ ¾÷µ¥ÀÌÆ®ÇÏ´Â ÇÔ¼ö
+    // ì‚¬ì§„ê³¼ ì´ë¦„ì„ ë°›ì•„ UIë¥¼ ì—…ë°ì´íŠ¸í•˜ëŠ” í•¨ìˆ˜
     public void UpdateSlot(Sprite picture, string name)
     {
         petPictureUI.sprite = picture;

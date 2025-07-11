@@ -127,7 +127,7 @@ public class DogFSM_K : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("PlayerHand") && isSelected)
+        if (other.CompareTag("PlayerHand") && isSelected && currentState == State.Interaction)
         {
             EnterState(State.Stroking);
             return;
@@ -155,7 +155,10 @@ public class DogFSM_K : MonoBehaviour
             // "나 이제 갈게" 라고 매니저에게 알림
             DogInteractionManager_K.instance.CancelRequest(this);
 
-            ReturnToWander();
+            if (currentState == State.InteractionRequest || currentState == State.Interaction)
+            {
+                ReturnToWander();
+            }
 
         }
     }
@@ -560,6 +563,11 @@ public class DogFSM_K : MonoBehaviour
 
     private IEnumerator Toilet_co()
     {
+        //TEMP
+        if (cubeRenderer != null)
+            cubeRenderer.material.color = Color.black;
+        //TEMP
+        
         isBowel = true;
         agent.SetDestination(ToiletPoint.position);
 

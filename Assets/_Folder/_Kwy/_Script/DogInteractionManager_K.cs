@@ -46,7 +46,7 @@ public class DogInteractionManager_K : MonoBehaviour
     public void SelectDog(DogFSM_K selectedDog)
     {
         Debug.Log(requestingDogs.Count);
-        if (!requestingDogs.Contains(selectedDog)) return;
+        if (!requestingDogs.Contains(selectedDog)&&selectedDog.GetCurrentState() != DogFSM_K.State.Hunger) return;
 
         DogFSM_K.State dogState = selectedDog.GetCurrentState();
 

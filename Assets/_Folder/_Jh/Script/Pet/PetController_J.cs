@@ -7,45 +7,45 @@ public class PetController_J : MonoBehaviour
 {
     public PetStatusData_J petData;
 
-    [Header("½Ã°¢Àû ¿ä¼Ò")]
-    // ¸ğµ¨¸µ ÇÁ¸®ÆÕÀÌ ½ÇÁ¦·Î »ı¼ºµÉ À§Ä¡ (ÀÚ½Ä ¿ÀºêÁ§Æ®)
+    [Header("ì‹œê°ì  ìš”ì†Œ")]
+    // ëª¨ë¸ë§ í”„ë¦¬íŒ¹ì´ ì‹¤ì œë¡œ ìƒì„±ë  ìœ„ì¹˜ (ìì‹ ì˜¤ë¸Œì íŠ¸)
     public GameObject petModelSlot;
-    // ÀÌ¸§Ç¥ UI (TextMeshProUGUI ¶Ç´Â UI.Text)
+    // ì´ë¦„í‘œ UI (TextMeshProUGUI ë˜ëŠ” UI.Text)
     public TextMeshProUGUI nameText;
 
-    [Header("ÇöÀç »óÅÂ (½Ç½Ã°£ º¯°æ°ª)")]
-    // °ÔÀÓ ÇÃ·¹ÀÌ Áß¿¡ °è¼Ó º¯ÇÏ´Â ÇöÀç ¼öÄ¡µé
+    [Header("í˜„ì¬ ìƒíƒœ (ì‹¤ì‹œê°„ ë³€ê²½ê°’)")]
+    // ê²Œì„ í”Œë ˆì´ ì¤‘ì— ê³„ì† ë³€í•˜ëŠ” í˜„ì¬ ìˆ˜ì¹˜ë“¤
     public float currentHunger;
     public float currentIntimacy;
     public float currentBowel;
 
-    // GameManager°¡ È£ÃâÇÒ µ¥ÀÌÅÍ Àû¿ë ÇÔ¼ö
+    // GameManagerê°€ í˜¸ì¶œí•  ë°ì´í„° ì ìš© í•¨ìˆ˜
     public void ApplyData(PetStatusData_J data)
     {
-        // 1. Àü´Ş¹ŞÀº µ¥ÀÌÅÍ¸¦ ÀÌ ÄÁÆ®·Ñ·¯¿¡ ÀúÀå
+        // 1. ì „ë‹¬ë°›ì€ ë°ì´í„°ë¥¼ ì´ ì»¨íŠ¸ë¡¤ëŸ¬ì— ì €ì¥
         this.petData = data;
 
-        // 2. ¸ğµ¨¸µ Àû¿ë
-        // ¸¸¾à ÀÌÀü¿¡ »ı¼ºµÈ ¸ğµ¨ÀÌ ÀÖ´Ù¸é ¸ÕÀú ÆÄ±«
+        // 2. ëª¨ë¸ë§ ì ìš©
+        // ë§Œì•½ ì´ì „ì— ìƒì„±ëœ ëª¨ë¸ì´ ìˆë‹¤ë©´ ë¨¼ì € íŒŒê´´
         if (petModelSlot.transform.childCount > 0)
         {
             Destroy(petModelSlot.transform.GetChild(0).gameObject);
         }
 
-        // DatabaseManager¿¡¼­ µ¥ÀÌÅÍ¿¡ ¸Â´Â ¸ğµ¨ 'ÇÁ¸®ÆÕ'À» °¡Á®¿È
+        // DatabaseManagerì—ì„œ ë°ì´í„°ì— ë§ëŠ” ëª¨ë¸ 'í”„ë¦¬íŒ¹'ì„ ê°€ì ¸ì˜´
         GameObject modelPrefab = DatabaseManager_J.instance.petProfiles[data.modelIndex].modelPrefab;
-        // °¡Á®¿Â ÇÁ¸®ÆÕÀ» petModelSlotÀÇ ÀÚ½ÄÀ¸·Î '»ı¼º(Instantiate)'
+        // ê°€ì ¸ì˜¨ í”„ë¦¬íŒ¹ì„ petModelSlotì˜ ìì‹ìœ¼ë¡œ 'ìƒì„±(Instantiate)'
         Instantiate(modelPrefab, petModelSlot.transform);
 
-        // 3. ÀÌ¸§ Àû¿ë
-        // °ÔÀÓ¿ÀºêÁ§Æ®ÀÇ ÀÌ¸§À» Æê ÀÌ¸§À¸·Î º¯°æÇÏ¸é ±¸ºĞÀÌ ½¬¿ò
+        // 3. ì´ë¦„ ì ìš©
+        // ê²Œì„ì˜¤ë¸Œì íŠ¸ì˜ ì´ë¦„ì„ í« ì´ë¦„ìœ¼ë¡œ ë³€ê²½í•˜ë©´ êµ¬ë¶„ì´ ì‰¬ì›€
         this.name = data.petName;
         if (nameText != null)
         {
-            nameText.text = data.petName; // UI ÅØ½ºÆ® º¯°æ
+            nameText.text = data.petName; // UI í…ìŠ¤íŠ¸ ë³€ê²½
         }
 
-        // 4. ÀúÀåµÈ ¼öÄ¡¸¦ ÇöÀç »óÅÂ º¯¼ö¿¡ Àû¿ë (°ÔÀÓ ½ÃÀÛ ½Ã)
+        // 4. ì €ì¥ëœ ìˆ˜ì¹˜ë¥¼ í˜„ì¬ ìƒíƒœ ë³€ìˆ˜ì— ì ìš© (ê²Œì„ ì‹œì‘ ì‹œ)
         this.currentHunger = data.hungerper;
         this.currentIntimacy = data.intimacyper;
         this.currentBowel = data.bowelper;
@@ -55,7 +55,7 @@ public class PetController_J : MonoBehaviour
         fsm.data = DatabaseManager_J.instance.personalities[data.personalityIndex];
         fsm.player = GameObject.FindGameObjectWithTag("Player").transform;
 
-        // 5. ¸ğµç ¼³Á¤ÀÌ ³¡³µÀ¸´Ï ¿ÀºêÁ§Æ®¸¦ È°¼ºÈ­
+        // 5. ëª¨ë“  ì„¤ì •ì´ ëë‚¬ìœ¼ë‹ˆ ì˜¤ë¸Œì íŠ¸ë¥¼ í™œì„±í™”
         this.gameObject.SetActive(true);
 
         //TEMP
