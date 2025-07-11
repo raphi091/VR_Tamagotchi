@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Threading;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,7 +8,7 @@ public class TimeManager_LES : MonoBehaviour
     public static TimeManager_LES instance = null;
     public TextMeshProUGUI time; //시간 표시용
 
-    public Canvas canvas;
+    public GameObject canvas0, canvas1;
 
     //시간 로직
     public float speed = 60f; // 실제 1초 = 60 게임 시간초
@@ -27,8 +25,6 @@ public class TimeManager_LES : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        
     }
 
     private void Update()
@@ -47,10 +43,12 @@ public class TimeManager_LES : MonoBehaviour
         gameTimeSec = 7 * 3600 + 30 * 60;
 
         // 오전 보고 시작.
-        canvas.gameObject.SetActive(true);
+        if (canvas0 == null) yield return null;
+
+        GameObject g = Instantiate(canvas0);
 
         // 아침 보고 및 오전시간.
-        while (gameTimeSec < 8 * 3600)
+        while (gameTimeSec < 8 * 3600 + 00 * 60)
         {
             gameTimeSec += Time.deltaTime * speed;
             DisplayTime(gameTimeSec);
@@ -58,10 +56,10 @@ public class TimeManager_LES : MonoBehaviour
             yield return null;
         }
 
-        canvas.gameObject.SetActive(false);
-
+        Destroy(g);
+        
         //오전 수업 시간.
-        while (gameTimeSec >= 12 * 3600)
+        while (gameTimeSec <= 12 * 3600 + 00 * 60)
         {
             gameTimeSec += Time.deltaTime * speed;
             DisplayTime(gameTimeSec);
@@ -69,17 +67,13 @@ public class TimeManager_LES : MonoBehaviour
             yield return null;
         }
 
-        // 점심시간
-        // while (gameTimeSec < 13 * 3600)
-        // {
-        //     gameTimeSec += Time.deltaTime * speed;
-        //     DisplayTime(gameTimeSec);
+        // GameManager.instance.GoToScene("H_Lunch");
+        GameManager.instance.GoToScene("H_Outdoor");
+    }
 
-        //     yield return null;
-        // }
-
-        // 씬로드
-        SceneManager.LoadScene("TesrScene 1", LoadSceneMode.Single);
+    public void LunchTime()
+    {
+        GameManager.instance.GoToScene("H_Outdoor");
     }
 
     public void OutdoorTime()
@@ -89,10 +83,10 @@ public class TimeManager_LES : MonoBehaviour
 
     private IEnumerator Outdoor_co()
     {
-        gameTimeSec = 13 * 3600;
+        gameTimeSec = 13 * 3600 + 00 * 60;
 
         //오후 수업시간.
-        while (gameTimeSec >= 17 * 3600)
+        while (gameTimeSec <= 17 * 3600 + 00 * 60)
         {
             gameTimeSec += Time.deltaTime * speed;
             DisplayTime(gameTimeSec);
@@ -100,8 +94,12 @@ public class TimeManager_LES : MonoBehaviour
             yield return null;
         }
 
-        // 씬로드(오후 보고 로직)
-        
+        GameObject g = Instantiate(canvas0);
+
+        // 다음날로 넘기는 로직 추가
+
+
+        Destroy(g, 30f);
     }
 
     public void DisplayTime(float gameTimeSec)
