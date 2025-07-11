@@ -45,8 +45,8 @@ public class DataManager_J : MonoBehaviour
         else
         {
             // 저장된 파일이 없으면, 새로운 게임 데이터 객체를 생성
-            Debug.Log("저장된 파일 없음. 새 게임을 시작합니다.");
-            gameData = new GameData();
+            Debug.Log("저장된 파일 없음. 오류");
+            return;
         }
     }
 
