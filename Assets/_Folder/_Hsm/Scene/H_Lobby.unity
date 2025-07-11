@@ -1048,6 +1048,7 @@ MonoBehaviour:
   gameData:
     selectedClassName: "\uBBF8\uC815"
     allPetData: []
+    Day: 1
 --- !u!114 &566210625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4034,7 +4035,6 @@ GameObject:
   - component: {fileID: 1974839883}
   - component: {fileID: 1974839882}
   - component: {fileID: 1974839881}
-  - component: {fileID: 1974839880}
   - component: {fileID: 1974839879}
   - component: {fileID: 1974839885}
   m_Layer: 0
@@ -4171,21 +4171,6 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1974839880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1974839878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a59fbcd616ff3dd4eb09622782746842, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pressedcolor: {r: 0, g: 0, b: 1, a: 1}
-  originalColor: {r: 1, g: 1, b: 1, a: 0}
-  meshR: {fileID: 1974839882}
 --- !u!65 &1974839881
 BoxCollider:
   m_ObjectHideFlags: 0
