@@ -98,11 +98,13 @@ public class LobbyManager_J : MonoBehaviour
     }
 
 
-        public void OnClickContinue()
+    public void OnClickContinue()
     {
+        DataManager_J.instance.LoadGameData();
         // 이어하기도 무조건 'IndoorScene' (1교시 씬)으로 이동
         GameManager.instance.GoToScene("H_Indoor");
     }
+
     public void OnSelectClass(string className)
     {
         List<PetStatusData_J> selectedPets = temporaryClassPets[className];
