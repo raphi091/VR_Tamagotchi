@@ -8,6 +8,7 @@ public class Ch_Throwable : MonoBehaviour
     private Rigidbody rb;
     private Collider col;
 
+    private bool isPicked = false;
     private bool isGrounded = false;
 
 
@@ -22,24 +23,34 @@ public class Ch_Throwable : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (isGrounded)
-        {
-            return;
-        }
-
         if (other.gameObject.CompareTag("Ground"))
         {
-            isGrounded = true;
-
-            Debug.Log(this.name + "가 땅에 닿았습니다. 모든 강아지에게 알립니다.");
-
-            DogFSM_K[] allDogs = FindObjectsOfType<DogFSM_K>();
-
-            foreach (DogFSM_K dog in allDogs)
+            if (isPicked == true)
             {
-                dog.CommandCatch(this.transform);
+                Debug.Log("막대기가 땅에 떨어졌습니다.");
+                isGrounded = true;
+                isPicked=false;
+
+                Debug.Log(this.name + "가 땅에 닿았습니다. 모든 강아지에게 알립니다.");
+
+                DogFSM_K[] allDogs = FindObjectsOfType<DogFSM_K>();
+
+                foreach (DogFSM_K dog in allDogs)
+                {
+                    dog.CommandCatch(this.transform);
+                }
+            }
+            else
+            {
+                isGrounded = true;
+                isPicked=false;
             }
         }
+    }
+
+    public void GetReady()
+    {
+        isPicked = true;
     }
 
     public void GetPickedUpBy(Transform newParent)

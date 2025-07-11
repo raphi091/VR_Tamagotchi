@@ -9,9 +9,9 @@ public class Ch_Player_Events : MonoBehaviour
     public float selectThreshold;
     
     private bool isCatchable = false;
-    private GameObject throwableTarget=null;
+    private Ch_Throwable throwableTarget=null;
     public bool IsCatchable {get => isCatchable; set => isCatchable = value; }
-    public GameObject ThrowableTarget { get => throwableTarget; set => throwableTarget = value; }
+    public Ch_Throwable ThrowableTarget { get => throwableTarget; set => throwableTarget = value; }
     
     
     public void OnDogSelected(SelectEnterEventArgs args)
@@ -75,8 +75,9 @@ public class Ch_Player_Events : MonoBehaviour
 
         if (throwableObject.CompareTag("Throwable")&&ThrowableTarget==null)
         {
-            isCatchable = true;
-            throwableTarget = throwableObject.transform.gameObject;
+            Debug.Log($"물건 잡힘:{throwableObject.name}");
+            throwableTarget = throwableObject.GetComponent<Ch_Throwable>();
+            throwableTarget.GetReady();
         }
     }
 
@@ -86,7 +87,7 @@ public class Ch_Player_Events : MonoBehaviour
 
         if (throwableObject.CompareTag("Throwable"))
         {
-            isCatchable = false;
+            Debug.Log($"물건 놓음:{throwableObject.name}");
             throwableTarget = null;
         }
     }
