@@ -45,11 +45,13 @@ public class GameData
 {
     public string selectedClassName;
     public List<PetStatusData_J> allPetData = new List<PetStatusData_J>();
+    public int Day;
 
     public GameData()
     {
         selectedClassName = "미정";
         allPetData = new List<PetStatusData_J>();
+        Day = 1;
     }
 }
 

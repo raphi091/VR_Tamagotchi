@@ -1,7 +1,6 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class TimeManager_LES : MonoBehaviour
 {
@@ -97,9 +96,17 @@ public class TimeManager_LES : MonoBehaviour
         GameObject g = Instantiate(canvas0);
 
         // 다음날로 넘기는 로직 추가
+        while (gameTimeSec < 17 * 3600 + 30 * 60)
+        {
+            gameTimeSec += Time.deltaTime * speed;
+            DisplayTime(gameTimeSec);
 
+            yield return null;
+        }
+        GameManager.instance.EndOfDay();
 
-        Destroy(g, 30f);
+        Destroy(g);
+        GameManager.instance.GoToScene("H_Indoor");
     }
 
     public void DisplayTime(float gameTimeSec)

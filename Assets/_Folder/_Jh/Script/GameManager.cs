@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("하루가 종료되어 게임을 자동 저장합니다.");
 
         SaveChangesToDataManager();
-
+        DataManager_J.instance.gameData.Day++;
         // 업데이트된 데이터로 저장 실행
         DataManager_J.instance.SaveGameData();
     }
