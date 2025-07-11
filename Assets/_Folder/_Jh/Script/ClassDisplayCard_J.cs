@@ -8,29 +8,29 @@ public class ClassDisplayCard_J : MonoBehaviour, H_UI
 
     private string className;
 
-    // 3¸¶¸®ÀÇ Æê Á¤º¸¸¦ ¹Ş¾Æ °¢ ½½·Ô¿¡ Àü´ŞÇÏ´Â ÇÔ¼ö
+    // 3ë§ˆë¦¬ì˜ í« ì •ë³´ë¥¼ ë°›ì•„ ê° ìŠ¬ë¡¯ì— ì „ë‹¬í•˜ëŠ” í•¨ìˆ˜
     public void SetupCard(string className, List<PetStatusData_J> previewPets)
     {
         this.className = className;
 
-        // 3°³ÀÇ ½½·ÔÀ» ¼øÈ¸ÇÏ¸ç Á¤º¸ ¼³Á¤
+        // 3ê°œì˜ ìŠ¬ë¡¯ì„ ìˆœíšŒí•˜ë©° ì •ë³´ ì„¤ì •
         for (int i = 0; i < petSlots.Length; i++)
         {
-            // ¹Ì¸®º¸±â¿ë Æê µ¥ÀÌÅÍ°¡ ½½·Ô ¼ö¸¸Å­ ÀÖ´ÂÁö È®ÀÎ
+            // ë¯¸ë¦¬ë³´ê¸°ìš© í« ë°ì´í„°ê°€ ìŠ¬ë¡¯ ìˆ˜ë§Œí¼ ìˆëŠ”ì§€ í™•ì¸
             if (i < previewPets.Count)
             {
-                // 1. Æê ÇÁ·ÎÇÊ¿¡¼­ »çÁø °¡Á®¿À±â
+                // 1. í« í”„ë¡œí•„ì—ì„œ ì‚¬ì§„ ê°€ì ¸ì˜¤ê¸°
                 PetProFile_LES profile = DatabaseManager_J.instance.petProfiles[previewPets[i].modelIndex];
 
-                // 2. ½½·ÔÀÇ UI(»çÁø, ÀÌ¸§) ¾÷µ¥ÀÌÆ®
+                // 2. ìŠ¬ë¡¯ì˜ UI(ì‚¬ì§„, ì´ë¦„) ì—…ë°ì´íŠ¸
                 petSlots[i].UpdateSlot(profile.petPicture, previewPets[i].petName);
 
-                // 3. ½½·Ô È°¼ºÈ­
+                // 3. ìŠ¬ë¡¯ í™œì„±í™”
                 petSlots[i].gameObject.SetActive(true);
             }
             else
             {
-                // Ç¥½ÃÇÒ Æê µ¥ÀÌÅÍ°¡ ¾øÀ¸¸é ½½·Ô ºñÈ°¼ºÈ­
+                // í‘œì‹œí•  í« ë°ì´í„°ê°€ ì—†ìœ¼ë©´ ìŠ¬ë¡¯ ë¹„í™œì„±í™”
                 petSlots[i].gameObject.SetActive(false);
             }
         }
@@ -41,7 +41,7 @@ public class ClassDisplayCard_J : MonoBehaviour, H_UI
         return this.className;
     }
 
-    // Ä«µå¸¦ Å¬¸¯ÇßÀ» ¶§ ·Îºñ ¸Å´ÏÀú¿¡°Ô ¾Ë¸²
+    // ì¹´ë“œë¥¼ í´ë¦­í–ˆì„ ë•Œ ë¡œë¹„ ë§¤ë‹ˆì €ì—ê²Œ ì•Œë¦¼
     public void OnPress()
     {
         FindObjectOfType<LobbyManager_J>().OnSelectClass(this.className);

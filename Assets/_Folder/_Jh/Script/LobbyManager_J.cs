@@ -56,12 +56,12 @@ public class LobbyManager_J : MonoBehaviour
     void CreateTemporaryPetData()
     {
         temporaryClassPets = new Dictionary<string, List<PetStatusData_J>>();
-        string[] classNames = { "ÇŞ´Ô¹İ", "´Ş´Ô¹İ", "º°´Ô¹İ" };
+        string[] classNames = { "í–‡ë‹˜ë°˜", "ë‹¬ë‹˜ë°˜", "ë³„ë‹˜ë°˜" };
 
         foreach (string className in classNames)
         {
             List<PetStatusData_J> petsForThisClass = new List<PetStatusData_J>();
-            for (int i = 0; i < 3; i++) // °¢ ¹İ¸¶´Ù 3¸¶¸®¾¿ »ı¼º
+            for (int i = 0; i < 3; i++) // ê° ë°˜ë§ˆë‹¤ 3ë§ˆë¦¬ì”© ìƒì„±
             {
                 int profileIdx = Random.Range(0, DatabaseManager_J.instance.petProfiles.Count);
                 int personalityIdx = Random.Range(0, DatabaseManager_J.instance.personalities.Count);
@@ -77,21 +77,21 @@ public class LobbyManager_J : MonoBehaviour
 
         void SetupPreviewCards()
         {
-        // 1. µ¥ÀÌÅÍÀÇ ¿øÃµÀÎ temporaryClassPets(Dictionary)¸¦ ±âÁØÀ¸·Î ¹İº¹ÇÕ´Ï´Ù.
+        // 1. ë°ì´í„°ì˜ ì›ì²œì¸ temporaryClassPets(Dictionary)ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ë°˜ë³µí•©ë‹ˆë‹¤.
         int index = 0;
         foreach (var entry in temporaryClassPets)
         {
-            // 2. Ä«µå°¡ ¹è¿­ÀÇ ¹üÀ§¸¦ ¹ş¾î³ªÁö ¾Ê´ÂÁö È®ÀÎÇÕ´Ï´Ù.
+            // 2. ì¹´ë“œê°€ ë°°ì—´ì˜ ë²”ìœ„ë¥¼ ë²—ì–´ë‚˜ì§€ ì•ŠëŠ”ì§€ í™•ì¸í•©ë‹ˆë‹¤.
             if (index < displayCards.Length)
             {
-                // 3. Dictionary¿¡¼­ key(¹İ ÀÌ¸§)¿Í value(Æê ¸®½ºÆ®)¸¦ ¸ÕÀú ²¨³À´Ï´Ù.
+                // 3. Dictionaryì—ì„œ key(ë°˜ ì´ë¦„)ì™€ value(í« ë¦¬ìŠ¤íŠ¸)ë¥¼ ë¨¼ì € êº¼ëƒ…ë‹ˆë‹¤.
                 string className = entry.Key;
                 List<PetStatusData_J> petsToShow = entry.Value;
 
-                // 4. ÀÌ·¸°Ô ²¨³»¿Â À¯È¿ÇÑ Á¤º¸¸¦ Ä«µå¿¡ Àü´ŞÇÏ¿© ¼³Á¤À» ¿Ï·áÇÕ´Ï´Ù.
+                // 4. ì´ë ‡ê²Œ êº¼ë‚´ì˜¨ ìœ íš¨í•œ ì •ë³´ë¥¼ ì¹´ë“œì— ì „ë‹¬í•˜ì—¬ ì„¤ì •ì„ ì™„ë£Œí•©ë‹ˆë‹¤.
                 displayCards[index].SetupCard(className, petsToShow);
 
-                // 5. ´ÙÀ½ Ä«µå·Î ³Ñ¾î°¡±â À§ÇØ ÀÎµ¦½º¸¦ Áõ°¡½ÃÅµ´Ï´Ù.
+                // 5. ë‹¤ìŒ ì¹´ë“œë¡œ ë„˜ì–´ê°€ê¸° ìœ„í•´ ì¸ë±ìŠ¤ë¥¼ ì¦ê°€ì‹œí‚µë‹ˆë‹¤.
                 index++;
             }
         }
@@ -100,17 +100,17 @@ public class LobbyManager_J : MonoBehaviour
 
         public void OnClickContinue()
     {
-        // ÀÌ¾îÇÏ±âµµ ¹«Á¶°Ç 'IndoorScene' (1±³½Ã ¾À)À¸·Î ÀÌµ¿
+        // ì´ì–´í•˜ê¸°ë„ ë¬´ì¡°ê±´ 'IndoorScene' (1êµì‹œ ì”¬)ìœ¼ë¡œ ì´ë™
         GameManager.instance.GoToScene("H_Indoor");
     }
     public void OnSelectClass(string className)
     {
         List<PetStatusData_J> selectedPets = temporaryClassPets[className];
 
-        // 2. GameManager¿¡°Ô ¼±ÅÃµÈ 3¸¶¸®ÀÇ µ¥ÀÌÅÍ·Î »õ °ÔÀÓÀ» ¸¸µé¶ó°í ¸í·É
+        // 2. GameManagerì—ê²Œ ì„ íƒëœ 3ë§ˆë¦¬ì˜ ë°ì´í„°ë¡œ ìƒˆ ê²Œì„ì„ ë§Œë“¤ë¼ê³  ëª…ë ¹
         GameManager.instance.CreateNewGameData(className, selectedPets);
 
-        // 3. °ÔÀÓ ¾ÀÀ¸·Î ÀÌµ¿
+        // 3. ê²Œì„ ì”¬ìœ¼ë¡œ ì´ë™
         GameManager.instance.GoToScene("H_Indoor");
         //GameManager
     }

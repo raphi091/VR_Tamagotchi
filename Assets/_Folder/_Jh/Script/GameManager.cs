@@ -31,10 +31,10 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    // ¾À ·Îµå°¡ ¿Ï·áµÇ¸é ÀÌ ÇÔ¼ö°¡ ½ÇÇàµË´Ï´Ù.
+    // ì”¬ ë¡œë“œê°€ ì™„ë£Œë˜ë©´ ì´ í•¨ìˆ˜ê°€ ì‹¤í–‰ë©ë‹ˆë‹¤.
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // °ÔÀÓ ÇÃ·¹ÀÌ ¾À(½Ç³» ¶Ç´Â ½Ç¿Ü)ÀÏ °æ¿ì¿¡¸¸ ÃÊ±âÈ­ ·ÎÁ÷ ½ÇÇà
+        // ê²Œì„ í”Œë ˆì´ ì”¬(ì‹¤ë‚´ ë˜ëŠ” ì‹¤ì™¸)ì¼ ê²½ìš°ì—ë§Œ ì´ˆê¸°í™” ë¡œì§ ì‹¤í–‰
         if (scene.name == "H_Indoor" || scene.name == "H_0utdoor")
         {
             UpdatePlacedPets();
@@ -43,12 +43,12 @@ public class GameManager : MonoBehaviour
 
     public void SaveChangesToDataManager()
     {
-        Debug.Log("ÇöÀç ÆêµéÀÇ ÃÖ½Å »óÅÂ¸¦ DataManager¿¡ ¾÷µ¥ÀÌÆ®ÇÕ´Ï´Ù.");
+        Debug.Log("í˜„ì¬ í«ë“¤ì˜ ìµœì‹  ìƒíƒœë¥¼ DataManagerì— ì—…ë°ì´íŠ¸í•©ë‹ˆë‹¤.");
         foreach (PetController_J pet in petsInScene)
         {
             if (pet.gameObject.activeSelf)
             {
-                // PetControllerÀÇ ½Ç½Ã°£ °ªÀ» ¿µ±¸ µ¥ÀÌÅÍ(petData)¿¡ µ¤¾î¾²±â
+                // PetControllerì˜ ì‹¤ì‹œê°„ ê°’ì„ ì˜êµ¬ ë°ì´í„°(petData)ì— ë®ì–´ì“°ê¸°
                 pet.petData.hungerper = pet.currentHunger;
                 pet.petData.intimacyper = pet.currentIntimacy;
                 pet.petData.bowelper = pet.currentBowel;
@@ -58,16 +58,16 @@ public class GameManager : MonoBehaviour
 
     public void GoToScene(string sceneName)
     {
-        // 1. ¾ÀÀ» ¶°³ª±â Àü¿¡ ÇöÀç »óÅÂ¸¦ ¸ÕÀú DataManager¿¡ ÀúÀåÇÑ´Ù.
+        // 1. ì”¬ì„ ë– ë‚˜ê¸° ì „ì— í˜„ì¬ ìƒíƒœë¥¼ ë¨¼ì € DataManagerì— ì €ì¥í•œë‹¤.
         SaveChangesToDataManager();
 
-        // 2. ¿øÇÏ´Â ¾ÀÀ¸·Î ÀÌµ¿ÇÑ´Ù.
-        Debug.Log(sceneName + "À¸·Î ÀÌµ¿ÇÕ´Ï´Ù...");
+        // 2. ì›í•˜ëŠ” ì”¬ìœ¼ë¡œ ì´ë™í•œë‹¤.
+        Debug.Log(sceneName + "ìœ¼ë¡œ ì´ë™í•©ë‹ˆë‹¤...");
         SceneManager.LoadScene(sceneName);
     }
 
 
-    // ¹èÄ¡µÈ Æêµé¿¡°Ô µ¥ÀÌÅÍ¸¦ Àû¿ëÇÏ´Â ÇÔ¼ö
+    // ë°°ì¹˜ëœ í«ë“¤ì—ê²Œ ë°ì´í„°ë¥¼ ì ìš©í•˜ëŠ” í•¨ìˆ˜
     void UpdatePlacedPets()
     {
         petsInScene.Clear();
@@ -88,28 +88,28 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // ·Îºñ¿¡¼­ È£ÃâÇÒ »õ °ÔÀÓ µ¥ÀÌÅÍ »ı¼º Àü¿ë ÇÔ¼ö
+    // ë¡œë¹„ì—ì„œ í˜¸ì¶œí•  ìƒˆ ê²Œì„ ë°ì´í„° ìƒì„± ì „ìš© í•¨ìˆ˜
     public void CreateNewGameData(string className, List<PetStatusData_J> petsToCreate)
     {
-        Debug.Log(className + "À¸·Î »õ °ÔÀÓÀ» ½ÃÀÛÇÕ´Ï´Ù.");
+        Debug.Log(className + "ìœ¼ë¡œ ìƒˆ ê²Œì„ì„ ì‹œì‘í•©ë‹ˆë‹¤.");
 
-        // 1. µ¥ÀÌÅÍ °´Ã¼ ÃÊ±âÈ­
+        // 1. ë°ì´í„° ê°ì²´ ì´ˆê¸°í™”
         DataManager_J.instance.gameData = new GameData();
 
-        // 2. ¹İ ÀÌ¸§°ú Àü´Ş¹ŞÀº Æê ¸®½ºÆ®¸¦ ±×´ë·Î ÀúÀå
+        // 2. ë°˜ ì´ë¦„ê³¼ ì „ë‹¬ë°›ì€ í« ë¦¬ìŠ¤íŠ¸ë¥¼ ê·¸ëŒ€ë¡œ ì €ì¥
         DataManager_J.instance.gameData.selectedClassName = className;
         DataManager_J.instance.gameData.allPetData = petsToCreate;
     }
 
 
-    // ÇÏ·ç°¡ Áö³µÀ» ¶§ È£ÃâµÉ ÇÔ¼ö
+    // í•˜ë£¨ê°€ ì§€ë‚¬ì„ ë•Œ í˜¸ì¶œë  í•¨ìˆ˜
     public void EndOfDay()
     {
-        Debug.Log("ÇÏ·ç°¡ Á¾·áµÇ¾î °ÔÀÓÀ» ÀÚµ¿ ÀúÀåÇÕ´Ï´Ù.");
+        Debug.Log("í•˜ë£¨ê°€ ì¢…ë£Œë˜ì–´ ê²Œì„ì„ ìë™ ì €ì¥í•©ë‹ˆë‹¤.");
 
         SaveChangesToDataManager();
 
-        // ¾÷µ¥ÀÌÆ®µÈ µ¥ÀÌÅÍ·Î ÀúÀå ½ÇÇà
+        // ì—…ë°ì´íŠ¸ëœ ë°ì´í„°ë¡œ ì €ì¥ ì‹¤í–‰
         DataManager_J.instance.SaveGameData();
     }
 }
