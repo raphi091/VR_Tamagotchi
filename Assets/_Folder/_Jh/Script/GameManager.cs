@@ -35,8 +35,9 @@ public class GameManager : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         // 게임 플레이 씬(실내 또는 실외)일 경우에만 초기화 로직 실행
-        if (scene.name == "H_Indoor" || scene.name == "H_0utdoor")
+        if (scene.name == "H_Indoor" || scene.name == "H_Outdoor")
         {
+            Debug.Log(scene.name);
             UpdatePlacedPets();
         }
     }
@@ -70,6 +71,7 @@ public class GameManager : MonoBehaviour
     // 배치된 펫들에게 데이터를 적용하는 함수
     void UpdatePlacedPets()
     {
+        Debug.Log("1");
         petsInScene.Clear();
         petsInScene.AddRange(FindObjectsOfType<PetController_J>());
 
@@ -79,6 +81,7 @@ public class GameManager : MonoBehaviour
         {
             if (i < loadedPetData.Count)
             {
+                Debug.Log("2");
                 petsInScene[i].ApplyData(loadedPetData[i]);
             }
             else
@@ -86,6 +89,7 @@ public class GameManager : MonoBehaviour
                 petsInScene[i].gameObject.SetActive(false);
             }
         }
+        Debug.Log("3");
     }
 
     // 로비에서 호출할 새 게임 데이터 생성 전용 함수
