@@ -1,14 +1,14 @@
-using System.IO; // ÆÄÀÏÀ» ´Ù·ç±â À§ÇØ ²À ÇÊ¿äÇÕ´Ï´Ù.
+using System.IO; // íŒŒì¼ì„ ë‹¤ë£¨ê¸° ìœ„í•´ ê¼­ í•„ìš”í•©ë‹ˆë‹¤.
 using UnityEngine;
 public class DataManager_J : MonoBehaviour
 {
-    // ´Ù¸¥ ½ºÅ©¸³Æ®¿¡¼­ ½±°Ô Á¢±ÙÇÒ ¼ö ÀÖµµ·Ï static º¯¼ö·Î ÀÚ½ÅÀ» ÀúÀå (½Ì±ÛÅæ)
+    // ë‹¤ë¥¸ ìŠ¤í¬ë¦½íŠ¸ì—ì„œ ì‰½ê²Œ ì ‘ê·¼í•  ìˆ˜ ìˆë„ë¡ static ë³€ìˆ˜ë¡œ ìì‹ ì„ ì €ì¥ (ì‹±ê¸€í†¤)
     public static DataManager_J instance;
 
-    // ÇöÀç °ÔÀÓÀÇ ¸ğµç µ¥ÀÌÅÍ¸¦ ´ã°í ÀÖ´Â °´Ã¼
+    // í˜„ì¬ ê²Œì„ì˜ ëª¨ë“  ë°ì´í„°ë¥¼ ë‹´ê³  ìˆëŠ” ê°ì²´
     public GameData gameData;
 
-    // ÀúÀåµÉ ÆÄÀÏÀÇ ÀüÃ¼ °æ·Î
+    // ì €ì¥ë  íŒŒì¼ì˜ ì „ì²´ ê²½ë¡œ
     private string saveFilePath;
 
     private void Awake()
@@ -16,49 +16,49 @@ public class DataManager_J : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject); // ¾ÀÀÌ ¹Ù²î¾îµµ ÀÌ ¿ÀºêÁ§Æ®´Â ÆÄ±«µÇÁö ¾ÊÀ½
+            DontDestroyOnLoad(gameObject); // ì”¬ì´ ë°”ë€Œì–´ë„ ì´ ì˜¤ë¸Œì íŠ¸ëŠ” íŒŒê´´ë˜ì§€ ì•ŠìŒ
         }
         else
         {
             Destroy(gameObject);
         }
 
-        // Application.persistentDataPath´Â PC, ¸ğ¹ÙÀÏ µî ¾î¶² È¯°æ¿¡¼­µµ
-        // ¾ÈÀüÇÏ°Ô ÆÄÀÏÀ» ÀúÀåÇÒ ¼ö ÀÖ´Â °æ·Î¸¦ ¾Ë·ÁÁİ´Ï´Ù.
+        // Application.persistentDataPathëŠ” PC, ëª¨ë°”ì¼ ë“± ì–´ë–¤ í™˜ê²½ì—ì„œë„
+        // ì•ˆì „í•˜ê²Œ íŒŒì¼ì„ ì €ì¥í•  ìˆ˜ ìˆëŠ” ê²½ë¡œë¥¼ ì•Œë ¤ì¤ë‹ˆë‹¤.
         saveFilePath = Path.Combine(Application.persistentDataPath, "MyPetData.json");
     }
 
-    // JSON ÆÄÀÏ¿¡¼­ °ÔÀÓ µ¥ÀÌÅÍ¸¦ ºÒ·¯¿À´Â ÇÔ¼ö
+    // JSON íŒŒì¼ì—ì„œ ê²Œì„ ë°ì´í„°ë¥¼ ë¶ˆëŸ¬ì˜¤ëŠ” í•¨ìˆ˜
     public void LoadGameData()
     {
-        // ÀúÀåµÈ ÆÄÀÏÀÌ ½ÇÁ¦·Î Á¸ÀçÇÏ´ÂÁö È®ÀÎ
+        // ì €ì¥ëœ íŒŒì¼ì´ ì‹¤ì œë¡œ ì¡´ì¬í•˜ëŠ”ì§€ í™•ì¸
         if (File.Exists(saveFilePath))
         {
-            // ÆÄÀÏÀÌ ÀÖ´Ù¸é, ÆÄÀÏÀÇ ¸ğµç ÅØ½ºÆ®(JSON)¸¦ ÀĞ¾î¿È
+            // íŒŒì¼ì´ ìˆë‹¤ë©´, íŒŒì¼ì˜ ëª¨ë“  í…ìŠ¤íŠ¸(JSON)ë¥¼ ì½ì–´ì˜´
             string jsonData = File.ReadAllText(saveFilePath);
 
-            // JSON ¹®ÀÚ¿­À» GameData °´Ã¼·Î º¯È¯ÇÏ¿© gameData º¯¼ö¿¡ µ¤¾î¾¸
+            // JSON ë¬¸ìì—´ì„ GameData ê°ì²´ë¡œ ë³€í™˜í•˜ì—¬ gameData ë³€ìˆ˜ì— ë®ì–´ì”€
             gameData = JsonUtility.FromJson<GameData>(jsonData);
 
-            Debug.Log("µ¥ÀÌÅÍ ºÒ·¯¿À±â ¿Ï·á.");
+            Debug.Log("ë°ì´í„° ë¶ˆëŸ¬ì˜¤ê¸° ì™„ë£Œ.");
         }
         else
         {
-            // ÀúÀåµÈ ÆÄÀÏÀÌ ¾øÀ¸¸é, »õ·Î¿î °ÔÀÓ µ¥ÀÌÅÍ °´Ã¼¸¦ »ı¼º
-            Debug.Log("ÀúÀåµÈ ÆÄÀÏ ¾øÀ½. »õ °ÔÀÓÀ» ½ÃÀÛÇÕ´Ï´Ù.");
+            // ì €ì¥ëœ íŒŒì¼ì´ ì—†ìœ¼ë©´, ìƒˆë¡œìš´ ê²Œì„ ë°ì´í„° ê°ì²´ë¥¼ ìƒì„±
+            Debug.Log("ì €ì¥ëœ íŒŒì¼ ì—†ìŒ. ìƒˆ ê²Œì„ì„ ì‹œì‘í•©ë‹ˆë‹¤.");
             gameData = new GameData();
         }
     }
 
-    // ÇöÀç °ÔÀÓ µ¥ÀÌÅÍ¸¦ JSON ÆÄÀÏ·Î ÀúÀåÇÏ´Â ÇÔ¼ö
+    // í˜„ì¬ ê²Œì„ ë°ì´í„°ë¥¼ JSON íŒŒì¼ë¡œ ì €ì¥í•˜ëŠ” í•¨ìˆ˜
     public void SaveGameData()
     {
-        // gameData °´Ã¼¸¦ JSON Çü½ÄÀÇ ¹®ÀÚ¿­·Î º¯È¯ (true ¿É¼ÇÀº º¸±â ÁÁ°Ô Á¤·Ä)
+        // gameData ê°ì²´ë¥¼ JSON í˜•ì‹ì˜ ë¬¸ìì—´ë¡œ ë³€í™˜ (true ì˜µì…˜ì€ ë³´ê¸° ì¢‹ê²Œ ì •ë ¬)
         string jsonData = JsonUtility.ToJson(gameData, true);
 
-        // º¯È¯µÈ JSON ¹®ÀÚ¿­À» ÆÄÀÏ °æ·Î¿¡ ÅØ½ºÆ® ÆÄÀÏ·Î ÀúÀå
+        // ë³€í™˜ëœ JSON ë¬¸ìì—´ì„ íŒŒì¼ ê²½ë¡œì— í…ìŠ¤íŠ¸ íŒŒì¼ë¡œ ì €ì¥
         File.WriteAllText(saveFilePath, jsonData);
 
-        Debug.Log("µ¥ÀÌÅÍ ÀúÀå ¿Ï·á: " + saveFilePath);
+        Debug.Log("ë°ì´í„° ì €ì¥ ì™„ë£Œ: " + saveFilePath);
     }
 }

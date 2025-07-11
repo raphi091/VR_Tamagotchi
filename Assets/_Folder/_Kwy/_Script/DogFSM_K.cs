@@ -154,10 +154,9 @@ public class DogFSM_K : MonoBehaviour
         {
             // "나 이제 갈게" 라고 매니저에게 알림
             DogInteractionManager_K.instance.CancelRequest(this);
-            if (isSelected)
-            {
-                ReturnToWander();
-            }
+
+            ReturnToWander();
+
         }
     }
 
