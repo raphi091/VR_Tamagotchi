@@ -1,5 +1,7 @@
 using System.Collections;
+using System.Threading;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -25,6 +27,8 @@ public class TimeManager_LES : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        
     }
 
     private void Update()
@@ -42,9 +46,21 @@ public class TimeManager_LES : MonoBehaviour
     {
         gameTimeSec = 7 * 3600 + 30 * 60;
 
-        // 오전 보고 로직
+        // 오전 보고 시작.
+        canvas.gameObject.SetActive(true);
 
+        // 아침 보고 및 오전시간.
+        while (gameTimeSec < 8 * 3600)
+        {
+            gameTimeSec += Time.deltaTime * speed;
+            DisplayTime(gameTimeSec);
 
+            yield return null;
+        }
+
+        canvas.gameObject.SetActive(false);
+
+        //오전 수업 시간.
         while (gameTimeSec >= 12 * 3600)
         {
             gameTimeSec += Time.deltaTime * speed;
@@ -53,8 +69,17 @@ public class TimeManager_LES : MonoBehaviour
             yield return null;
         }
 
+        // 점심시간
+        // while (gameTimeSec < 13 * 3600)
+        // {
+        //     gameTimeSec += Time.deltaTime * speed;
+        //     DisplayTime(gameTimeSec);
+
+        //     yield return null;
+        // }
+
         // 씬로드
-        SceneManager.LoadScene("H_Outdoor", LoadSceneMode.Single);
+        SceneManager.LoadScene("TesrScene 1", LoadSceneMode.Single);
     }
 
     public void OutdoorTime()
@@ -66,6 +91,7 @@ public class TimeManager_LES : MonoBehaviour
     {
         gameTimeSec = 13 * 3600;
 
+        //오후 수업시간.
         while (gameTimeSec >= 17 * 3600)
         {
             gameTimeSec += Time.deltaTime * speed;
@@ -75,14 +101,13 @@ public class TimeManager_LES : MonoBehaviour
         }
 
         // 씬로드(오후 보고 로직)
-        SceneManager.LoadScene("H_Indoor", LoadSceneMode.Single);
+        
     }
 
     public void DisplayTime(float gameTimeSec)
     {
         int hh = Mathf.FloorToInt(gameTimeSec / 3600f) % 24;
         int mm = Mathf.FloorToInt((gameTimeSec % 3600f) / 60f);
-        string period = hh >= 12 ? "PM" : "AM";
-        time.text = $"{hh:00}:{mm:00} {period}";
+        time.text = $"{hh:00}:{mm:00}";
     }
 }
