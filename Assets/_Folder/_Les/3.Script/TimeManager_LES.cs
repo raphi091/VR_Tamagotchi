@@ -66,13 +66,10 @@ public class TimeManager_LES : MonoBehaviour
             yield return null;
         }
 
-        // GameManager.instance.GoToScene("H_Lunch");
-        GameManager.instance.GoToScene("H_Outdoor");
-    }
-
-    public void LunchTime()
-    {
-        GameManager.instance.GoToScene("H_Outdoor");
+        // ✅ 점심시간: 바로 씬 전환, 보고서 생략, 시계 12:00 고정
+        gameTimeSec = 12 * 3600 + 0 * 60;
+        DisplayTime(gameTimeSec); // 시계 고정
+        GameManager.instance.GoToScene("H_Lunch");
     }
 
     public void OutdoorTime()

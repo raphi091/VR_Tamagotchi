@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class LunchSceneManager_Dummy : MonoBehaviour
 {
@@ -11,7 +12,12 @@ public class LunchSceneManager_Dummy : MonoBehaviour
     public AudioClip bellClip;              // ✅ 종소리 클립
 
     private static int finishCount = 0;
+    private static LunchSceneManager_Dummy instance;
 
+    void Awake()
+    {
+        instance = this;
+    }
     void Start()
     {
         // 1. 모든 밥그릇 랜덤 음식 채우기 (테스트용)
@@ -26,11 +32,10 @@ public class LunchSceneManager_Dummy : MonoBehaviour
             var dog = dogCubes[i];
             dog.SetLunchFood(foodBowls[i].containedFood);
 
-            // ⚠️ 테스트용 PetStatusData 할당 (나중에 실제 저장된 데이터로 대체)
-            PetStatusData_J mockData = new PetStatusData_J(0, 0);
-            dog.SetPetData(mockData);
+            // ✅ 실제 GameData에 있는 저장된 펫 데이터 사용
+            var data = DataManager_J.instance.gameData.allPetData[i];
+            dog.SetPetData(data);
 
-            // ✅ 강아지 위치를 대기 지점(waitPosition)으로 초기화
             dog.InitPositionToWait();
         }
 
@@ -59,6 +64,17 @@ public class LunchSceneManager_Dummy : MonoBehaviour
         if (finishCount >= 3)
         {
             Debug.Log("모든 강아지 식사 완료 → 씬 전환 등 처리");
+
+            // ✅ 1초 후 외부 씬으로 전환
+            instance.StartCoroutine(instance.LoadOutdoorScene());
         }
+    }
+
+    private IEnumerator LoadOutdoorScene()
+    {
+        yield return new WaitForSeconds(1f); // 약간의 여유 시간
+        Debug.Log("모든 강아지 식사 완료 -> H_Outdoor로 이동");
+        // ✅ GameManager 통해 외부 씬으로 전환
+        GameManager.instance.GoToScene("H_Outdoor");
     }
 }
