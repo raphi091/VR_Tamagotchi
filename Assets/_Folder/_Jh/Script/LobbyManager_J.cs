@@ -108,7 +108,7 @@ public class LobbyManager_J : MonoBehaviour
     public void OnSelectClass(string className)
     {
         List<PetStatusData_J> selectedPets = temporaryClassPets[className];
-
+        Debug.Log($"[LobbyManager_J] OnSelectClass: {className}, selectedPets count: {selectedPets.Count}");
         // 2. GameManager에게 선택된 3마리의 데이터로 새 게임을 만들라고 명령
         GameManager.instance.CreateNewGameData(className, selectedPets);
 

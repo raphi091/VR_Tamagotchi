@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
 
     public List<PetController_J> petsInScene = new List<PetController_J>();
+    
 
     private void Awake()
     {
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+
         }
         else
         {
@@ -95,14 +97,16 @@ public class GameManager : MonoBehaviour
     // 로비에서 호출할 새 게임 데이터 생성 전용 함수
     public void CreateNewGameData(string className, List<PetStatusData_J> petsToCreate)
     {
-        Debug.Log(className + "으로 새 게임을 시작합니다.");
+        // 1. 모든 정보가 담긴 '완성된' GameData 객체를 지역 변수로 먼저 만듭니다.
+        GameData newGameData = new GameData();
+        newGameData.selectedClassName = className;
+        newGameData.allPetData = petsToCreate;
 
-        // 1. 데이터 객체 초기화
-        DataManager_J.instance.gameData = new GameData();
+        // 2. 완성된 객체를 DataManager에 '단 한 번에' 할당합니다.
+        // 이렇게 하면 중간에 데이터가 비어있는 상태가 발생하지 않습니다.
+        DataManager_J.instance.gameData = newGameData;
 
-        // 2. 반 이름과 전달받은 펫 리스트를 그대로 저장
-        DataManager_J.instance.gameData.selectedClassName = className;
-        DataManager_J.instance.gameData.allPetData = petsToCreate;
+        Debug.Log($"[GameManager] {className} 데이터 생성 완료. 펫: {petsToCreate.Count}마리");
     }
 
 
