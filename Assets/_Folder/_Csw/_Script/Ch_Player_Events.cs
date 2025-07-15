@@ -47,7 +47,6 @@ public class Ch_Player_Events : MonoBehaviour
 
     public void OnDogSit(SelectEnterEventArgs args)
     {
-        Debug.Log("Enter dog");
         GameObject selectedObject = args.interactableObject.transform.gameObject;
         if (selectedObject.CompareTag("Dog"))
         {
