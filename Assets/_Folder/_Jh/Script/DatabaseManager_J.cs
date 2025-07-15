@@ -5,7 +5,6 @@ using UnityEngine;
 public class DatabaseManager_J : MonoBehaviour
 {
     public static DatabaseManager_J instance;
-
     
     public List<PetProFile_LES> petProfiles;
     public List<PersonalityData_LES> personalities;
