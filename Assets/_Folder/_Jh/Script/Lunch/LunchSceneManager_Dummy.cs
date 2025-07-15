@@ -1,51 +1,64 @@
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class LunchSceneManager_Dummy : MonoBehaviour
 {
-    public List<LunchDogDummy> dogCubes; // 큐브 3개
+    public List<LunchDogDummy> dogCubes;
     public List<FoodBowl> foodBowls;
-    // public AudioSource bellSound;
 
-    private bool triggered = false;
+    public AudioSource bellSource;  // ✅ 종소리 AudioSource
+    public AudioClip bellClip;              // ✅ 종소리 클립
+
+    private static int finishCount = 0;
 
     void Start()
     {
-        StartCoroutine(FillBowlsAfterDelay());
-    }
-
-    IEnumerator FillBowlsAfterDelay()
-    {
-        yield return new WaitForSeconds(3f); // 3초 대기
-
+        // 1. 모든 밥그릇 랜덤 음식 채우기 (테스트용)
         foreach (var bowl in foodBowls)
         {
-            bowl.Fill();
+            bowl.FillRandom(); // ⚠️ 테스트용
         }
-    }
 
-    void Update()
-    {
-        if (!triggered && foodBowls.TrueForAll(b => b.IsFilled))
+        // 2. 각 큐브에게 오늘의 음식과 데이터 설정
+        for (int i = 0; i < dogCubes.Count; i++)
         {
-            triggered = true;
-            // bellSound?.Play();
+            var dog = dogCubes[i];
+            dog.SetLunchFood(foodBowls[i].containedFood);
 
-            foreach (var dog in dogCubes)
-                dog.StartLunch();
+            // ⚠️ 테스트용 PetStatusData 할당 (나중에 실제 저장된 데이터로 대체)
+            PetStatusData_J mockData = new PetStatusData_J(0, 0);
+            dog.SetPetData(mockData);
+
+            // ✅ 강아지 위치를 대기 지점(waitPosition)으로 초기화
+            dog.InitPositionToWait();
         }
+
+        // 3. 테스트용 자동 실행
+        StartCoroutine(StartLunchDelayed());
     }
 
-    public void OnAllDogsFinished()
+    IEnumerator StartLunchDelayed()
     {
-        StartCoroutine(GoToNextScene());
+        yield return new WaitForSeconds(3f); // 잠시 대기
+
+        // ✅ 종소리 재생
+        if (bellSource != null && bellClip != null)
+        {
+            Debug.Log($"벨소리");
+            bellSource.PlayOneShot(bellClip);
+        }
+
+        foreach (var dog in dogCubes)
+            dog.StartLunch();
     }
 
-    private IEnumerator GoToNextScene()
+    public static void OnDogFinished()
     {
-        yield return new WaitForSeconds(2f);
-        yield return null;
+        finishCount++;
+        if (finishCount >= 3)
+        {
+            Debug.Log("모든 강아지 식사 완료 → 씬 전환 등 처리");
+        }
     }
 }
