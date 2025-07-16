@@ -7,6 +7,20 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
 
     public List<PetController_J> petsInScene = new List<PetController_J>();
+
+public List<PetStatusData_J> getPetsInSceneData()
+    {
+        List<PetStatusData_J> petDataList = new List<PetStatusData_J>();
+
+        foreach (PetController_J pet in petsInScene)
+        {
+            if(pet != null && pet.gameObject.activeSelf)
+            {
+                petDataList.Add(pet.petData);
+            }
+        }
+        return petDataList;
+    }
     
 
     private void Awake()
@@ -36,11 +50,18 @@ public class GameManager : MonoBehaviour
     // 씬 로드가 완료되면 이 함수가 실행됩니다.
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        Debug.Log($"[GameManager] 씬 로드됨: {scene.name}");
+
         // 게임 플레이 씬(실내 또는 실외)일 경우에만 초기화 로직 실행
         if (scene.name == "H_Indoor" || scene.name == "H_Outdoor")
         {
-            Debug.Log(scene.name);
+            Debug.Log($"[GameManager] {scene.name} 씬 - UpdatePlacedPets 실행");
             UpdatePlacedPets();
+        }
+        else if (scene.name == "H_Lunch")
+        {
+            Debug.Log("[GameManager] H_Lunch 씬 - LunchSceneManager가 처리함");
+            // 점심 씬은 LunchSceneManager_Dummy에서 처리하므로 여기서는 아무것도 하지 않음
         }
     }
 
@@ -61,13 +82,29 @@ public class GameManager : MonoBehaviour
 
     public void GoToScene(string sceneName)
     {
-        // 1. 씬을 떠나기 전에 현재 상태를 먼저 DataManager에 저장한다.
-        SaveChangesToDataManager();
+        Debug.Log($"[GameManager] 씬 전환 시작: {sceneName}");
 
-        // 2. 원하는 씬으로 이동한다.
-        Debug.Log(sceneName + "으로 이동합니다...");
+        // 현재 씬이 H_Lunch가 아닐 때만 데이터 저장 시도
+        string currentScene = SceneManager.GetActiveScene().name;
+        if (currentScene != "H_Lunch")
+        {
+            try
+            {
+                SaveChangesToDataManager();
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError($"[GameManager] 씬 전환 중 데이터 저장 실패: {e.Message}");
+            }
+        }
+        else
+        {
+            Debug.Log("[GameManager] 현재 씬이 H_Lunch → 데이터 저장 생략");
+        }
+
         SceneManager.LoadScene(sceneName);
     }
+
 
 
     // 배치된 펫들에게 데이터를 적용하는 함수

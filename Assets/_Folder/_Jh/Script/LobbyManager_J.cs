@@ -63,11 +63,11 @@ public class LobbyManager_J : MonoBehaviour
             List<PetStatusData_J> petsForThisClass = new List<PetStatusData_J>();
             for (int i = 0; i < 3; i++) // 각 반마다 3마리씩 생성
             {
-                int profileIdx = Random.Range(0, DatabaseManager_J.instance.petProfiles.Count);
+                int modleIdx = Random.Range(0, DatabaseManager_J.instance.petProfiles.Count); //
                 int personalityIdx = Random.Range(0, DatabaseManager_J.instance.personalities.Count);
                 int nameIdx = Random.Range(0, DatabaseManager_J.instance.PetNames.Count);
 
-                PetStatusData_J tempPet = new PetStatusData_J(profileIdx, personalityIdx);
+                PetStatusData_J tempPet = new PetStatusData_J(modleIdx, personalityIdx);
                 tempPet.petName = DatabaseManager_J.instance.PetNames[nameIdx];
                 petsForThisClass.Add(tempPet);
             }

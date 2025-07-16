@@ -10,7 +10,7 @@ public class TimeManager_LES : MonoBehaviour
     public GameObject canvas0, canvas1;
 
     //시간 로직
-    public float speed = 60f; // 실제 1초 = 60 게임 시간초
+    public float speed = 60f*5f; // 실제 1초 = 60 게임 시간초
     private float gameTimeSec; // 현재 게임 시간(초)
 
     private void Awake()
@@ -66,8 +66,8 @@ public class TimeManager_LES : MonoBehaviour
             yield return null;
         }
 
-        // GameManager.instance.GoToScene("H_Lunch");
-        GameManager.instance.GoToScene("H_Outdoor");
+        GameManager.instance.GoToScene("H_Lunch");
+        //GameManager.instance.GoToScene("H_Outdoor");
     }
 
     public void LunchTime()
