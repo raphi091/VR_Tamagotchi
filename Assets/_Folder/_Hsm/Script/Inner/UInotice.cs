@@ -15,7 +15,7 @@ public class UInotice : MonoBehaviour, H_UI
 
     public void OnPress()
     {
-        Debug.Log("gesipan: UInotice.OnPress »£√‚µ ");
+        Debug.Log("gesipan: UInotice.OnPress Ìò∏Ï∂úÎê®");
         view.SetActive(true);
     }
 
