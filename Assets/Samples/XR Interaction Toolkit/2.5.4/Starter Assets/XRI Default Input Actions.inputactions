@@ -850,6 +850,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SecondaryButton",
+                    "type": "Button",
+                    "id": "66447594-5677-4aaa-b966-24b6786ed95a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PirmaryButton",
+                    "type": "Button",
+                    "id": "46818d61-18b7-4faf-89d5-657ec6b74bbb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1026,6 +1044,28 @@
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "Menu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d3ded52e-4a61-4232-b3ef-97297599f38f",
+                    "path": "<XRSimulatedController>{LeftHand}/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SecondaryButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a32c30eb-1e95-464f-9a56-3f23de36d922",
+                    "path": "<XRSimulatedController>{LeftHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PirmaryButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
