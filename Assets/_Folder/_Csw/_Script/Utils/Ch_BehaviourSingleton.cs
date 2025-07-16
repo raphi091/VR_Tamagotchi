@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 // template : 틀, 형  사용법 <T>
