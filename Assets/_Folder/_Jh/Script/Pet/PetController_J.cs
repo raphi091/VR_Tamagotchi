@@ -22,12 +22,6 @@ public class PetController_J : MonoBehaviour
     // GameManager가 호출할 데이터 적용 함수
     public void ApplyData(PetStatusData_J data)
     {
-        if (data == null)
-        {
-            Debug.LogError("💥 ApplyData() 실패: PetStatusData_J 가 null입니다.");
-            return;
-        }
-
         // 1. 전달받은 데이터를 이 컨트롤러에 저장
         this.petData = data;
 

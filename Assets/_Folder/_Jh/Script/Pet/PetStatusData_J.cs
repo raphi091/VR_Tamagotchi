@@ -26,9 +26,7 @@ public class PetStatusData_J
 
     public PetStatusData_J(int modelIdx, int personalityIdx)
     {
-        int maxModelCount = 3;
-        this.modelIndex = Mathf.Clamp(modelIdx, 0, maxModelCount - 1);
-
+        this.modelIndex = modelIdx;
         this.personalityIndex = personalityIdx;
         this.petName = "댕댕이";
 
