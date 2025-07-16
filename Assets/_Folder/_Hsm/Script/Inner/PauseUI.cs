@@ -17,7 +17,7 @@ public class PauseUI : MonoBehaviour
     {
         if (menuAction != null && menuAction.action != null && menuAction.action.triggered)
         {
-            Debug.Log("MenuButton ´­¸²");
+            Debug.Log("MenuButton ëˆŒë¦¼");
         }
     }
 
@@ -72,7 +72,7 @@ public class PauseUI : MonoBehaviour
         Debug.Log("BGM On");
         pan.SetActive(true);
 
-        //BGM ±â´É Ãß°¡
+        //BGM ê¸°ëŠ¥ ì¶”ê°€
     }
     public void OnClickSave()
     {
