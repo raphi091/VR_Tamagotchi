@@ -9,41 +9,40 @@ public class Ch_FoodEvent : Ch_BehaviourSingleton<Ch_FoodEvent>
         return true;
     }
     
-    private readonly IDictionary<foodType,UnityEvent> FoodTrayActions = new Dictionary<foodType, UnityEvent>();
+    private readonly IDictionary<FoodBowl,UnityEvent<Ch_BowlFood>> FoodBowlActions = new Dictionary<FoodBowl, UnityEvent<Ch_BowlFood>>();
 
-    public void AddFoodTrayEvent(foodType foodType, UnityAction action)
+    public void AddFoodBowlEvent(FoodBowl bowl, UnityAction<Ch_BowlFood> action)
     {
-        UnityEvent foodTrayAction;
+        UnityEvent<Ch_BowlFood> foodBowlAction;
 
-        if (FoodTrayActions.TryGetValue(foodType, out foodTrayAction))
+        if (FoodBowlActions.TryGetValue(bowl, out foodBowlAction))
         {
-            foodTrayAction.AddListener(action);
+            foodBowlAction.AddListener(action);
         }
         else
         {
-            foodTrayAction = new UnityEvent();
-            foodTrayAction.AddListener(action);
-            FoodTrayActions.Add(foodType, foodTrayAction);
+            foodBowlAction = new UnityEvent<Ch_BowlFood>();
+            foodBowlAction.AddListener(action);
+            FoodBowlActions.Add(bowl, foodBowlAction);
         }
     }
 
-    public void RemoveFoodTrayEvent(foodType foodType, UnityAction action)
+    public void RemoveFoodBowlEvent(FoodBowl bowl, UnityAction<Ch_BowlFood> action)
     {
-        UnityEvent foodTrayAction;
-        if (FoodTrayActions.TryGetValue(foodType, out foodTrayAction))
+        UnityEvent<Ch_BowlFood> foodBowlAction;
+        if (FoodBowlActions.TryGetValue(bowl, out foodBowlAction))
         {
-            foodTrayAction.RemoveListener(action);
+            foodBowlAction.RemoveListener(action);
         }
     }
 
-    public void InvokeFoodTrayAction(foodType foodType)
+    public void InvokeFoodBowlAction(FoodBowl bowl, Ch_BowlFood food)
     {
-        UnityEvent foodTrayAction;
+        UnityEvent<Ch_BowlFood> foodBowlAction;
 
-        if (FoodTrayActions.TryGetValue(foodType, out foodTrayAction))
+        if (FoodBowlActions.TryGetValue(bowl, out foodBowlAction))
         {
-            Debug.Log(foodTrayAction);
-            foodTrayAction.Invoke();
+            foodBowlAction.Invoke(food);
         }
     }
 }

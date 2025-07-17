@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LunchSceneManager_Dummy : MonoBehaviour
 {
-    public List<LunchDogDummy> dogCubes;          // 점심용 강아지 프리팹들
+    public List<LunchDog> dogCubes;          // 점심용 강아지 프리팹들
     public List<FoodBowl> foodBowls;              // 밥그릇들
 
     public AudioSource bellSource;                // 종소리 AudioSource
@@ -22,12 +22,6 @@ public class LunchSceneManager_Dummy : MonoBehaviour
 
     void Start()
     {
-        // 1. 밥그릇에 음식 랜덤 설정
-        foreach (var bowl in foodBowls)
-        {
-            bowl.FillRandom(); // 테스트용 무작위 음식 설정
-        }
-
         // 2. 강아지 데이터 및 위치 초기화
         for (int i = 0; i < dogCubes.Count; i++)
         {
@@ -35,6 +29,7 @@ public class LunchSceneManager_Dummy : MonoBehaviour
 
             // ✅ 오늘 제공할 음식 전달
             dog.SetLunchFood(foodBowls[i].containedFood);
+            foodBowls[i].SetDog(dog);
 
             // ✅ 실제 저장된 데이터 가져오기
             var data = DataManager_J.instance?.gameData?.allPetData;
@@ -54,7 +49,7 @@ public class LunchSceneManager_Dummy : MonoBehaviour
 
     IEnumerator StartLunchDelayed()
     {
-        yield return new WaitForSeconds(3f); // 대기 후 시작
+        yield return new WaitForSeconds(180f); // 대기 후 시작
 
         // ✅ 종소리 재생
         if (bellSource != null && bellClip != null)

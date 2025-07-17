@@ -85,6 +85,8 @@ public class Ch_Knife : XRGrabInteractable
                          slice_objs[i].SetParent(lowerhull.transform);
                      }
                  }
+                 Setup_Slice_components(upperhull);
+                 Setup_Slice_components(lowerhull);
                  Destroy(target);
              }
          }

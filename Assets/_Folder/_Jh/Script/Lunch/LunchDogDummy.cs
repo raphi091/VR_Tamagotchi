@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-public class LunchDogDummy : MonoBehaviour
+public class LunchDog : MonoBehaviour
 {
     [Header("위치 지정")]
     public Transform waitPosition;
