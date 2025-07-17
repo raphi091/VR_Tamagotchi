@@ -6,7 +6,7 @@ public class Ch_WetFood : MonoBehaviour
     [SerializeField] Rigidbody rb;
     [SerializeField] Ch_CannedFood cannedFood;
 
-    [Range(0f, -1f), SerializeField] private float upsideDownRange = -0.8f;
+    [Range(0f, -1f), SerializeField] private float upsideDownRange = -0.7f;
     [SerializeField] private Transform startPoint;
     private float duration;
     private bool isOut=false;
@@ -19,12 +19,21 @@ public class Ch_WetFood : MonoBehaviour
 
     private void Update()
     {
-        if (transform.up.y < upsideDownRange&&rb.velocity.magnitude>0&&!isOut)
+        if (Vector3.Distance(startPoint.position, cannedFood.endPoint.position) < 0.01f)
         {
-            duration = Mathf.Clamp(rb.velocity.magnitude,0f,100f);
-            cannedFood.transform.DOLocalMoveY(transform.localPosition.y + 0.01f, duration)
-                .SetEase(Ease.OutBack)
-                .WaitForCompletion();
+            isOut=true;
+            cannedFood.OnOut();
+        }
+        Debug.Log(rb.velocity.magnitude);
+        if (transform.up.y < upsideDownRange)
+        {
+            Debug.Log("UpsideDown");
+            if (rb.velocity.magnitude > 0f && !isOut)
+            {
+                duration = 1f / (Mathf.Clamp(rb.velocity.magnitude,1f,5f)*Time.deltaTime);
+                cannedFood.transform.DOLocalMoveY(transform.localPosition.y + 0.001f, duration)
+                    .SetEase(Ease.OutBack);
+            }
         }
         else
         {
