@@ -441,6 +441,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: DryFood
       objectReference: {fileID: 0}
+    - target: {fileID: 7046171213845705871, guid: ecfa70a638ef11648b27b6e31fba6ac4, type: 3}
+      propertyPath: cullingMode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7046171213845705871, guid: ecfa70a638ef11648b27b6e31fba6ac4, type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7046171213845705871, guid: ecfa70a638ef11648b27b6e31fba6ac4, type: 3}
+      propertyPath: CollisionModule.m_Planes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7637374830740008834, guid: ecfa70a638ef11648b27b6e31fba6ac4, type: 3}
+      propertyPath: m_SortingFudge
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

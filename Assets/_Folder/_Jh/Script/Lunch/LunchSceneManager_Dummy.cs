@@ -28,7 +28,7 @@ public class LunchSceneManager_Dummy : MonoBehaviour
             var dog = dogCubes[i];
 
             // ✅ 오늘 제공할 음식 전달
-            dog.SetLunchFood(foodBowls[i].containedFood);
+            dog.SetLunchFood(foodBowls[i]);
             foodBowls[i].SetDog(dog);
 
             // ✅ 실제 저장된 데이터 가져오기
