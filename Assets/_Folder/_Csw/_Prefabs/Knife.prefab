@@ -214,13 +214,13 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
-  target: {fileID: 0}
   cross_m: {fileID: 0}
-  cutForce: 2000
+  cutForce: 50
   layer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   handPoint: {fileID: 346498801328785016}
+  blade: {fileID: 4299598123125972755}
 --- !u!1 &4416464244942589251
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,6 +233,9 @@ GameObject:
   - component: {fileID: 1374426795214755991}
   - component: {fileID: 3355022590955539665}
   - component: {fileID: 6325783626433466815}
+  - component: {fileID: 4299598123125972755}
+  - component: {fileID: 5814492109041381989}
+  - component: {fileID: 1534684967888247525}
   m_Layer: 0
   m_Name: Blade
   m_TagString: Untagged
@@ -326,6 +329,75 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4299598123125972755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4416464244942589251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4efd04711ac6ed1499f56a30181d0deb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onSliceHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7142810544998352267}
+        m_TargetAssemblyTypeName: Ch_Knife, Assembly-CSharp
+        m_MethodName: OnSlicehit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!54 &5814492109041381989
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4416464244942589251}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!138 &1534684967888247525
+FixedJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4416464244942589251}
+  m_ConnectedBody: {fileID: 8254309728618842553}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1 &5712425497055924228
 GameObject:
   m_ObjectHideFlags: 0
