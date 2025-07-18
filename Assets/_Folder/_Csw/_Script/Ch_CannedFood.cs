@@ -21,8 +21,7 @@ public class Ch_CannedFood : MonoBehaviour,  Ch_BowlFood
         foodType = foodType.Wet;
         GetComponent<Collider>().enabled = false;
         GetComponent<Rigidbody>().isKinematic = true;
-        interactable = GetComponent<XRGrabInteractable>();
-        interactable.enabled = false;
+        GetComponent<XRGrabInteractable>().enabled = false;
         isFillable = false;
     }
 
@@ -31,8 +30,17 @@ public class Ch_CannedFood : MonoBehaviour,  Ch_BowlFood
         transform.DOKill();
         transform.SetParent(null);
         GetComponent<Collider>().enabled = true;
-        GetComponent<Rigidbody>().isKinematic=false;
-        interactable.enabled = true;
+        GetComponent<Rigidbody>().isKinematic = false;
+        GetComponent<XRGrabInteractable>().enabled = true;
         isFillable = true;
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Tray")&&isFillable)
+        {
+            collision.gameObject.TryGetComponent(out FoodBowl bowl);
+            Ch_FoodEvent.I.InvokeFoodBowlAction(bowl, this);
+        }
     }
 }

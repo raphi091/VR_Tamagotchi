@@ -10,9 +10,11 @@ public class Ch_WetFood : MonoBehaviour
     [Range(0f, -1f), SerializeField] private float upsideDownRange = -0.7f;
     [SerializeField] private Transform startPoint;
     
-    private float duration;
+    [SerializeField] private float duration;
     private bool isOut=false;
     private Ch_VelocityInteractable interactable;
+    private bool isTweening = false;
+    private Tween MyTween;
 
     void Awake()
     {
@@ -22,33 +24,31 @@ public class Ch_WetFood : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(Update_Co());
+        MyTween=cannedFood.transform.DOLocalMoveY(2f, duration);
+        MyTween.SetEase(Ease.OutQuad);
+        MyTween.Pause();
     }
 
-    private IEnumerator Update_Co()
+
+    private void Update()
     {
-        while (true)
-        {
-            if (Vector3.Distance(startPoint.position, cannedFood.endPoint.position) < 0.01f)
+            if (Vector3.Distance(startPoint.position, cannedFood.endPoint.position) < 0.01f && !isOut)
             {
                 isOut=true;
                 cannedFood.OnOut();
-                yield break;
             }
-            if (transform.up.y < upsideDownRange)
+            if (transform.up.y < upsideDownRange && !isOut)
             {
-                if (interactable.velocity.magnitude >= 1f && !isOut)
+                isTweening = MyTween.IsPlaying();
+                if (interactable.velocity.magnitude >= 0.5f &&!isTweening)
                 {
-                    duration = 1f / (Mathf.Clamp(interactable.velocity.magnitude,1f,5f)*Time.deltaTime);
-                    yield return cannedFood.transform.DOLocalMoveY(transform.localPosition.y + 0.05f, duration)
-                        .SetEase(Ease.OutBack);
-
+                    MyTween.Restart();
+                }
+                else if(interactable.velocity.magnitude < 0.1f && isTweening)
+                {
+                    MyTween.Pause();
                 }
             }
-            else
-            {
-                cannedFood.transform.DOKill();
-            }
-        }
+        
     }
 }

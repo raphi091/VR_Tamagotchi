@@ -17,6 +17,7 @@ public class Ch_Knife : XRGrabInteractable
     [Header("Knife")]
     [SerializeField] private Transform handPoint;
     [SerializeField] Ch_Blade blade;
+    [SerializeField] Ch_CuttedFood cuttedFood;
 
     protected override void OnEnable()
     {
@@ -97,8 +98,10 @@ public class Ch_Knife : XRGrabInteractable
          Rigidbody rb = g.AddComponent<Rigidbody>();
          MeshCollider c = g.AddComponent<MeshCollider>();
          c.convex = true;
-         g.AddComponent<Ch_TreatFood>();
+         Ch_TreatFood t =g.AddComponent<Ch_TreatFood>();
          rb.AddExplosionForce(cutForce, g.transform.position, 1);
+         t.cuttedFood=cuttedFood;
+         t.OnCutted();
      }
 
      public void OnSlicehit(Transform hit)
