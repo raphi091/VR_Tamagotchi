@@ -15,13 +15,15 @@ public class LunchDog : MonoBehaviour
     public float eatingTime = 3f;
     [Header("데이터")]
     public PetStatusData_J petData;       // 이 강아지의 데이터
+    private FoodBowl foodBowl;
     private foodType lunchFoodType;       // 오늘 제공된 음식
     [Header("디버깅")]
     public bool debugMode = true;
 
-    public void SetLunchFood(foodType type)
+    public void SetLunchFood(FoodBowl bowl)
     {
-        lunchFoodType = type;
+        foodBowl = bowl;
+        lunchFoodType = bowl.containedFood;
     }
     public void SetPetData(PetStatusData_J data)
     {
@@ -64,7 +66,7 @@ public class LunchDog : MonoBehaviour
         gameObject.SetActive(true);
 
         // ✅ bowlPosition 검증
-        if (bowlPosition == null)
+        if (bowlPosition.Equals(null))
         {
             Debug.LogError($"[LunchDogDummy] bowlPosition이 null입니다!");
             yield break;
@@ -108,6 +110,7 @@ public class LunchDog : MonoBehaviour
 
         // ✅ 3. 먹는 시간 대기
         yield return new WaitForSeconds(eatingTime);
+        foodBowl.ClearBowl();
 
         // ✅ 4. 음식 비교 후 텍스트 생성
         bool isGood = petData.foodType == lunchFoodType;

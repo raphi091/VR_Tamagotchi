@@ -115,6 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5514318222772478000}
   - component: {fileID: 7966216326247888418}
+  - component: {fileID: 3883781971416138920}
   m_Layer: 0
   m_Name: Poke Interactor
   m_TagString: Untagged
@@ -205,6 +206,31 @@ MonoBehaviour:
   m_UIHoverExited:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3883781971416138920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121069700584106699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aff0f00458ceca749a6dc6da01aca094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityProperty:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Velocity Property
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 3bbf99c7-0cc1-4488-84cc-22c83f77f13e
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -5390227482875353744, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  velocity: {x: 0, y: 0, z: 0}
 --- !u!1 &203941965339395952
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,6 +371,7 @@ GameObject:
   - component: {fileID: 3058621940235087735}
   - component: {fileID: 3295399539172198571}
   - component: {fileID: 8381357801278148457}
+  - component: {fileID: 2194619904131037806}
   m_Layer: 0
   m_Name: Ray Interactor
   m_TagString: Untagged
@@ -780,6 +807,31 @@ SortingGroup:
   m_SortingLayer: 0
   m_SortingOrder: 30005
   m_SortAtRoot: 0
+--- !u!114 &2194619904131037806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 296218243949093179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aff0f00458ceca749a6dc6da01aca094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityProperty:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Velocity Property
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 68dd041e-218d-4d0f-a9e1-072d22dd6e0c
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 55713661957825118, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  velocity: {x: 0, y: 0, z: 0}
 --- !u!1 &443661068421818284
 GameObject:
   m_ObjectHideFlags: 0
@@ -2381,6 +2433,7 @@ GameObject:
   - component: {fileID: 5923240236582828633}
   - component: {fileID: 9184549493317924485}
   - component: {fileID: 9031032323513287373}
+  - component: {fileID: 8970026855644039118}
   m_Layer: 0
   m_Name: Direct Interactor
   m_TagString: Untagged
@@ -2538,6 +2591,31 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8970026855644039118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4607618640678999428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aff0f00458ceca749a6dc6da01aca094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityProperty:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Velocity Property
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 8661cdb6-2515-4ded-84a5-1fce5b225fd7
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -5390227482875353744, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  velocity: {x: 0, y: 0, z: 0}
 --- !u!1 &4662032053482011136
 GameObject:
   m_ObjectHideFlags: 0
@@ -2743,6 +2821,7 @@ GameObject:
   m_Component:
   - component: {fileID: 628775176959759688}
   - component: {fileID: 4797918744459179654}
+  - component: {fileID: 1290995410743497141}
   m_Layer: 0
   m_Name: Poke Interactor
   m_TagString: Untagged
@@ -2833,6 +2912,31 @@ MonoBehaviour:
   m_UIHoverExited:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1290995410743497141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4752750767284157860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aff0f00458ceca749a6dc6da01aca094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityProperty:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Velocity Property
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 01d8d8d8-d414-46de-899e-18f2b40f1282
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 55713661957825118, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  velocity: {x: 0, y: 0, z: 0}
 --- !u!1 &4884608211284321696
 GameObject:
   m_ObjectHideFlags: 0
@@ -3260,6 +3364,7 @@ GameObject:
   - component: {fileID: 438237267805181144}
   - component: {fileID: 7225783256439646622}
   - component: {fileID: 2398932888180458341}
+  - component: {fileID: 8131984406574541721}
   m_Layer: 0
   m_Name: Teleport Interactor
   m_TagString: Untagged
@@ -3921,6 +4026,31 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: 0}
   m_ButtonPressPoint: 0.5
+--- !u!114 &8131984406574541721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5929436836637013861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aff0f00458ceca749a6dc6da01aca094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityProperty:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Velocity Property
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: b74ec853-22cd-41df-8517-db248de609d8
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -5390227482875353744, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  velocity: {x: 0, y: 0, z: 0}
 --- !u!1 &6048806101223998374
 GameObject:
   m_ObjectHideFlags: 0
@@ -4197,6 +4327,7 @@ GameObject:
   - component: {fileID: 2619367452820385332}
   - component: {fileID: 7890320996019219640}
   - component: {fileID: 5286622708222179782}
+  - component: {fileID: 4641326278615500875}
   m_Layer: 0
   m_Name: Direct Interactor
   m_TagString: Untagged
@@ -4354,6 +4485,31 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4641326278615500875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6081851783239453398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aff0f00458ceca749a6dc6da01aca094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityProperty:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Velocity Property
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 8e05af74-d5f1-448a-bed6-e52e567c9d64
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 55713661957825118, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  velocity: {x: 0, y: 0, z: 0}
 --- !u!1 &6173199487761512166
 GameObject:
   m_ObjectHideFlags: 0
@@ -5502,6 +5658,7 @@ GameObject:
   - component: {fileID: 602791921814201533}
   - component: {fileID: 8314844787559951099}
   - component: {fileID: 2404143335200994106}
+  - component: {fileID: 5779640716221014145}
   m_Layer: 0
   m_Name: Teleport Interactor
   m_TagString: Untagged
@@ -6151,6 +6308,31 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: 0}
   m_ButtonPressPoint: 0.5
+--- !u!114 &5779640716221014145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7028854386387947608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aff0f00458ceca749a6dc6da01aca094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityProperty:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Velocity Property
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 49d71386-c514-498a-8b53-a1f30a721249
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 55713661957825118, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  velocity: {x: 0, y: 0, z: 0}
 --- !u!1 &7041799551290460724
 GameObject:
   m_ObjectHideFlags: 0
@@ -7283,6 +7465,7 @@ GameObject:
   - component: {fileID: 5191387656955473579}
   - component: {fileID: 8067656015340200414}
   - component: {fileID: 4640510574977077657}
+  - component: {fileID: 9089988725772738045}
   m_Layer: 0
   m_Name: Ray Interactor
   m_TagString: Untagged
@@ -7718,6 +7901,31 @@ SortingGroup:
   m_SortingLayer: 0
   m_SortingOrder: 30005
   m_SortAtRoot: 0
+--- !u!114 &9089988725772738045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8193658328105908539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aff0f00458ceca749a6dc6da01aca094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityProperty:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Velocity Property
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: b12fc796-41fc-4fd1-a635-2c6700fc9994
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -5390227482875353744, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  velocity: {x: 0, y: 0, z: 0}
 --- !u!1 &8283140305205532665
 GameObject:
   m_ObjectHideFlags: 0

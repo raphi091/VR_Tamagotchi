@@ -40,9 +40,11 @@ public class FoodBowl : MonoBehaviour
     /// </summary>
     public void FillBowl(Ch_BowlFood food)
     {
+        
         containedFood = food.FoodType;
         if (containedFood == foodType.Dry)
         {
+            currentBowlInstance = dryfoodModel.gameObject;
             Vector3 a= dryfoodModel.position;
             a.y+=dryfoodUp*Time.deltaTime;
             dryfoodModel.position = a;
@@ -53,6 +55,7 @@ public class FoodBowl : MonoBehaviour
         }
         else if(food.isFillable)
         {
+            currentBowlInstance = food.gameObj;
             IsFilled=true;
         }
     }
@@ -62,6 +65,7 @@ public class FoodBowl : MonoBehaviour
     /// </summary>
     public void ClearBowl()
     {
+        currentBowlInstance.SetActive(false);
         IsFilled = false;
     }
 

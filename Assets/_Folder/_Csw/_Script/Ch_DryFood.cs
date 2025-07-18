@@ -5,6 +5,7 @@ public class Ch_DryFood : MonoBehaviour, Ch_BowlFood
     private foodType foodtype;
     public virtual foodType FoodType { get => foodtype; set => foodtype = value; }
     public virtual bool isFillable { get; set; }
+    public virtual GameObject gameObj => gameObject;
 
     [SerializeField] ParticleSystem particle;
     //[SerializeField] Rigidbody rb;
@@ -25,7 +26,10 @@ public class Ch_DryFood : MonoBehaviour, Ch_BowlFood
     {
         if (transform.up.y < upsideDownRange)
         {
-            particle.Play();
+            if (particle.isPlaying)
+            {
+                particle.Play();
+            }
             //var emissionModule = particle.emission;
             //emissionModule.rateOverTimeMultiplier = 30f * Mathf.Clamp01(rb.velocity.magnitude);
             if (Physics.Raycast(startPoint.position, startPoint.up, out hit, 30f))
