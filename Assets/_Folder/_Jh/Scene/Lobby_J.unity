@@ -151,7 +151,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33a2ba0e037cf3c43bb23d523ba712b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  continueButton: {fileID: 729257000}
+  newGameButton: {fileID: 0}
+  continueButton: {fileID: 0}
+  popUp: {fileID: 0}
+  displayCards: []
 --- !u!4 &280165906
 Transform:
   m_ObjectHideFlags: 0
@@ -333,7 +336,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -417,6 +421,30 @@ PrefabInstance:
     - target: {fileID: 189646681076749945, guid: 25f8b5c5dd78d314581f154eefb93432, type: 3}
       propertyPath: m_Name
       value: XR Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1189729802399215244, guid: 25f8b5c5dd78d314581f154eefb93432, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1288665863670934561, guid: 25f8b5c5dd78d314581f154eefb93432, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1524171243932376364, guid: 25f8b5c5dd78d314581f154eefb93432, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3114996875223500728, guid: 25f8b5c5dd78d314581f154eefb93432, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3176958342315402766, guid: 25f8b5c5dd78d314581f154eefb93432, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4459847015790442348, guid: 25f8b5c5dd78d314581f154eefb93432, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9150614329238580468, guid: 25f8b5c5dd78d314581f154eefb93432, type: 3}
       propertyPath: m_LocalPosition.x
@@ -790,7 +818,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:

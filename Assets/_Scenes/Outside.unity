@@ -226,6 +226,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: outsideRoom
       objectReference: {fileID: 0}
+    - target: {fileID: 866983227516875947, guid: 68dcc1dc223bdb046929fe07260c974d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 4053758592961644955, guid: 68dcc1dc223bdb046929fe07260c974d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -266,6 +270,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4619752897134063911, guid: 68dcc1dc223bdb046929fe07260c974d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -300,6 +308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b012fefffea61a44aadae6a15dcd4896, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  text: {fileID: 0}
 --- !u!4 &946412743
 Transform:
   m_ObjectHideFlags: 0

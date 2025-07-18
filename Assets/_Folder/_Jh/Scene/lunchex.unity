@@ -4346,6 +4346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitPosition: {fileID: 2038821293}
   bowlPosition: {fileID: 6168396330817655758}
+  dogModelPrefabs: []
   goodTextPrefab: {fileID: 3094756083469887380, guid: 5bf8e7a7f91add94eb958f545b9ee8eb, type: 3}
   badTextPrefab: {fileID: 760922392494936497, guid: 64cf560c4757120478fe7ca0400f06c1, type: 3}
   eatingTime: 3
@@ -4359,6 +4360,7 @@ MonoBehaviour:
     intimacyper: 0
     hungerper: 0
     bowelper: 0
+  debugMode: 1
 --- !u!95 &1404180374
 Animator:
   serializedVersion: 5
@@ -6131,6 +6133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitPosition: {fileID: 1634566438}
   bowlPosition: {fileID: 2930924956078474347}
+  dogModelPrefabs: []
   goodTextPrefab: {fileID: 3094756083469887380, guid: 5bf8e7a7f91add94eb958f545b9ee8eb, type: 3}
   badTextPrefab: {fileID: 760922392494936497, guid: 64cf560c4757120478fe7ca0400f06c1, type: 3}
   eatingTime: 3
@@ -6144,6 +6147,7 @@ MonoBehaviour:
     intimacyper: 0
     hungerper: 0
     bowelper: 0
+  debugMode: 1
 --- !u!95 &2065912473
 Animator:
   serializedVersion: 5
@@ -6542,10 +6546,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db68c8ebfc9539c4482fb07a39d05e82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emptyBowlPrefab: {fileID: 0}
-  filledBowlPrefab: {fileID: 0}
-  IsFilled: 0
+  assignedDog: {fileID: 0}
   containedFood: 0
+  IsFilled: 0
+  dryfoodModel: {fileID: 0}
+  dryfoodUp: 0
+  foodThreshold: 0
 --- !u!1 &521212881834687945
 GameObject:
   m_ObjectHideFlags: 0
@@ -7384,10 +7390,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db68c8ebfc9539c4482fb07a39d05e82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emptyBowlPrefab: {fileID: 0}
-  filledBowlPrefab: {fileID: 0}
-  IsFilled: 0
+  assignedDog: {fileID: 0}
   containedFood: 0
+  IsFilled: 0
+  dryfoodModel: {fileID: 0}
+  dryfoodUp: 0
+  foodThreshold: 0
 --- !u!1 &3017986516322860474
 GameObject:
   m_ObjectHideFlags: 0
@@ -7420,6 +7428,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitPosition: {fileID: 1926297902}
   bowlPosition: {fileID: 515534228228981631}
+  dogModelPrefabs: []
   goodTextPrefab: {fileID: 3094756083469887380, guid: 5bf8e7a7f91add94eb958f545b9ee8eb, type: 3}
   badTextPrefab: {fileID: 760922392494936497, guid: 64cf560c4757120478fe7ca0400f06c1, type: 3}
   eatingTime: 3
@@ -7433,6 +7442,7 @@ MonoBehaviour:
     intimacyper: 0
     hungerper: 0
     bowelper: 0
+  debugMode: 1
 --- !u!4 &3139231324838022699
 Transform:
   m_ObjectHideFlags: 0
@@ -8217,10 +8227,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db68c8ebfc9539c4482fb07a39d05e82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emptyBowlPrefab: {fileID: 0}
-  filledBowlPrefab: {fileID: 0}
-  IsFilled: 0
+  assignedDog: {fileID: 0}
   containedFood: 0
+  IsFilled: 0
+  dryfoodModel: {fileID: 0}
+  dryfoodUp: 0
+  foodThreshold: 0
 --- !u!1 &6209735901045860413
 GameObject:
   m_ObjectHideFlags: 0

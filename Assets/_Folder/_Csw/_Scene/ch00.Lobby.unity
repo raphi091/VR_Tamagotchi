@@ -183,7 +183,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -288,6 +289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b012fefffea61a44aadae6a15dcd4896, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  text: {fileID: 0}
 --- !u!114 &636111005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -300,6 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f94ff041a435c458752c288caa089e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  petsInScene: []
 --- !u!114 &636111006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,6 +318,7 @@ MonoBehaviour:
   gameData:
     selectedClassName: "\uBBF8\uC815"
     allPetData: []
+    Day: 1
 --- !u!114 &636111007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,9 +331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8452ff31ae1ebd43aaa59766d821c25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allModels:
-  - {fileID: 3543039877590659780, guid: 32b6d5fb38e818748bf982f48adf6dfb, type: 3}
-  - {fileID: 6937548348995569358, guid: 5e1719142abf82b41b1c0de80d73fcef, type: 3}
+  petProfiles: []
   personalities:
   - {fileID: 11400000, guid: 9bc35c30fcfaf4745921ffd9baa4fa61, type: 2}
   - {fileID: 11400000, guid: 4873ae8ad517e074aae67307fcfd0f0e, type: 2}
@@ -340,6 +342,8 @@ MonoBehaviour:
   - "\uB450\uBD80"
   - "\uB098\uBE44"
   - "\uB300\uAC00\uB9AC"
+  maleIcon: {fileID: 0}
+  femaleIcon: {fileID: 0}
 --- !u!4 &636111008
 Transform:
   m_ObjectHideFlags: 0
@@ -763,7 +767,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -854,7 +858,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -1089,8 +1094,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33a2ba0e037cf3c43bb23d523ba712b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  continueButton: {fileID: 1177766587}
-  sceneName: TEST_K_Ch
+  newGameButton: {fileID: 0}
+  continueButton: {fileID: 0}
+  popUp: {fileID: 0}
+  displayCards: []
 --- !u!4 &1470036974
 Transform:
   m_ObjectHideFlags: 0
@@ -1188,6 +1195,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5829588899887225, guid: 25f8b5c5dd78d314581f154eefb93432, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1189729802399215244, guid: 25f8b5c5dd78d314581f154eefb93432, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1288665863670934561, guid: 25f8b5c5dd78d314581f154eefb93432, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1524171243932376364, guid: 25f8b5c5dd78d314581f154eefb93432, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3114996875223500728, guid: 25f8b5c5dd78d314581f154eefb93432, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3176958342315402766, guid: 25f8b5c5dd78d314581f154eefb93432, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4459847015790442348, guid: 25f8b5c5dd78d314581f154eefb93432, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8042339853895346383, guid: 25f8b5c5dd78d314581f154eefb93432, type: 3}

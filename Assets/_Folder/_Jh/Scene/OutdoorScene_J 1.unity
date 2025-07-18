@@ -195,6 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f94ff041a435c458752c288caa089e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  petsInScene: []
 --- !u!4 &53592582
 Transform:
   m_ObjectHideFlags: 0
@@ -271,7 +272,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -469,7 +470,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -633,10 +634,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e0a1e38b8a1d504e98e3e566796a665, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
   data: {fileID: 11400000, guid: 32cd15f25388e034b858856c248f4652, type: 2}
+  currentState: 0
   ToiletPoint: {fileID: 6058433345435803852}
   EatPoint: {fileID: 2275367562735755141}
+  mouthTransform: {fileID: 0}
+  player: {fileID: 0}
+  cubeRenderer: {fileID: 0}
 --- !u!135 &729087434
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -899,7 +903,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -984,10 +988,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e0a1e38b8a1d504e98e3e566796a665, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
   data: {fileID: 11400000, guid: 32cd15f25388e034b858856c248f4652, type: 2}
+  currentState: 0
   ToiletPoint: {fileID: 6058433345435803852}
   EatPoint: {fileID: 2275367562735755141}
+  mouthTransform: {fileID: 0}
+  player: {fileID: 0}
+  cubeRenderer: {fileID: 0}
 --- !u!135 &1068867322
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1225,10 +1232,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e0a1e38b8a1d504e98e3e566796a665, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
   data: {fileID: 11400000, guid: 32cd15f25388e034b858856c248f4652, type: 2}
+  currentState: 0
   ToiletPoint: {fileID: 6058433345435803852}
   EatPoint: {fileID: 2275367562735755141}
+  mouthTransform: {fileID: 0}
+  player: {fileID: 0}
+  cubeRenderer: {fileID: 0}
 --- !u!143 &1127347891
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1496,7 +1506,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1727,7 +1737,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1769,8 +1779,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f65ede419a43a246b0482c222bcea90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rightHandController: {fileID: 892899494598207708}
-  callAction: {fileID: 2307464322626738743, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   sitAction: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   lieDownAction: {fileID: 3279264004350380116, guid: c348712bda248c246b8c49b3db54643f, type: 3}
 --- !u!135 &1953720717
@@ -2650,7 +2658,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2719,7 +2727,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5876,7 +5884,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5972,7 +5980,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7283,7 +7291,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7454,6 +7462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff0ee6198b6e28d428970157ca1270ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectThreshold: 0
 --- !u!114 &8292104061369398759
 MonoBehaviour:
   m_ObjectHideFlags: 0
