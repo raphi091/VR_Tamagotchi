@@ -378,7 +378,7 @@ GameObject:
   - component: {fileID: 4063085551597658280}
   - component: {fileID: 3541432751011666175}
   - component: {fileID: 5579500573716228536}
-  - component: {fileID: 5653693034861161254}
+  - component: {fileID: 6985001491909868678}
   m_Layer: 0
   m_Name: WetFood
   m_TagString: Untagged
@@ -536,11 +536,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7cc91d413213094b8682683090aa26e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
   cannedFood: {fileID: 0}
   upsideDownRange: -0.7
   startPoint: {fileID: 8787344433481029442}
---- !u!114 &5653693034861161254
+--- !u!114 &6985001491909868678
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -549,12 +548,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6627770533579280045}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
+  m_Script: {fileID: 11500000, guid: 312de4d359c499f42bfb79bc9b9c3129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
-  m_Colliders:
-  - {fileID: 1311889544865775068}
+  m_Colliders: []
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -693,3 +691,4 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
+  velocity: {x: 0, y: 0, z: 0}
