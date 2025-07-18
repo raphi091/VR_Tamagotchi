@@ -1,16 +1,23 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class Ch_Bell : XRSimpleInteractable
+public class Ch_Bell : MonoBehaviour
 {
-    public UnityEvent onBellRing=new UnityEvent();
-    
-    private Rigidbody rb;
+    public bool ringged=false;
+    private Ch_VelocityInteractable interactable;
 
-    protected override void Awake()
+    private void Awake()
     {
-        
-        base.Awake();
+        TryGetComponent(out interactable);
+    }
+
+    void Update()
+    {
+        if (!ringged&&interactable.velocity.magnitude>2f)
+        {
+            ringged = true;
+        }
     }
 }

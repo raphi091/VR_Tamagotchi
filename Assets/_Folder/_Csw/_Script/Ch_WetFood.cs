@@ -42,10 +42,12 @@ public class Ch_WetFood : MonoBehaviour
                 isTweening = MyTween.IsPlaying();
                 if (interactable.velocity.magnitude >= 0.5f &&!isTweening)
                 {
+                    Debug.Log("Start Drop");
                     MyTween.Restart();
                 }
                 else if(interactable.velocity.magnitude < 0.1f && isTweening)
                 {
+                    Debug.Log("Stop Drop");
                     MyTween.Pause();
                 }
             }

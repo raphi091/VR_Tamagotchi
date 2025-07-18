@@ -69,13 +69,11 @@ public class Ch_Knife : XRGrabInteractable
                  GameObject upperhull = hull.CreateUpperHull(target, cross_m);
                  GameObject lowerhull = hull.CreateLowerHull(target, cross_m);
                  int indexOfSlice=slice_objs.IndexOf(quad);
-                 Debug.Log(indexOfSlice);
                  for (int i = 0; i < slice_objs.Count; i++)
                  {
                      if (i < indexOfSlice)
                      {
                          slice_objs[i].SetParent(upperhull.transform);
-                         Debug.Log($"Slice Moved: {i}");
                      }
                      else if(i==indexOfSlice)
                      {
