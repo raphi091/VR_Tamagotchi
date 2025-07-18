@@ -6,7 +6,8 @@ public enum foodType
 {
     Dry, // 건식
     Wet, // 습식
-    Treat // 생식
+    Treat, // 생식
+    None
 }
 
 [System.Serializable]

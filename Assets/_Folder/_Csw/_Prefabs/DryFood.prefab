@@ -4847,7 +4847,7 @@ GameObject:
   - component: {fileID: 3758572180505417355}
   m_Layer: 0
   m_Name: DryFood
-  m_TagString: Tray
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4961,7 +4961,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -4978,7 +4978,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30b1009bfbd77764f912a476ca3e0c98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particle: {fileID: 0}
+  particle: {fileID: 7046171213845705871}
   upsideDownRange: -0.6
   startPoint: {fileID: 5491241560421394355}
 --- !u!114 &3758572180505417355
