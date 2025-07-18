@@ -21,7 +21,7 @@ public class Ch_CuttedFood : XRGrabInteractable, Ch_BowlFood
         isFillable = false;
     }
     
-    void OnCutted(Ch_TreatFood cutted)
+    public void OnCutted(Ch_TreatFood cutted)
     {
         if (index < fillableCount)
         {

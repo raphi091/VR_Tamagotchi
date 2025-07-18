@@ -5,6 +5,7 @@ using UnityEngine;
 public class Ch_TreatFood:MonoBehaviour
 {
     public List<Transform> slices=new List<Transform>();
+    private Ch_CuttedFood cuttedFood;
 
     void Awake()
     {
@@ -13,17 +14,13 @@ public class Ch_TreatFood:MonoBehaviour
             slices = GetComponentsInChildren<Transform>().Where(t=>t!=this.transform).ToList();
         }
     }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        
-    }
+    
 
     public void OnCutted()
     {
         if (slices.Count == 0)
         {
-            
+            cuttedFood.OnCutted(this);
         }
     }
 }

@@ -28,12 +28,11 @@ public class Ch_CannedFood : MonoBehaviour,  Ch_BowlFood
 
     public void OnOut()
     {
-
-            transform.DOKill();
-            transform.SetParent(null);
-            GetComponent<Collider>().enabled = true;
-            GetComponent<Rigidbody>().isKinematic=false;
-            interactable.enabled = true;
-            isFillable = true;
+        transform.DOKill();
+        transform.SetParent(null);
+        GetComponent<Collider>().enabled = true;
+        GetComponent<Rigidbody>().isKinematic=false;
+        interactable.enabled = true;
+        isFillable = true;
     }
 }
