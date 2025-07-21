@@ -51,10 +51,10 @@ public class GameData
 
     public GameData()
     {
-        tutorial = false;
         selectedClassName = "미정";
         allPetData = new List<PetStatusData_J>();
         Day = 1;
+        tutorial = false;
     }
 }
 

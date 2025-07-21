@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 
     public List<PetController_J> petsInScene = new List<PetController_J>();
 
-public List<PetStatusData_J> getPetsInSceneData()
+    public List<PetStatusData_J> getPetsInSceneData()
     {
         List<PetStatusData_J> petDataList = new List<PetStatusData_J>();
 
@@ -146,6 +146,11 @@ public List<PetStatusData_J> getPetsInSceneData()
 
         SaveChangesToDataManager();
         DataManager_J.instance.gameData.Day++;
+        if (DataManager_J.instance.gameData.Day.Equals(1))
+        {
+            DataManager_J.instance.gameData.tutorial = false;
+        }
+
         // 업데이트된 데이터로 저장 실행
         DataManager_J.instance.SaveGameData();
     }
