@@ -52,8 +52,12 @@ public class PauseUI : MonoBehaviour
 
     private void OnEnable()
     {
-        if (menuAction != null) menuAction.action.performed += OnMenuButtonPressed;
-
+        if (menuAction != null)
+        {
+            menuAction.action.performed += OnMenuButtonPressed;
+            menuAction.action.Enable(); // 여기에 꼭 넣어야 동작합니다!
+        }
+        canInteract = true;
         // Enable은 Start()에서 지연 후 실행
     }
 
