@@ -5,7 +5,7 @@ using UnityEngine;
 public class Ch_TreatFood:MonoBehaviour
 {
     public List<Transform> slices=new List<Transform>();
-    private Ch_CuttedFood cuttedFood;
+    public Ch_CuttedFood cuttedFood;
 
     void Awake()
     {

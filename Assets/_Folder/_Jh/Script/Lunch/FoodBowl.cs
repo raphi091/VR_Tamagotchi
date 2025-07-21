@@ -22,7 +22,20 @@ public class FoodBowl : MonoBehaviour
     
     void OnEnable()
     {
+        if (Ch_FoodEvent.I == null)
+        {
+            Debug.Log("FoodEvent Null");
+        }
+        else
+        {
+            Debug.Log("FoodEvent Found");
+        }
         Ch_FoodEvent.I.AddFoodBowlEvent(this, FillBowl);
+    }
+
+    void OnDisable()
+    {
+        Ch_FoodEvent.I.RemoveFoodBowlEvent(this, FillBowl);
     }
     
     public void FillByPlayer(foodType selected)
