@@ -7,6 +7,7 @@ public class LunchSceneManager_Dummy : MonoBehaviour
 {
     public List<LunchDog> dogCubes;          // 점심용 강아지 프리팹들
     public List<FoodBowl> foodBowls;              // 밥그릇들
+    public Ch_Bell bell;
 
     public AudioSource bellSource;                // 종소리 AudioSource
     public AudioClip bellClip;                    // 종소리 클립
@@ -49,7 +50,7 @@ public class LunchSceneManager_Dummy : MonoBehaviour
 
     IEnumerator StartLunchDelayed()
     {
-        yield return new WaitForSeconds(180f); // 대기 후 시작
+        yield return new WaitUntil(()=>bell.ringged); // 대기 후 시작
 
         // ✅ 종소리 재생
         if (bellSource != null && bellClip != null)

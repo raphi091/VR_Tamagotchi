@@ -17,6 +17,7 @@ public class Ch_Knife : XRGrabInteractable
     [Header("Knife")]
     [SerializeField] private Transform handPoint;
     [SerializeField] Ch_Blade blade;
+    [SerializeField] Ch_CuttedFood cuttedFood;
 
     protected override void OnEnable()
     {
@@ -68,13 +69,11 @@ public class Ch_Knife : XRGrabInteractable
                  GameObject upperhull = hull.CreateUpperHull(target, cross_m);
                  GameObject lowerhull = hull.CreateLowerHull(target, cross_m);
                  int indexOfSlice=slice_objs.IndexOf(quad);
-                 Debug.Log(indexOfSlice);
                  for (int i = 0; i < slice_objs.Count; i++)
                  {
                      if (i < indexOfSlice)
                      {
                          slice_objs[i].SetParent(upperhull.transform);
-                         Debug.Log($"Slice Moved: {i}");
                      }
                      else if(i==indexOfSlice)
                      {
@@ -97,8 +96,10 @@ public class Ch_Knife : XRGrabInteractable
          Rigidbody rb = g.AddComponent<Rigidbody>();
          MeshCollider c = g.AddComponent<MeshCollider>();
          c.convex = true;
-         g.AddComponent<Ch_TreatFood>();
+         Ch_TreatFood t =g.AddComponent<Ch_TreatFood>();
          rb.AddExplosionForce(cutForce, g.transform.position, 1);
+         t.cuttedFood=cuttedFood;
+         t.OnCutted();
      }
 
      public void OnSlicehit(Transform hit)
