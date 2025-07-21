@@ -52,15 +52,18 @@ public class PetController_J : MonoBehaviour
         this.currentBowel = data.bowelper;
 
         DogFSM_K fsm = GetComponent<DogFSM_K>();
-        fsm.mouthTransform = transform.FindSlot("_MOUSE_", "MOUSE");
-        fsm.data = DatabaseManager_J.instance.personalities[data.personalityIndex];
-        fsm.player = GameObject.FindGameObjectWithTag("Player").transform;
+        if (fsm != null)
+        {
+            fsm.mouthTransform = transform.FindSlot("_MOUSE_", "MOUSE");
+            fsm.data = DatabaseManager_J.instance.personalities[data.personalityIndex];
+            fsm.player = GameObject.FindGameObjectWithTag("Player").transform;
+        //TEMP
+            fsm.cubeRenderer = GetComponentInChildren<Renderer>();
+        //TEMP
+        }
 
         // 5. 모든 설정이 끝났으니 오브젝트를 활성화
         this.gameObject.SetActive(true);
 
-        //TEMP
-        GetComponent<DogFSM_K>().cubeRenderer = GetComponentInChildren<Renderer>();
-        //TEMP
     }
 }

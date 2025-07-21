@@ -53,15 +53,10 @@ public List<PetStatusData_J> getPetsInSceneData()
         Debug.Log($"[GameManager] 씬 로드됨: {scene.name}");
 
         // 게임 플레이 씬(실내 또는 실외)일 경우에만 초기화 로직 실행
-        if (scene.name == "H_Indoor" || scene.name == "H_Outdoor")
+        if (scene.name != "H_Lobby")
         {
             Debug.Log($"[GameManager] {scene.name} 씬 - UpdatePlacedPets 실행");
             UpdatePlacedPets();
-        }
-        else if (scene.name == "H_Lunch")
-        {
-            Debug.Log("[GameManager] H_Lunch 씬 - LunchSceneManager가 처리함");
-            // 점심 씬은 LunchSceneManager_Dummy에서 처리하므로 여기서는 아무것도 하지 않음
         }
     }
 
@@ -110,7 +105,6 @@ public List<PetStatusData_J> getPetsInSceneData()
     // 배치된 펫들에게 데이터를 적용하는 함수
     void UpdatePlacedPets()
     {
-        Debug.Log("1");
         petsInScene.Clear();
         petsInScene.AddRange(FindObjectsOfType<PetController_J>());
 
@@ -120,7 +114,6 @@ public List<PetStatusData_J> getPetsInSceneData()
         {
             if (i < loadedPetData.Count)
             {
-                Debug.Log("2");
                 petsInScene[i].ApplyData(loadedPetData[i]);
             }
             else
@@ -128,7 +121,6 @@ public List<PetStatusData_J> getPetsInSceneData()
                 petsInScene[i].gameObject.SetActive(false);
             }
         }
-        Debug.Log("3");
     }
 
     // 로비에서 호출할 새 게임 데이터 생성 전용 함수

@@ -2985,6 +2985,7 @@ GameObject:
   - component: {fileID: 1295733004804904491}
   - component: {fileID: 480060333101760005}
   - component: {fileID: 3948621092514286529}
+  - component: {fileID: 8630242933304388572}
   - component: {fileID: 8630242933304388571}
   m_Layer: 0
   m_Name: Pet
@@ -3008,6 +3009,7 @@ GameObject:
   - component: {fileID: 480060332410114337}
   - component: {fileID: 3948621094237988069}
   - component: {fileID: 8630242934792930559}
+  - component: {fileID: 8630242934792930560}
   m_Layer: 0
   m_Name: Pet (2)
   m_TagString: Dog
@@ -3030,6 +3032,7 @@ GameObject:
   - component: {fileID: 480060332040797819}
   - component: {fileID: 3948621093533174719}
   - component: {fileID: 8630242934424071077}
+  - component: {fileID: 8630242934424071078}
   m_Layer: 0
   m_Name: Pet (1)
   m_TagString: Dog
@@ -3629,12 +3632,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitPosition: {fileID: 8630242933304388570}
   bowlPosition: {fileID: 1559843205}
-  dogModelPrefabs:
-  - {fileID: 5746319834222776545, guid: 0a5b4345a78b42f4fb5bd7a12f659643, type: 3}
-  - {fileID: 6645317762985406290, guid: 1a121b1b9a041174ab8eab8c90dcb274, type: 3}
   goodTextPrefab: {fileID: 3094756083469887380, guid: 5bf8e7a7f91add94eb958f545b9ee8eb, type: 3}
   badTextPrefab: {fileID: 760922392494936497, guid: 64cf560c4757120478fe7ca0400f06c1, type: 3}
   eatingTime: 3
+  debugMode: 1
+--- !u!114 &8630242933304388572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 835714086307493350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68181f2d70d0f3843ad4a2a663edee90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   petData:
     petName: 
     modelIndex: 0
@@ -3645,7 +3658,11 @@ MonoBehaviour:
     intimacyper: 0
     hungerper: 0
     bowelper: 0
-  debugMode: 1
+  petModelSlot: {fileID: 7809982528514044805}
+  nameText: {fileID: 0}
+  currentHunger: 0
+  currentIntimacy: 0
+  currentBowel: 0
 --- !u!4 &8630242934424071076
 Transform:
   m_ObjectHideFlags: 0
@@ -3677,12 +3694,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitPosition: {fileID: 8630242934424071076}
   bowlPosition: {fileID: 51911309}
-  dogModelPrefabs:
-  - {fileID: 5746319834222776545, guid: 0a5b4345a78b42f4fb5bd7a12f659643, type: 3}
-  - {fileID: 6645317762985406290, guid: 1a121b1b9a041174ab8eab8c90dcb274, type: 3}
   goodTextPrefab: {fileID: 3094756083469887380, guid: 5bf8e7a7f91add94eb958f545b9ee8eb, type: 3}
   badTextPrefab: {fileID: 760922392494936497, guid: 64cf560c4757120478fe7ca0400f06c1, type: 3}
   eatingTime: 3
+  debugMode: 1
+--- !u!114 &8630242934424071078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 835714087435433368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68181f2d70d0f3843ad4a2a663edee90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   petData:
     petName: 
     modelIndex: 0
@@ -3693,7 +3720,11 @@ MonoBehaviour:
     intimacyper: 0
     hungerper: 0
     bowelper: 0
-  debugMode: 1
+  petModelSlot: {fileID: 7809982529575007227}
+  nameText: {fileID: 0}
+  currentHunger: 0
+  currentIntimacy: 0
+  currentBowel: 0
 --- !u!4 &8630242934792930558
 Transform:
   m_ObjectHideFlags: 0
@@ -3725,12 +3756,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitPosition: {fileID: 8630242934792930558}
   bowlPosition: {fileID: 140475508}
-  dogModelPrefabs:
-  - {fileID: 5746319834222776545, guid: 0a5b4345a78b42f4fb5bd7a12f659643, type: 3}
-  - {fileID: 6645317762985406290, guid: 1a121b1b9a041174ab8eab8c90dcb274, type: 3}
   goodTextPrefab: {fileID: 3094756083469887380, guid: 5bf8e7a7f91add94eb958f545b9ee8eb, type: 3}
   badTextPrefab: {fileID: 760922392494936497, guid: 64cf560c4757120478fe7ca0400f06c1, type: 3}
   eatingTime: 3
+  debugMode: 1
+--- !u!114 &8630242934792930560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 835714086999382722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68181f2d70d0f3843ad4a2a663edee90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   petData:
     petName: 
     modelIndex: 0
@@ -3741,7 +3782,11 @@ MonoBehaviour:
     intimacyper: 0
     hungerper: 0
     bowelper: 0
-  debugMode: 1
+  petModelSlot: {fileID: 7809982530011045025}
+  nameText: {fileID: 0}
+  currentHunger: 0
+  currentIntimacy: 0
+  currentBowel: 0
 --- !u!4 &8885397173547218249
 Transform:
   m_ObjectHideFlags: 0
