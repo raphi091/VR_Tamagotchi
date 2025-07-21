@@ -5,48 +5,26 @@ public class LunchDog : MonoBehaviour
     [Header("위치 지정")]
     public Transform waitPosition;
     public Transform bowlPosition;
-    [Header("모델링 프리팹")]
-    public GameObject[] dogModelPrefabs; // 모델링 프리팹들 (modelIndex 기준)
-    private GameObject currentModelInstance;
     [Header("텍스트 프리팹")]
     public GameObject goodTextPrefab;
     public GameObject badTextPrefab;
     [Header("식사 설정")]
     public float eatingTime = 3f;
-    [Header("데이터")]
-    public PetStatusData_J petData;       // 이 강아지의 데이터
+    private PetController_J petcontroller;
     private FoodBowl foodBowl;
     private foodType lunchFoodType;       // 오늘 제공된 음식
     [Header("디버깅")]
     public bool debugMode = true;
 
+    private void Awake()
+    {
+        if (!TryGetComponent(out petcontroller))
+            Debug.LogWarning("LunchDogDummy ] PetController_J 없음");
+    }
     public void SetLunchFood(FoodBowl bowl)
     {
         foodBowl = bowl;
         lunchFoodType = bowl.containedFood;
-    }
-    public void SetPetData(PetStatusData_J data)
-    {
-        if (data == null)
-        {
-            Debug.LogError($"[LunchDogDummy] Pet 데이터가 null입니다! 오브젝트: {name}");
-            return;
-        }
-        petData = data;
-        // ✅ 모델링 불러오기
-        if (dogModelPrefabs != null && data.modelIndex % 2 < dogModelPrefabs.Length)
-        {
-            if (currentModelInstance != null)
-                Destroy(currentModelInstance);
-            currentModelInstance = Instantiate(dogModelPrefabs[data.modelIndex % 2], transform);//
-            currentModelInstance.transform.localPosition = Vector3.zero;
-            currentModelInstance.transform.localRotation = Quaternion.identity;
-            Debug.Log($"정상 생성");
-        }
-        else
-        {
-            Debug.LogError($"{name} - 잘못된 modelIndex이거나 프리팹이 없습니다. index: {data.modelIndex}");
-        }
     }
     public void InitPositionToWait()
     {
@@ -113,11 +91,11 @@ public class LunchDog : MonoBehaviour
         foodBowl.ClearBowl();
 
         // ✅ 4. 음식 비교 후 텍스트 생성
-        bool isGood = petData.foodType == lunchFoodType;
+        bool isGood = petcontroller.petData.foodType == lunchFoodType;
         GameObject textPrefab = isGood ? goodTextPrefab : badTextPrefab;
 
         if (debugMode)
-            Debug.Log($"[LunchDogDummy] 음식 비교 - Pet: {petData.foodType}, Lunch: {lunchFoodType}, 결과: {isGood}");
+            Debug.Log($"[LunchDogDummy] 음식 비교 - Pet: {petcontroller.petData.foodType}, Lunch: {lunchFoodType}, 결과: {isGood}");
 
         if (textPrefab != null)
         {
@@ -128,7 +106,7 @@ public class LunchDog : MonoBehaviour
         }
 
         // ✅ 5. 식사 완료 → 허기 회복
-        petData.hungerper = 100f;
+        petcontroller.petData.hungerper = 100f;
 
         // ✅ 6. 식사 완료 알림
         LunchSceneManager_Dummy.OnDogFinished();

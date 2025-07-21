@@ -39,8 +39,6 @@ public class LunchSceneManager_Dummy : MonoBehaviour
                 Debug.LogError($"[LunchSceneManager] PetData가 없거나 인덱스 초과: {i}");
                 continue;
             }
-
-            dog.SetPetData(data[i]);
             dog.InitPositionToWait();
         }
 
