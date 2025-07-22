@@ -3621,6 +3621,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78960e9149892584c97c64753d51b066, type: 3}
+--- !u!1001 &254367189
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1520234996016735183, guid: 1a7c8aa105e5bca4e949d6fe3634246b, type: 3}
+      propertyPath: m_Name
+      value: Clipboard
+      objectReference: {fileID: 0}
+    - target: {fileID: 2473450189958867177, guid: 1a7c8aa105e5bca4e949d6fe3634246b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.666
+      objectReference: {fileID: 0}
+    - target: {fileID: 2473450189958867177, guid: 1a7c8aa105e5bca4e949d6fe3634246b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.773
+      objectReference: {fileID: 0}
+    - target: {fileID: 2473450189958867177, guid: 1a7c8aa105e5bca4e949d6fe3634246b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.537
+      objectReference: {fileID: 0}
+    - target: {fileID: 2473450189958867177, guid: 1a7c8aa105e5bca4e949d6fe3634246b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.14315793
+      objectReference: {fileID: 0}
+    - target: {fileID: 2473450189958867177, guid: 1a7c8aa105e5bca4e949d6fe3634246b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.14315793
+      objectReference: {fileID: 0}
+    - target: {fileID: 2473450189958867177, guid: 1a7c8aa105e5bca4e949d6fe3634246b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.6924636
+      objectReference: {fileID: 0}
+    - target: {fileID: 2473450189958867177, guid: 1a7c8aa105e5bca4e949d6fe3634246b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.6924636
+      objectReference: {fileID: 0}
+    - target: {fileID: 2473450189958867177, guid: 1a7c8aa105e5bca4e949d6fe3634246b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2473450189958867177, guid: 1a7c8aa105e5bca4e949d6fe3634246b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2473450189958867177, guid: 1a7c8aa105e5bca4e949d6fe3634246b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 203.361
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1a7c8aa105e5bca4e949d6fe3634246b, type: 3}
 --- !u!1 &254463629
 GameObject:
   m_ObjectHideFlags: 0
@@ -6061,6 +6118,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 488557810}
+  - component: {fileID: 488557818}
   - component: {fileID: 488557817}
   - component: {fileID: 488557816}
   - component: {fileID: 488557815}
@@ -6328,6 +6386,27 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &488557818
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 488557809}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &489017021
 GameObject:
   m_ObjectHideFlags: 0
@@ -28595,6 +28674,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1897225154}
+  - component: {fileID: 1897225162}
   - component: {fileID: 1897225161}
   - component: {fileID: 1897225160}
   - component: {fileID: 1897225159}
@@ -28862,6 +28942,27 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &1897225162
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897225153}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1899232374
 GameObject:
   m_ObjectHideFlags: 0
@@ -34884,6 +34985,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5210808963241565980}
+  - component: {fileID: 8691617815048799007}
   - component: {fileID: 6125683741085876707}
   - component: {fileID: 6395388681892635758}
   - component: {fileID: 3345916482870895341}
@@ -39723,6 +39825,27 @@ MonoBehaviour:
   badTextPrefab: {fileID: 760922392494936497, guid: 64cf560c4757120478fe7ca0400f06c1, type: 3}
   eatingTime: 3
   debugMode: 1
+--- !u!95 &8691617815048799007
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3750731672356929824}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &8698340292164383543
 Transform:
   m_ObjectHideFlags: 0
@@ -40392,6 +40515,7 @@ SceneRoots:
   - {fileID: 5464482541905460050}
   - {fileID: 1941561044}
   - {fileID: 7230824271212140007}
+  - {fileID: 254367189}
   - {fileID: 165002732}
   - {fileID: 1730091197}
   - {fileID: 2056970805}
