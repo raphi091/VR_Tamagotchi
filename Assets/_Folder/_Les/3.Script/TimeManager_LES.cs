@@ -5,7 +5,7 @@ using UnityEngine;
 public class TimeManager_LES : MonoBehaviour
 {
     public static TimeManager_LES instance = null;
-    public TextMeshProUGUI time; //시간 표시용
+    public TextMeshPro timeText; //시간 표시용
 
     public GameObject canvas0, canvas1;
 
@@ -113,6 +113,6 @@ public class TimeManager_LES : MonoBehaviour
     {
         int hh = Mathf.FloorToInt(gameTimeSec / 3600f) % 24;
         int mm = Mathf.FloorToInt((gameTimeSec % 3600f) / 60f);
-        time.text = $"{hh:00}:{mm:00}";
+        timeText.text = $"{hh:00}:{mm:00}";
     }
 }
