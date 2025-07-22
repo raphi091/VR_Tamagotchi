@@ -8,6 +8,9 @@ public class PetProFile_LES : ScriptableObject
     public Sprite petPicture; // 대표 사진
     public GameObject modelPrefab; // 3D 모델링 프리팹
     public List<AudioClip> DogSound = new List<AudioClip>();
+    public AnimatorOverrideController petAnimator;
+    public Avatar petAvater;
+
     [TextArea]
     public string description; // 펫 설명
 }

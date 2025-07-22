@@ -121,6 +121,8 @@ public class GameManager : MonoBehaviour
                 petsInScene[i].gameObject.SetActive(false);
             }
         }
+
+        FindObjectOfType<Report_K>().SetupPetCard();
     }
 
     // 로비에서 호출할 새 게임 데이터 생성 전용 함수
