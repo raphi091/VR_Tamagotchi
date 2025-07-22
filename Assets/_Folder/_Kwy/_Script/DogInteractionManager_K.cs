@@ -10,6 +10,8 @@ public class DogInteractionManager_K : MonoBehaviour
 
     private DogFSM_K activeDog = null;
 
+    public DogFSM_K ActiveDog => activeDog;
+
 
     private void Awake()
     {
