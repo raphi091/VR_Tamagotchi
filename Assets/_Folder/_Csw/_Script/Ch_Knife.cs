@@ -44,7 +44,7 @@ public class Ch_Knife : XRGrabInteractable
              RaycastHit hit;
              if (Physics.Raycast(transform.position, transform.forward, out hit, layer))
              {
-                 if (Vector3.Angle(transform.position - previous_pos, hit.transform.up) >= 130f&&sliceQuad != null)
+                 if (Vector3.Angle(transform.position - previous_pos, hit.transform.right) >= 130f&&sliceQuad != null)
                  {
                      Slice_Objects(hit.transform.gameObject, sliceQuad);
                  }

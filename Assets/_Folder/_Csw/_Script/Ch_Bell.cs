@@ -1,7 +1,4 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.XR.Interaction.Toolkit;
 
 public class Ch_Bell : MonoBehaviour
 {

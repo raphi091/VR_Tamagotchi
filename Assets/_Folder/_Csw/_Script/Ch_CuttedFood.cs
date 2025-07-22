@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -11,11 +10,11 @@ public class Ch_CuttedFood : XRGrabInteractable, Ch_BowlFood
     public virtual GameObject gameObj => gameObject;
     [SerializeField] private Transform[] offset;
     private int index=0;
-    private int fillableCount;
+    [SerializeField] private int fillableCount=4;
 
     void Awake()
     {
-        offset=GetComponentsInChildren<Transform>();
+        offset=GetComponentsInChildren<Transform>().Where(t=>t!=this.transform).ToArray();
         fillableCount=offset.Length;
         foodtype = foodType.Treat;
         isFillable = false;

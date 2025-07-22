@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6062611881875657886}
   - component: {fileID: 6158003075079828305}
   - component: {fileID: 6218663384285706517}
+  - component: {fileID: 614742690147794500}
   m_Layer: 0
   m_Name: Ray Interactor
   m_TagString: Untagged
@@ -448,6 +449,32 @@ SortingGroup:
   m_SortingLayer: 0
   m_SortingOrder: 30005
   m_SortAtRoot: 0
+--- !u!114 &614742690147794500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44203802070049607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aff0f00458ceca749a6dc6da01aca094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityProperty:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Velocity Property
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 442008cb-c529-4cc3-b593-31b01b775167
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 55713661957825118, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  velocity: {x: 0, y: 0, z: 0}
+  magnitude: 0
 --- !u!1 &445466008660338678
 GameObject:
   m_ObjectHideFlags: 0
@@ -536,6 +563,7 @@ GameObject:
   - component: {fileID: 8486439520998430074}
   - component: {fileID: 8976436028160272005}
   - component: {fileID: 9044241932096543121}
+  - component: {fileID: 8202333613454541937}
   m_Layer: 0
   m_Name: Direct Interactor
   m_TagString: Untagged
@@ -693,6 +721,32 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8202333613454541937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828359256053057282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aff0f00458ceca749a6dc6da01aca094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityProperty:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Velocity Property
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 6ed7117b-2c28-411f-a259-fd18d9fa2dfe
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 55713661957825118, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  velocity: {x: 0, y: 0, z: 0}
+  magnitude: 0
 --- !u!1 &1127557934903213790
 GameObject:
   m_ObjectHideFlags: 0
@@ -4247,6 +4301,7 @@ GameObject:
   - component: {fileID: 5337776497671724100}
   - component: {fileID: 695673650171554380}
   - component: {fileID: 7560852046195044165}
+  - component: {fileID: 7550891128542476244}
   m_Layer: 0
   m_Name: Direct Interactor
   m_TagString: Untagged
@@ -4404,6 +4459,32 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7550891128542476244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4504361701679755176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aff0f00458ceca749a6dc6da01aca094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityProperty:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Velocity Property
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: a880992d-99ce-40e5-9180-865043208702
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -5390227482875353744, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  velocity: {x: 0, y: 0, z: 0}
+  magnitude: 0
 --- !u!1 &4749103437362989921
 GameObject:
   m_ObjectHideFlags: 0
@@ -5066,6 +5147,7 @@ GameObject:
   - component: {fileID: 7304036580512220937}
   - component: {fileID: 66049182814888366}
   - component: {fileID: 3676953142635621248}
+  - component: {fileID: 1258734209116731091}
   m_Layer: 0
   m_Name: Ray Interactor
   m_TagString: Untagged
@@ -5501,6 +5583,32 @@ SortingGroup:
   m_SortingLayer: 0
   m_SortingOrder: 30005
   m_SortAtRoot: 0
+--- !u!114 &1258734209116731091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5265908435378127350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aff0f00458ceca749a6dc6da01aca094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityProperty:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Velocity Property
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 4686da6b-41a3-4a26-b1b8-dd5f5c2b588b
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -5390227482875353744, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  velocity: {x: 0, y: 0, z: 0}
+  magnitude: 0
 --- !u!1 &5502318495540355540
 GameObject:
   m_ObjectHideFlags: 0
@@ -5533,7 +5641,7 @@ Transform:
   m_GameObject: {fileID: 5502318495540355540}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -2.03, y: 0, z: -2.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6424,6 +6532,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3592944615933599083}
   - component: {fileID: 3797834436004607632}
+  - component: {fileID: 2211888494837444378}
   m_Layer: 0
   m_Name: Poke Interactor
   m_TagString: Untagged
@@ -6514,6 +6623,32 @@ MonoBehaviour:
   m_UIHoverExited:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2211888494837444378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7506057932898534337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aff0f00458ceca749a6dc6da01aca094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityProperty:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Velocity Property
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: d47de6ba-cf51-4dcf-9d11-3c38246e6a53
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -5390227482875353744, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  velocity: {x: 0, y: 0, z: 0}
+  magnitude: 0
 --- !u!1 &7709410782491768416
 GameObject:
   m_ObjectHideFlags: 0
@@ -6524,6 +6659,7 @@ GameObject:
   m_Component:
   - component: {fileID: 607988542103688511}
   - component: {fileID: 1677059566715774900}
+  - component: {fileID: 2360145023228291647}
   m_Layer: 0
   m_Name: Poke Interactor
   m_TagString: Untagged
@@ -6614,6 +6750,32 @@ MonoBehaviour:
   m_UIHoverExited:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2360145023228291647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7709410782491768416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aff0f00458ceca749a6dc6da01aca094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityProperty:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Velocity Property
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: ffaa3e8e-db09-43db-9507-9201b942ac7c
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 55713661957825118, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  velocity: {x: 0, y: 0, z: 0}
+  magnitude: 0
 --- !u!1 &7828295778978969153
 GameObject:
   m_ObjectHideFlags: 0
