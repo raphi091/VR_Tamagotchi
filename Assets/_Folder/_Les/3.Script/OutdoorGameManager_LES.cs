@@ -5,7 +5,7 @@ public class OutdoorGameManager_LES : MonoBehaviour
 {
     public static OutdoorGameManager_LES Instance;
 
-    [SerializeField] private TextMeshProUGUI text;
+    [SerializeField] private TextMeshPro text;
 
     private void Awake()
     {
@@ -21,7 +21,7 @@ public class OutdoorGameManager_LES : MonoBehaviour
 
     private void Start()
     {
-        TimeManager_LES.instance.time = text;
+        TimeManager_LES.instance.timeText = text;
         TimeManager_LES.instance.OutdoorTime();
     }
 }
