@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(CharacterController))]
@@ -27,6 +28,8 @@ public class DogFSM_K : MonoBehaviour
 
     public Transform mouthTransform;
     public Transform player;
+    [Range(0f,1f)] public Vector2 Hunger = new Vector2(0.2f, 0.5f);
+    [Range(0f, 1f)] public Vector2 Toilet = new Vector2(0.1f, 0.4f);
 
     private NavMeshAgent agent;
     private CharacterController controller;
@@ -81,10 +84,10 @@ public class DogFSM_K : MonoBehaviour
 
     private void Update()
     {
-        hungerpercent -= Time.deltaTime * 0.6f;
-        bowelpercent -= Time.deltaTime * 0.6f;
+        hungerpercent -= Time.deltaTime * Random.Range(Hunger.x, Hunger.y);
+        bowelpercent -= Time.deltaTime * Random.Range(Toilet.x, Toilet.y);
 
-        if (/*!useRootMotionLogic &&*/ agent.velocity.sqrMagnitude > 0.1f)
+        if (agent.velocity.sqrMagnitude > 0.1f)
         {
             Quaternion targetRotation = Quaternion.LookRotation(agent.velocity);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
@@ -98,32 +101,8 @@ public class DogFSM_K : MonoBehaviour
         }
 
         controller.Move(moveDelta);
+        animator.SetFloat("Speed", agent.velocity.magnitude);
     }
-
-    //private void OnAnimatorMove()
-    //{
-    //    if (!controller.enabled || Time.deltaTime <= 0) return;
-
-    //    Vector3 finalMoveDelta;
-
-    //    finalMoveDelta = agent.velocity * Time.deltaTime;
-
-    //    //if (useRootMotionLogic)
-    //    //{
-    //    //    finalMoveDelta = animator.deltaPosition;
-    //    //}
-    //    //else
-    //    //{
-    //    //    finalMoveDelta = agent.velocity * Time.deltaTime;
-    //    //}
-
-    //    if (!controller.isGrounded)
-    //    {
-    //        finalMoveDelta.y -= 20f * Time.deltaTime;
-    //    }
-
-    //    controller.Move(finalMoveDelta);
-    //}
 
     private void OnTriggerEnter(Collider other)
     {
@@ -171,18 +150,6 @@ public class DogFSM_K : MonoBehaviour
         }
         currentState = newState;
         lastStateChangeTime = Time.time;
-
-        //if (newState == State.Attacking || newState == State.Broken)
-        //{
-        //    useRootMotionLogic = true;
-        //    agent.isStopped = true;
-        //}
-        //else
-        //{
-        //    useRootMotionLogic = false;
-        //    if (agent.enabled)
-        //        agent.isStopped = false;
-        //}
 
         switch (currentState)
         {
@@ -242,7 +209,7 @@ public class DogFSM_K : MonoBehaviour
         agent.isStopped = true;
         agent.ResetPath();
         isWandering = false;
-        // animator.SetFloat("MoveSpeed", 0);
+        animator.SetBool("INTERACT", false);
 
         while (true)
         {
@@ -253,7 +220,7 @@ public class DogFSM_K : MonoBehaviour
                 EnterState(State.Hunger);
             }
 
-            if (bowelpercent <= 10f)
+            if (bowelpercent <= 10f && !isHunger)
             {
                 EnterState(State.Toilet);
             }
@@ -274,7 +241,7 @@ public class DogFSM_K : MonoBehaviour
                     float rang;
                     float movespeed;
 
-                    if (randAction < 7)
+                    if (randAction <= 5)
                     {
                         if (currentintimacy >= 80)
                         {
@@ -304,13 +271,14 @@ public class DogFSM_K : MonoBehaviour
                         agent.isStopped = false;
                         isWandering = true;
                     }
-                    else if (randAction > 9)
+                    else if (randAction <= 8)
                     {
                         EnterState(State.Playing);
                     }
                     else
                     {
                         Debug.Log("월!");
+                        animator.SetTrigger("BARK");
                     }
                 }
             }
@@ -321,8 +289,53 @@ public class DogFSM_K : MonoBehaviour
 
     private IEnumerator Play_co()
     {
-        // 애니메이션 확인 후 작업
+        Scene scene = SceneManager.GetActiveScene();
 
+        int randAction = Random.Range(0, 10);
+
+        if (scene.name.Equals("H_Outdoor"))
+        {
+            if (randAction <= 2)
+            {
+
+            }
+            else if (randAction <= 4)
+            {
+
+            }
+            else if (randAction <= 6)
+            {
+
+            }
+            else if (randAction <= 8)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+        else
+        {
+            if (randAction <= 3)
+            {
+
+            }
+            else if (randAction <= 5)
+            {
+
+            }
+            else if (randAction <= 7)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+        
         yield return new WaitForSeconds(10f);
 
         EnterState(State.Wander);
@@ -355,14 +368,15 @@ public class DogFSM_K : MonoBehaviour
         if (cubeRenderer != null)
             cubeRenderer.material.color = Color.green;
         //TEMP
+        animator.SetBool("STROK", false);
+        animator.SetBool("INTERACT", true);
 
-        // 이 상태에 들어왔다는 것은 이미 선택이 완료되었다는 의미
-        while (isSelected) // isSelected가 false가 될 때까지 대기
+        while (isSelected)
         {
-            // 여기서 쓰다듬기, 손 주기 등 구체적인 상호작용을 기다리거나 처리
             yield return null;
         }
-        EnterState(State.Wander); // 선택이 해제되면 Wander로 복귀
+
+        EnterState(State.Wander);
     }
 
     public void ConfirmSelection()
@@ -373,6 +387,7 @@ public class DogFSM_K : MonoBehaviour
 
     public void ReturnToWander()
     {
+        animator.SetBool("INTERACT", false);
         isSelected = false;
         EnterState(State.Wander);
     }
@@ -387,12 +402,11 @@ public class DogFSM_K : MonoBehaviour
         Debug.Log("쓰다듬는 중...");
         agent.isStopped = true;
 
-        // "Stroking_Loop" 같은 반복 애니메이션을 여기서 재생할 수 있습니다.
-        // animator.SetBool("isStroking", true);
+        animator.SetBool("STROK", true);
 
-        // OnTriggerExit에 의해 상태가 변경될 때까지 이 상태를 무한히 유지합니다.
         while (true)
         {
+            currentintimacy += 0.2f;
             yield return null;
         }
     }
@@ -414,18 +428,14 @@ public class DogFSM_K : MonoBehaviour
         //TEMP
 
         Debug.Log($"{name}: 앉습니다.");
-        agent.isStopped = true; // 앉는 동안은 움직이지 않음
+        agent.isStopped = true;
+        animator.SetBool("SIT", true);
 
-        // "Sit" 애니메이션을 여기서 재생
-        // animator.SetTrigger("Sit");
-
-        // 5초 동안 앉아있음
         yield return new WaitForSeconds(5f);
 
-        // "StandUp" 애니메이션을 여기서 재생
-        // animator.SetTrigger("StandUp");
+        animator.SetBool("SIT", false);
 
-        // 앉기가 끝나면 다시 다른 상호작용을 기다리는 'Interaction' 상태로 복귀
+        currentintimacy += 5;
         EnterState(State.Interaction);
     }
 
@@ -446,18 +456,14 @@ public class DogFSM_K : MonoBehaviour
         //TEMP
 
         Debug.Log($"{name}: 엎드립니다.");
-        agent.isStopped = true; // 앉는 동안은 움직이지 않음
+        agent.isStopped = true;
+        animator.SetBool("LIE", true);
 
-        // "Sit" 애니메이션을 여기서 재생
-        // animator.SetTrigger("Liedown");
-
-        // 5초 동안 앉아있음
         yield return new WaitForSeconds(5f);
 
-        // "StandUp" 애니메이션을 여기서 재생
-        // animator.SetTrigger("StandUp");
+        animator.SetBool("LIE", false);
 
-        // 앉기가 끝나면 다시 다른 상호작용을 기다리는 'Interaction' 상태로 복귀
+        currentintimacy += 5;
         EnterState(State.Interaction);
     }
 
@@ -487,7 +493,8 @@ public class DogFSM_K : MonoBehaviour
         Debug.Log($"{name}: {target.name} 물어올게요!");
         agent.isStopped = false;
 
-        // 1. 목표물(막대기)을 향해 이동
+        animator.SetBool("INTERACT", false);
+
         agent.SetDestination(target.position);
 
         // 목표물에 도착할 때까지 대기
@@ -498,6 +505,7 @@ public class DogFSM_K : MonoBehaviour
 
         // 2. 목표물 줍기
         Debug.Log("잡았다!");
+        animator.SetTrigger("PICKUP");
         // 목표물에 붙어있는 스크립트를 가져와서 '줍기' 함수 호출
         Ch_Throwable item = target.GetComponent<Ch_Throwable>();
         if (item != null)
@@ -517,12 +525,14 @@ public class DogFSM_K : MonoBehaviour
 
         // 4. 목표물 내려놓기
         Debug.Log("가져왔어요!");
+        animator.SetTrigger("PUTDOWN");
         if (item != null)
         {
             item.Drop(); // 아이템 내려놓기 함수 호출
         }
 
         // 5. 임무 완수 후 다시 상호작용 대기 상태로 복귀
+        currentintimacy += 5;
         EnterState(State.Interaction);
     }
 
@@ -555,8 +565,7 @@ public class DogFSM_K : MonoBehaviour
             hungerpercent = 100f;
             isHunger = false;
 
-            // 친밀도를 올리거나 행복해하는 애니메이션을 잠시 보여줄 수 있음
-            // animator.SetTrigger("Happy");
+            animator.SetTrigger("EAT");
             currentintimacy += 5;
         }
     }
@@ -571,7 +580,18 @@ public class DogFSM_K : MonoBehaviour
         isBowel = true;
         agent.SetDestination(ToiletPoint.position);
 
-        yield return new WaitForSeconds(2f);
+        while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance)
+        {
+            yield return null;
+        }
+
+        PetController_J petcon = GetComponent<PetController_J>();
+
+        petcon.petModelSlot.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(5f);
+
+        petcon.petModelSlot.gameObject.SetActive(true);
 
         isBowel = false;
         bowelpercent = 100f;

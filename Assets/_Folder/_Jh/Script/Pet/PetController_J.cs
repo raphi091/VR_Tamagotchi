@@ -62,6 +62,10 @@ public class PetController_J : MonoBehaviour
         //TEMP
         }
 
+        Animator ani = GetComponent<Animator>();
+        // ani.runtimeAnimatorController = DatabaseManager_J.instance.petProfiles[data.modelIndex].animatorcontroller;
+        // ani.avatar = DatabaseManager_J.instance.petProfiles[data.modelIndex].avatar;
+
         // 5. 모든 설정이 끝났으니 오브젝트를 활성화
         this.gameObject.SetActive(true);
 
