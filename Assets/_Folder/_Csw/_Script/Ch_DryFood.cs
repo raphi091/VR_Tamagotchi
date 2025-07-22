@@ -26,7 +26,7 @@ public class Ch_DryFood : MonoBehaviour, Ch_BowlFood
     {
         if (transform.up.y < upsideDownRange)
         {
-            if (particle.isPlaying)
+            if (!particle.isPlaying)
             {
                 particle.Play();
             }

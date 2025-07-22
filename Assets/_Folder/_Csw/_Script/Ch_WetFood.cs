@@ -24,7 +24,7 @@ public class Ch_WetFood : MonoBehaviour
 
     void Start()
     {
-        MyTween=cannedFood.transform.DOLocalMoveY(2f, duration);
+        MyTween=cannedFood.transform.DOLocalMoveZ(0.01f, duration);
         MyTween.SetEase(Ease.OutQuad);
         MyTween.Pause();
     }
@@ -32,12 +32,12 @@ public class Ch_WetFood : MonoBehaviour
 
     private void Update()
     {
-            if (Vector3.Distance(startPoint.position, cannedFood.endPoint.position) < 0.01f && !isOut)
+            if (Vector3.Distance(startPoint.position, cannedFood.endPoint.position) < 0.001f && !isOut)
             {
                 isOut=true;
                 cannedFood.OnOut();
             }
-            if (transform.up.y < upsideDownRange && !isOut)
+            if (transform.forward.y < upsideDownRange && !isOut)
             {
                 isTweening = MyTween.IsPlaying();
                 if (interactable.velocity.magnitude >= 0.5f &&!isTweening)
