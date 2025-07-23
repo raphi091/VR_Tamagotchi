@@ -48,6 +48,7 @@ public class PauseUI : MonoBehaviour
 
         if (enableDebugLogs) Debug.Log("[PauseUI] 초기화 완료");
         menu.SetActive(false);
+        pan.SetActive(false);
     }
 
     private void OnEnable()
