@@ -8,6 +8,7 @@ public enum BGMTrackName
 {
     None = 0,
     Lobby,
+    Tutorial,
     Indoor,
     Lunch,
     Outdoor

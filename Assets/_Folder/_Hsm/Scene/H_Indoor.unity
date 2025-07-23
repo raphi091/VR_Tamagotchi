@@ -1340,13 +1340,30 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 842432054447518147, guid: 9fae45e05e9fb9c47987aca82a4e1472, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 3155998869435405797, guid: 9fae45e05e9fb9c47987aca82a4e1472, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
     - targetCorrespondingSourceObject: {fileID: 5272734267158885051, guid: 9fae45e05e9fb9c47987aca82a4e1472, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 7322134136918353159, guid: 9fae45e05e9fb9c47987aca82a4e1472, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 9fae45e05e9fb9c47987aca82a4e1472, type: 3}
 --- !u!114 &302985559 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8969892783117044122, guid: 9fae45e05e9fb9c47987aca82a4e1472, type: 3}
+  m_PrefabInstance: {fileID: 302985558}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &302985560 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7200560846145288165, guid: 9fae45e05e9fb9c47987aca82a4e1472, type: 3}
   m_PrefabInstance: {fileID: 302985558}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -1562,6 +1579,10 @@ PrefabInstance:
       value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 765039024841896185, guid: a061dd62d5483a94b81b59fc532a338b, type: 3}
+      propertyPath: DayText
+      value: 
+      objectReference: {fileID: 302985560}
+    - target: {fileID: 765039024841896185, guid: a061dd62d5483a94b81b59fc532a338b, type: 3}
       propertyPath: canvas0
       value: 
       objectReference: {fileID: 2421240132665749832, guid: 00b70619eaf85c14ba781a7a5527ca52, type: 3}
@@ -1569,6 +1590,10 @@ PrefabInstance:
       propertyPath: canvas1
       value: 
       objectReference: {fileID: 2421240132665749832, guid: 00b70619eaf85c14ba781a7a5527ca52, type: 3}
+    - target: {fileID: 765039024841896185, guid: a061dd62d5483a94b81b59fc532a338b, type: 3}
+      propertyPath: timeText
+      value: 
+      objectReference: {fileID: 302985559}
     - target: {fileID: 3844792246662795418, guid: a061dd62d5483a94b81b59fc532a338b, type: 3}
       propertyPath: m_Name
       value: TimeManager

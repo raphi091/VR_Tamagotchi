@@ -5,13 +5,15 @@ using UnityEngine;
 public class TimeManager_LES : MonoBehaviour
 {
     public static TimeManager_LES instance = null;
-    public TextMeshPro timeText; //시간 표시용
-
-    public GameObject canvas0, canvas1;
+    public TextMeshPro timeText;
+    public TextMeshPro DayText; //시간 표시용
 
     //시간 로직
-    public float speed = 60f*5f; // 실제 1초 = 60 게임 시간초
+    public float speed = 60f * 5f; // 실제 1초 = 60 게임 시간초
     private float gameTimeSec; // 현재 게임 시간(초)
+
+    // 요일 배열
+    private string[] daysOfWeek = { "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN" };
 
     private void Awake()
     {
@@ -32,6 +34,18 @@ public class TimeManager_LES : MonoBehaviour
         DisplayTime(gameTimeSec);
     }
 
+    // 현재 요일을 반환하는 메서드
+    private string GetDayOfWeek()
+    {
+        // DataManager에서 Day 값을 가져옴 (Day 1 = 월요일)
+        int currentDay = DataManager_J.instance.gameData.Day;
+        
+        // Day는 1부터 시작하므로 1을 빼고, 7로 나눈 나머지로 요일 계산
+        int dayIndex = (currentDay - 1) % 7;
+        
+        return daysOfWeek[dayIndex];
+    }
+
     public void IndoorTime()
     {
         StartCoroutine(Indoor_co());
@@ -41,12 +55,7 @@ public class TimeManager_LES : MonoBehaviour
     {
         gameTimeSec = 7 * 3600 + 30 * 60;
 
-        // 오전 보고 시작.
-        if (canvas0 == null) yield return null;
-
-        GameObject g = Instantiate(canvas0);
-
-        // 아침 보고 및 오전시간.
+        // 아침 시간
         while (gameTimeSec < 8 * 3600 + 00 * 60)
         {
             gameTimeSec += Time.deltaTime * speed;
@@ -54,8 +63,6 @@ public class TimeManager_LES : MonoBehaviour
 
             yield return null;
         }
-
-        Destroy(g);
         
         //오전 수업 시간.
         while (gameTimeSec <= 12 * 3600 + 00 * 60)
@@ -67,13 +74,12 @@ public class TimeManager_LES : MonoBehaviour
         }
 
         GameManager.instance.GoToScene("H_Lunch");
-        //GameManager.instance.GoToScene("H_Outdoor");
     }
 
-    public void LunchTime()
-    {
-        GameManager.instance.GoToScene("H_Outdoor");
-    }
+    // public void LunchTime()
+    // {
+    //     GameManager.instance.GoToScene("H_Outdoor");
+    // }
 
     public void OutdoorTime()
     {
@@ -93,9 +99,7 @@ public class TimeManager_LES : MonoBehaviour
             yield return null;
         }
 
-        GameObject g = Instantiate(canvas0);
-
-        // 다음날로 넘기는 로직 추가
+        // 하루 마무리 시간
         while (gameTimeSec < 17 * 3600 + 30 * 60)
         {
             gameTimeSec += Time.deltaTime * speed;
@@ -103,9 +107,8 @@ public class TimeManager_LES : MonoBehaviour
 
             yield return null;
         }
+        
         GameManager.instance.EndOfDay();
-
-        Destroy(g);
         GameManager.instance.GoToScene("H_Indoor");
     }
 
@@ -113,6 +116,10 @@ public class TimeManager_LES : MonoBehaviour
     {
         int hh = Mathf.FloorToInt(gameTimeSec / 3600f) % 24;
         int mm = Mathf.FloorToInt((gameTimeSec % 3600f) / 60f);
+
+        // 요일과 시간을 함께 표시
+        string dayOfWeek = GetDayOfWeek();
         timeText.text = $"{hh:00}:{mm:00}";
+        DayText.text = $"{dayOfWeek}";
     }
 }
