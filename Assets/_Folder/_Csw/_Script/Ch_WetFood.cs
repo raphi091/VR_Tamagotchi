@@ -6,10 +6,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class Ch_WetFood : MonoBehaviour
 {
     [SerializeField] Ch_CannedFood cannedFood;
-
     [Range(0f, -1f), SerializeField] private float upsideDownRange = -0.7f;
     [SerializeField] private Transform startPoint;
-    
     [SerializeField] private float duration;
     private bool isOut=false;
     private Ch_VelocityInteractable interactable;
@@ -18,12 +16,12 @@ public class Ch_WetFood : MonoBehaviour
 
     void Awake()
     {
-        cannedFood = GetComponentInChildren<Ch_CannedFood>();
         interactable = GetComponent<Ch_VelocityInteractable>();
     }
 
     void Start()
     {
+        cannedFood.transform.SetParent(this.transform);
         MyTween=cannedFood.transform.DOLocalMoveZ(0.01f, duration);
         MyTween.SetEase(Ease.OutQuad);
         MyTween.Pause();
@@ -35,6 +33,7 @@ public class Ch_WetFood : MonoBehaviour
             if (Vector3.Distance(startPoint.position, cannedFood.endPoint.position) < 0.001f && !isOut)
             {
                 isOut=true;
+                interactable.colliders.Remove(cannedFood.gameObject.GetComponent<Collider>());
                 cannedFood.OnOut();
             }
             if (transform.forward.y < upsideDownRange && !isOut)
