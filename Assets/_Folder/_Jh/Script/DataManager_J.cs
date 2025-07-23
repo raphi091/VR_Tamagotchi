@@ -5,8 +5,12 @@ public class DataManager_J : MonoBehaviour
 {
     public static DataManager_J instance;
 
-    // 디버깅용 프로퍼티 대신, 원래의 간단한 public 변수로 되돌립니다.
+    [Header("GameData")]
     public GameData gameData;
+
+    [Header("Settiong")]
+    public GameSetting setting;
+    private string settingFilePath;
 
     private string saveFilePath;
 
@@ -21,7 +25,10 @@ public class DataManager_J : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
         saveFilePath = Path.Combine(Application.persistentDataPath, "MyPetData.json");
+        settingFilePath = Path.Combine(Application.persistentDataPath, "setting.json");
+        LoadSettings();
     }
 
     public bool LoadGameData()
@@ -45,5 +52,24 @@ public class DataManager_J : MonoBehaviour
         if (gameData == null) return;
         string jsonData = JsonUtility.ToJson(gameData, true);
         File.WriteAllText(saveFilePath, jsonData);
+    }
+
+    public void SaveSettings()
+    {
+        string json = JsonUtility.ToJson(setting, true);
+        File.WriteAllText(settingFilePath, json);
+    }
+
+    public void LoadSettings()
+    {
+        if (File.Exists(settingFilePath))
+        {
+            string json = File.ReadAllText(settingFilePath);
+            setting = JsonUtility.FromJson<GameSetting>(json);
+        }
+        else
+        {
+            setting = new GameSetting();
+        }
     }
 }

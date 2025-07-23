@@ -2,47 +2,70 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
+
 
 public class soundSliderController : MonoBehaviour
 {
-    public enum VolumeType { Master, BGM, SFX }
-    public VolumeType volumeType;
-
-    public Slider slider;
+    [Header("Sound Setting")]
+    [SerializeField] private AudioMixer mixer;
+    [SerializeField] private Slider masterVolume;
+    [SerializeField] private Slider bgmVolume;
+    [SerializeField] private Slider sfxVolume;
 
     private void Start()
     {
-        switch (volumeType)
-        {
-            case VolumeType.Master:
-                slider.value = SoundManager.Instance.masterVolume;
-                break;
-            case VolumeType.BGM:
-                slider.value = SoundManager.Instance.bgmVolume;
-                break;
-            case VolumeType.SFX:
-                slider.value = SoundManager.Instance.sfxVolume;
-                slider.value = SoundManager.Instance.uiVolume;
-                break;
-        }
+        LoadSettingsToUI();
 
-        slider.onValueChanged.AddListener(OnSliderChanged);
+        masterVolume.onValueChanged.AddListener(SetMasterVolume);
+        bgmVolume.onValueChanged.AddListener(SetBGMVolume);
+        sfxVolume.onValueChanged.AddListener(SetSFXVolume);
     }
-    private void OnSliderChanged(float value)
+
+    private void LoadSettingsToUI()
     {
-        switch(volumeType)
-        {
-            case VolumeType.Master:
-                SoundManager.Instance.SetMasterVolume(value);
-                break;
-            case VolumeType.BGM:
-                SoundManager.Instance.SetBGMVolume(value);
-                break;
-            case VolumeType.SFX:
-                SoundManager.Instance.SetSFXVolume(value);
-                SoundManager.Instance.uiVolume = value;
-                SoundManager.Instance.UpdateVolume();
-                break;
-        }
+        GameSetting settings = DataManager_J.instance.setting;
+
+        masterVolume.value = settings.masterVolume;
+        bgmVolume.value = settings.bgmVolume;
+        sfxVolume.value = settings.sfxVolume;
+
+        SetMasterVolume(settings.masterVolume);
+        SetBGMVolume(settings.bgmVolume);
+        SetSFXVolume(settings.sfxVolume);
+    }
+
+    public void SetMasterVolume(float value)
+    {
+        float volume = value > 0.0001f ? Mathf.Log10(value) * 20 : -80f;
+        mixer.SetFloat("MASTER", volume);
+        DataManager_J.instance.setting.masterVolume = value;
+    }
+
+    public void SetBGMVolume(float value)
+    {
+        float volume = value > 0.0001f ? Mathf.Log10(value) * 20 : -80f;
+        mixer.SetFloat("BGM", volume);
+        DataManager_J.instance.setting.bgmVolume = value;
+    }
+
+    public void SetSFXVolume(float value)
+    {
+        float volume = value > 0.0001f ? Mathf.Log10(value) * 20 : -80f;
+        mixer.SetFloat("SFX", volume);
+        DataManager_J.instance.setting.sfxVolume = value;
+    }
+
+    public void OnClickConfirmReset()
+    {
+        DataManager_J.instance.setting = new GameSetting();
+
+        LoadSettingsToUI();
+        ApplyAndSaveChanges();
+    }
+
+    public void ApplyAndSaveChanges()
+    {
+        DataManager_J.instance.SaveSettings();
     }
 }

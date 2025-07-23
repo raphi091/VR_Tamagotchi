@@ -58,3 +58,18 @@ public class GameData
     }
 }
 
+[System.Serializable]
+public class GameSetting
+{
+    public float masterVolume;
+    public float bgmVolume;
+    public float sfxVolume;
+
+    public GameSetting()
+    {
+        masterVolume = 1f;
+        bgmVolume = 1f;
+        sfxVolume = 1f;
+    }
+}
+

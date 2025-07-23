@@ -116,6 +116,7 @@ public class PauseUI : MonoBehaviour
         Time.timeScale = 1f;
         isPaused = false;
         input.XRIUI.Disable();
+        DataManager_J.instance.SaveSettings();
 
         if (enableDebugLogs) Debug.Log("[PauseUI] 메뉴 닫힘");
     }
