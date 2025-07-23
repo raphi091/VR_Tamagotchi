@@ -13,6 +13,7 @@ public class PauseUI : MonoBehaviour
     public GameObject menu;
     public GameObject pan;
     public GameObject btn;
+    public GameObject slider;
 
     [Header("Input Settings")]
     public InputActionReference menuAction;      // XR LeftHand Menu 버튼
@@ -122,7 +123,11 @@ public class PauseUI : MonoBehaviour
     public void OnClickBGMControl()
     {
         if (enableDebugLogs) Debug.Log("[PauseUI] BGM 설정 클릭");
-        if (pan != null) pan.SetActive(true);
+        if (pan != null)
+        {
+            pan.SetActive(true);
+            SetSelectedUIElement(slider);
+        } 
     }
 
     // 강제로 모든 메뉴 닫기 (씬 전환 전 반드시 호출)
