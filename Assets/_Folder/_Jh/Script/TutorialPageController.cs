@@ -3,11 +3,17 @@ using UnityEngine;
 
 public class TutorialPageController : MonoBehaviour
 {
+    public static TutorialPageController instance = null;
+
     [Header("튜토리얼 페이지들 (Image1, Image2 등)")]
     public List<GameObject> tutorialPages;
 
     private int currentPage = 0;
-    public static TutorialPageController instance = null;
+    private bool isTutorial;
+
+    public bool IsTutorial => isTutorial;
+
+
     private void Awake()
     {
         if (instance == null)
@@ -23,8 +29,11 @@ public class TutorialPageController : MonoBehaviour
     void Start()
     {
         InitializePages();
-        
+
+        if (DataManager_J.instance.gameData.tutorial)
+            isTutorial = true;
     }
+
     public GameObject tutorialRoot; // 전체 튜토리얼 UI를 감싸는 루트 오브젝트 (Canvas 포함)
 
 
@@ -47,7 +56,10 @@ public class TutorialPageController : MonoBehaviour
         {
             // 전체 튜토리얼 루트를 비활성화
             if (tutorialRoot != null)
+            {
+                isTutorial = false;
                 tutorialRoot.SetActive(false);
+            }
             else
                 Debug.LogWarning("튜토리얼 루트가 설정되지 않았습니다.");
         }
