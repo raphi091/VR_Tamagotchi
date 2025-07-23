@@ -19,7 +19,7 @@ public class LunchDog : MonoBehaviour
     private void Awake()
     {
         if (!TryGetComponent(out petcontroller))
-            Debug.LogWarning("LunchDogDummy ] PetController_J 없음");
+            Debug.LogWarning("LunchDog ] PetController_J 없음");
     }
     public void SetLunchFood(FoodBowl bowl)
     {
@@ -46,12 +46,12 @@ public class LunchDog : MonoBehaviour
         // ✅ bowlPosition 검증
         if (bowlPosition.Equals(null))
         {
-            Debug.LogError($"[LunchDogDummy] bowlPosition이 null입니다!");
+            Debug.LogError($"[LunchDog] bowlPosition이 null입니다!");
             yield break;
         }
 
         if (debugMode)
-            Debug.Log($"[LunchDogDummy] 점심 루틴 시작 - 현재 위치: {transform.position}, 목표: {bowlPosition.position}");
+            Debug.Log($"[LunchDog] 점심 루틴 시작 - 현재 위치: {transform.position}, 목표: {bowlPosition.position}");
 
         // ✅ 2. 밥그릇 앞으로 이동 (개선된 버전)
         float speed = 1.5f;
@@ -68,7 +68,7 @@ public class LunchDog : MonoBehaviour
             // 1초마다 진행상황 로그
             if (debugMode && logTimer >= 1f)
             {
-                Debug.Log($"[LunchDogDummy] 이동 중... 거리: {Vector3.Distance(transform.position, bowlPosition.position)}, 경과시간: {timer:F1}s");
+                Debug.Log($"[LunchDog] 이동 중... 거리: {Vector3.Distance(transform.position, bowlPosition.position)}, 경과시간: {timer:F1}s");
                 logTimer = 0f;
             }
 
@@ -78,13 +78,13 @@ public class LunchDog : MonoBehaviour
         // 타임아웃 검사
         if (timer >= timeout)
         {
-            Debug.LogWarning($"[LunchDogDummy] 이동 타임아웃! 현재 거리: {Vector3.Distance(transform.position, bowlPosition.position)}");
+            Debug.LogWarning($"[LunchDog 이동 타임아웃! 현재 거리: {Vector3.Distance(transform.position, bowlPosition.position)}");
             // 강제로 목표 위치로 이동
             transform.position = bowlPosition.position;
         }
 
         if (debugMode)
-            Debug.Log($"[LunchDogDummy] 밥그릇 앞 도착: {transform.position}, 최종 거리: {Vector3.Distance(transform.position, bowlPosition.position)}");
+            Debug.Log($"[LunchDog] 밥그릇 앞 도착: {transform.position}, 최종 거리: {Vector3.Distance(transform.position, bowlPosition.position)}");
 
         // ✅ 3. 먹는 시간 대기
         yield return new WaitForSeconds(eatingTime);
@@ -95,7 +95,7 @@ public class LunchDog : MonoBehaviour
         GameObject textPrefab = isGood ? goodTextPrefab : badTextPrefab;
 
         if (debugMode)
-            Debug.Log($"[LunchDogDummy] 음식 비교 - Pet: {petcontroller.petData.foodType}, Lunch: {lunchFoodType}, 결과: {isGood}");
+            Debug.Log($"[LunchDog] 음식 비교 - Pet: {petcontroller.petData.foodType}, Lunch: {lunchFoodType}, 결과: {isGood}");
 
         if (textPrefab != null)
         {
@@ -109,9 +109,9 @@ public class LunchDog : MonoBehaviour
         petcontroller.petData.hungerper = 100f;
 
         // ✅ 6. 식사 완료 알림
-        LunchSceneManager_Dummy.OnDogFinished();
+        LunchSceneManager.OnDogFinished();
 
         if (debugMode)
-            Debug.Log($"[LunchDogDummy] 점심 루틴 완료!");
+            Debug.Log($"[LunchDog] 점심 루틴 완료!");
     }
 }

@@ -36,6 +36,8 @@ public class LobbyManager_J : MonoBehaviour
         {
             continueButton.SetActive(false);
         }
+
+        SoundManager.Instance.PlayBGM(BGMTrackName.Lobby);
     }
 
     public void OnClickNewGame()

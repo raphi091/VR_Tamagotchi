@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
-public class LunchSceneManager_Dummy : MonoBehaviour
+public class LunchSceneManager : MonoBehaviour
 {
     public List<LunchDog> dogCubes;          // 점심용 강아지 프리팹들
     public List<FoodBowl> foodBowls;              // 밥그릇들
@@ -13,7 +13,7 @@ public class LunchSceneManager_Dummy : MonoBehaviour
     public AudioClip bellClip;                    // 종소리 클립
 
     private static int finishCount = 0;
-    private static LunchSceneManager_Dummy instance;
+    private static LunchSceneManager instance;
 
     void Awake()
     {
@@ -44,6 +44,11 @@ public class LunchSceneManager_Dummy : MonoBehaviour
 
         // 3. 점심 자동 시작 (딜레이 후)
         StartCoroutine(StartLunchDelayed());
+
+        if (DataManager_J.instance.gameData.Day.Equals(1))
+            SoundManager.Instance.PlayBGM(BGMTrackName.Tutorial);
+        else
+            SoundManager.Instance.PlayBGM(BGMTrackName.Lunch);
     }
 
     IEnumerator StartLunchDelayed()

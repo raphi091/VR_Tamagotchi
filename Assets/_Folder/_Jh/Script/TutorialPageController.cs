@@ -23,6 +23,7 @@ public class TutorialPageController : MonoBehaviour
     void Start()
     {
         InitializePages();
+        
     }
     public GameObject tutorialRoot; // 전체 튜토리얼 UI를 감싸는 루트 오브젝트 (Canvas 포함)
 
