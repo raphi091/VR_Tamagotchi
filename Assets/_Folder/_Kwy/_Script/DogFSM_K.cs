@@ -101,7 +101,7 @@ public class DogFSM_K : MonoBehaviour
         }
 
         controller.Move(moveDelta);
-        animator.SetFloat("Speed", agent.velocity.magnitude);
+        animator.SetFloat("MOVESPEED", agent.velocity.magnitude);
     }
 
     private void OnTriggerEnter(Collider other)

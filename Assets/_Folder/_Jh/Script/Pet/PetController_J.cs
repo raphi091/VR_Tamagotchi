@@ -20,6 +20,14 @@ public class PetController_J : MonoBehaviour
     public float currentIntimacy;
     public float currentBowel;
 
+    private Animator ani;
+
+    private void Awake()
+    {
+        if (!TryGetComponent(out ani))
+            Debug.LogWarning("PetController_J ] Animator 없음");
+    }
+
     // GameManager가 호출할 데이터 적용 함수
     public void ApplyData(PetStatusData_J data)
     {
@@ -62,12 +70,13 @@ public class PetController_J : MonoBehaviour
         //TEMP
         }
 
-        Animator ani = GetComponent<Animator>();
-        ani.runtimeAnimatorController = DatabaseManager_J.instance.petProfiles[data.modelIndex].petAnimator;
-        ani.avatar = DatabaseManager_J.instance.petProfiles[data.modelIndex].petAvater;
+        if (ani != null)
+        {
+            ani.runtimeAnimatorController = DatabaseManager_J.instance.petProfiles[data.modelIndex].petAnimator;
+            ani.avatar = DatabaseManager_J.instance.petProfiles[data.modelIndex].petAvater;
+        }
 
         // 5. 모든 설정이 끝났으니 오브젝트를 활성화
         this.gameObject.SetActive(true);
-
     }
 }
