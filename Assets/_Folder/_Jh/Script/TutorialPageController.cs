@@ -26,6 +26,7 @@ public class TutorialPageController : MonoBehaviour
     }
     public GameObject tutorialRoot; // 전체 튜토리얼 UI를 감싸는 루트 오브젝트 (Canvas 포함)
 
+
     public void ShowNextPage()
     {
         if (tutorialPages == null || tutorialPages.Count == 0) return;
