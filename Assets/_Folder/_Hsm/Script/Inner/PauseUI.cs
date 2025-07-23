@@ -21,14 +21,6 @@ public class PauseUI : MonoBehaviour
     [Header("Controller Reference")]
     public Transform leftHandTransform;          // 왼손 컨트롤러 기준 Ray 쏘는 위치
 
-    [Header("Raycast")]
-    public GraphicRaycaster uiRaycaster;
-    public EventSystem eventSystem;
-
-    [Header("Debug")]
-    public bool enableDebugLogs = true;
-    public LineRenderer debugRay;                // Ray 시각화용 (선택)
-
     private XRInput input;
 
     private bool isPaused = false;
@@ -41,13 +33,6 @@ public class PauseUI : MonoBehaviour
 
     private void Start()
     {
-        // LineRenderer 설정
-        if (debugRay != null)
-        {
-            debugRay.positionCount = 2;
-        }
-
-        if (enableDebugLogs) Debug.Log("[PauseUI] 초기화 완료");
         menu.SetActive(false);
         pan.SetActive(false);
     }
@@ -70,21 +55,6 @@ public class PauseUI : MonoBehaviour
         menuAction?.action.Disable();
     }
 
-    private void Update()
-    {
-        if (debugRay != null && leftHandTransform != null)
-        {
-            // positionCount 안전성 체크
-            if (debugRay.positionCount < 2)
-            {
-                debugRay.positionCount = 2;
-            }
-
-            debugRay.SetPosition(0, leftHandTransform.position);
-            debugRay.SetPosition(1, leftHandTransform.position + leftHandTransform.forward * 10f);
-        }
-    }
-
     private void OnMenuButtonPressed(InputAction.CallbackContext ctx)
     {
         // 상호작용 불가능하면 무시
@@ -105,8 +75,6 @@ public class PauseUI : MonoBehaviour
         input.XRIUI.Enable();
 
         SetSelectedUIElement(btn);
-
-        if (enableDebugLogs) Debug.Log("[PauseUI] 메뉴 열림");
     }
 
     public void CloseMenu()
@@ -117,13 +85,10 @@ public class PauseUI : MonoBehaviour
         isPaused = false;
         input.XRIUI.Disable();
         DataManager_J.instance.SaveSettings();
-
-        if (enableDebugLogs) Debug.Log("[PauseUI] 메뉴 닫힘");
     }
 
     public void OnClickBGMControl()
     {
-        if (enableDebugLogs) Debug.Log("[PauseUI] BGM 설정 클릭");
         if (pan != null)
         {
             pan.SetActive(true);
@@ -139,20 +104,16 @@ public class PauseUI : MonoBehaviour
         Time.timeScale = 1f;
         isPaused = false;
         canInteract = false; // 상호작용도 비활성화
-
-        if (enableDebugLogs) Debug.Log("[PauseUI] 모든 메뉴 강제 닫힘");
     }
 
     public void OnClickReturnToLobby()
     {
-        if (enableDebugLogs) Debug.Log("[PauseUI] 로비로 이동");
         ForceCloseAllMenus();
         SceneManager.LoadScene("H_Lobby");
     }
 
     public void OnClickExit()
     {
-        if (enableDebugLogs) Debug.Log("[PauseUI] 종료 클릭");
         ForceCloseAllMenus();
 
 #if UNITY_EDITOR
