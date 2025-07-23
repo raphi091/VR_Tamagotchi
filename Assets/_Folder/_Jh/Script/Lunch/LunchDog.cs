@@ -33,6 +33,10 @@ public class LunchDog : MonoBehaviour
 
         if (!TryGetComponent(out agent))
             Debug.LogWarning("LunchDog ] NavMeshAgent 없음");
+
+        if (!TryGetComponent(out controller))
+            Debug.LogWarning("LunchDog ] CharacterController 없음");
+
     }
 
     private void Update()
