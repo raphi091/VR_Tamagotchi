@@ -1,19 +1,20 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TimeManager_LES : MonoBehaviour
 {
     public static TimeManager_LES instance = null;
     public TextMeshPro timeText;
-    public TextMeshPro DayText; //시간 표시용
+    public TextMeshPro dayText; //시간 표시용
 
     //시간 로직
-    public float speed = 60f * 5f; // 실제 1초 = 60 게임 시간초
+    public float speed = 60f*5f; // 실제 1초 = 60 게임 시간초
     private float gameTimeSec; // 현재 게임 시간(초)
 
     // 요일 배열
-    private string[] daysOfWeek = { "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN" };
+    private string[] daysOfWeek = { "MON", "TUE", "WED", "THU", "FRI"};
 
     private void Awake()
     {
@@ -30,8 +31,20 @@ public class TimeManager_LES : MonoBehaviour
 
     private void Update()
     {
-        gameTimeSec += Time.deltaTime * speed;
-        DisplayTime(gameTimeSec);
+        // 현재 씬 확인
+        string currentScene = SceneManager.GetActiveScene().name;
+        
+        // 점심 씬이나 로비 씬에서는 시간 업데이트 중지
+        if (currentScene == "H_Lunch" || currentScene == "H_Lobby")
+        {
+            return;
+        }
+
+        if (!TutorialPageController.instance.IsTutorial)
+        {
+            gameTimeSec += Time.deltaTime * speed;
+            DisplayTime(gameTimeSec);
+        }            
     }
 
     // 현재 요일을 반환하는 메서드
@@ -76,11 +89,6 @@ public class TimeManager_LES : MonoBehaviour
         GameManager.instance.GoToScene("H_Lunch");
     }
 
-    // public void LunchTime()
-    // {
-    //     GameManager.instance.GoToScene("H_Outdoor");
-    // }
-
     public void OutdoorTime()
     {
         StartCoroutine(Outdoor_co());
@@ -120,6 +128,6 @@ public class TimeManager_LES : MonoBehaviour
         // 요일과 시간을 함께 표시
         string dayOfWeek = GetDayOfWeek();
         timeText.text = $"{hh:00}:{mm:00}";
-        DayText.text = $"{dayOfWeek}";
+        dayText.text = $"{dayOfWeek}";
     }
 }
