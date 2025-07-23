@@ -12,7 +12,7 @@ public class Ch_Bell : MonoBehaviour
 
     void Update()
     {
-        if (!ringged&&interactable.velocity.magnitude>2f)
+        if (!ringged&&interactable.velocity.magnitude>1.5f)
         {
             ringged = true;
         }

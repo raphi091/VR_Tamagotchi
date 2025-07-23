@@ -44,7 +44,7 @@ public class Ch_Knife : XRGrabInteractable
              RaycastHit hit;
              if (Physics.Raycast(transform.position, transform.forward, out hit, layer))
              {
-                 if (Vector3.Angle(transform.position - previous_pos, hit.transform.right) >= 130f&&sliceQuad != null)
+                 if (Vector3.Angle(transform.position - previous_pos, hit.transform.forward) >= 130f&&sliceQuad != null)
                  {
                      Slice_Objects(hit.transform.gameObject, sliceQuad);
                  }
@@ -97,7 +97,7 @@ public class Ch_Knife : XRGrabInteractable
          MeshCollider c = g.AddComponent<MeshCollider>();
          c.convex = true;
          Ch_TreatFood t =g.AddComponent<Ch_TreatFood>();
-         rb.AddExplosionForce(cutForce, g.transform.position, 1);
+         rb.AddExplosionForce(cutForce, g.transform.position, 0.1f);
          t.cuttedFood=cuttedFood;
          t.OnCutted();
      }

@@ -2,7 +2,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class Ch_CuttedFood : XRGrabInteractable, Ch_BowlFood
+public class Ch_CuttedFood : MonoBehaviour, Ch_BowlFood
 {
     public bool isFillable { get; set; }
     private foodType foodtype;
@@ -11,11 +11,14 @@ public class Ch_CuttedFood : XRGrabInteractable, Ch_BowlFood
     [SerializeField] private Transform[] offset;
     private int index=0;
     [SerializeField] private int fillableCount=4;
+    private XRGrabInteractable interactable;
 
     void Awake()
     {
         offset=GetComponentsInChildren<Transform>().Where(t=>t!=this.transform).ToArray();
+        interactable = GetComponent<XRGrabInteractable>();
         fillableCount=offset.Length;
+        interactable.enabled = false;
         foodtype = foodType.Treat;
         isFillable = false;
     }
@@ -24,14 +27,19 @@ public class Ch_CuttedFood : XRGrabInteractable, Ch_BowlFood
     {
         if (index < fillableCount)
         {
-            cutted.transform.rotation = Quaternion.identity;
+            cutted.transform.rotation = Quaternion.Euler(new Vector3(-90f, 0f, 0f));
             cutted.transform.position = offset[index].position;
-            cutted.transform.SetParent(transform);
+            cutted.transform.SetParent(offset[index]);
             index++;
-            this.colliders.Add(cutted.GetComponent<Collider>());
+            interactable.colliders.Add(cutted.GetComponent<Collider>());
+            Rigidbody a=cutted.GetComponent<Rigidbody>();
+            a.isKinematic = true;
+            a.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
             if (index >= fillableCount)
             {
+                this.GetComponent<MeshRenderer>().enabled = false;
                 isFillable = true;
+                interactable.enabled = true;
             }
         }
     }
