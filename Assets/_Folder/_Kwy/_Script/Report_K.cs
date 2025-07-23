@@ -13,7 +13,7 @@ public class Report_K : MonoBehaviour
 
     public void SetupPetCard()
     {
-        for (int i = 0; i <= GameManager.instance.petsInScene.Count; i++)
+        for (int i = 0; i < GameManager.instance.petsInScene.Count; i++)
         {
             petImages[i].sprite = DatabaseManager_J.instance.petProfiles[GameManager.instance.petsInScene[i].petData.modelIndex].petPicture;
             petNames[i].text = GameManager.instance.petsInScene[i].petData.petName;
