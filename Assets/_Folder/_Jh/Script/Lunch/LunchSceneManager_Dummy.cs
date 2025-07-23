@@ -44,6 +44,11 @@ public class LunchSceneManager_Dummy : MonoBehaviour
 
         // 3. 점심 자동 시작 (딜레이 후)
         StartCoroutine(StartLunchDelayed());
+
+        if (DataManager_J.instance.gameData.Day.Equals(1))
+            SoundManager.Instance.PlayBGM(BGMTrackName.Tutorial);
+        else
+            SoundManager.Instance.PlayBGM(BGMTrackName.Lunch);
     }
 
     IEnumerator StartLunchDelayed()

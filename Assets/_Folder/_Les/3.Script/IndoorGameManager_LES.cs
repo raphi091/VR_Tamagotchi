@@ -24,5 +24,10 @@ public class IndoorGameManager_LES : MonoBehaviour
     {
         TimeManager_LES.instance.timeText = text;
         TimeManager_LES.instance.IndoorTime();
+
+        if (DataManager_J.instance.gameData.Day.Equals(1))
+            SoundManager.Instance.PlayBGM(BGMTrackName.Tutorial);
+        else
+            SoundManager.Instance.PlayBGM(BGMTrackName.Indoor);
     }
 }

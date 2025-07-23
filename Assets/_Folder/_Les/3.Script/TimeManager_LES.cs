@@ -76,10 +76,10 @@ public class TimeManager_LES : MonoBehaviour
         GameManager.instance.GoToScene("H_Lunch");
     }
 
-    public void LunchTime()
-    {
-        GameManager.instance.GoToScene("H_Outdoor");
-    }
+    // public void LunchTime()
+    // {
+    //     GameManager.instance.GoToScene("H_Outdoor");
+    // }
 
     public void OutdoorTime()
     {
