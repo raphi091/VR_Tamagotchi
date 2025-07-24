@@ -10,6 +10,7 @@ public class Report_K : MonoBehaviour
     public List<TextMeshProUGUI> petNames;
     public List<TextMeshProUGUI> petFoodandImacys;
     public List<Image> genderIcons;
+    public TextMeshProUGUI className;
 
     public void SetupPetCard()
     {
@@ -30,5 +31,7 @@ public class Report_K : MonoBehaviour
             else
                 genderIcons[i].sprite = DatabaseManager_J.instance.femaleIcon;
         }
+
+        className.text = DataManager_J.instance.gameData.selectedClassName;
     }
 }

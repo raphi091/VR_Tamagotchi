@@ -30,19 +30,6 @@ public class Ch_DryFood : MonoBehaviour, Ch_BowlFood
             {
                 particle.Play();
             }
-            //var emissionModule = particle.emission;
-            //emissionModule.rateOverTimeMultiplier = 30f * Mathf.Clamp01(rb.velocity.magnitude);
-            if (Physics.Raycast(startPoint.position, startPoint.up, out hit, 30f))
-            {
-                if (hit.collider.CompareTag("Tray"))
-                {
-                    hit.collider.gameObject.TryGetComponent(out FoodBowl bowl);
-                    if (bowl.IsFilled == false)
-                    {
-                        Ch_FoodEvent.I.InvokeFoodBowlAction(bowl, this);
-                    }
-                }
-            }
         }
         else
         {

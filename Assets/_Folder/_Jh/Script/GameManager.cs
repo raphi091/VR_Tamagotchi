@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
     }
 
     // 씬 로드가 완료되면 이 함수가 실행됩니다.
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log($"[GameManager] 씬 로드됨: {scene.name}");
 
