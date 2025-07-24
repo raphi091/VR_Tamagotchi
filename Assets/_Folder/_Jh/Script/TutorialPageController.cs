@@ -8,7 +8,7 @@ public class TutorialPageController : MonoBehaviour
     public GameObject tutorialRoot; // 전체 튜토리얼 UI를 감싸는 루트 오브젝트 (Canvas 포함)
 
     private int currentPage = 0;
-    private bool isTutorial;
+    private bool isTutorial = true;
 
     public bool IsTutorial => isTutorial;
 
@@ -17,7 +17,7 @@ public class TutorialPageController : MonoBehaviour
     {
         InitializePages();
 
-        if (!DataManager_J.instance.gameData.tutorial)
+        if (DataManager_J.instance.gameData.tutorial == false)
             isTutorial = true;
     }
 

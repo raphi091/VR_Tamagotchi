@@ -128,7 +128,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.2
+  m_Radius: 0.8
   m_Center: {x: 0, y: 0.35, z: 0}
 --- !u!65 &480060333693071307
 BoxCollider:
@@ -194,7 +194,8 @@ MonoBehaviour:
   currentState: 0
   ToiletPoint: {fileID: 0}
   EatPoint: {fileID: 0}
-  mouthTransform: {fileID: 0}
+  mouthpoint: {fileID: 0}
+  particlepoint: {fileID: 0}
   player: {fileID: 0}
   Hunger: {x: 0, y: 0}
   Toilet: {x: 0, y: 0}

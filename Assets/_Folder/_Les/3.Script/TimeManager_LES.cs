@@ -36,32 +36,19 @@ public class TimeManager_LES : MonoBehaviour
 
     private void OnEnable()
     {
-        SceneManager.sceneLoaded += LoadScene;
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDisable()
     {
-        SceneManager.sceneLoaded -= LoadScene;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    private void LoadScene(Scene scene, LoadSceneMode mode)
+    // 씬 로드가 완료되면 이 함수가 실행됩니다.
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        currentScene = scene.name;
-    }
-
-    private void Update()
-    {
-        if (currentScene == "H_Lunch" || currentScene == "H_Lobby")
-        {
-            gameTimeSec = 0f;
-            return;
-        }
-
-        if (!TutorialManager_J.instance.Page.IsTutorial)
-        {
-            gameTimeSec += Time.deltaTime * speed;
-            DisplayTime(gameTimeSec);
-        }
+        if (scene.name == "H_Lobby")
+            StopAllCoroutines();
     }
 
     // 현재 요일을 반환하는 메서드

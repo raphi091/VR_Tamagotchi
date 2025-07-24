@@ -58,7 +58,7 @@ public class LobbyManager_J : MonoBehaviour
     void CreateTemporaryPetData()
     {
         temporaryClassPets = new Dictionary<string, List<PetStatusData_J>>();
-        string[] classNames = { "햇님반", "달님반", "별님반" };
+        string[] classNames = { "별님반", "달님반", "햇님반" };
 
         foreach (string className in classNames)
         {

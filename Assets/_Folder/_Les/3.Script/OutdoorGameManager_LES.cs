@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using TMPro;
 
@@ -20,15 +21,18 @@ public class OutdoorGameManager_LES : MonoBehaviour
         }
     }
 
-    private void Start()
+    private IEnumerator Start()
     {
-        TimeManager_LES.instance.timeText = num;
-        TimeManager_LES.instance.dayText = day;
-        TimeManager_LES.instance.OutdoorTime();
-
         if (DataManager_J.instance.gameData.Day.Equals(1))
             SoundManager.Instance.PlayBGM(BGMTrackName.Tutorial);
         else
             SoundManager.Instance.PlayBGM(BGMTrackName.Outdoor);
+
+        TimeManager_LES.instance.timeText = num;
+        TimeManager_LES.instance.dayText = day;
+
+        yield return new WaitUntil(() => TutorialManager_J.instance.Page.IsTutorial == false);
+
+        TimeManager_LES.instance.OutdoorTime();
     }
 }
