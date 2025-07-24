@@ -12,6 +12,7 @@ public class TimeManager_LES : MonoBehaviour
     //시간 로직
     public float speed = 60f*5f; // 실제 1초 = 60 게임 시간초
     private float gameTimeSec; // 현재 게임 시간(초)
+    private string currentScene;
 
     // 요일 배열
     private string[] daysOfWeek = { "MON", "TUE", "WED", "THU", "FRI"};
@@ -33,14 +34,26 @@ public class TimeManager_LES : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += LoadScene;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= LoadScene;
+    }
+
+    private void LoadScene(Scene scene, LoadSceneMode mode)
+    {
+        currentScene = scene.name;
+    }
+
     private void Update()
     {
-        // 현재 씬 확인
-        string currentScene = SceneManager.GetActiveScene().name;
-        
-        // 점심 씬이나 로비 씬에서는 시간 업데이트 중지
         if (currentScene == "H_Lunch" || currentScene == "H_Lobby")
         {
+            gameTimeSec = 0f;
             return;
         }
 
@@ -48,7 +61,7 @@ public class TimeManager_LES : MonoBehaviour
         {
             gameTimeSec += Time.deltaTime * speed;
             DisplayTime(gameTimeSec);
-        }            
+        }
     }
 
     // 현재 요일을 반환하는 메서드

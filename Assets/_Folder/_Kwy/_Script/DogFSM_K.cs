@@ -116,8 +116,11 @@ public class DogFSM_K : MonoBehaviour
         {
             if (currentState == State.Wander || currentState == State.Playing || currentState == State.Called)
             {
-                EnterState(State.InteractionRequest);
-                DogInteractionManager_K.instance.RequestInteraction(this);
+                if (DogInteractionManager_K.instance.ActiveDog == null)
+                {
+                    EnterState(State.InteractionRequest);
+                    DogInteractionManager_K.instance.RequestInteraction(this);
+                }
             }
         }
     }
@@ -137,8 +140,12 @@ public class DogFSM_K : MonoBehaviour
             if (currentState == State.InteractionRequest || currentState == State.Interaction)
             {
                 ReturnToWander();
-            }
 
+                if (DogInteractionManager_K.instance.ActiveDog == this)
+                {
+                    DogInteractionManager_K.instance.SetActiveDog();
+                }
+            }
         }
     }
 

@@ -17,7 +17,7 @@ public class TutorialPageController : MonoBehaviour
     {
         InitializePages();
 
-        if (DataManager_J.instance.gameData.tutorial)
+        if (!DataManager_J.instance.gameData.tutorial)
             isTutorial = true;
     }
 

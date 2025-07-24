@@ -106,4 +106,9 @@ public class DogInteractionManager_K : MonoBehaviour
         }
         requestingDogs.Clear();
     }
+
+    public void SetActiveDog()
+    {
+        activeDog = null;
+    }
 }
