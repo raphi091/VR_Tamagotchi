@@ -19,6 +19,7 @@ public class FoodBowl : MonoBehaviour
     [SerializeField] Transform dryfoodModel;
     [SerializeField] private float dryfoodUp;
     [SerializeField] private float foodThreshold = 0f;
+    [SerializeField] private Transform foodPoint;
     
     
     private void OnEnable()
@@ -61,9 +62,25 @@ public class FoodBowl : MonoBehaviour
                 IsFilled = true;
             }
         }
+        else if(containedFood==foodType.Wet && food.isFillable)
+        {
+            currentBowlInstance = food.gameObj;
+            Collider c = currentBowlInstance.GetComponent<Collider>();
+            Rigidbody r = currentBowlInstance.GetComponent<Rigidbody>();
+            c.enabled = false;
+            r.isKinematic = true;
+            currentBowlInstance.transform.position = foodPoint.position;
+            currentBowlInstance.transform.rotation = Quaternion.Euler(new Vector3(90f, 0, 0));
+            IsFilled=true;
+        }
         else if(food.isFillable)
         {
             currentBowlInstance = food.gameObj;
+            Collider c = currentBowlInstance.GetComponent<Collider>();
+            Rigidbody r = currentBowlInstance.GetComponent<Rigidbody>();
+            c.enabled = false;
+            r.isKinematic = true;
+            currentBowlInstance.transform.position = foodPoint.position;
             IsFilled=true;
         }
     }
