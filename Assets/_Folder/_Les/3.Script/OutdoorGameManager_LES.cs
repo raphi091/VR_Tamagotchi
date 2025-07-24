@@ -5,7 +5,8 @@ public class OutdoorGameManager_LES : MonoBehaviour
 {
     public static OutdoorGameManager_LES Instance;
 
-    [SerializeField] private TextMeshPro text;
+    [SerializeField] private TextMeshPro num;
+    [SerializeField] private TextMeshPro day;
 
     private void Awake()
     {
@@ -21,7 +22,8 @@ public class OutdoorGameManager_LES : MonoBehaviour
 
     private void Start()
     {
-        TimeManager_LES.instance.timeText = text;
+        TimeManager_LES.instance.timeText = num;
+        TimeManager_LES.instance.dayText = day;
         TimeManager_LES.instance.OutdoorTime();
 
         if (DataManager_J.instance.gameData.Day.Equals(1))

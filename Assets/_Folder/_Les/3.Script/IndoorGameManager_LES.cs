@@ -6,7 +6,8 @@ public class IndoorGameManager_LES : MonoBehaviour
 {
     public static IndoorGameManager_LES Instance;
 
-    [SerializeField] private TextMeshPro text;
+    [SerializeField] private TextMeshPro num;
+    [SerializeField] private TextMeshPro day;
 
     private void Awake()
     {
@@ -22,7 +23,8 @@ public class IndoorGameManager_LES : MonoBehaviour
 
     private void Start()
     {
-        TimeManager_LES.instance.timeText = text;
+        TimeManager_LES.instance.timeText = num;
+        TimeManager_LES.instance.dayText = day;
         TimeManager_LES.instance.IndoorTime();
 
         if (DataManager_J.instance.gameData.Day.Equals(1))

@@ -831,6 +831,7 @@ GameObject:
   - component: {fileID: 566210626}
   - component: {fileID: 566210625}
   - component: {fileID: 566210624}
+  - component: {fileID: 566210627}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -994,6 +995,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   petsInScene: []
+--- !u!114 &566210627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566210622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a85cbb8030bddb41aea76508478a4c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &615841501
 GameObject:
   m_ObjectHideFlags: 0

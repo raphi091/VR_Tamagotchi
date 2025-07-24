@@ -16,6 +16,10 @@ public class TimeManager_LES : MonoBehaviour
     // 요일 배열
     private string[] daysOfWeek = { "MON", "TUE", "WED", "THU", "FRI"};
 
+    //temp
+    public bool debug;
+    //temp
+
     private void Awake()
     {
         if (instance == null)
@@ -40,7 +44,7 @@ public class TimeManager_LES : MonoBehaviour
             return;
         }
 
-        if (!TutorialPageController.instance.IsTutorial)
+        if (!TutorialManager_J.instance.Page.IsTutorial)
         {
             gameTimeSec += Time.deltaTime * speed;
             DisplayTime(gameTimeSec);
