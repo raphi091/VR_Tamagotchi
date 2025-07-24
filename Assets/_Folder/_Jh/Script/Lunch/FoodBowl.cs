@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class FoodBowl : MonoBehaviour
@@ -46,8 +47,6 @@ public class FoodBowl : MonoBehaviour
         // 나중에 UI나 VR 상호작용에서 이 함수 호출
     }
 
-    /* 위에까지 테스트용도
-     아래부터는 수정용도 */
     public void FillBowl(Ch_BowlFood food)
     {
         containedFood = food.FoodType;
@@ -66,6 +65,15 @@ public class FoodBowl : MonoBehaviour
         {
             currentBowlInstance = food.gameObj;
             IsFilled=true;
+        }
+    }
+
+    private void OnParticleCollision(GameObject other)
+    {
+        Ch_BowlFood food=other.GetComponentInParent<Ch_BowlFood>();
+        if (food != null && food.FoodType==foodType.Dry && !IsFilled)
+        {
+            FillBowl(food);
         }
     }
 
