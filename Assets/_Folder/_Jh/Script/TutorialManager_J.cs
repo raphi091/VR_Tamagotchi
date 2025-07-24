@@ -6,6 +6,12 @@ using UnityEngine.SceneManagement;
 public class TutorialManager_J : MonoBehaviour
 {
     public static TutorialManager_J instance = null;
+
+    private TutorialPageController page;
+
+    public TutorialPageController Page => page;
+
+
     private void Awake()
     {
         if( instance == null)
@@ -19,8 +25,6 @@ public class TutorialManager_J : MonoBehaviour
         }
     }
 
-    public GameObject TutorialUI_1, TutorialUI_2, TutorialUI_3, TutorialUI_4;
-
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneTutorial;
@@ -33,27 +37,23 @@ public class TutorialManager_J : MonoBehaviour
 
     private void OnSceneTutorial(Scene scene, LoadSceneMode mode)
     {
+        page = FindObjectOfType<TutorialPageController>();
+
         if (DataManager_J.instance.gameData.tutorial && scene.name == "H_Indoor")
         {
-            
+            page.gameObject.SetActive(false);  
         }
         else if (DataManager_J.instance.gameData.tutorial && scene.name == "H_Lunch")
         {
-            
+            page.gameObject.SetActive(false);
         }
         else if (DataManager_J.instance.gameData.tutorial && scene.name == "H_Outdoor")
         {
-
+            page.gameObject.SetActive(false);
         }
         else
         {
             return;
         }
     }
-
-    public void InteractionTutorial()
-    {
-        
-    }
-    
 }
