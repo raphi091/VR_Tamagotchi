@@ -19,7 +19,6 @@ public class LunchDog : MonoBehaviour
     private Animator animator;
     private NavMeshAgent agent;
     private FoodBowl foodBowl;
-    private foodType lunchFoodType;
 
 
     private void Awake()
@@ -60,7 +59,6 @@ public class LunchDog : MonoBehaviour
     public void SetLunchFood(FoodBowl bowl)
     {
         foodBowl = bowl;
-        lunchFoodType = bowl.containedFood;
     }
 
     public void StartLunch()
@@ -68,7 +66,7 @@ public class LunchDog : MonoBehaviour
         StartCoroutine(LunchRoutine());
     }
 
-    private IEnumerator LunchRoutine()
+        private IEnumerator LunchRoutine()
     {
         if (bowlPosition == null)
         {
@@ -90,11 +88,27 @@ public class LunchDog : MonoBehaviour
         animator.SetBool("LUNCHEAT", false);
         foodBowl.ClearBowl();
 
-        // 음식 비교 후 텍스트 생성
-        // 파티클작업 추가
+        // 음식 비교 후 파티클 생성
+        MoodType currentMood;
+        if (petcontroller.petData.foodType.Equals(foodBowl.containedFood))
+        {
+            ParticlePoolManager_LES.Instance.PlayParticle(MoodType.Good, particlepoint);
+            currentMood = MoodType.Good;
+        }
+        else
+        {
+            ParticlePoolManager_LES.Instance.PlayParticle(MoodType.Bad, particlepoint);
+            currentMood = MoodType.Bad;
+        }
 
         // 식사 완료 → 허기 회복
         petcontroller.petData.hungerper = 100f;
+        
+        // 파티클이 충분히 표시될 시간 대기 (예: 2.5초)
+        yield return new WaitForSeconds(4f);
+
+        // 파티클 종료
+        ParticlePoolManager_LES.Instance.StopParticles(currentMood);
 
         // 식사 완료 알림
         LunchSceneManager.instance.OnDogFinished();

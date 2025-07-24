@@ -27,6 +27,7 @@ public class ParticlePoolManager_LES : MonoBehaviour
     private Dictionary<MoodType, Queue<GameObject>> particlePools;
     private Dictionary<MoodType, GameObject> particlePrefabs;
 
+
     private void Awake()
     {
         // 싱글톤 패턴
