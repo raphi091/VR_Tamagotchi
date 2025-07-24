@@ -31,6 +31,9 @@ public class OutdoorGameManager_LES : MonoBehaviour
         TimeManager_LES.instance.timeText = num;
         TimeManager_LES.instance.dayText = day;
 
+        // 인도어, 아웃도어 초기 시간 및 날짜 설정 추가
+        TimeManager_LES.instance.SetOutdoorInitialTime();
+
         yield return new WaitUntil(() => TutorialManager_J.instance.Page.IsTutorial == false);
 
         TimeManager_LES.instance.OutdoorTime();

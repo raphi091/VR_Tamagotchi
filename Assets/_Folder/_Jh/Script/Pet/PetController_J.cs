@@ -66,9 +66,6 @@ public class PetController_J : MonoBehaviour
             fsm.particlepoint = transform.FindSlot("PARTICLE_POINT");
             fsm.data = DatabaseManager_J.instance.personalities[data.personalityIndex];
             fsm.player = GameObject.FindGameObjectWithTag("Player").transform;
-        //TEMP
-            fsm.cubeRenderer = GetComponentInChildren<Renderer>();
-        //TEMP
         }
 
         LunchDog lunchDog = GetComponent<LunchDog>();

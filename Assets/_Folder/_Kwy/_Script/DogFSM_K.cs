@@ -54,11 +54,6 @@ public class DogFSM_K : MonoBehaviour
     public float Bowelpercent => bowelpercent;
 
 
-    //TEMP
-    public Renderer cubeRenderer;
-    //TEMP
-
-
     private void Awake()
     {
         if (!TryGetComponent(out agent))
@@ -130,7 +125,9 @@ public class DogFSM_K : MonoBehaviour
     {
         if (other.CompareTag("PlayerHand") && currentState == State.Stroking)
         {
-            EnterState(State.Interaction);
+            ParticlePoolManager_LES.Instance.StopParticles(MoodType.Happy);
+
+            EnterState(State.Interaction);            
         }
 
         if (other.CompareTag("Player"))
@@ -210,11 +207,6 @@ public class DogFSM_K : MonoBehaviour
 
     private IEnumerator Wander_co()
     {
-        //TEMP
-        if (cubeRenderer != null)
-            cubeRenderer.material.color = Color.white;
-        //TEPM
-
         agent.isStopped = true;
         agent.ResetPath();
         isWandering = false;
@@ -360,11 +352,6 @@ public class DogFSM_K : MonoBehaviour
 
     private IEnumerator InteractionRequest_co()
     {
-        //TEMP
-        if (cubeRenderer != null)
-            cubeRenderer.material.color = Color.gray;
-        //TEMP
-
         agent.isStopped = true;
         agent.ResetPath();
 
@@ -381,10 +368,6 @@ public class DogFSM_K : MonoBehaviour
 
     private IEnumerator Interaction_co()
     {
-        //TEMP
-        if (cubeRenderer != null)
-            cubeRenderer.material.color = Color.green;
-        //TEMP
         animator.SetBool("STROK", false);
         animator.SetBool("INTERACT", true);
 
@@ -411,15 +394,11 @@ public class DogFSM_K : MonoBehaviour
 
     private IEnumerator Stroking_co()
     {
-        //TEMP
-        if (cubeRenderer != null)
-            cubeRenderer.material.color = Color.blue;
-        //TEMP
-
         Debug.Log("쓰다듬는 중...");
         agent.isStopped = true;
 
         animator.SetBool("STROK", true);
+        ParticlePoolManager_LES.Instance.PlayParticle(MoodType.Happy, particlepoint);
 
         while (true)
         {
@@ -439,11 +418,6 @@ public class DogFSM_K : MonoBehaviour
 
     private IEnumerator Sit_co()
     {
-        //TEMP
-        if (cubeRenderer != null)
-            cubeRenderer.material.color = Color.yellow;
-        //TEMP
-
         Debug.Log($"{name}: 앉습니다.");
         agent.isStopped = true;
         animator.SetBool("SIT", true);
@@ -467,11 +441,6 @@ public class DogFSM_K : MonoBehaviour
 
     private IEnumerator Liedown_co()
     {
-        //TEMP
-        if (cubeRenderer != null)
-            cubeRenderer.material.color = Color.magenta;
-        //TEMP
-
         Debug.Log($"{name}: 엎드립니다.");
         agent.isStopped = true;
         animator.SetBool("LIE", true);
@@ -501,11 +470,6 @@ public class DogFSM_K : MonoBehaviour
             EnterState(State.Interaction); // 목표가 없으면 바로 상호작용 상태로 복귀
             yield break; // 코루틴 즉시 종료
         }
-
-        // TEMP: 상태 표시용 색상 변경
-        if (cubeRenderer != null)
-            cubeRenderer.material.color = Color.cyan;
-        // TEMP
 
         Debug.Log($"{name}: {target.name} 물어올게요!");
         agent.isStopped = false;
@@ -555,11 +519,6 @@ public class DogFSM_K : MonoBehaviour
 
     private IEnumerator Hunger_co()
     {
-        //TEMP
-        if (cubeRenderer != null)
-            cubeRenderer.material.color = Color.red;
-        //TEMP
-        
         Debug.Log($"{name}: 배고파요! 주인을 따라다닙니다.");
         isHunger = true;
         agent.isStopped = false;
@@ -589,11 +548,6 @@ public class DogFSM_K : MonoBehaviour
 
     private IEnumerator Toilet_co()
     {
-        //TEMP
-        if (cubeRenderer != null)
-            cubeRenderer.material.color = Color.black;
-        //TEMP
-        
         isBowel = true;
         agent.SetDestination(ToiletPoint.position);
 

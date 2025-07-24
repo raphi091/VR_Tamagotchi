@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AzureSky;
 using UnityEngine.SceneManagement;
 
 public class TimeManager_LES : MonoBehaviour
@@ -57,10 +58,24 @@ public class TimeManager_LES : MonoBehaviour
         // DataManager에서 Day 값을 가져옴 (Day 1 = 월요일)
         int currentDay = DataManager_J.instance.gameData.Day;
         
-        // Day는 1부터 시작하므로 1을 빼고, 7로 나눈 나머지로 요일 계산
-        int dayIndex = (currentDay - 1) % 7;
+        // Day는 1부터 시작하므로 1을 빼고, 5로 나눈 나머지로 요일 계산
+        int dayIndex = (currentDay - 1) % 5;
         
         return daysOfWeek[dayIndex];
+    }
+
+    // 인도어 초기 시간 설정 메소드
+    public void SetIndoorInitialTime()
+    {
+        gameTimeSec = 7 * 3600 + 30 * 60; // 7:30 설정
+        DisplayTime(gameTimeSec);
+    }
+
+    // 아웃도어 초기 시간 설정 메소드
+    public void SetOutdoorInitialTime()
+    {
+        gameTimeSec = 13 * 3600 + 00 * 60; // 13:00 설정
+        DisplayTime(gameTimeSec);
     }
 
     public void IndoorTime()
@@ -68,6 +83,7 @@ public class TimeManager_LES : MonoBehaviour
         StartCoroutine(Indoor_co());
     }
 
+    AzureCoreSystem azureCoreSystem;
     private IEnumerator Indoor_co()
     {
         gameTimeSec = 7 * 3600 + 30 * 60;
@@ -80,7 +96,7 @@ public class TimeManager_LES : MonoBehaviour
 
             yield return null;
         }
-        
+
         //오전 수업 시간.
         while (gameTimeSec <= 12 * 3600 + 00 * 60)
         {
