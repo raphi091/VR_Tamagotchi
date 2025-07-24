@@ -8,9 +8,8 @@ public class LunchDog : MonoBehaviour
     public Transform waitPosition;
     public Transform bowlPosition;
 
-    [Header("텍스트 프리팹")]
-    public GameObject goodTextPrefab;
-    public GameObject badTextPrefab;
+    [Header("파티클 프리팹")]
+    public Transform particlepoint;
 
     [Header("식사 설정")]
     public float eatingTime = 3f;
@@ -93,16 +92,6 @@ public class LunchDog : MonoBehaviour
 
         // 음식 비교 후 텍스트 생성
         // 파티클작업 추가
-        bool isGood = petcontroller.petData.foodType == lunchFoodType;
-        GameObject textPrefab = isGood ? goodTextPrefab : badTextPrefab;
-
-        if (textPrefab != null)
-        {
-            Vector3 spawnPos = transform.position + new Vector3(0f, 0.5f, 0f);
-            GameObject text = Instantiate(textPrefab, spawnPos, Quaternion.identity);
-            text.AddComponent<BillboardFaceCamera>();
-            Destroy(text, 1.5f);
-        }
 
         // 식사 완료 → 허기 회복
         petcontroller.petData.hungerper = 100f;

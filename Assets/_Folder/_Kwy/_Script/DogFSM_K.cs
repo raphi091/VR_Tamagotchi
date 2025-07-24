@@ -26,7 +26,8 @@ public class DogFSM_K : MonoBehaviour
     [SerializeField] private Transform ToiletPoint;
     [SerializeField] private Transform EatPoint;
 
-    public Transform mouthTransform;
+    public Transform mouthpoint;
+    public Transform particlepoint;
     public Transform player;
     [Range(0f,1f)] public Vector2 Hunger = new Vector2(0.2f, 0.5f);
     [Range(0f, 1f)] public Vector2 Toilet = new Vector2(0.1f, 0.4f);
@@ -157,6 +158,7 @@ public class DogFSM_K : MonoBehaviour
         }
         currentState = newState;
         lastStateChangeTime = Time.time;
+        agent.Warp(transform.position);
 
         switch (currentState)
         {
@@ -299,52 +301,60 @@ public class DogFSM_K : MonoBehaviour
         Scene scene = SceneManager.GetActiveScene();
 
         int randAction = Random.Range(0, 10);
+        float playtime;
 
         if (scene.name.Equals("H_Outdoor"))
         {
-            if (randAction <= 2)
+            if (randAction <= 3)
             {
-
+                animator.SetBool("PLAY", true);
+                animator.SetInteger("PLAYNUM", 1);
+                playtime = 3f;
             }
-            else if (randAction <= 4)
+            else if (randAction <= 5)
             {
-
+                animator.SetBool("PLAY", true);
+                animator.SetInteger("PLAYNUM", 2);
+                playtime = 4f;
             }
-            else if (randAction <= 6)
+            else if (randAction <= 7)
             {
-
-            }
-            else if (randAction <= 8)
-            {
-
+                animator.SetBool("PLAY", true);
+                animator.SetInteger("PLAYNUM", 3);
+                playtime = 7f;
             }
             else
             {
-
+                animator.SetBool("PLAY", true);
+                animator.SetInteger("PLAYNUM", 4);
+                playtime = 8f;
             }
         }
         else
         {
             if (randAction <= 3)
             {
-
+                animator.SetBool("PLAY", true);
+                animator.SetInteger("PLAYNUM", 1);
+                playtime = 3f;
             }
             else if (randAction <= 5)
             {
-
-            }
-            else if (randAction <= 7)
-            {
-
+                animator.SetBool("PLAY", true);
+                animator.SetInteger("PLAYNUM", 2);
+                playtime = 4f;
             }
             else
             {
-
+                animator.SetBool("PLAY", true);
+                animator.SetInteger("PLAYNUM", 3);
+                playtime = 7f;
             }
         }
         
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(playtime);
 
+        animator.SetBool("PLAY", false);
         EnterState(State.Wander);
     }
 
@@ -517,7 +527,7 @@ public class DogFSM_K : MonoBehaviour
         Ch_Throwable item = target.GetComponent<Ch_Throwable>();
         if (item != null)
         {
-            item.GetPickedUpBy(mouthTransform); // 입 위치로 아이템을 옮김
+            item.GetPickedUpBy(mouthpoint); // 입 위치로 아이템을 옮김
         }
 
         // 3. 플레이어에게 돌아가기

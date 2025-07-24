@@ -62,12 +62,19 @@ public class PetController_J : MonoBehaviour
         DogFSM_K fsm = GetComponent<DogFSM_K>();
         if (fsm != null)
         {
-            fsm.mouthTransform = transform.FindSlot("_MOUSE_", "MOUSE");
+            fsm.mouthpoint = transform.FindSlot("PICKUP_POINT");
+            fsm.particlepoint = transform.FindSlot("PARTICLE_POINT");
             fsm.data = DatabaseManager_J.instance.personalities[data.personalityIndex];
             fsm.player = GameObject.FindGameObjectWithTag("Player").transform;
         //TEMP
             fsm.cubeRenderer = GetComponentInChildren<Renderer>();
         //TEMP
+        }
+
+        LunchDog lunchDog = GetComponent<LunchDog>();
+        if (lunchDog != null)
+        {
+            lunchDog.particlepoint = transform.FindSlot("PARTICLE_POINT");
         }
 
         if (ani != null)
