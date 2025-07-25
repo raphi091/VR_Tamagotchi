@@ -44,33 +44,39 @@ public class FootstepDetector_LES : MonoBehaviour
         }
     }
 
-    private void TriggerFootstep()
+        private void TriggerFootstep()
     {
-        Debug.DrawRay(transform.position, Vector3.down * 2f, Color.green);
+        Debug.Log("TriggerFootstep() 함수 호출 성공!"); // 1. 함수 호출 확인
 
-        // 발밑으로 Raycast를 쏴서 바닥 재질 감지
-        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 2f))
+        // Raycast의 길이를 넉넉하게 1m로 늘려서 테스트
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 1.0f))
         {
-            // 1. Raycast가 무언가에 닿기는 했다는 의미의 로그
-            Debug.Log("Raycast Hit! 닿은 오브젝트: " + hit.collider.name + ", 태그: " + hit.collider.tag);
+            Debug.Log("Raycast가 " + hit.collider.name + " 오브젝트에 닿았습니다. 태그는 '" + hit.collider.tag + "' 입니다."); // 2. Raycast 성공 및 태그 확인
 
             if (hit.collider.CompareTag("InDoorGround"))
             {
-                Debug.Log("내부 걷는 중");
-                if(indoorWalking != null) PlayerAudio.PlayOneShot(indoorWalking);
+                Debug.Log("InDoorGround 태그 확인! 실내 발소리를 재생합니다."); // 3a. 실내 태그 확인
+                if (indoorWalking != null)
+                    PlayerAudio.PlayOneShot(indoorWalking);
+                else
+                    Debug.LogWarning("indoorWalking 오디오 클립이 비어있습니다!");
             }
             else if (hit.collider.CompareTag("OutDoorGround"))
             {
-                Debug.Log("외부 걷는 중");
-                if (outdoorWalking != null) PlayerAudio.PlayOneShot(outdoorWalking);
+                Debug.Log("OutDoorGround 태그 확인! 실외 발소리를 재생합니다."); // 3b. 실외 태그 확인
+                if (outdoorWalking != null)
+                    PlayerAudio.PlayOneShot(outdoorWalking);
+                else
+                    Debug.LogWarning("outdoorWalking 오디오 클립이 비어있습니다!");
             }
             else
             {
-                // 2. 태그가 일치하지 않을 경우의 로그
-                Debug.Log("닿았지만, 태그가 InDoorGround 또는 OutDoorGround가 아님.");
+                Debug.LogWarning("Raycast는 성공했지만, 바닥의 태그가 InDoorGround 또는 OutDoorGround가 아닙니다."); // 4. 태그 불일치 확인
             }
         }
         else
-        Debug.LogWarning("Raycast가 아무것도 감지하지 못함!");
+        {
+            Debug.LogError("오류: 발밑으로 Raycast를 쐈지만 아무것도 감지되지 않았습니다. 바닥에 Collider가 있는지 다시 확인해주세요."); // 5. Raycast 실패 확인
+        }
     }
 }
