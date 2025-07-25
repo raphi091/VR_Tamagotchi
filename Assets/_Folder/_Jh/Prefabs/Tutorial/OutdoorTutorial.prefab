@@ -566,7 +566,7 @@ MonoBehaviour:
   m_SelectEntered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5870166004577318009}
         m_TargetAssemblyTypeName: TutorialPageController, Assembly-CSharp
         m_MethodName: ShowNextPage
         m_Mode: 1
@@ -999,6 +999,7 @@ GameObject:
   - component: {fileID: 6339236739921585091}
   - component: {fileID: 478500440004300580}
   - component: {fileID: 8342817543607238234}
+  - component: {fileID: 5870166004577318009}
   m_Layer: 5
   m_Name: OutdoorTutorial
   m_TagString: Untagged
@@ -1093,6 +1094,23 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &5870166004577318009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7209736220250781232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05bcebaf2a6d88446a982321ba90e6bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialPages:
+  - {fileID: 7775803906610306464}
+  - {fileID: 1611753352768831998}
+  - {fileID: 5041585259836876538}
+  tutorialRoot: {fileID: 7209736220250781232}
 --- !u!1 &7593424462565447516
 GameObject:
   m_ObjectHideFlags: 0
