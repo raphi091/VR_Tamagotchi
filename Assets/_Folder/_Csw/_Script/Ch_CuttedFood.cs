@@ -11,6 +11,12 @@ public class Ch_CuttedFood : MonoBehaviour, Ch_BowlFood
     [SerializeField] private Transform[] offset;
     private int index=0;
     [SerializeField] private int fillableCount=4;
+    public AudioClip FoodSound
+    {
+        get => foodSound;
+
+        set => foodSound = value;
+    }
     [SerializeField] private AudioClip foodSound;
     private XRGrabInteractable interactable;
 
@@ -51,7 +57,6 @@ public class Ch_CuttedFood : MonoBehaviour, Ch_BowlFood
         {
             collision.gameObject.TryGetComponent(out FoodBowl bowl);
             Ch_FoodEvent.I.InvokeFoodBowlAction(bowl, this);
-            SoundManager.Instance.PlaySFX(foodSound);
         }
     }
 }
