@@ -34,7 +34,7 @@ public class Ch_Player_Events : MonoBehaviour
                 if (dis >= selectThreshold)
                 {
                     Debug.Log("dis:1");
-                    dogFSM.BeCalled(transform);
+                    dogFSM.BeCalled();
                 }
                 else
                 {

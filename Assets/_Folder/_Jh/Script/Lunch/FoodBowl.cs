@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class FoodBowl : MonoBehaviour
@@ -41,13 +40,6 @@ public class FoodBowl : MonoBehaviour
         Ch_FoodEvent.I.RemoveFoodBowlEvent(this, FillBowl);
     }
     
-    public void FillByPlayer(foodType selected)
-    {
-        IsFilled = true;
-        containedFood = selected;
-        // 나중에 UI나 VR 상호작용에서 이 함수 호출
-    }
-
     public void FillBowl(Ch_BowlFood food)
     {
         containedFood = food.FoodType;
