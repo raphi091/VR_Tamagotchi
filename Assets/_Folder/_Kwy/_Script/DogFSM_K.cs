@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(CharacterController))]
@@ -31,6 +32,8 @@ public class DogFSM_K : MonoBehaviour
     public Transform player;
     [Range(0f,1f)] public Vector2 Hunger = new Vector2(0.2f, 0.5f);
     [Range(0f, 1f)] public Vector2 Toilet = new Vector2(0.1f, 0.4f);
+    public float sightRange = 1f;
+    public float loseSightRange = 2f;
 
     private NavMeshAgent agent;
     private CharacterController controller;
@@ -53,6 +56,10 @@ public class DogFSM_K : MonoBehaviour
     public float Currentintimacy => currentintimacy;
     public float Hungerpercent => hungerpercent;
     public float Bowelpercent => bowelpercent;
+
+    [Header("Debug")]
+    public bool debug = false;
+    public TextMeshProUGUI text;
 
 
     private void Awake()
@@ -107,15 +114,6 @@ public class DogFSM_K : MonoBehaviour
             EnterState(State.Stroking);
             return;
         }
-
-        if (other.CompareTag("Player"))
-        {
-            if (currentState == State.Wander || currentState == State.Playing || currentState == State.Called)
-            {
-                EnterState(State.InteractionRequest);
-                DogInteractionManager_K.instance.RequestInteraction(this);
-            }
-        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -148,6 +146,16 @@ public class DogFSM_K : MonoBehaviour
         currentState = newState;
         lastStateChangeTime = Time.time;
         agent.Warp(transform.position);
+
+        if (debug)
+        {
+            text.gameObject.SetActive(true);
+            text.text = currentState.ToString();
+        }
+        else
+        {
+            text.gameObject.SetActive(false);
+        }
 
         switch (currentState)
         {
@@ -202,20 +210,29 @@ public class DogFSM_K : MonoBehaviour
         agent.isStopped = true;
         agent.ResetPath();
         isWandering = false;
+        isCalled = false;
         animator.SetBool("INTERACT", false);
 
         while (true)
         {
             yield return null;
 
+            if (IsPlayerInSight())
+            {
+                EnterState(State.InteractionRequest);
+                yield break;
+            }
+
             if (hungerpercent <= 10f || isHunger)
             {
                 EnterState(State.Hunger);
+                yield break;
             }
 
             if (bowelpercent <= 10f && !isHunger)
             {
                 EnterState(State.Toilet);
+                yield break;
             }
 
             if (isWandering)
@@ -284,8 +301,17 @@ public class DogFSM_K : MonoBehaviour
     {
         Scene scene = SceneManager.GetActiveScene();
 
+        agent.isStopped = true;
+        agent.ResetPath();
+
         int randAction = Random.Range(0, 10);
         float playtime;
+
+        if (IsPlayerInSight())
+        {
+            EnterState(State.InteractionRequest);
+            yield break;
+        }
 
         if (scene.name.Equals("H_Outdoor"))
         {
@@ -344,11 +370,19 @@ public class DogFSM_K : MonoBehaviour
 
     private IEnumerator InteractionRequest_co()
     {
+        DogInteractionManager_K.instance.RequestInteraction(this);
         agent.isStopped = true;
         agent.ResetPath();
 
         while (true)
         {
+            if (IsPlayerOutOfRange())
+            {
+                DogInteractionManager_K.instance.CancelRequest(this);
+                ReturnToWander();
+                yield break;
+            }
+
             Vector3 directionToPlayer = player.position - transform.position;
             directionToPlayer.y = 0;
             Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
@@ -365,6 +399,13 @@ public class DogFSM_K : MonoBehaviour
 
         while (isSelected)
         {
+            if (IsPlayerOutOfRange())
+            {
+                DogInteractionManager_K.instance.CancelRequest(this);
+                ReturnToWander();
+                yield break;
+            }
+
             yield return null;
         }
 
@@ -573,15 +614,21 @@ public class DogFSM_K : MonoBehaviour
     private IEnumerator Called_co()
     {
         Debug.Log($"{name}: 부르셨나요? 지금 갑니다!");
+        isCalled = true;
         agent.isStopped = false;
-        agent.SetDestination(player.position);
 
         // 목표 지점에 도착할 때까지 대기
         while (isCalled)
         {
+            if (IsPlayerInSight())
+            {
+                EnterState(State.InteractionRequest);
+                yield break;
+            }
+
             agent.SetDestination(player.position);
 
-            yield return new WaitForSeconds(0.25f);
+            yield return null;
         }
 
         EnterState(State.InteractionRequest);
@@ -590,5 +637,24 @@ public class DogFSM_K : MonoBehaviour
     public State GetCurrentState()
     {
         return currentState;
+    }
+
+    private bool IsPlayerInSight()
+    {
+        return Vector3.Distance(transform.position, player.position) < sightRange;
+    }
+
+    private bool IsPlayerOutOfRange()
+    {
+        return Vector3.Distance(transform.position, player.position) > loseSightRange;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, sightRange);
+
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireSphere(transform.position, loseSightRange);
     }
 }
