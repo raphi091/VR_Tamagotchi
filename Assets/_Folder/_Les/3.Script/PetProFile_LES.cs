@@ -1,6 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PetSize
+{
+    Big,
+    medium,
+    small
+}
+
 [CreateAssetMenu(fileName = "New Pet Profile", menuName = "Pet/Pet Profile_LES")]
 public class PetProFile_LES : ScriptableObject
 {
