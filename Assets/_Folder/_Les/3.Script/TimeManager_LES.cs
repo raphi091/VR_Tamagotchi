@@ -87,9 +87,13 @@ public class TimeManager_LES : MonoBehaviour
         StartCoroutine(Indoor_co());
     }
 
-    AzureCoreSystem azureCoreSystem;
     private IEnumerator Indoor_co()
     {
+        if (Weather_K.instance != null)
+        {
+            Weather_K.instance.SetDailyWeather();
+        }
+
         SoundManager.Instance.PlaySFX(doorBall);
         gameTimeSec = 7 * 3600 + 30 * 60;
 
@@ -176,5 +180,10 @@ public class TimeManager_LES : MonoBehaviour
         string dayOfWeek = GetDayOfWeek();
         timeText.text = $"{hh:00}:{mm:00}";
         dayText.text = $"{dayOfWeek}";
+
+        if (Weather_K.instance != null)
+        {
+            Weather_K.instance.SyncTime(gameTimeSec);
+        }
     }
 }

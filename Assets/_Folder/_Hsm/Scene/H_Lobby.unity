@@ -20,13 +20,13 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
-  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
-  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
+  m_AmbientSkyColor: {r: 0.6032093, g: 0.4570546, b: 0.41468316, a: 1}
+  m_AmbientEquatorColor: {r: 0.6032093, g: 0.4570546, b: 0.41468316, a: 1}
+  m_AmbientGroundColor: {r: 0.6032093, g: 0.4570546, b: 0.41468316, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: af73272e223d9ad4e962d490f46402c1, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -138,6 +138,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d568f804409d22c4cbefc2a11ca95783, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &299750986
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 145113943742852715, guid: f09432e97d4fb5b439b18f535a84b956, type: 3}
+      propertyPath: m_Name
+      value: WeatherSystem
+      objectReference: {fileID: 0}
+    - target: {fileID: 5711821392714536640, guid: f09432e97d4fb5b439b18f535a84b956, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5711821392714536640, guid: f09432e97d4fb5b439b18f535a84b956, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5711821392714536640, guid: f09432e97d4fb5b439b18f535a84b956, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5711821392714536640, guid: f09432e97d4fb5b439b18f535a84b956, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5711821392714536640, guid: f09432e97d4fb5b439b18f535a84b956, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5711821392714536640, guid: f09432e97d4fb5b439b18f535a84b956, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5711821392714536640, guid: f09432e97d4fb5b439b18f535a84b956, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5711821392714536640, guid: f09432e97d4fb5b439b18f535a84b956, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5711821392714536640, guid: f09432e97d4fb5b439b18f535a84b956, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5711821392714536640, guid: f09432e97d4fb5b439b18f535a84b956, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f09432e97d4fb5b439b18f535a84b956, type: 3}
 --- !u!1001 &313685794
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -433,6 +490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a85cbb8030bddb41aea76508478a4c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTutorial: 1
 --- !u!1 &699204662
 GameObject:
   m_ObjectHideFlags: 0
@@ -1532,3 +1590,4 @@ SceneRoots:
   - {fileID: 740806863}
   - {fileID: 566210623}
   - {fileID: 1696747461}
+  - {fileID: 299750986}
