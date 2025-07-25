@@ -81,10 +81,12 @@ public class LunchDog : MonoBehaviour
             yield return null;
         }
 
-        Vector3 directionToPlayer = bowlPosition.position - transform.position;
-        directionToPlayer.y = 0;
-        Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
+        Vector3 directionTobowl = bowlPosition.position - transform.position;
+        directionTobowl.y = 0;
+        Quaternion lookRotation = Quaternion.LookRotation(directionTobowl);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotationSpeed * Time.deltaTime);
+
+        yield return null;
 
         animator.SetBool("LUNCHEAT", true);
 

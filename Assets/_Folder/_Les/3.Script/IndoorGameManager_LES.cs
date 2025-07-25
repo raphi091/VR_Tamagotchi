@@ -35,7 +35,7 @@ public class IndoorGameManager_LES : MonoBehaviour
         // 인도어, 아웃도어 초기 시간 및 날짜 설정 추가
         TimeManager_LES.instance.SetIndoorInitialTime();
 
-        yield return new WaitUntil(() => TutorialManager_J.instance.Page.IsTutorial == false);
+        yield return new WaitUntil(() => TutorialManager_J.instance.isTutorial == false);
 
         TimeManager_LES.instance.IndoorTime();
     }

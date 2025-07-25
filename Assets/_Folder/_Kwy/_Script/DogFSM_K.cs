@@ -200,7 +200,7 @@ public class DogFSM_K : MonoBehaviour
 
     private IEnumerator Setup_co()
     {
-        yield return new WaitUntil(() => TutorialManager_J.instance.Page.IsTutorial == false);
+        yield return new WaitUntil(() => TutorialManager_J.instance.isTutorial == false);
 
         EnterState(State.Wander);
     }

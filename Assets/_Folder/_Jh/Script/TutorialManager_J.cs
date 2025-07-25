@@ -10,6 +10,7 @@ public class TutorialManager_J : MonoBehaviour
     private TutorialPageController page;
 
     public TutorialPageController Page => page;
+    public bool isTutorial = true;
 
 
     private void Awake()
@@ -39,16 +40,24 @@ public class TutorialManager_J : MonoBehaviour
     {
         page = FindObjectOfType<TutorialPageController>();
 
+        if (DataManager_J.instance.gameData.tutorial == false)
+        {
+            isTutorial = true;
+        }
+
         if (DataManager_J.instance.gameData.tutorial && scene.name == "H_Indoor")
         {
+            isTutorial = false;
             page.gameObject.SetActive(false);  
         }
         else if (DataManager_J.instance.gameData.tutorial && scene.name == "H_Lunch")
         {
+            isTutorial = false;
             page.gameObject.SetActive(false);
         }
         else if (DataManager_J.instance.gameData.tutorial && scene.name == "H_Outdoor")
         {
+            isTutorial = false;
             page.gameObject.SetActive(false);
         }
         else
