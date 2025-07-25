@@ -12,8 +12,7 @@ GameObject:
   - component: {fileID: 261996435764570734}
   - component: {fileID: 7680475703925548267}
   - component: {fileID: 7445777306650198374}
-  - component: {fileID: 1295733005405095909}
-  - component: {fileID: 480060333693071307}
+  - component: {fileID: 2868051819712382092}
   - component: {fileID: -4104292980112775659}
   - component: {fileID: 7225419347306197634}
   - component: {fileID: 3948621093088205327}
@@ -33,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 835714085867430952}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.15, y: 0.2, z: 2.44}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -71,7 +70,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 835714085867430952}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.2
+  m_Radius: 0.15
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -80,7 +79,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 0.8
+  m_Height: 0.75
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -103,35 +102,14 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 0.8
-  m_Radius: 0.2
+  m_Height: 0.75
+  m_Radius: 0.15
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.4, z: 0}
---- !u!135 &1295733005405095909
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 835714085867430952}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.8
-  m_Center: {x: 0, y: 0.35, z: 0}
---- !u!65 &480060333693071307
+  m_Center: {x: 0, y: 0.375, z: 0}
+--- !u!65 &2868051819712382092
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,8 +128,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.2, y: 0.4, z: 0.85}
-  m_Center: {x: 0, y: 0.55, z: 0.05}
+  m_Size: {x: 0.2, y: 0.35, z: 0.5}
+  m_Center: {x: 0, y: 0.25, z: 0.035}
 --- !u!114 &-4104292980112775659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,8 +178,8 @@ MonoBehaviour:
   player: {fileID: 0}
   Hunger: {x: 0, y: 0}
   Toilet: {x: 0, y: 0}
-  sightRange: 0.8
-  loseSightRange: 1.1
+  sightRange: 0.9
+  loseSightRange: 1.2
   debug: 1
   text: {fileID: 6696672655025647121}
 --- !u!114 &3948621093088205327
@@ -371,7 +349,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: "\uC559"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc42a33f1dbb72e4fa69058caf99fd5e, type: 2}
   m_sharedMaterial: {fileID: 9037362135291406586, guid: dc42a33f1dbb72e4fa69058caf99fd5e, type: 2}
@@ -398,8 +376,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.5
-  m_fontSizeBase: 0.5
+  m_fontSize: 0.2
+  m_fontSizeBase: 0.2
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -476,7 +454,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1.202}
+  m_AnchoredPosition: {x: 0, y: 0.886}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &5285953783427028333
@@ -567,7 +545,7 @@ Transform:
   m_GameObject: {fileID: 7809982529147560523}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.15, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

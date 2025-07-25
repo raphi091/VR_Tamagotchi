@@ -21,11 +21,15 @@ public class PetController_J : MonoBehaviour
     public float currentBowel;
 
     private Animator ani;
+    private BoxCollider col;
 
     private void Awake()
     {
         if (!TryGetComponent(out ani))
             Debug.LogWarning("PetController_J ] Animator 없음");
+
+        if (!TryGetComponent(out col))
+            Debug.LogWarning("PetController_J ] SphereCollider 없음");
     }
 
     // GameManager가 호출할 데이터 적용 함수
@@ -82,5 +86,21 @@ public class PetController_J : MonoBehaviour
 
         // 5. 모든 설정이 끝났으니 오브젝트를 활성화
         this.gameObject.SetActive(true);
+
+        switch (DatabaseManager_J.instance.petProfiles[data.modelIndex].petSize)
+        {
+            case PetSize.Big:
+                col.center = new Vector3(0f, 0.6f, 0.1f);
+                col.size = new Vector3(0.2f, 0.55f, 1f);
+                break;
+            case PetSize.medium:
+                col.center = new Vector3(0f, 0.47f, 0.07f);
+                col.size = new Vector3(0.2f, 0.45f, 0.85f);
+                break;
+            case PetSize.small:
+                col.center = new Vector3(0f, 0.25f, 0.035f);
+                col.size = new Vector3(0.2f, 0.35f, 0.5f);
+                break;
+        }
     }
 }

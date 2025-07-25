@@ -17,6 +17,7 @@ public class PetProFile_LES : ScriptableObject
     public List<AudioClip> DogSound = new List<AudioClip>();
     public AnimatorOverrideController petAnimator;
     public Avatar petAvater;
+    public PetSize petSize;
 
     [TextArea]
     public string description; // 펫 설명
