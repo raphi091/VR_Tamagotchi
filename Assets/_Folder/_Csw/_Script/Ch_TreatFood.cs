@@ -6,6 +6,7 @@ public class Ch_TreatFood:MonoBehaviour
 {
     public List<Transform> slices=new List<Transform>();
     public Ch_CuttedFood cuttedFood;
+    public AudioClip cutSound;
 
     void Awake()
     {
