@@ -4,6 +4,7 @@ public class Ch_Bell : MonoBehaviour
 {
     public bool ringged=false;
     private Ch_VelocityInteractable interactable;
+    [SerializeField]  AudioClip bellSound;
 
     private void Awake()
     {
@@ -12,9 +13,10 @@ public class Ch_Bell : MonoBehaviour
 
     void Update()
     {
-        if (!ringged&&interactable.velocity.magnitude>1.5f)
+        if (!ringged&&interactable.velocity.magnitude>1f)
         {
             ringged = true;
+            SoundManager.Instance.PlaySFX(bellSound);
         }
     }
 }

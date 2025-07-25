@@ -15,6 +15,8 @@ public class Ch_CannedFood : MonoBehaviour,  Ch_BowlFood
     public Transform endPoint;
     
     private XRGrabInteractable interactable;
+    
+    [SerializeField] private AudioClip foodSound;
 
     void Awake()
     {
@@ -41,6 +43,7 @@ public class Ch_CannedFood : MonoBehaviour,  Ch_BowlFood
         {
             collision.gameObject.TryGetComponent(out FoodBowl bowl);
             Ch_FoodEvent.I.InvokeFoodBowlAction(bowl, this);
+            SoundManager.Instance.PlaySFX(foodSound);
         }
     }
 }

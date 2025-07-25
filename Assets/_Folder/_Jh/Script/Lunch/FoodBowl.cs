@@ -13,6 +13,8 @@ public class FoodBowl : MonoBehaviour
     // 사료가 생성될 위치 (빈 GameObject를 transform으로 설정)
     private GameObject currentBowl;
 
+    private Vector3 initPos;
+
     [HideInInspector] public bool IsFilled = false;
 
     [SerializeField] Transform dryfoodModel;
@@ -23,6 +25,7 @@ public class FoodBowl : MonoBehaviour
     
     private void OnEnable()
     {
+        initPos = dryfoodModel.position;
         if (Ch_FoodEvent.I == null)
         {
             Debug.Log("FoodEvent Null");
@@ -42,6 +45,16 @@ public class FoodBowl : MonoBehaviour
     
     public void FillBowl(Ch_BowlFood food)
     {
+        if (IsFilled)
+        {
+            return;
+        }
+
+        if (food.FoodType!=foodType.Dry && containedFood == foodType.Dry && IsFilled)
+        {
+            dryfoodModel.position = initPos;
+        }
+        
         containedFood = food.FoodType;
         if (containedFood == foodType.Dry)
         {
