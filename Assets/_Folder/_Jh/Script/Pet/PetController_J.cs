@@ -7,6 +7,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class PetController_J : MonoBehaviour
 {
     public PetStatusData_J petData;
+    public NamePlate_K namePlate;
 
     [Header("시각적 요소")]
     // 모델링 프리팹이 실제로 생성될 위치 (자식 오브젝트)
@@ -70,12 +71,33 @@ public class PetController_J : MonoBehaviour
             fsm.particlepoint = transform.FindSlot("PARTICLE_POINT");
             fsm.data = DatabaseManager_J.instance.personalities[data.personalityIndex];
             fsm.player = GameObject.FindGameObjectWithTag("Player").transform;
+
+            switch (DatabaseManager_J.instance.petProfiles[data.modelIndex].petSize)
+            {
+                case PetSize.Big:
+                    col.center = new Vector3(0f, 0.6f, 0.1f);
+                    col.size = new Vector3(0.2f, 0.55f, 1f);
+                    break;
+                case PetSize.medium:
+                    col.center = new Vector3(0f, 0.47f, 0.07f);
+                    col.size = new Vector3(0.2f, 0.45f, 0.85f);
+                    break;
+                case PetSize.small:
+                    col.center = new Vector3(0f, 0.25f, 0.035f);
+                    col.size = new Vector3(0.2f, 0.35f, 0.5f);
+                    break;
+            }
         }
 
         LunchDog lunchDog = GetComponent<LunchDog>();
         if (lunchDog != null)
         {
             lunchDog.particlepoint = transform.FindSlot("PARTICLE_POINT");
+
+            if (namePlate != null)
+            {
+                namePlate.Setup(data.petName, DataManager_J.instance.gameData.selectedClassName);
+            }
         }
 
         if (ani != null)
@@ -86,21 +108,5 @@ public class PetController_J : MonoBehaviour
 
         // 5. 모든 설정이 끝났으니 오브젝트를 활성화
         this.gameObject.SetActive(true);
-
-        switch (DatabaseManager_J.instance.petProfiles[data.modelIndex].petSize)
-        {
-            case PetSize.Big:
-                col.center = new Vector3(0f, 0.6f, 0.1f);
-                col.size = new Vector3(0.2f, 0.55f, 1f);
-                break;
-            case PetSize.medium:
-                col.center = new Vector3(0f, 0.47f, 0.07f);
-                col.size = new Vector3(0.2f, 0.45f, 0.85f);
-                break;
-            case PetSize.small:
-                col.center = new Vector3(0f, 0.25f, 0.035f);
-                col.size = new Vector3(0.2f, 0.35f, 0.5f);
-                break;
-        }
     }
 }
