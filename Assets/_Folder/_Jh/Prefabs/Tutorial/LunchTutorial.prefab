@@ -323,7 +323,7 @@ MonoBehaviour:
   m_SelectEntered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2601536035074361824}
         m_TargetAssemblyTypeName: TutorialPageController, Assembly-CSharp
         m_MethodName: ShowNextPage
         m_Mode: 1
@@ -3554,6 +3554,7 @@ GameObject:
   - component: {fileID: 5367763193495578382}
   - component: {fileID: 4237429976500505558}
   - component: {fileID: 7359927555382717632}
+  - component: {fileID: 2601536035074361824}
   m_Layer: 5
   m_Name: LunchTutorial
   m_TagString: Untagged
@@ -3654,6 +3655,29 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &2601536035074361824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7257147166330282238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05bcebaf2a6d88446a982321ba90e6bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialPages:
+  - {fileID: 5964040149231892880}
+  - {fileID: 5019199877916949699}
+  - {fileID: 4855079116142328932}
+  - {fileID: 172372965217857308}
+  - {fileID: 5072630565622653872}
+  - {fileID: 6713228926720920836}
+  - {fileID: 7902654025576348561}
+  - {fileID: 958351895331914900}
+  - {fileID: 7518269942696294200}
+  tutorialRoot: {fileID: 7257147166330282238}
 --- !u!1 &7518269942696294200
 GameObject:
   m_ObjectHideFlags: 0
