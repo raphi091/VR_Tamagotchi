@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using CustomInspector;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(CharacterController))]
@@ -30,8 +31,8 @@ public class DogFSM_K : MonoBehaviour
     public Transform mouthpoint;
     public Transform particlepoint;
     public Transform player;
-    [Range(0f,1f)] public Vector2 Hunger = new Vector2(0.2f, 0.5f);
-    [Range(0f, 1f)] public Vector2 Toilet = new Vector2(0.1f, 0.4f);
+    [AsRange(0f, 1f)] public Vector2 Hunger = new Vector2(0.2f, 0.5f);
+    [AsRange(0f, 1f)] public Vector2 Toilet = new Vector2(0.1f, 0.4f);
     public float sightRange = 1f;
     public float loseSightRange = 2f;
 
@@ -229,7 +230,7 @@ public class DogFSM_K : MonoBehaviour
                 yield break;
             }
 
-            if (bowelpercent <= 10f && !isHunger)
+            if (bowelpercent <= 10f && !isHunger && ToiletPoint != null)
             {
                 EnterState(State.Toilet);
                 yield break;
@@ -376,6 +377,18 @@ public class DogFSM_K : MonoBehaviour
 
         while (true)
         {
+            if (hungerpercent <= 10f || isHunger)
+            {
+                EnterState(State.Hunger);
+                yield break;
+            }
+
+            if (bowelpercent <= 10f && !isHunger && ToiletPoint != null)
+            {
+                EnterState(State.Toilet);
+                yield break;
+            }
+
             if (IsPlayerOutOfRange())
             {
                 DogInteractionManager_K.instance.CancelRequest(this);
@@ -399,6 +412,18 @@ public class DogFSM_K : MonoBehaviour
 
         while (isSelected)
         {
+            if (hungerpercent <= 10f || isHunger)
+            {
+                EnterState(State.Hunger);
+                yield break;
+            }
+
+            if (bowelpercent <= 10f && !isHunger && ToiletPoint != null)
+            {
+                EnterState(State.Toilet);
+                yield break;
+            }
+
             if (IsPlayerOutOfRange())
             {
                 DogInteractionManager_K.instance.CancelRequest(this);
