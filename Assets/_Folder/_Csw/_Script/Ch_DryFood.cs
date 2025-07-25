@@ -8,27 +8,37 @@ public class Ch_DryFood : MonoBehaviour, Ch_BowlFood
     public virtual GameObject gameObj => gameObject;
 
     [SerializeField] ParticleSystem particle;
-    //[SerializeField] Rigidbody rb;
-    private RaycastHit hit;
+    private Ch_VelocityInteractable interactable;
 
     [Range(0f, -1f), SerializeField] private float upsideDownRange=-0.7f;
     [SerializeField] private Transform startPoint;
+    [SerializeField] AudioClip shakeSound;
+    [SerializeField] AudioClip pourSound;
 
     void Awake()
     {
         foodtype = foodType.Dry;
         isFillable = true;
         particle = startPoint.gameObject.GetComponent<ParticleSystem>();
-        //rb=GetComponent<Rigidbody>();
+        interactable = GetComponent<Ch_VelocityInteractable>();
     }
 
     private void Update()
     {
-        if (transform.up.y < upsideDownRange)
+        if (interactable.velocity.magnitude > 0.3f)
         {
-            if (!particle.isPlaying)
+            SoundManager.Instance.PlaySFX(shakeSound);
+            if (transform.up.y < upsideDownRange)
             {
-                particle.Play();
+                if (!particle.isPlaying)
+                {
+                    particle.Play();
+                    SoundManager.Instance.PlaySFX(pourSound);
+                }
+            }
+            else
+            {
+                particle.Stop();
             }
         }
         else
