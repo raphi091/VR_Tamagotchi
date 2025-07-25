@@ -67,7 +67,10 @@ public class DogInteractionManager_K : MonoBehaviour
                 Debug.Log($"[Manager] {selectedDog.name}을(를) 상호작용 대상으로 선택합니다.");
                 ConfirmAndDeselectOthers(selectedDog);
                 break;
-
+            case DogFSM_K.State.Called:
+                Debug.Log($"[Manager] {selectedDog.name}을(를) 상호작용 대상으로 선택합니다. (Call)");
+                ConfirmAndDeselectOthers(selectedDog);
+                break;
             default:
                 // 그 외 다른 상태라면 일단 선택 절차 진행
                 ConfirmAndDeselectOthers(selectedDog);
@@ -105,10 +108,5 @@ public class DogInteractionManager_K : MonoBehaviour
             requestingDogs[i].ReturnToWander();
         }
         requestingDogs.Clear();
-    }
-
-    public void SetActiveDog()
-    {
-        activeDog = null;
     }
 }

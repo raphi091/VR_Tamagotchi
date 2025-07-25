@@ -42,6 +42,7 @@ public class DogFSM_K : MonoBehaviour
     private float hungerpercent;
     private float bowelpercent;
     private bool isSelected = false;
+    private bool isCalled = false;
     private bool isWandering;
     private bool isHunger = false;
     private bool isBowel = false;
@@ -70,7 +71,6 @@ public class DogFSM_K : MonoBehaviour
 
         hungerpercent = 80f;
         bowelpercent = 100f;
-
     }
 
     private void Start()
@@ -112,11 +112,8 @@ public class DogFSM_K : MonoBehaviour
         {
             if (currentState == State.Wander || currentState == State.Playing || currentState == State.Called)
             {
-                if (DogInteractionManager_K.instance.ActiveDog == null)
-                {
-                    EnterState(State.InteractionRequest);
-                    DogInteractionManager_K.instance.RequestInteraction(this);
-                }
+                EnterState(State.InteractionRequest);
+                DogInteractionManager_K.instance.RequestInteraction(this);
             }
         }
     }
@@ -138,11 +135,6 @@ public class DogFSM_K : MonoBehaviour
             if (currentState == State.InteractionRequest || currentState == State.Interaction)
             {
                 ReturnToWander();
-
-                if (DogInteractionManager_K.instance.ActiveDog == this)
-                {
-                    DogInteractionManager_K.instance.SetActiveDog();
-                }
             }
         }
     }
@@ -187,7 +179,7 @@ public class DogFSM_K : MonoBehaviour
                 currentStateCoroutine = StartCoroutine(Catch_co(data as Transform));
                 break;
             case State.Called:
-                currentStateCoroutine = StartCoroutine(Called_co(data as Transform));
+                currentStateCoroutine = StartCoroutine(Called_co());
                 break;
             case State.Hunger:
                 currentStateCoroutine = StartCoroutine(Hunger_co());
@@ -569,28 +561,28 @@ public class DogFSM_K : MonoBehaviour
         EnterState(State.Wander);
     }
 
-    public void BeCalled(Transform target)
+    public void BeCalled()
     {
         // 다른 중요한 상태(상호작용 중 등)가 아닐 때만 호출에 응답
         if (currentState == State.Wander || currentState == State.Playing)
         {
-            EnterState(State.Called, target);
+            EnterState(State.Called);
         }
     }
 
-    private IEnumerator Called_co(Transform target)
+    private IEnumerator Called_co()
     {
         Debug.Log($"{name}: 부르셨나요? 지금 갑니다!");
         agent.isStopped = false;
-        agent.SetDestination(target.position);
+        agent.SetDestination(player.position);
 
         // 목표 지점에 도착할 때까지 대기
-        while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance)
+        while (isCalled)
         {
-            yield return null;
-        }
+            agent.SetDestination(player.position);
 
-        Debug.Log($"{name}: 저 왔어요!");
+            yield return new WaitForSeconds(0.25f);
+        }
 
         EnterState(State.InteractionRequest);
     }
