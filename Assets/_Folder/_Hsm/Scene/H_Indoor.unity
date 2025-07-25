@@ -3181,7 +3181,10 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 4400381033237101459, guid: 78960e9149892584c97c64753d51b066, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5502318495540355540, guid: 78960e9149892584c97c64753d51b066, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 876173582}
   m_SourcePrefab: {fileID: 100100000, guid: 78960e9149892584c97c64753d51b066, type: 3}
 --- !u!20 &876173579 stripped
 Camera:
@@ -3199,6 +3202,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08af24a302a01ac40804b40f3b9092da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &876173581 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5502318495540355540, guid: 78960e9149892584c97c64753d51b066, type: 3}
+  m_PrefabInstance: {fileID: 876173578}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &876173582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 876173581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dc7c765a5200d042a51973a2d33400d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stepDistance: 0.5
+  indoorWalking: {fileID: 8300000, guid: dbc08626501d13e4bac622508194466c, type: 3}
+  outdoorWalking: {fileID: 8300000, guid: bd20143568510ff4a974d837f274aa1e, type: 3}
 --- !u!1 &912453039
 GameObject:
   m_ObjectHideFlags: 0
