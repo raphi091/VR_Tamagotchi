@@ -10,8 +10,12 @@ public class TimeManager_LES : MonoBehaviour
     public TextMeshPro timeText;
     public TextMeshPro dayText; //시간 표시용
 
+    public AudioClip sceneChange; //씬 전환전 알림소리
+    public AudioClip doorBall; //시작시 문열림 소리
+    public AudioClip door; // 다음 씬 전화 되는 소리
+
     //시간 로직
-    public float speed = 60f*5f; // 실제 1초 = 60 게임 시간초
+    public float speed = 60f * 5f; // 실제 1초 = 60 게임 시간초
     private float gameTimeSec; // 현재 게임 시간(초)
     private string currentScene;
 
@@ -86,6 +90,7 @@ public class TimeManager_LES : MonoBehaviour
     AzureCoreSystem azureCoreSystem;
     private IEnumerator Indoor_co()
     {
+        SoundManager.Instance.PlaySFX(doorBall);
         gameTimeSec = 7 * 3600 + 30 * 60;
 
         // 아침 시간
@@ -97,6 +102,16 @@ public class TimeManager_LES : MonoBehaviour
             yield return null;
         }
 
+        while (gameTimeSec <= 11 * 3600 + 50 * 60)
+        {
+            gameTimeSec += Time.deltaTime * speed;
+            DisplayTime(gameTimeSec);
+
+            yield return null;
+        }
+
+        SoundManager.Instance.PlaySFX(sceneChange);
+
         //오전 수업 시간.
         while (gameTimeSec <= 12 * 3600 + 00 * 60)
         {
@@ -106,6 +121,7 @@ public class TimeManager_LES : MonoBehaviour
             yield return null;
         }
 
+        SoundManager.Instance.PlaySFX(door);
         GameManager.instance.GoToScene("H_Lunch");
     }
 
@@ -127,6 +143,16 @@ public class TimeManager_LES : MonoBehaviour
             yield return null;
         }
 
+        while (gameTimeSec <= 17 * 3600 + 20 * 60)
+        {
+            gameTimeSec += Time.deltaTime * speed;
+            DisplayTime(gameTimeSec);
+
+            yield return null;
+        }
+
+        SoundManager.Instance.PlaySFX(sceneChange);
+
         // 하루 마무리 시간
         while (gameTimeSec < 17 * 3600 + 30 * 60)
         {
@@ -135,7 +161,8 @@ public class TimeManager_LES : MonoBehaviour
 
             yield return null;
         }
-        
+
+        SoundManager.Instance.PlaySFX(doorBall);
         GameManager.instance.EndOfDay();
         GameManager.instance.GoToScene("H_Indoor");
     }
