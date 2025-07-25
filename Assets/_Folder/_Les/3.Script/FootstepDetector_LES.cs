@@ -1,6 +1,4 @@
-using CustomInspector.Extensions;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class FootstepDetector_LES : MonoBehaviour
 {
@@ -9,7 +7,8 @@ public class FootstepDetector_LES : MonoBehaviour
     public float stepDistance = 0.5f;
 
     // 내부 변수
-    private CharacterController characterController;
+    [SerializeField] private CharacterController characterController;
+    [SerializeField] private AudioSource PlayerAudio;
     private Vector3 lastPosition;
     private float distanceTraveled = 0f;
 
@@ -21,12 +20,14 @@ public class FootstepDetector_LES : MonoBehaviour
     void Start()
     {
         // XR Rig 구조에 따라 GetComponentInParent 또는 GetComponent 사용
-        characterController = GetComponentInParent<CharacterController>();
+        characterController = GetComponent<CharacterController>();
+        PlayerAudio = GetComponent<AudioSource>();
         lastPosition = transform.position;
     }
 
     void Update()
     {
+        Debug.Log($"isGrounded: {characterController.isGrounded}, Velocity: {characterController.velocity.magnitude}");
         // 캐릭터가 땅에 닿아 있고, 움직일 때만 감지
         if (characterController.isGrounded && characterController.velocity.magnitude > 0.1f)
         {
@@ -45,13 +46,31 @@ public class FootstepDetector_LES : MonoBehaviour
 
     private void TriggerFootstep()
     {
+        Debug.DrawRay(transform.position, Vector3.down * 2f, Color.green);
+
         // 발밑으로 Raycast를 쏴서 바닥 재질 감지
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 2f))
         {
-            if (gameObject.CompareTag("InDoorGround"))
-                SoundManager.Instance.PlaySFX(indoorWalking);
-            else if(gameObject.CompareTag("OutDoorGround"))
-                SoundManager.Instance.PlaySFX(outdoorWalking);
+            // 1. Raycast가 무언가에 닿기는 했다는 의미의 로그
+            Debug.Log("Raycast Hit! 닿은 오브젝트: " + hit.collider.name + ", 태그: " + hit.collider.tag);
+
+            if (hit.collider.CompareTag("InDoorGround"))
+            {
+                Debug.Log("내부 걷는 중");
+                if(indoorWalking != null) PlayerAudio.PlayOneShot(indoorWalking);
+            }
+            else if (hit.collider.CompareTag("OutDoorGround"))
+            {
+                Debug.Log("외부 걷는 중");
+                if (outdoorWalking != null) PlayerAudio.PlayOneShot(outdoorWalking);
+            }
+            else
+            {
+                // 2. 태그가 일치하지 않을 경우의 로그
+                Debug.Log("닿았지만, 태그가 InDoorGround 또는 OutDoorGround가 아님.");
+            }
         }
+        else
+        Debug.LogWarning("Raycast가 아무것도 감지하지 못함!");
     }
 }
