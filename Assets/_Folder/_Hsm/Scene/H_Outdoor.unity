@@ -6870,38 +6870,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 8.005421, y: 1.0867118, z: 11.234713}
   m_Center: {x: 3.5027094, y: 0.043355525, z: 1.0195858}
---- !u!1 &599664265016706790 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7775803906610306464, guid: 8950dbe7a0a823b4aafdc5b78cbc9dd1, type: 3}
-  m_PrefabInstance: {fileID: 4757437015924123773}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1163652528022087895 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7209736220250781232, guid: 8950dbe7a0a823b4aafdc5b78cbc9dd1, type: 3}
-  m_PrefabInstance: {fileID: 4757437015924123773}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1163652528022087896
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1163652528022087895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05bcebaf2a6d88446a982321ba90e6bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tutorialPages:
-  - {fileID: 599664265016706790}
-  - {fileID: 2385880904183199371}
-  - {fileID: 5064159589193190183}
-  tutorialRoot: {fileID: 1163652528022087895}
---- !u!1 &2385880904183199371 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1611753352768831998, guid: 8950dbe7a0a823b4aafdc5b78cbc9dd1, type: 3}
-  m_PrefabInstance: {fileID: 4757437015924123773}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4757437015924123773
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6910,14 +6878,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2818875145677505385, guid: 8950dbe7a0a823b4aafdc5b78cbc9dd1, type: 3}
-      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1163652528022087896}
-    - target: {fileID: 2818875145677505385, guid: 8950dbe7a0a823b4aafdc5b78cbc9dd1, type: 3}
-      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ShowNextPage
-      objectReference: {fileID: 0}
     - target: {fileID: 5784598464459796370, guid: 8950dbe7a0a823b4aafdc5b78cbc9dd1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -7002,23 +6962,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: OutdoorTutorial
       objectReference: {fileID: 0}
-    - target: {fileID: 7209736220250781232, guid: 8950dbe7a0a823b4aafdc5b78cbc9dd1, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7209736220250781232, guid: 8950dbe7a0a823b4aafdc5b78cbc9dd1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1163652528022087896}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8950dbe7a0a823b4aafdc5b78cbc9dd1, type: 3}
---- !u!1 &5064159589193190183 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5041585259836876538, guid: 8950dbe7a0a823b4aafdc5b78cbc9dd1, type: 3}
-  m_PrefabInstance: {fileID: 4757437015924123773}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
