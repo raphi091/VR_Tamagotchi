@@ -20,7 +20,7 @@ public class Ch_Throwable : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Ground"))
+        if (other.gameObject.CompareTag("OutDoorGround"))
         {
             if (isPicked == true)
             {

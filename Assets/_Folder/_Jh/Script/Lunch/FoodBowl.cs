@@ -14,6 +14,7 @@ public class FoodBowl : MonoBehaviour
     private GameObject currentBowl;
 
     private Vector3 initPos;
+    private AudioSource audioSource;
 
     [HideInInspector] public bool IsFilled = false;
 
@@ -21,6 +22,7 @@ public class FoodBowl : MonoBehaviour
     [SerializeField] private float dryfoodUp;
     [SerializeField] private float foodThreshold = 0f;
     [SerializeField] private Transform foodPoint;
+    
     
     
     private void OnEnable()
@@ -50,7 +52,7 @@ public class FoodBowl : MonoBehaviour
             return;
         }
 
-        if (food.FoodType!=foodType.Dry && containedFood == foodType.Dry && IsFilled)
+        if (food.FoodType!=foodType.Dry && containedFood == foodType.Dry && !IsFilled)
         {
             dryfoodModel.position = initPos;
         }
@@ -87,6 +89,12 @@ public class FoodBowl : MonoBehaviour
             r.isKinematic = true;
             currentBowlInstance.transform.position = foodPoint.position;
             IsFilled=true;
+        }
+
+        if (!audioSource.isPlaying)
+        {
+            audioSource.clip = food.FoodSound;
+            audioSource.Play();
         }
     }
 
