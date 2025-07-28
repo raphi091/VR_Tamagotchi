@@ -8,9 +8,11 @@ public class TutorialPageController : MonoBehaviour
     public GameObject tutorialRoot; // 전체 튜토리얼 UI를 감싸는 루트 오브젝트 (Canvas 포함)
 
     private int currentPage = 0;
-    
+    private TutorialTTSList_LES ttsList;
+
     void Start()
     {
+        ttsList = FindObjectOfType<TutorialTTSList_LES>();
         InitializePages();
     }
 
@@ -28,6 +30,8 @@ public class TutorialPageController : MonoBehaviour
         if (currentPage < tutorialPages.Count)
         {
             tutorialPages[currentPage].SetActive(true);
+
+            PlayTTSForCurrentPage();
         }
         else
         {
@@ -47,6 +51,19 @@ public class TutorialPageController : MonoBehaviour
         for (int i = 0; i < tutorialPages.Count; i++)
         {
             tutorialPages[i].SetActive(i == 0);
+        }
+
+        PlayTTSForCurrentPage();
+    }
+
+    private void PlayTTSForCurrentPage()
+    {
+        if (ttsList == null || ttsList.TTS == null) return;
+
+        if (currentPage < ttsList.TTS.Count)
+        {
+            AudioClip clipToPlay = ttsList.TTS[currentPage];
+            TutorialTTSMangaer_LES.Instance.PlayTTS(clipToPlay);
         }
     }
 }

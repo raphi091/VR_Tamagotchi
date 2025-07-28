@@ -974,6 +974,7 @@ GameObject:
   - component: {fileID: 1696747461}
   - component: {fileID: 1696747460}
   - component: {fileID: 1696747462}
+  - component: {fileID: 1696747463}
   m_Layer: 0
   m_Name: Manager_L
   m_TagString: Untagged
@@ -1032,6 +1033,18 @@ MonoBehaviour:
   happyParticlePrefab: {fileID: 5539631335722287518, guid: 93d1cebcb09d4c94b8c7966734261b3d, type: 3}
   poolSize: 10
   particleDuration: 3
+--- !u!114 &1696747463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696747459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cef4069517e0ce41a23aea06430d95d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1974839878 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7267394287477015001, guid: 97aa421053767ff4d830edffadf41ee7, type: 3}
