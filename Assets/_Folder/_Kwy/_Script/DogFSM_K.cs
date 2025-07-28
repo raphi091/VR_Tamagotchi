@@ -128,7 +128,7 @@ public class DogFSM_K : MonoBehaviour
         }
         else
         {
-            StopWalk();
+            PlayStop();
         }
     }
 
@@ -145,7 +145,7 @@ public class DogFSM_K : MonoBehaviour
     {
         if (other.CompareTag("PlayerHand") && currentState == State.Stroking)
         {
-            StopStrok();
+            PlayStop();
             ParticlePoolManager_LES.Instance.StopParticles(MoodType.Happy);
 
             EnterState(State.Interaction);            
@@ -713,21 +713,30 @@ public class DogFSM_K : MonoBehaviour
 
     public void PlayBark()
     {
-        dogAudio.PlayOneShot(DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].barkSound);
+        if (DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].barkSound != null)
+            dogAudio.PlayOneShot(DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].barkSound);
     }
 
     private void PlayStrok()
     {
-        dogAudio.loop = true;
-        dogAudio.clip = DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].strokSound;
-        dogAudio.Play();
+        if (DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].strokSound != null)
+        {
+            dogAudio.loop = true;
+            dogAudio.clip = DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].strokSound;
+            dogAudio.Play();
+        }
     }
 
-    private void StopStrok()
+    private void PlayStop()
     {
-        dogAudio.Stop();
-        dogAudio.clip = null;
-        dogAudio.loop = false;
+        if (DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].strokSound != null && 
+            DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].indoorWalkSound != null &&
+            DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].outdoorWalkSound != null)
+        {
+            dogAudio.Stop();
+            dogAudio.clip = null;
+            dogAudio.loop = false;
+        }
     }
 
     private void PlayWalk()
@@ -746,12 +755,5 @@ public class DogFSM_K : MonoBehaviour
             dogAudio.clip = DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].outdoorWalkSound;
             dogAudio.Play();
         }
-    }
-
-    private void StopWalk()
-    {
-        dogAudio.Stop();
-        dogAudio.clip = null;
-        dogAudio.loop = false;
     }
 }
