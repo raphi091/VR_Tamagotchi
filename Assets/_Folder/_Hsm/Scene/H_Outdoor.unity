@@ -7505,6 +7505,38 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 8.005421, y: 1.0867118, z: 11.234713}
   m_Center: {x: 3.5027094, y: 0.043355525, z: 1.0195858}
+--- !u!4 &665425180200723596
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792629393450553640}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1792629393450553640
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 665425180200723596}
+  - component: {fileID: 8088626809850366816}
+  m_Layer: 0
+  m_Name: TutorialTTSList
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
 --- !u!1001 &4757437015924123773
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7513,6 +7545,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5041585259836876538, guid: 8950dbe7a0a823b4aafdc5b78cbc9dd1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5784598464459796370, guid: 8950dbe7a0a823b4aafdc5b78cbc9dd1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -7597,11 +7633,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: OutdoorTutorial
       objectReference: {fileID: 0}
+    - target: {fileID: 7775803906610306464, guid: 8950dbe7a0a823b4aafdc5b78cbc9dd1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8950dbe7a0a823b4aafdc5b78cbc9dd1, type: 3}
+--- !u!114 &8088626809850366816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792629393450553640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9cd44362258bbf489ce230c8dd578aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TTS:
+  - {fileID: 8300000, guid: 653a28aef293d9e4a9731fea6d328608, type: 3}
+  - {fileID: 8300000, guid: 7a731fbf097c3cd4ba31a6dd3a0be89b, type: 3}
+  - {fileID: 8300000, guid: 04dd56bdd59c03648986a4249d9dbefb, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -7631,5 +7687,6 @@ SceneRoots:
   - {fileID: 1346950975}
   - {fileID: 298293016}
   - {fileID: 4757437015924123773}
+  - {fileID: 665425180200723596}
   - {fileID: 308031022}
   - {fileID: 893289226}
