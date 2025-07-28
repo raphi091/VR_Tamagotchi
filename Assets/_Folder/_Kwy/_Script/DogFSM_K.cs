@@ -114,6 +114,22 @@ public class DogFSM_K : MonoBehaviour
 
         controller.Move(moveDelta);
         animator.SetFloat("MOVESPEED", agent.velocity.magnitude);
+
+        if (agent.velocity.magnitude > 0)
+        {
+            if (!dogAudio.isPlaying)
+            {
+                PlayWalk();
+            }
+            else
+            {
+                return;
+            }
+        }
+        else
+        {
+            StopWalk();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -129,6 +145,7 @@ public class DogFSM_K : MonoBehaviour
     {
         if (other.CompareTag("PlayerHand") && currentState == State.Stroking)
         {
+            StopStrok();
             ParticlePoolManager_LES.Instance.StopParticles(MoodType.Happy);
 
             EnterState(State.Interaction);            
@@ -466,6 +483,7 @@ public class DogFSM_K : MonoBehaviour
         agent.isStopped = true;
 
         animator.SetBool("STROK", true);
+        PlayStrok();
         ParticlePoolManager_LES.Instance.PlayParticle(MoodType.Happy, particlepoint);
 
         while (true)
@@ -698,18 +716,42 @@ public class DogFSM_K : MonoBehaviour
         dogAudio.PlayOneShot(DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].barkSound);
     }
 
-    public void PlayStrok()
+    private void PlayStrok()
     {
-        dogAudio.PlayOneShot(DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].strokSound);
+        dogAudio.loop = true;
+        dogAudio.clip = DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].strokSound;
+        dogAudio.Play();
     }
 
-    public void PlayWalk()
+    private void StopStrok()
+    {
+        dogAudio.Stop();
+        dogAudio.clip = null;
+        dogAudio.loop = false;
+    }
+
+    private void PlayWalk()
     {
         var scene = SceneManager.GetActiveScene();
 
         if (scene.name == "Indoor")
-            dogAudio.PlayOneShot(DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].indoorWalkSound);
+        {
+            dogAudio.loop = true;
+            dogAudio.clip = DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].indoorWalkSound;
+            dogAudio.Play();
+        }
         else
-            dogAudio.PlayOneShot(DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].outdoorWalkSound);
+        {
+            dogAudio.loop = true;
+            dogAudio.clip = DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].outdoorWalkSound;
+            dogAudio.Play();
+        }
+    }
+
+    private void StopWalk()
+    {
+        dogAudio.Stop();
+        dogAudio.clip = null;
+        dogAudio.loop = false;
     }
 }
