@@ -27,7 +27,7 @@ public class FootstepDetector_LES : MonoBehaviour
 
     void Update()
     {
-        Debug.Log($"isGrounded: {characterController.isGrounded}, Velocity: {characterController.velocity.magnitude}");
+//        Debug.Log($"isGrounded: {characterController.isGrounded}, Velocity: {characterController.velocity.magnitude}");
         // 캐릭터가 땅에 닿아 있고, 움직일 때만 감지
         if (characterController.isGrounded && characterController.velocity.magnitude > 0.1f)
         {
@@ -46,16 +46,16 @@ public class FootstepDetector_LES : MonoBehaviour
 
         private void TriggerFootstep()
     {
-        Debug.Log("TriggerFootstep() 함수 호출 성공!"); // 1. 함수 호출 확인
+//        Debug.Log("TriggerFootstep() 함수 호출 성공!"); // 1. 함수 호출 확인
 
         // Raycast의 길이를 넉넉하게 1m로 늘려서 테스트
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 1.0f))
         {
-            Debug.Log("Raycast가 " + hit.collider.name + " 오브젝트에 닿았습니다. 태그는 '" + hit.collider.tag + "' 입니다."); // 2. Raycast 성공 및 태그 확인
+//            Debug.Log("Raycast가 " + hit.collider.name + " 오브젝트에 닿았습니다. 태그는 '" + hit.collider.tag + "' 입니다."); // 2. Raycast 성공 및 태그 확인
 
             if (hit.collider.CompareTag("InDoorGround"))
             {
-                Debug.Log("InDoorGround 태그 확인! 실내 발소리를 재생합니다."); // 3a. 실내 태그 확인
+//                Debug.Log("InDoorGround 태그 확인! 실내 발소리를 재생합니다."); // 3a. 실내 태그 확인
                 if (indoorWalking != null)
                     PlayerAudio.PlayOneShot(indoorWalking);
                 else
