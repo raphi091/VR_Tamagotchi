@@ -1082,8 +1082,30 @@ public partial class @XRInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""9465c61b-0937-45f6-a39d-6ddf7b3072ea"",
+                    ""path"": ""<XRController>{LeftHand}/{SecondaryButton}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SecondaryButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""a32c30eb-1e95-464f-9a56-3f23de36d922"",
                     ""path"": ""<XRSimulatedController>{LeftHand}/primaryButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PirmaryButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cb0ac26a-548e-426e-8680-1c7d5a6fcf90"",
+                    ""path"": ""<XRController>{LeftHand}/{PrimaryButton}"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -1748,6 +1770,24 @@ public partial class @XRInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PrimaryButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""c37a84e2-7b57-420d-8a04-c0bd50a9c2ab"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SecondaryButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""61a65d8d-7ba3-4139-aaf2-28361d82ccd1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1924,6 +1964,28 @@ public partial class @XRInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Call Dog"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""404c2855-52c2-4bc6-8e43-aef51aafa6bd"",
+                    ""path"": ""<XRController>{RightHand}/{PrimaryButton}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PrimaryButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6f540c8a-746f-4fe2-a915-0d24adb13e15"",
+                    ""path"": ""<XRController>{RightHand}/{SecondaryButton}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SecondaryButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -2585,7 +2647,7 @@ public partial class @XRInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""00821533-fc57-4569-a1c4-6c63ab132c57"",
-                    ""path"": ""<XRController>{RightHand}/gripPressed"",
+                    ""path"": ""<XRController>{RightHand}/{PrimaryButton}"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -3010,6 +3072,8 @@ public partial class @XRInput: IInputActionCollection2, IDisposable
         m_XRIRightHandInteraction_ScaleToggle = m_XRIRightHandInteraction.FindAction("Scale Toggle", throwIfNotFound: true);
         m_XRIRightHandInteraction_ScaleDelta = m_XRIRightHandInteraction.FindAction("Scale Delta", throwIfNotFound: true);
         m_XRIRightHandInteraction_CallDog = m_XRIRightHandInteraction.FindAction("Call Dog", throwIfNotFound: true);
+        m_XRIRightHandInteraction_PrimaryButton = m_XRIRightHandInteraction.FindAction("PrimaryButton", throwIfNotFound: true);
+        m_XRIRightHandInteraction_SecondaryButton = m_XRIRightHandInteraction.FindAction("SecondaryButton", throwIfNotFound: true);
         // XRI RightHand Locomotion
         m_XRIRightHandLocomotion = asset.FindActionMap("XRI RightHand Locomotion", throwIfNotFound: true);
         m_XRIRightHandLocomotion_TeleportSelect = m_XRIRightHandLocomotion.FindAction("Teleport Select", throwIfNotFound: true);
@@ -3788,6 +3852,8 @@ public partial class @XRInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_XRIRightHandInteraction_ScaleToggle;
     private readonly InputAction m_XRIRightHandInteraction_ScaleDelta;
     private readonly InputAction m_XRIRightHandInteraction_CallDog;
+    private readonly InputAction m_XRIRightHandInteraction_PrimaryButton;
+    private readonly InputAction m_XRIRightHandInteraction_SecondaryButton;
     public struct XRIRightHandInteractionActions
     {
         private @XRInput m_Wrapper;
@@ -3804,6 +3870,8 @@ public partial class @XRInput: IInputActionCollection2, IDisposable
         public InputAction @ScaleToggle => m_Wrapper.m_XRIRightHandInteraction_ScaleToggle;
         public InputAction @ScaleDelta => m_Wrapper.m_XRIRightHandInteraction_ScaleDelta;
         public InputAction @CallDog => m_Wrapper.m_XRIRightHandInteraction_CallDog;
+        public InputAction @PrimaryButton => m_Wrapper.m_XRIRightHandInteraction_PrimaryButton;
+        public InputAction @SecondaryButton => m_Wrapper.m_XRIRightHandInteraction_SecondaryButton;
         public InputActionMap Get() { return m_Wrapper.m_XRIRightHandInteraction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -3849,6 +3917,12 @@ public partial class @XRInput: IInputActionCollection2, IDisposable
             @CallDog.started += instance.OnCallDog;
             @CallDog.performed += instance.OnCallDog;
             @CallDog.canceled += instance.OnCallDog;
+            @PrimaryButton.started += instance.OnPrimaryButton;
+            @PrimaryButton.performed += instance.OnPrimaryButton;
+            @PrimaryButton.canceled += instance.OnPrimaryButton;
+            @SecondaryButton.started += instance.OnSecondaryButton;
+            @SecondaryButton.performed += instance.OnSecondaryButton;
+            @SecondaryButton.canceled += instance.OnSecondaryButton;
         }
 
         private void UnregisterCallbacks(IXRIRightHandInteractionActions instance)
@@ -3889,6 +3963,12 @@ public partial class @XRInput: IInputActionCollection2, IDisposable
             @CallDog.started -= instance.OnCallDog;
             @CallDog.performed -= instance.OnCallDog;
             @CallDog.canceled -= instance.OnCallDog;
+            @PrimaryButton.started -= instance.OnPrimaryButton;
+            @PrimaryButton.performed -= instance.OnPrimaryButton;
+            @PrimaryButton.canceled -= instance.OnPrimaryButton;
+            @SecondaryButton.started -= instance.OnSecondaryButton;
+            @SecondaryButton.performed -= instance.OnSecondaryButton;
+            @SecondaryButton.canceled -= instance.OnSecondaryButton;
         }
 
         public void RemoveCallbacks(IXRIRightHandInteractionActions instance)
@@ -4390,6 +4470,8 @@ public partial class @XRInput: IInputActionCollection2, IDisposable
         void OnScaleToggle(InputAction.CallbackContext context);
         void OnScaleDelta(InputAction.CallbackContext context);
         void OnCallDog(InputAction.CallbackContext context);
+        void OnPrimaryButton(InputAction.CallbackContext context);
+        void OnSecondaryButton(InputAction.CallbackContext context);
     }
     public interface IXRIRightHandLocomotionActions
     {
