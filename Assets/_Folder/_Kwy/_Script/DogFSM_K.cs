@@ -36,9 +36,11 @@ public class DogFSM_K : MonoBehaviour
     public float sightRange = 1f;
     public float loseSightRange = 2f;
 
+    private PetController_J control;
     private NavMeshAgent agent;
     private CharacterController controller;
     private Animator animator;
+    private AudioSource dogAudio;
 
     private float currentintimacy;
     private float rotationSpeed = 10f;
@@ -65,6 +67,9 @@ public class DogFSM_K : MonoBehaviour
 
     private void Awake()
     {
+        if (!TryGetComponent(out control))
+            Debug.LogWarning("DogFSM ] PetController_J 없음");
+
         if (!TryGetComponent(out agent))
             Debug.LogWarning("DogFSM ] NavMeshAgent 없음");
 
@@ -73,6 +78,9 @@ public class DogFSM_K : MonoBehaviour
 
         if (!TryGetComponent(out animator))
             Debug.LogWarning("DogFSM ] Animator 없음");
+
+        if (!TryGetComponent(out dogAudio))
+            Debug.LogWarning("DogFSM ] AudioSource 없음");
 
         agent.updatePosition = false;
         agent.updateRotation = false;
@@ -290,6 +298,8 @@ public class DogFSM_K : MonoBehaviour
                     {
                         Debug.Log("월!");
                         animator.SetTrigger("BARK");
+
+                        yield return new WaitForSeconds(4f);
                     }
                 }
             }
@@ -332,13 +342,13 @@ public class DogFSM_K : MonoBehaviour
             {
                 animator.SetBool("PLAY", true);
                 animator.SetInteger("PLAYNUM", 3);
-                playtime = 7f;
+                playtime = 8f;
             }
             else
             {
                 animator.SetBool("PLAY", true);
                 animator.SetInteger("PLAYNUM", 4);
-                playtime = 8f;
+                playtime = 10f;
             }
         }
         else
@@ -359,7 +369,7 @@ public class DogFSM_K : MonoBehaviour
             {
                 animator.SetBool("PLAY", true);
                 animator.SetInteger("PLAYNUM", 3);
-                playtime = 7f;
+                playtime = 8f;
             }
         }
         
@@ -681,5 +691,25 @@ public class DogFSM_K : MonoBehaviour
 
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(transform.position, loseSightRange);
+    }
+
+    public void PlayBark()
+    {
+        dogAudio.PlayOneShot(DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].barkSound);
+    }
+
+    public void PlayStrok()
+    {
+        dogAudio.PlayOneShot(DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].strokSound);
+    }
+
+    public void PlayWalk()
+    {
+        var scene = SceneManager.GetActiveScene();
+
+        if (scene.name == "Indoor")
+            dogAudio.PlayOneShot(DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].indoorWalkSound);
+        else
+            dogAudio.PlayOneShot(DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].outdoorWalkSound);
     }
 }
