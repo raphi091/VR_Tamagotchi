@@ -9,17 +9,25 @@ public class Ch_Knife : XRGrabInteractable
     private List<Transform> slice_objs;
     private Transform sliceQuad;
     private Vector3 previous_pos;
-    private AudioClip cutSound;
+    private AudioSource audioSource;
     
     public Material cross_m;
     public float cutForce = 50f;
     public LayerMask layer;
     
     [Header("Knife")]
+    [SerializeField] private AudioClip cutSound;
     [SerializeField] private Transform handPoint;
     [SerializeField] Ch_Blade blade;
     [SerializeField] Ch_CuttedFood cuttedFood;
 
+    protected override void Awake()
+    {
+        TryGetComponent(out audioSource);
+        audioSource.clip = cutSound;
+        base.Awake();
+    }
+    
     protected override void OnEnable()
     {
         blade.onSliceHit.AddListener(OnSlicehit);
@@ -59,8 +67,6 @@ public class Ch_Knife : XRGrabInteractable
      {
          if (target.TryGetComponent(out Ch_TreatFood c))
          {
-             cutSound=c.cutSound;
-             SoundManager.Instance.PlaySFX(cutSound);
              slice_objs = c.slices;
      
              Vector3 slice_normal = Vector3.Cross(transform.position - previous_pos, transform.forward);
@@ -89,6 +95,10 @@ public class Ch_Knife : XRGrabInteractable
                  }
                  Setup_Slice_components(upperhull);
                  Setup_Slice_components(lowerhull);
+                 if (audioSource.isPlaying)
+                 {
+                     audioSource.Play();
+                 }
                  Destroy(target);
              }
          }
@@ -102,7 +112,6 @@ public class Ch_Knife : XRGrabInteractable
          Ch_TreatFood t =g.AddComponent<Ch_TreatFood>();
          rb.AddExplosionForce(cutForce, g.transform.position, 0.1f);
          t.cuttedFood=cuttedFood;
-         t.cutSound=cutSound;
          t.OnCutted();
      }
 
