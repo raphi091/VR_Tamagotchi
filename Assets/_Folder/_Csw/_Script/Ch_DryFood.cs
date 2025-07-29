@@ -56,7 +56,6 @@ public class Ch_DryFood : MonoBehaviour, Ch_BowlFood
         else
         {
             particle.Stop();
-            audioSource.Stop();
         }
     }
 }

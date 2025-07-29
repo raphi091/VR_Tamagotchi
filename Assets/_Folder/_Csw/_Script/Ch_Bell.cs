@@ -16,7 +16,7 @@ public class Ch_Bell : MonoBehaviour
 
     void Update()
     {
-        if (!ringged&&interactable.velocity.magnitude>1f)
+        if (!ringged&&interactable.velocity.magnitude>0.7f)
         {
             audioSource.Play();
             ringged = true;
