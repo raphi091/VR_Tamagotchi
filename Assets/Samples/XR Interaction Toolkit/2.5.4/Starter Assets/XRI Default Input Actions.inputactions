@@ -852,18 +852,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "SecondaryButton",
+                    "name": "PrimaryButton",
                     "type": "Button",
-                    "id": "66447594-5677-4aaa-b966-24b6786ed95a",
+                    "id": "46818d61-18b7-4faf-89d5-657ec6b74bbb",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "PirmaryButton",
+                    "name": "SecondaryButton",
                     "type": "Button",
-                    "id": "46818d61-18b7-4faf-89d5-657ec6b74bbb",
+                    "id": "66447594-5677-4aaa-b966-24b6786ed95a",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -1076,7 +1076,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PirmaryButton",
+                    "action": "PrimaryButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -1087,7 +1087,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PirmaryButton",
+                    "action": "PrimaryButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -2592,7 +2592,7 @@
                 {
                     "name": "",
                     "id": "ba32eb92-dc55-4781-b71a-9e881a10342e",
-                    "path": "<XRController>{LeftHand}/primaryButton",
+                    "path": "<XRController>{RightHand}/{PrimaryButton}",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -2615,17 +2615,6 @@
                     "name": "",
                     "id": "198e6869-709e-448d-96d4-27186c9d56e6",
                     "path": "<Touchscreen>/Press",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Click",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "00821533-fc57-4569-a1c4-6c63ab132c57",
-                    "path": "<XRController>{RightHand}/{PrimaryButton}",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

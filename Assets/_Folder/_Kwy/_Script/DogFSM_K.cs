@@ -27,6 +27,7 @@ public class DogFSM_K : MonoBehaviour
 
     [SerializeField] private Transform ToiletPoint;
     [SerializeField] private Transform EatPoint;
+    [SerializeField] private GameObject nametext;
 
     public Transform mouthpoint;
     public Transform particlepoint;
@@ -42,11 +43,8 @@ public class DogFSM_K : MonoBehaviour
     private Animator animator;
     private AudioSource dogAudio;
 
-    private float currentintimacy;
     private float rotationSpeed = 10f;
     private float lastStateChangeTime;
-    private float hungerpercent;
-    private float bowelpercent;
     private bool isSelected = false;
     private bool isCalled = false;
     private bool isWandering;
@@ -56,9 +54,6 @@ public class DogFSM_K : MonoBehaviour
     private Coroutine currentStateCoroutine;
 
     public PersonalityData_LES Data => data;
-    public float Currentintimacy => currentintimacy;
-    public float Hungerpercent => hungerpercent;
-    public float Bowelpercent => bowelpercent;
 
     [Header("Debug")]
     public bool debug = false;
@@ -82,11 +77,10 @@ public class DogFSM_K : MonoBehaviour
         if (!TryGetComponent(out dogAudio))
             Debug.LogWarning("DogFSM ] AudioSource 없음");
 
+        nametext.SetActive(false);
+
         agent.updatePosition = false;
         agent.updateRotation = false;
-
-        hungerpercent = 80f;
-        bowelpercent = 100f;
     }
 
     private void Start()
@@ -96,8 +90,8 @@ public class DogFSM_K : MonoBehaviour
 
     private void Update()
     {
-        hungerpercent -= Time.deltaTime * Random.Range(Hunger.x, Hunger.y);
-        bowelpercent -= Time.deltaTime * Random.Range(Toilet.x, Toilet.y);
+        control.currentHunger -= Time.deltaTime * Random.Range(Hunger.x, Hunger.y);
+        control.currentBowel -= Time.deltaTime * Random.Range(Toilet.x, Toilet.y);
 
         if (agent.velocity.sqrMagnitude > 0.1f)
         {
@@ -130,6 +124,11 @@ public class DogFSM_K : MonoBehaviour
         {
             PlayStop();
         }
+
+        if (nametext.activeSelf)
+        {
+            nametext.transform.LookAt(Camera.main.transform);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -149,17 +148,6 @@ public class DogFSM_K : MonoBehaviour
             ParticlePoolManager_LES.Instance.StopParticles(MoodType.Happy);
 
             EnterState(State.Interaction);            
-        }
-
-        if (other.CompareTag("Player"))
-        {
-            // "나 이제 갈게" 라고 매니저에게 알림
-            DogInteractionManager_K.instance.CancelRequest(this);
-
-            if (currentState == State.InteractionRequest || currentState == State.Interaction)
-            {
-                ReturnToWander();
-            }
         }
     }
 
@@ -249,13 +237,13 @@ public class DogFSM_K : MonoBehaviour
                 yield break;
             }
 
-            if (hungerpercent <= 10f || isHunger)
+            if (control.currentHunger <= 10f || isHunger)
             {
                 EnterState(State.Hunger);
                 yield break;
             }
 
-            if (bowelpercent <= 10f && !isHunger && ToiletPoint != null)
+            if (control.currentBowel <= 10f && !isHunger && ToiletPoint != null)
             {
                 EnterState(State.Toilet);
                 yield break;
@@ -279,12 +267,12 @@ public class DogFSM_K : MonoBehaviour
 
                     if (randAction <= 5)
                     {
-                        if (currentintimacy >= 80)
+                        if (control.currentIntimacy >= 80)
                         {
                             rang = data.Active_MovingRang;
                             movespeed = data.Active_walkSpeed;
                         }
-                        else if (currentintimacy >= 20)
+                        else if (control.currentIntimacy >= 20)
                         {
                             rang = data.MovingRang;
                             movespeed = data.walkSpeed;
@@ -393,6 +381,9 @@ public class DogFSM_K : MonoBehaviour
         yield return new WaitForSeconds(playtime);
 
         animator.SetBool("PLAY", false);
+
+        yield return new WaitForSeconds(0.5f);
+
         EnterState(State.Wander);
     }
 
@@ -401,16 +392,17 @@ public class DogFSM_K : MonoBehaviour
         DogInteractionManager_K.instance.RequestInteraction(this);
         agent.isStopped = true;
         agent.ResetPath();
+        ShowText(particlepoint.position);
 
         while (true)
         {
-            if (hungerpercent <= 10f || isHunger)
+            if (control.currentHunger <= 10f || isHunger)
             {
                 EnterState(State.Hunger);
                 yield break;
             }
 
-            if (bowelpercent <= 10f && !isHunger && ToiletPoint != null)
+            if (control.currentBowel <= 10f && !isHunger && ToiletPoint != null)
             {
                 EnterState(State.Toilet);
                 yield break;
@@ -439,13 +431,13 @@ public class DogFSM_K : MonoBehaviour
 
         while (isSelected)
         {
-            if (hungerpercent <= 10f || isHunger)
+            if (control.currentHunger <= 10f || isHunger)
             {
                 EnterState(State.Hunger);
                 yield break;
             }
 
-            if (bowelpercent <= 10f && !isHunger && ToiletPoint != null)
+            if (control.currentBowel <= 10f && !isHunger && ToiletPoint != null)
             {
                 EnterState(State.Toilet);
                 yield break;
@@ -473,6 +465,7 @@ public class DogFSM_K : MonoBehaviour
     public void ReturnToWander()
     {
         animator.SetBool("INTERACT", false);
+        nametext.SetActive(false);
         isSelected = false;
         EnterState(State.Wander);
     }
@@ -488,7 +481,7 @@ public class DogFSM_K : MonoBehaviour
 
         while (true)
         {
-            currentintimacy += 0.2f;
+            control.currentIntimacy += 0.2f;
             yield return null;
         }
     }
@@ -512,7 +505,7 @@ public class DogFSM_K : MonoBehaviour
 
         animator.SetBool("SIT", false);
 
-        currentintimacy += 5;
+        control.currentIntimacy += 5;
         EnterState(State.Interaction);
     }
 
@@ -535,7 +528,7 @@ public class DogFSM_K : MonoBehaviour
 
         animator.SetBool("LIE", false);
 
-        currentintimacy += 5;
+        control.currentIntimacy += 5;
         EnterState(State.Interaction);
     }
 
@@ -599,7 +592,7 @@ public class DogFSM_K : MonoBehaviour
         }
 
         // 5. 임무 완수 후 다시 상호작용 대기 상태로 복귀
-        currentintimacy += 5;
+        control.currentIntimacy += 5;
         EnterState(State.Interaction);
     }
 
@@ -624,11 +617,13 @@ public class DogFSM_K : MonoBehaviour
         if (currentState == State.Hunger)
         {
             Debug.Log($"{name}: 간식 고맙습니다!");
-            hungerpercent = 100f;
+            control.currentHunger = 100f;
             isHunger = false;
 
             animator.SetTrigger("EAT");
-            currentintimacy += 5;
+            control.currentIntimacy += 5;
+            control.currentIntimacy += 5;
+            control.currentIntimacy += 5;
         }
     }
 
@@ -651,7 +646,7 @@ public class DogFSM_K : MonoBehaviour
         petcon.petModelSlot.gameObject.SetActive(true);
 
         isBowel = false;
-        bowelpercent = 100f;
+        control.currentBowel = 100f;
         EnterState(State.Wander);
     }
 
@@ -666,6 +661,8 @@ public class DogFSM_K : MonoBehaviour
 
     private IEnumerator Called_co()
     {
+        animator.SetBool("PLAY", false);
+
         Debug.Log($"{name}: 부르셨나요? 지금 갑니다!");
         isCalled = true;
         agent.isStopped = false;
@@ -755,5 +752,14 @@ public class DogFSM_K : MonoBehaviour
             dogAudio.clip = DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].outdoorWalkSound;
             dogAudio.Play();
         }
+    }
+
+    private void ShowText(Vector3 position)
+    {
+        position.y += 0.2f;
+        nametext.transform.position = position;
+        nametext.transform.LookAt(Camera.main.transform);
+
+        nametext.SetActive(true);
     }
 }

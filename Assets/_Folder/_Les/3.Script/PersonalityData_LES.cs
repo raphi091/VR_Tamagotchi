@@ -8,8 +8,6 @@ public enum personalityType
     Curious //호기심
 }
 
-
-
 [CreateAssetMenu(fileName = "NewPetPersonality", menuName = "Pet/PersonalityData")]
 public class PersonalityData_LES : ScriptableObject
 {

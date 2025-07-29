@@ -15,9 +15,11 @@ MonoBehaviour:
   petTypeName: "\uBCF5\uC11C"
   petPicture: {fileID: 0}
   modelPrefab: {fileID: 6310775375096409862, guid: 4ffaa625ac66c594c90771b07016497e, type: 3}
-  DogSound:
-  - {fileID: 8300000, guid: 3474a1ef488504013a6cf1a43cfa554c, type: 3}
-  - {fileID: 8300000, guid: da29b62a44772499eb2c3d319163d7bb, type: 3}
+  barkSound: {fileID: 8300000, guid: c06b7ee19eab39746a0633cb920ba331, type: 3}
+  strokSound: {fileID: 8300000, guid: 08e3b7f3223d93b49bcc5252dfd99dc0, type: 3}
+  indoorWalkSound: {fileID: 8300000, guid: c3077f0071fec604c8c850b14189f6b9, type: 3}
+  outdoorWalkSound: {fileID: 8300000, guid: 3eaa2c870a8f88b45876d9f606e74ac2, type: 3}
   petAnimator: {fileID: 0}
   petAvater: {fileID: 9000000, guid: 61262e6c0c5f89e479f17a4010ccd352, type: 3}
+  petSize: 0
   description: 

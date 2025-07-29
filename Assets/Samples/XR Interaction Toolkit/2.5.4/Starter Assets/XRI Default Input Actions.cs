@@ -874,18 +874,18 @@ public partial class @XRInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""SecondaryButton"",
+                    ""name"": ""PrimaryButton"",
                     ""type"": ""Button"",
-                    ""id"": ""66447594-5677-4aaa-b966-24b6786ed95a"",
+                    ""id"": ""46818d61-18b7-4faf-89d5-657ec6b74bbb"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""PirmaryButton"",
+                    ""name"": ""SecondaryButton"",
                     ""type"": ""Button"",
-                    ""id"": ""46818d61-18b7-4faf-89d5-657ec6b74bbb"",
+                    ""id"": ""66447594-5677-4aaa-b966-24b6786ed95a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -1098,7 +1098,7 @@ public partial class @XRInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PirmaryButton"",
+                    ""action"": ""PrimaryButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -1109,7 +1109,7 @@ public partial class @XRInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PirmaryButton"",
+                    ""action"": ""PrimaryButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -2614,7 +2614,7 @@ public partial class @XRInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""ba32eb92-dc55-4781-b71a-9e881a10342e"",
-                    ""path"": ""<XRController>{LeftHand}/primaryButton"",
+                    ""path"": ""<XRController>{RightHand}/{PrimaryButton}"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -2637,17 +2637,6 @@ public partial class @XRInput: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""198e6869-709e-448d-96d4-27186c9d56e6"",
                     ""path"": ""<Touchscreen>/Press"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Click"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""00821533-fc57-4569-a1c4-6c63ab132c57"",
-                    ""path"": ""<XRController>{RightHand}/{PrimaryButton}"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -3030,8 +3019,8 @@ public partial class @XRInput: IInputActionCollection2, IDisposable
         m_XRILeftHandInteraction_ScaleToggle = m_XRILeftHandInteraction.FindAction("Scale Toggle", throwIfNotFound: true);
         m_XRILeftHandInteraction_ScaleDelta = m_XRILeftHandInteraction.FindAction("Scale Delta", throwIfNotFound: true);
         m_XRILeftHandInteraction_Menu = m_XRILeftHandInteraction.FindAction("Menu", throwIfNotFound: true);
+        m_XRILeftHandInteraction_PrimaryButton = m_XRILeftHandInteraction.FindAction("PrimaryButton", throwIfNotFound: true);
         m_XRILeftHandInteraction_SecondaryButton = m_XRILeftHandInteraction.FindAction("SecondaryButton", throwIfNotFound: true);
-        m_XRILeftHandInteraction_PirmaryButton = m_XRILeftHandInteraction.FindAction("PirmaryButton", throwIfNotFound: true);
         // XRI LeftHand Locomotion
         m_XRILeftHandLocomotion = asset.FindActionMap("XRI LeftHand Locomotion", throwIfNotFound: true);
         m_XRILeftHandLocomotion_TeleportSelect = m_XRILeftHandLocomotion.FindAction("Teleport Select", throwIfNotFound: true);
@@ -3450,8 +3439,8 @@ public partial class @XRInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_XRILeftHandInteraction_ScaleToggle;
     private readonly InputAction m_XRILeftHandInteraction_ScaleDelta;
     private readonly InputAction m_XRILeftHandInteraction_Menu;
+    private readonly InputAction m_XRILeftHandInteraction_PrimaryButton;
     private readonly InputAction m_XRILeftHandInteraction_SecondaryButton;
-    private readonly InputAction m_XRILeftHandInteraction_PirmaryButton;
     public struct XRILeftHandInteractionActions
     {
         private @XRInput m_Wrapper;
@@ -3468,8 +3457,8 @@ public partial class @XRInput: IInputActionCollection2, IDisposable
         public InputAction @ScaleToggle => m_Wrapper.m_XRILeftHandInteraction_ScaleToggle;
         public InputAction @ScaleDelta => m_Wrapper.m_XRILeftHandInteraction_ScaleDelta;
         public InputAction @Menu => m_Wrapper.m_XRILeftHandInteraction_Menu;
+        public InputAction @PrimaryButton => m_Wrapper.m_XRILeftHandInteraction_PrimaryButton;
         public InputAction @SecondaryButton => m_Wrapper.m_XRILeftHandInteraction_SecondaryButton;
-        public InputAction @PirmaryButton => m_Wrapper.m_XRILeftHandInteraction_PirmaryButton;
         public InputActionMap Get() { return m_Wrapper.m_XRILeftHandInteraction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -3515,12 +3504,12 @@ public partial class @XRInput: IInputActionCollection2, IDisposable
             @Menu.started += instance.OnMenu;
             @Menu.performed += instance.OnMenu;
             @Menu.canceled += instance.OnMenu;
+            @PrimaryButton.started += instance.OnPrimaryButton;
+            @PrimaryButton.performed += instance.OnPrimaryButton;
+            @PrimaryButton.canceled += instance.OnPrimaryButton;
             @SecondaryButton.started += instance.OnSecondaryButton;
             @SecondaryButton.performed += instance.OnSecondaryButton;
             @SecondaryButton.canceled += instance.OnSecondaryButton;
-            @PirmaryButton.started += instance.OnPirmaryButton;
-            @PirmaryButton.performed += instance.OnPirmaryButton;
-            @PirmaryButton.canceled += instance.OnPirmaryButton;
         }
 
         private void UnregisterCallbacks(IXRILeftHandInteractionActions instance)
@@ -3561,12 +3550,12 @@ public partial class @XRInput: IInputActionCollection2, IDisposable
             @Menu.started -= instance.OnMenu;
             @Menu.performed -= instance.OnMenu;
             @Menu.canceled -= instance.OnMenu;
+            @PrimaryButton.started -= instance.OnPrimaryButton;
+            @PrimaryButton.performed -= instance.OnPrimaryButton;
+            @PrimaryButton.canceled -= instance.OnPrimaryButton;
             @SecondaryButton.started -= instance.OnSecondaryButton;
             @SecondaryButton.performed -= instance.OnSecondaryButton;
             @SecondaryButton.canceled -= instance.OnSecondaryButton;
-            @PirmaryButton.started -= instance.OnPirmaryButton;
-            @PirmaryButton.performed -= instance.OnPirmaryButton;
-            @PirmaryButton.canceled -= instance.OnPirmaryButton;
         }
 
         public void RemoveCallbacks(IXRILeftHandInteractionActions instance)
@@ -4425,8 +4414,8 @@ public partial class @XRInput: IInputActionCollection2, IDisposable
         void OnScaleToggle(InputAction.CallbackContext context);
         void OnScaleDelta(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
+        void OnPrimaryButton(InputAction.CallbackContext context);
         void OnSecondaryButton(InputAction.CallbackContext context);
-        void OnPirmaryButton(InputAction.CallbackContext context);
     }
     public interface IXRILeftHandLocomotionActions
     {

@@ -68,8 +68,8 @@ public class GameManager : MonoBehaviour
             if (pet.gameObject.activeSelf)
             {
                 // PetController의 실시간 값을 영구 데이터(petData)에 덮어쓰기
-                pet.petData.hungerper = pet.currentHunger;
                 pet.petData.intimacyper = pet.currentIntimacy;
+                pet.petData.hungerper = pet.currentHunger;
                 pet.petData.bowelper = pet.currentBowel;
             }
         }
