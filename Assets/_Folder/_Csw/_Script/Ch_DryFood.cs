@@ -35,7 +35,7 @@ public class Ch_DryFood : MonoBehaviour, Ch_BowlFood
 
     private void Update()
     {
-        if (interactable.velocity.magnitude > 0.05f)
+        if (interactable.velocity.magnitude > 0.08f)
         {
             if (!audioSource.isPlaying)
             {
@@ -56,6 +56,7 @@ public class Ch_DryFood : MonoBehaviour, Ch_BowlFood
         else
         {
             particle.Stop();
+            audioSource.Stop();
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class FoodBowl : MonoBehaviour
@@ -22,9 +23,12 @@ public class FoodBowl : MonoBehaviour
     [SerializeField] private float dryfoodUp;
     [SerializeField] private float foodThreshold = 0f;
     [SerializeField] private Transform foodPoint;
-    
-    
-    
+
+    private void Awake()
+    {
+        audioSource=GetComponent<AudioSource>();
+    }
+
     private void OnEnable()
     {
         initPos = dryfoodModel.position;
@@ -109,7 +113,7 @@ public class FoodBowl : MonoBehaviour
 
     public void ClearBowl()
     {
-        currentBowlInstance.SetActive(false);
+        currentBowlInstance?.SetActive(false);
         IsFilled = false;
     }
 

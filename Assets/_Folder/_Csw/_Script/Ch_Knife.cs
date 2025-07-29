@@ -10,6 +10,7 @@ public class Ch_Knife : XRGrabInteractable
     private Transform sliceQuad;
     private Vector3 previous_pos;
     private AudioSource audioSource;
+    private Ch_CuttedFood cuttedFood;
     
     public Material cross_m;
     public float cutForce = 50f;
@@ -19,7 +20,6 @@ public class Ch_Knife : XRGrabInteractable
     [SerializeField] private AudioClip cutSound;
     [SerializeField] private Transform handPoint;
     [SerializeField] Ch_Blade blade;
-    [SerializeField] Ch_CuttedFood cuttedFood;
 
     protected override void Awake()
     {
@@ -68,6 +68,7 @@ public class Ch_Knife : XRGrabInteractable
          if (target.TryGetComponent(out Ch_TreatFood c))
          {
              slice_objs = c.slices;
+             cuttedFood = c.cuttedFood;
      
              Vector3 slice_normal = Vector3.Cross(transform.position - previous_pos, transform.forward);
      
