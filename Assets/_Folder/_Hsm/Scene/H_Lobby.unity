@@ -754,6 +754,11 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!4 &957130479 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8248180871664159438, guid: 9ac35853f1da8e54c869d57cb79a268e, type: 3}
+  m_PrefabInstance: {fileID: 1180075556}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1068461684 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5501735570610387229, guid: a827e66e6fce9924caf858d98fc98e37, type: 3}
@@ -829,13 +834,105 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3610959911683878097, guid: 9ac35853f1da8e54c869d57cb79a268e, type: 3}
+      propertyPath: stepInterval
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 3610959911683878097, guid: 9ac35853f1da8e54c869d57cb79a268e, type: 3}
+      propertyPath: bodyTransform
+      value: 
+      objectReference: {fileID: 957130479}
+    - target: {fileID: 3610959911683878097, guid: 9ac35853f1da8e54c869d57cb79a268e, type: 3}
+      propertyPath: characterBaseSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3610959911683878097, guid: 9ac35853f1da8e54c869d57cb79a268e, type: 3}
+      propertyPath: sceneSets.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3610959911683878097, guid: 9ac35853f1da8e54c869d57cb79a268e, type: 3}
+      propertyPath: turnAction.m_Reference
+      value: 
+      objectReference: {fileID: -8525429354371678379, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+    - target: {fileID: 3610959911683878097, guid: 9ac35853f1da8e54c869d57cb79a268e, type: 3}
       propertyPath: footstepClips.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3610959911683878097, guid: 9ac35853f1da8e54c869d57cb79a268e, type: 3}
+      propertyPath: turnAction.m_UseReference
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3610959911683878097, guid: 9ac35853f1da8e54c869d57cb79a268e, type: 3}
+      propertyPath: turnAction.m_Action.m_Name
+      value: Turn
       objectReference: {fileID: 0}
     - target: {fileID: 3610959911683878097, guid: 9ac35853f1da8e54c869d57cb79a268e, type: 3}
       propertyPath: footstepClips.Array.data[0]
       value: 
       objectReference: {fileID: 8300000, guid: dbc08626501d13e4bac622508194466c, type: 3}
+    - target: {fileID: 3610959911683878097, guid: 9ac35853f1da8e54c869d57cb79a268e, type: 3}
+      propertyPath: sceneSets.Array.data[0].sceneName
+      value: H_Lobby
+      objectReference: {fileID: 0}
+    - target: {fileID: 3610959911683878097, guid: 9ac35853f1da8e54c869d57cb79a268e, type: 3}
+      propertyPath: sceneSets.Array.data[1].sceneName
+      value: H_Indoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 3610959911683878097, guid: 9ac35853f1da8e54c869d57cb79a268e, type: 3}
+      propertyPath: sceneSets.Array.data[2].sceneName
+      value: H_Lunch
+      objectReference: {fileID: 0}
+    - target: {fileID: 3610959911683878097, guid: 9ac35853f1da8e54c869d57cb79a268e, type: 3}
+      propertyPath: sceneSets.Array.data[3].sceneName
+      value: H_Outdoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 3610959911683878097, guid: 9ac35853f1da8e54c869d57cb79a268e, type: 3}
+      propertyPath: sceneSets.Array.data[0].footstepClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3610959911683878097, guid: 9ac35853f1da8e54c869d57cb79a268e, type: 3}
+      propertyPath: sceneSets.Array.data[1].footstepClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3610959911683878097, guid: 9ac35853f1da8e54c869d57cb79a268e, type: 3}
+      propertyPath: sceneSets.Array.data[2].footstepClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3610959911683878097, guid: 9ac35853f1da8e54c869d57cb79a268e, type: 3}
+      propertyPath: sceneSets.Array.data[3].footstepClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3610959911683878097, guid: 9ac35853f1da8e54c869d57cb79a268e, type: 3}
+      propertyPath: sceneSets.Array.data[0].footstepClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: dbc08626501d13e4bac622508194466c, type: 3}
+    - target: {fileID: 3610959911683878097, guid: 9ac35853f1da8e54c869d57cb79a268e, type: 3}
+      propertyPath: sceneSets.Array.data[1].footstepClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: dbc08626501d13e4bac622508194466c, type: 3}
+    - target: {fileID: 3610959911683878097, guid: 9ac35853f1da8e54c869d57cb79a268e, type: 3}
+      propertyPath: sceneSets.Array.data[1].footstepClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: dbc08626501d13e4bac622508194466c, type: 3}
+    - target: {fileID: 3610959911683878097, guid: 9ac35853f1da8e54c869d57cb79a268e, type: 3}
+      propertyPath: sceneSets.Array.data[2].footstepClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: dbc08626501d13e4bac622508194466c, type: 3}
+    - target: {fileID: 3610959911683878097, guid: 9ac35853f1da8e54c869d57cb79a268e, type: 3}
+      propertyPath: sceneSets.Array.data[3].footstepClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: bd20143568510ff4a974d837f274aa1e, type: 3}
+    - target: {fileID: 3610959911683878097, guid: 9ac35853f1da8e54c869d57cb79a268e, type: 3}
+      propertyPath: turnAction.m_Action.m_SingletonActionBindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3610959911683878097, guid: 9ac35853f1da8e54c869d57cb79a268e, type: 3}
+      propertyPath: turnAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Id
+      value: f8721959-617b-4dfa-aee0-e58b0de3ebee
+      objectReference: {fileID: 0}
+    - target: {fileID: 3610959911683878097, guid: 9ac35853f1da8e54c869d57cb79a268e, type: 3}
+      propertyPath: turnAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Turn
+      objectReference: {fileID: 0}
     - target: {fileID: 4516023281853813982, guid: 9ac35853f1da8e54c869d57cb79a268e, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1009,7 +1106,7 @@ MonoBehaviour:
   doorBall: {fileID: 8300000, guid: ce049c11b5f0cbc47bbcf87c7054b1d9, type: 3}
   door: {fileID: 8300000, guid: 9c28b065cc8428d4c9204a19521ae920, type: 3}
   speed: 1200
-  debug: 1
+  debug: 0
 --- !u!4 &1696747461
 Transform:
   m_ObjectHideFlags: 0

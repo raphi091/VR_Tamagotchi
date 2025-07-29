@@ -3248,6 +3248,66 @@ PrefabInstance:
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8773060247567484704, guid: 78960e9149892584c97c64753d51b066, type: 3}
+      propertyPath: stepInterval
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 8773060247567484704, guid: 78960e9149892584c97c64753d51b066, type: 3}
+      propertyPath: bodyTransform
+      value: 
+      objectReference: {fileID: 876173580}
+    - target: {fileID: 8773060247567484704, guid: 78960e9149892584c97c64753d51b066, type: 3}
+      propertyPath: sceneSets.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8773060247567484704, guid: 78960e9149892584c97c64753d51b066, type: 3}
+      propertyPath: sceneSets.Array.data[0].sceneName
+      value: H_Lobby
+      objectReference: {fileID: 0}
+    - target: {fileID: 8773060247567484704, guid: 78960e9149892584c97c64753d51b066, type: 3}
+      propertyPath: sceneSets.Array.data[1].sceneName
+      value: H_Indoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 8773060247567484704, guid: 78960e9149892584c97c64753d51b066, type: 3}
+      propertyPath: sceneSets.Array.data[2].sceneName
+      value: H_Lunch
+      objectReference: {fileID: 0}
+    - target: {fileID: 8773060247567484704, guid: 78960e9149892584c97c64753d51b066, type: 3}
+      propertyPath: sceneSets.Array.data[3].sceneName
+      value: H_Outdoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 8773060247567484704, guid: 78960e9149892584c97c64753d51b066, type: 3}
+      propertyPath: sceneSets.Array.data[0].footstepClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8773060247567484704, guid: 78960e9149892584c97c64753d51b066, type: 3}
+      propertyPath: sceneSets.Array.data[1].footstepClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8773060247567484704, guid: 78960e9149892584c97c64753d51b066, type: 3}
+      propertyPath: sceneSets.Array.data[2].footstepClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8773060247567484704, guid: 78960e9149892584c97c64753d51b066, type: 3}
+      propertyPath: sceneSets.Array.data[3].footstepClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8773060247567484704, guid: 78960e9149892584c97c64753d51b066, type: 3}
+      propertyPath: sceneSets.Array.data[0].footstepClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: dbc08626501d13e4bac622508194466c, type: 3}
+    - target: {fileID: 8773060247567484704, guid: 78960e9149892584c97c64753d51b066, type: 3}
+      propertyPath: sceneSets.Array.data[1].footstepClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: dbc08626501d13e4bac622508194466c, type: 3}
+    - target: {fileID: 8773060247567484704, guid: 78960e9149892584c97c64753d51b066, type: 3}
+      propertyPath: sceneSets.Array.data[2].footstepClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: dbc08626501d13e4bac622508194466c, type: 3}
+    - target: {fileID: 8773060247567484704, guid: 78960e9149892584c97c64753d51b066, type: 3}
+      propertyPath: sceneSets.Array.data[3].footstepClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: bd20143568510ff4a974d837f274aa1e, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3256,6 +3316,11 @@ PrefabInstance:
 --- !u!20 &876173579 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 1763241357422493581, guid: 78960e9149892584c97c64753d51b066, type: 3}
+  m_PrefabInstance: {fileID: 876173578}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &876173580 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2705031367389660531, guid: 78960e9149892584c97c64753d51b066, type: 3}
   m_PrefabInstance: {fileID: 876173578}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &912453039
