@@ -36,9 +36,11 @@ public class DogFSM_K : MonoBehaviour
     public float sightRange = 1f;
     public float loseSightRange = 2f;
 
+    private PetController_J control;
     private NavMeshAgent agent;
     private CharacterController controller;
     private Animator animator;
+    private AudioSource dogAudio;
 
     private float currentintimacy;
     private float rotationSpeed = 10f;
@@ -65,6 +67,9 @@ public class DogFSM_K : MonoBehaviour
 
     private void Awake()
     {
+        if (!TryGetComponent(out control))
+            Debug.LogWarning("DogFSM ] PetController_J 없음");
+
         if (!TryGetComponent(out agent))
             Debug.LogWarning("DogFSM ] NavMeshAgent 없음");
 
@@ -73,6 +78,9 @@ public class DogFSM_K : MonoBehaviour
 
         if (!TryGetComponent(out animator))
             Debug.LogWarning("DogFSM ] Animator 없음");
+
+        if (!TryGetComponent(out dogAudio))
+            Debug.LogWarning("DogFSM ] AudioSource 없음");
 
         agent.updatePosition = false;
         agent.updateRotation = false;
@@ -106,6 +114,22 @@ public class DogFSM_K : MonoBehaviour
 
         controller.Move(moveDelta);
         animator.SetFloat("MOVESPEED", agent.velocity.magnitude);
+
+        if (agent.velocity.magnitude > 0)
+        {
+            if (!dogAudio.isPlaying)
+            {
+                PlayWalk();
+            }
+            else
+            {
+                return;
+            }
+        }
+        else
+        {
+            PlayStop();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -121,6 +145,7 @@ public class DogFSM_K : MonoBehaviour
     {
         if (other.CompareTag("PlayerHand") && currentState == State.Stroking)
         {
+            PlayStop();
             ParticlePoolManager_LES.Instance.StopParticles(MoodType.Happy);
 
             EnterState(State.Interaction);            
@@ -290,6 +315,8 @@ public class DogFSM_K : MonoBehaviour
                     {
                         Debug.Log("월!");
                         animator.SetTrigger("BARK");
+
+                        yield return new WaitForSeconds(4f);
                     }
                 }
             }
@@ -332,13 +359,13 @@ public class DogFSM_K : MonoBehaviour
             {
                 animator.SetBool("PLAY", true);
                 animator.SetInteger("PLAYNUM", 3);
-                playtime = 7f;
+                playtime = 8f;
             }
             else
             {
                 animator.SetBool("PLAY", true);
                 animator.SetInteger("PLAYNUM", 4);
-                playtime = 8f;
+                playtime = 10f;
             }
         }
         else
@@ -359,7 +386,7 @@ public class DogFSM_K : MonoBehaviour
             {
                 animator.SetBool("PLAY", true);
                 animator.SetInteger("PLAYNUM", 3);
-                playtime = 7f;
+                playtime = 8f;
             }
         }
         
@@ -456,6 +483,7 @@ public class DogFSM_K : MonoBehaviour
         agent.isStopped = true;
 
         animator.SetBool("STROK", true);
+        PlayStrok();
         ParticlePoolManager_LES.Instance.PlayParticle(MoodType.Happy, particlepoint);
 
         while (true)
@@ -681,5 +709,51 @@ public class DogFSM_K : MonoBehaviour
 
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(transform.position, loseSightRange);
+    }
+
+    public void PlayBark()
+    {
+        if (DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].barkSound != null)
+            dogAudio.PlayOneShot(DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].barkSound);
+    }
+
+    private void PlayStrok()
+    {
+        if (DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].strokSound != null)
+        {
+            dogAudio.loop = true;
+            dogAudio.clip = DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].strokSound;
+            dogAudio.Play();
+        }
+    }
+
+    private void PlayStop()
+    {
+        if (DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].strokSound != null && 
+            DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].indoorWalkSound != null &&
+            DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].outdoorWalkSound != null)
+        {
+            dogAudio.Stop();
+            dogAudio.clip = null;
+            dogAudio.loop = false;
+        }
+    }
+
+    private void PlayWalk()
+    {
+        var scene = SceneManager.GetActiveScene();
+
+        if (scene.name == "Indoor")
+        {
+            dogAudio.loop = true;
+            dogAudio.clip = DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].indoorWalkSound;
+            dogAudio.Play();
+        }
+        else
+        {
+            dogAudio.loop = true;
+            dogAudio.clip = DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].outdoorWalkSound;
+            dogAudio.Play();
+        }
     }
 }

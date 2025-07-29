@@ -1,82 +1,71 @@
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
+[RequireComponent(typeof(AudioSource))]
 public class FootstepDetector_LES : MonoBehaviour
 {
-    [Header("발걸음 설정")]
-    [Tooltip("한 걸음으로 인정할 거리 (미터)")]
-    public float stepDistance = 0.5f;
+    [Header("오디오 설정")]
+    [Tooltip("발소리 오디오 클립들. 여러 개를 넣으면 랜덤으로 재생됩니다.")]
+    public AudioClip[] footstepClips;
+
+    [Header("발소리 조건")]
+    [Tooltip("이 속도(m/s) 이상으로 움직일 때만 발소리가 납니다.")]
+    public float minSpeed = 0.1f;
+    [Tooltip("기본 발소리 사이의 간격(초)")]
+    public float stepInterval = 0.5f;
+
+    [Header("동적 발소리 설정")]
+    [Tooltip("이 속도를 기준으로 발소리 간격이 조절됩니다. 캐릭터의 평균 걷는 속도를 입력하세요.")]
+    public float characterBaseSpeed = 2.0f; // 캐릭터의 '평균' 걷기 속도
 
     // 내부 변수
-    [SerializeField] private CharacterController characterController;
-    [SerializeField] private AudioSource PlayerAudio;
-    private Vector3 lastPosition;
-    private float distanceTraveled = 0f;
+    private AudioSource audioSource;
+    private CharacterController characterController;
+    private float footstepTimer = 0f;
 
-    [SerializeField] private AudioClip indoorWalking;
-    [SerializeField] private AudioClip outdoorWalking;
-
-
-
-    void Start()
+    void Awake()
     {
-        // XR Rig 구조에 따라 GetComponentInParent 또는 GetComponent 사용
+        audioSource = GetComponent<AudioSource>();
         characterController = GetComponent<CharacterController>();
-        PlayerAudio = GetComponent<AudioSource>();
-        lastPosition = transform.position;
+
+        if (characterController == null)
+        {
+            Debug.LogError("이 스크립트는 CharacterController가 필요합니다. XR Origin에 추가해주세요.");
+        }
     }
 
     void Update()
     {
-        Debug.Log($"isGrounded: {characterController.isGrounded}, Velocity: {characterController.velocity.magnitude}");
-        // 캐릭터가 땅에 닿아 있고, 움직일 때만 감지
-        if (characterController.isGrounded && characterController.velocity.magnitude > 0.1f)
+        Vector3 horizontalVelocity = new Vector3(characterController.velocity.x, 0, characterController.velocity.z);
+        float currentSpeed = horizontalVelocity.magnitude;
+
+        if (currentSpeed > minSpeed)
         {
-            // 이동 거리 계산
-            distanceTraveled += Vector3.Distance(transform.position, lastPosition);
-            lastPosition = transform.position;
+            // 타이머 증가
+            footstepTimer += Time.deltaTime;
 
-            // 누적 이동 거리가 설정된 값을 넘어서면
-            if (distanceTraveled >= stepDistance)
-            {
-                TriggerFootstep();
-                distanceTraveled = 0f; // 거리 초기화
-            }
-        }
-    }
+            // '현재 속도'를 기반으로 동적인 발소리 간격을 계산합니다.
+            float dynamicInterval = stepInterval / (currentSpeed / characterBaseSpeed);
 
-        private void TriggerFootstep()
-    {
-        Debug.Log("TriggerFootstep() 함수 호출 성공!"); // 1. 함수 호출 확인
-
-        // Raycast의 길이를 넉넉하게 1m로 늘려서 테스트
-        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 1.0f))
-        {
-            Debug.Log("Raycast가 " + hit.collider.name + " 오브젝트에 닿았습니다. 태그는 '" + hit.collider.tag + "' 입니다."); // 2. Raycast 성공 및 태그 확인
-
-            if (hit.collider.CompareTag("InDoorGround"))
+            // 타이머가 동적으로 계산된 간격보다 커지면 소리 재생
+            if (footstepTimer >= dynamicInterval)
             {
-                Debug.Log("InDoorGround 태그 확인! 실내 발소리를 재생합니다."); // 3a. 실내 태그 확인
-                if (indoorWalking != null)
-                    PlayerAudio.PlayOneShot(indoorWalking);
-                else
-                    Debug.LogWarning("indoorWalking 오디오 클립이 비어있습니다!");
-            }
-            else if (hit.collider.CompareTag("OutDoorGround"))
-            {
-                Debug.Log("OutDoorGround 태그 확인! 실외 발소리를 재생합니다."); // 3b. 실외 태그 확인
-                if (outdoorWalking != null)
-                    PlayerAudio.PlayOneShot(outdoorWalking);
-                else
-                    Debug.LogWarning("outdoorWalking 오디오 클립이 비어있습니다!");
-            }
-            else
-            {
-                Debug.LogWarning("Raycast는 성공했지만, 바닥의 태그가 InDoorGround 또는 OutDoorGround가 아닙니다."); // 4. 태그 불일치 확인
+                PlayFootstepSound();
+                footstepTimer = 0f; // 타이머 리셋
             }
         }
         else
         {
-            Debug.LogError("오류: 발밑으로 Raycast를 쐈지만 아무것도 감지되지 않았습니다. 바닥에 Collider가 있는지 다시 확인해주세요."); // 5. Raycast 실패 확인
+            footstepTimer = 0f;
         }
+    }
+
+    private void PlayFootstepSound()
+    {
+        if (footstepClips == null || footstepClips.Length == 0) return;
+        
+        int index = Random.Range(0, footstepClips.Length);
+        AudioClip clip = footstepClips[index];
+        audioSource.PlayOneShot(clip);
     }
 }

@@ -35918,6 +35918,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2277025260197136554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8591108583091475170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9cd44362258bbf489ce230c8dd578aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TTS:
+  - {fileID: 8300000, guid: cc5d4fd52362ba74f9a69bf7b4526b4d, type: 3}
+  - {fileID: 8300000, guid: a9191a985ecf7594780e8dd1b1b59097, type: 3}
+  - {fileID: 8300000, guid: ed3db9e4468956f4bacb1d54a5e4890f, type: 3}
+  - {fileID: 8300000, guid: 6a32e2898b76fb44f9954d7090004dc3, type: 3}
+  - {fileID: 8300000, guid: 408f9f82150e7fd418d33239fa0f8ab3, type: 3}
+  - {fileID: 8300000, guid: abcfa5039eeefcd418af3c5f77908cce, type: 3}
+  - {fileID: 8300000, guid: 7360a715b648b5244ace0212504eeb88, type: 3}
+  - {fileID: 8300000, guid: 49acbf7b7a1fc8e4fb2421b1de9f9866, type: 3}
+  - {fileID: 8300000, guid: 2f346362f5cec88488d7f82e3fa7e4d0, type: 3}
 --- !u!1 &2333685847741272591 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 172372965217857308, guid: b7c0a4e373f8afb448d56d7adae352a2, type: 3}
@@ -39388,6 +39410,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2844406059589440662}
   m_Mesh: {fileID: -6214979170766498539, guid: 7fcf008177df8f6449f71a3324136912, type: 3}
+--- !u!4 &7414365345156671302
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8591108583091475170}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &7440337239690850783
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -40761,6 +40798,23 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &8591108583091475170
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7414365345156671302}
+  - component: {fileID: 2277025260197136554}
+  m_Layer: 0
+  m_Name: TutorialTTSList
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &8653483693373042684
 GameObject:
   m_ObjectHideFlags: 0
@@ -41439,5 +41493,6 @@ SceneRoots:
   - {fileID: 32248974}
   - {fileID: 393737608}
   - {fileID: 4174962650405244975}
+  - {fileID: 7414365345156671302}
   - {fileID: 547577873}
   - {fileID: 233144012}
