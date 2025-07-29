@@ -1,57 +1,87 @@
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.SceneManagement;
+
+// 인스펙터 창에서 씬별 설정을 보기 좋게 만들기 위한 클래스
+[System.Serializable]
+public class SceneFootstepSet
+{
+    [Tooltip("적용할 씬의 이름")]
+    public string sceneName;
+    [Tooltip("해당 씬에서 재생될 발소리 오디오 클립들")]
+    public AudioClip[] footstepClips;
+}
 
 [RequireComponent(typeof(AudioSource))]
 public class FootstepDetector_LES : MonoBehaviour
 {
-    [Header("오디오 설정")]
-    [Tooltip("발소리 오디오 클립들. 여러 개를 넣으면 랜덤으로 재생됩니다.")]
-    public AudioClip[] footstepClips;
-
-    [Header("발소리 조건")]
-    [Tooltip("이 속도(m/s) 이상으로 움직일 때만 발소리가 납니다.")]
-    public float minSpeed = 0.1f;
-    [Tooltip("기본 발소리 사이의 간격(초)")]
+    [Header("핵심 설정"), Tooltip("위치를 추적할 오브젝트 (XR Origin > Camera Offset)")]
+    public Transform bodyTransform;
+    [Tooltip("발소리 사이의 고정된 시간 간격 (초)")]
     public float stepInterval = 0.5f;
+    [Tooltip("움직임으로 감지할 최소 이동 거리. 매우 작은 값이어야 합니다.")]
+    public float minMoveThreshold = 0.001f;
 
-    [Header("동적 발소리 설정")]
-    [Tooltip("이 속도를 기준으로 발소리 간격이 조절됩니다. 캐릭터의 평균 걷는 속도를 입력하세요.")]
-    public float characterBaseSpeed = 2.0f; // 캐릭터의 '평균' 걷기 속도
+    [Header("씬별 오디오 설정"), Tooltip("각 씬에 맞는 발소리 세트를 설정합니다.")]
+    public SceneFootstepSet[] sceneSets; // 씬별 오디오 세트 배열
 
     // 내부 변수
     private AudioSource audioSource;
-    private CharacterController characterController;
+    private Vector3 lastPosition;
     private float footstepTimer = 0f;
+    private AudioClip[] currentSceneClips; // 현재 씬에서 사용할 클립 배열
 
-    void Awake()
+    void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        characterController = GetComponent<CharacterController>();
-
-        if (characterController == null)
+        if (bodyTransform == null)
         {
-            Debug.LogError("이 스크립트는 CharacterController가 필요합니다. XR Origin에 추가해주세요.");
+            Debug.LogError("Body Transform이 연결되지 않았습니다! XR Origin의 Camera Offset을 연결해주세요.");
+            this.enabled = false;
+            return;
         }
+
+        lastPosition = bodyTransform.position;
+
+        // 현재 씬에 맞는 오디오 클립을 찾아서 설정
+        InitializeFootstepsForCurrentScene();
+    }
+
+    // 현재 씬을 확인하고, 그에 맞는 발소리 클립 배열을 준비하는 메서드
+    void InitializeFootstepsForCurrentScene()
+    {
+        // 현재 활성화된 씬의 정보를 가져옴
+        Scene currentScene = SceneManager.GetActiveScene();
+
+        // 설정된 씬 세트들을 순회하며 현재 씬 이름과 일치하는 것을 찾음
+        foreach (var set in sceneSets)
+        {
+            if (set.sceneName == currentScene.name)
+            {
+                currentSceneClips = set.footstepClips; // 일치하는 세트의 클립을 사용
+                Debug.Log($"'{currentScene.name}' 씬을 위한 발소리가 로드되었습니다.");
+                return; // 찾았으면 함수 종료
+            }
+        }
+
+        // 루프가 끝날 때까지 맞는 세트를 못 찾았다면 경고 메시지 출력
+        Debug.LogWarning($"'{currentScene.name}' 씬에 맞는 발소리 설정이 없습니다!");
     }
 
     void Update()
     {
-        Vector3 horizontalVelocity = new Vector3(characterController.velocity.x, 0, characterController.velocity.z);
-        float currentSpeed = horizontalVelocity.magnitude;
+        Vector3 currentXZPosition = new Vector3(bodyTransform.position.x, 0, bodyTransform.position.z);
+        Vector3 lastXZPosition = new Vector3(lastPosition.x, 0, lastPosition.z);
+        float distanceMoved = Vector3.Distance(currentXZPosition, lastXZPosition);
+        
+        lastPosition = bodyTransform.position;
 
-        if (currentSpeed > minSpeed)
+        if (distanceMoved > minMoveThreshold)
         {
-            // 타이머 증가
             footstepTimer += Time.deltaTime;
-
-            // '현재 속도'를 기반으로 동적인 발소리 간격을 계산합니다.
-            float dynamicInterval = stepInterval / (currentSpeed / characterBaseSpeed);
-
-            // 타이머가 동적으로 계산된 간격보다 커지면 소리 재생
-            if (footstepTimer >= dynamicInterval)
+            if (footstepTimer >= stepInterval)
             {
                 PlayFootstepSound();
-                footstepTimer = 0f; // 타이머 리셋
+                footstepTimer = 0f;
             }
         }
         else
@@ -62,10 +92,10 @@ public class FootstepDetector_LES : MonoBehaviour
 
     private void PlayFootstepSound()
     {
-        if (footstepClips == null || footstepClips.Length == 0) return;
+        // 현재 씬의 클립 배열을 사용하도록 수정
+        if (currentSceneClips == null || currentSceneClips.Length == 0) return;
         
-        int index = Random.Range(0, footstepClips.Length);
-        AudioClip clip = footstepClips[index];
-        audioSource.PlayOneShot(clip);
+        int index = Random.Range(0, currentSceneClips.Length);
+        audioSource.PlayOneShot(currentSceneClips[index]);
     }
 }
