@@ -27,6 +27,7 @@ public class DogFSM_K : MonoBehaviour
 
     [SerializeField] private Transform ToiletPoint;
     [SerializeField] private Transform EatPoint;
+    [SerializeField] private GameObject nametext;
 
     public Transform mouthpoint;
     public Transform particlepoint;
@@ -76,6 +77,8 @@ public class DogFSM_K : MonoBehaviour
         if (!TryGetComponent(out dogAudio))
             Debug.LogWarning("DogFSM ] AudioSource 없음");
 
+        nametext.SetActive(false);
+
         agent.updatePosition = false;
         agent.updateRotation = false;
     }
@@ -121,6 +124,11 @@ public class DogFSM_K : MonoBehaviour
         {
             PlayStop();
         }
+
+        if (nametext.activeSelf)
+        {
+            nametext.transform.LookAt(Camera.main.transform);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -140,17 +148,6 @@ public class DogFSM_K : MonoBehaviour
             ParticlePoolManager_LES.Instance.StopParticles(MoodType.Happy);
 
             EnterState(State.Interaction);            
-        }
-
-        if (other.CompareTag("Player"))
-        {
-            // "나 이제 갈게" 라고 매니저에게 알림
-            DogInteractionManager_K.instance.CancelRequest(this);
-
-            if (currentState == State.InteractionRequest || currentState == State.Interaction)
-            {
-                ReturnToWander();
-            }
         }
     }
 
@@ -384,6 +381,9 @@ public class DogFSM_K : MonoBehaviour
         yield return new WaitForSeconds(playtime);
 
         animator.SetBool("PLAY", false);
+
+        yield return new WaitForSeconds(0.5f);
+
         EnterState(State.Wander);
     }
 
@@ -392,6 +392,7 @@ public class DogFSM_K : MonoBehaviour
         DogInteractionManager_K.instance.RequestInteraction(this);
         agent.isStopped = true;
         agent.ResetPath();
+        ShowText(particlepoint.position);
 
         while (true)
         {
@@ -464,6 +465,7 @@ public class DogFSM_K : MonoBehaviour
     public void ReturnToWander()
     {
         animator.SetBool("INTERACT", false);
+        nametext.SetActive(false);
         isSelected = false;
         EnterState(State.Wander);
     }
@@ -659,6 +661,8 @@ public class DogFSM_K : MonoBehaviour
 
     private IEnumerator Called_co()
     {
+        animator.SetBool("PLAY", false);
+
         Debug.Log($"{name}: 부르셨나요? 지금 갑니다!");
         isCalled = true;
         agent.isStopped = false;
@@ -748,5 +752,14 @@ public class DogFSM_K : MonoBehaviour
             dogAudio.clip = DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].outdoorWalkSound;
             dogAudio.Play();
         }
+    }
+
+    private void ShowText(Vector3 position)
+    {
+        position.y += 0.2f;
+        nametext.transform.position = position;
+        nametext.transform.LookAt(Camera.main.transform);
+
+        nametext.SetActive(true);
     }
 }
