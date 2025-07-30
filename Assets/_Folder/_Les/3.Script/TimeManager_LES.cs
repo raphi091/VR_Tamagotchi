@@ -13,6 +13,7 @@ public class TimeManager_LES : MonoBehaviour
     public AudioClip sceneChange; //씬 전환전 알림소리
     public AudioClip doorBall; //시작시 문열림 소리
     public AudioClip door; // 다음 씬 전화 되는 소리
+    public AudioClip hunger;
 
     //시간 로직
     public float speed = 60f * 5f; // 실제 1초 = 60 게임 시간초
@@ -126,6 +127,7 @@ public class TimeManager_LES : MonoBehaviour
         }
 
         SoundManager.Instance.PlaySFX(door);
+        SoundManager.Instance.PlaySFX(hunger);
         GameManager.instance.GoToScene("H_Lunch");
     }
 
