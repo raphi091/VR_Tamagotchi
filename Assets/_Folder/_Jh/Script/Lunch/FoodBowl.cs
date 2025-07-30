@@ -4,6 +4,8 @@ using UnityEngine;
 public class FoodBowl : MonoBehaviour
 {
     public LunchDog assignedDog;
+    public NamePlate_K namePlate;
+    public Transform WaitPoint;
 
      // 현재 그릇에 담긴 사료 종류
     public foodType containedFood = foodType.None;

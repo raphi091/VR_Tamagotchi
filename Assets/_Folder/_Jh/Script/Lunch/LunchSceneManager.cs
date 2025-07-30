@@ -8,8 +8,9 @@ public class LunchSceneManager : MonoBehaviour
     public static LunchSceneManager instance = null;
     public Ch_Bell bell;
 
-    private LunchDog[] dogs;
-    private FoodBowl[] foodBowls;
+    public List<PetController_J> dogs;
+    public List<LunchDog> lunchdogs;
+    public FoodBowl[] foodBowls;
     private static int finishCount = 0;
 
     private void Awake()
@@ -29,17 +30,29 @@ public class LunchSceneManager : MonoBehaviour
         else
             SoundManager.Instance.PlayBGM(BGMTrackName.Lunch);
 
-        foodBowls = FindObjectsOfType<FoodBowl>();
-
         for (int i = 0; i < GameManager.instance.petsInScene.Count; i++)
         {
-            dogs[i] = GameManager.instance.petsInScene[i].GetComponent<LunchDog>();
-            dogs[i].SetLunchFood(foodBowls[i]);
-            foodBowls[i].SetDog(dogs[i]);
+            dogs.Add(GameManager.instance.petsInScene[i]);
+            lunchdogs.Add(dogs[i].GetComponent<LunchDog>());
         }
+        foodBowls = FindObjectsOfType<FoodBowl>();
 
+        SetUp();
+        
         // 3. 점심 자동 시작 (딜레이 후)
         StartCoroutine(StartLunchDelayed());
+    }
+
+    public void SetUp()
+    {
+        for (int i = 0; i < GameManager.instance.petsInScene.Count; i++)
+        {
+            lunchdogs[i].SetLunchFood(foodBowls[i]);
+            foodBowls[i].SetDog(lunchdogs[i]);
+
+            lunchdogs[i].PetController.namePlate = foodBowls[i].namePlate;
+            lunchdogs[i].PetController.namePlate.Setup(dogs[i].petData.petName, DataManager_J.instance.gameData.selectedClassName);
+        }
     }
 
     private IEnumerator StartLunchDelayed()
@@ -47,7 +60,7 @@ public class LunchSceneManager : MonoBehaviour
         yield return new WaitUntil(()=>bell.ringged); // 대기 후 시작
 
         // 강아지들 점심 시작
-        foreach (var dog in dogs)
+        foreach (var dog in lunchdogs)
         {
             dog.StartLunch();
         }

@@ -364,7 +364,7 @@ PrefabInstance:
     - target: {fileID: 1956516457981517029, guid: 49f78ff2c17e8fa48880efa6989ee49f, type: 3}
       propertyPath: namePlate
       value: 
-      objectReference: {fileID: 362939746}
+      objectReference: {fileID: 0}
     - target: {fileID: 4547603643777036124, guid: 49f78ff2c17e8fa48880efa6989ee49f, type: 3}
       propertyPath: m_Name
       value: LunchPet (2)
@@ -4170,6 +4170,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDog: {fileID: 0}
+  namePlate: {fileID: 362939746}
+  WaitPoint: {fileID: 1808955171}
   containedFood: 3
   IsFilled: 0
   dryfoodModel: {fileID: 1033479820}
@@ -4189,6 +4191,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDog: {fileID: 0}
+  namePlate: {fileID: 194925999}
+  WaitPoint: {fileID: 2041563350}
   containedFood: 3
   IsFilled: 0
   dryfoodModel: {fileID: 1592102423}
@@ -4208,6 +4212,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDog: {fileID: 0}
+  namePlate: {fileID: 8359117805628211402}
+  WaitPoint: {fileID: 814747055}
   containedFood: 3
   IsFilled: 0
   dryfoodModel: {fileID: 4096727552750178564}
@@ -21477,6 +21483,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bell: {fileID: 6795694348555579586}
+  dogs: []
+  lunchdogs: []
+  foodBowls: []
 --- !u!114 &1443801413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25279,7 +25288,7 @@ PrefabInstance:
     - target: {fileID: 1956516457981517029, guid: 49f78ff2c17e8fa48880efa6989ee49f, type: 3}
       propertyPath: namePlate
       value: 
-      objectReference: {fileID: 194925999}
+      objectReference: {fileID: 0}
     - target: {fileID: 4547603643777036124, guid: 49f78ff2c17e8fa48880efa6989ee49f, type: 3}
       propertyPath: m_Name
       value: LunchPet (1)
@@ -37418,7 +37427,7 @@ PrefabInstance:
     - target: {fileID: 1956516457981517029, guid: 49f78ff2c17e8fa48880efa6989ee49f, type: 3}
       propertyPath: namePlate
       value: 
-      objectReference: {fileID: 8359117805628211402}
+      objectReference: {fileID: 0}
     - target: {fileID: 4547603643777036124, guid: 49f78ff2c17e8fa48880efa6989ee49f, type: 3}
       propertyPath: m_Name
       value: LunchPet

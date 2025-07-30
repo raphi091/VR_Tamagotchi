@@ -20,6 +20,7 @@ public class LunchDog : MonoBehaviour
     private NavMeshAgent agent;
     private FoodBowl foodBowl;
 
+    public PetController_J PetController => petcontroller;
     public FoodBowl FoodBowl => foodBowl;
 
 
@@ -36,7 +37,6 @@ public class LunchDog : MonoBehaviour
 
         if (!TryGetComponent(out controller))
             Debug.LogWarning("LunchDog ] CharacterController 없음");
-
     }
 
     private void Update()
@@ -62,7 +62,7 @@ public class LunchDog : MonoBehaviour
     {
         foodBowl = bowl;
         bowlPosition = bowl.transform;
-        waitPosition = bowl.transform.FindSlot("WaitPoint");
+        waitPosition = bowl.WaitPoint;
     }
 
     public void StartLunch()
