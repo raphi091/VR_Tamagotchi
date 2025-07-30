@@ -105,6 +105,7 @@ public class PetController_J : MonoBehaviour
 
             if (namePlate != null)
             {
+                namePlate = lunchDog.FoodBowl.GetComponentInChildren<NamePlate_K>();
                 namePlate.Setup(data.petName, DataManager_J.instance.gameData.selectedClassName);
             }
         }
