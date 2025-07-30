@@ -25565,7 +25565,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 80ba6ac16e3a9eb48909281a25caba2c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -40430,7 +40430,7 @@ MonoBehaviour:
   upsideDownRange: -0.7
   startPoint: {fileID: 1659641101}
   shakeSound: {fileID: 8300000, guid: ba67bcaa47007564f99dc22caf79b1d7, type: 3}
-  foodSound: {fileID: 0}
+  foodSound: {fileID: 8300000, guid: 24338ff9d018be34f918d708336f161b, type: 3}
 --- !u!114 &5299685495826968266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43881,7 +43881,7 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 1
-  cutSound: {fileID: 0}
+  cutSound: {fileID: 8300000, guid: 55630d51da3e2ba4fb2ed36f229cf37e, type: 3}
   handPoint: {fileID: 982483400}
   blade: {fileID: 183154212}
 --- !u!54 &8738962759970165045
