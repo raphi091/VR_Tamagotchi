@@ -17,11 +17,10 @@ public class EasterEgg_K : MonoBehaviour, H_UI
 
     public void OnPress()
     {
-        if (i == null)
-        {
-            i = Instantiate(remote, spawnPoint);
-            i.transform.position = spawnPoint.position;
-        }
+        if (i != null) return;
+
+        i = Instantiate(remote, spawnPoint);
+        i.transform.position = spawnPoint.position;
     }
 
     public void OnRelease()
