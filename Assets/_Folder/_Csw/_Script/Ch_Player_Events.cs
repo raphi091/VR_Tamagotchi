@@ -43,29 +43,6 @@ public class Ch_Player_Events : MonoBehaviour
         }
     }
 
-    public void OnDogSit(SelectEnterEventArgs args)
-    {
-        GameObject selectedObject = args.interactableObject.transform.gameObject;
-        if (selectedObject.CompareTag("Dog"))
-        {
-            DogFSM_K dogFSM = selectedObject.GetComponent<DogFSM_K>();
-            Debug.Log($"{selectedObject.name}: 앉아");
-            dogFSM.CommandSit();
-        }
-
-    }
-    
-    public void OnDogLie(SelectEnterEventArgs args)
-    {
-        GameObject selectedObject = args.interactableObject.transform.gameObject;
-        if (selectedObject.CompareTag("Dog"))
-        {
-            DogFSM_K dogFSM = selectedObject.GetComponent<DogFSM_K>();
-            dogFSM.CommandLiedown();
-        }
-
-    }
-
     public void OnThrowableGrabbed(SelectEnterEventArgs args)
     {
         GameObject throwableObject = args.interactableObject.transform.gameObject;

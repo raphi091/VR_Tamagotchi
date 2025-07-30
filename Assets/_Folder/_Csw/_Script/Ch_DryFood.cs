@@ -35,18 +35,19 @@ public class Ch_DryFood : MonoBehaviour, Ch_BowlFood
 
     private void Update()
     {
-        if (interactable.velocity.magnitude > 0.08f)
+        if (interactable.velocity.magnitude > 0.06f)
         {
-            if (!audioSource.isPlaying)
-            {
-                audioSource.Play();
-            }
             if (transform.up.y < upsideDownRange)
             {
                 if (!particle.isPlaying)
                 {
                     particle.Play();
                 }
+            }
+            else if(!audioSource.isPlaying)
+            {
+                audioSource.Play();
+                particle.Stop();
             }
             else
             {

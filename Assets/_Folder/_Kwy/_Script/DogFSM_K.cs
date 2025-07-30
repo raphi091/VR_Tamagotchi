@@ -91,7 +91,7 @@ public class DogFSM_K : MonoBehaviour
     private void Update()
     {
         control.currentHunger -= Time.deltaTime * Random.Range(Hunger.x, Hunger.y);
-        control.currentBowel -= Time.deltaTime * Random.Range(Toilet.x, Toilet.y);
+        control.currentBowel += Time.deltaTime * Random.Range(Toilet.x, Toilet.y);
 
         if (agent.velocity.sqrMagnitude > 0.1f)
         {
@@ -243,7 +243,7 @@ public class DogFSM_K : MonoBehaviour
                 yield break;
             }
 
-            if (control.currentBowel <= 10f && !isHunger && ToiletPoint != null)
+            if (control.currentBowel >= 90f && !isHunger && ToiletPoint != null)
             {
                 EnterState(State.Toilet);
                 yield break;
@@ -402,7 +402,7 @@ public class DogFSM_K : MonoBehaviour
                 yield break;
             }
 
-            if (control.currentBowel <= 10f && !isHunger && ToiletPoint != null)
+            if (control.currentBowel >= 90f && !isHunger && ToiletPoint != null)
             {
                 EnterState(State.Toilet);
                 yield break;
@@ -646,7 +646,7 @@ public class DogFSM_K : MonoBehaviour
         petcon.petModelSlot.gameObject.SetActive(true);
 
         isBowel = false;
-        control.currentBowel = 100f;
+        control.currentBowel = 0f;
         EnterState(State.Wander);
     }
 

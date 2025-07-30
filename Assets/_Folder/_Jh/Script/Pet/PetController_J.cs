@@ -60,9 +60,18 @@ public class PetController_J : MonoBehaviour
         }
 
         // 4. 저장된 수치를 현재 상태 변수에 적용 (게임 시작 시)
-        this.currentHunger = data.hungerper;
         this.currentIntimacy = data.intimacyper;
-        this.currentBowel = data.bowelper;
+
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "H_Indoor")
+        {
+            this.currentHunger = Random.Range(80f, 90f);
+            this.currentBowel = 0f;
+        }
+        else
+        {
+            this.currentHunger = data.hungerper;
+            this.currentBowel = data.bowelper;
+        }
 
         DogFSM_K fsm = GetComponent<DogFSM_K>();
         if (fsm != null)
@@ -96,6 +105,7 @@ public class PetController_J : MonoBehaviour
 
             if (namePlate != null)
             {
+                namePlate = lunchDog.FoodBowl.GetComponentInChildren<NamePlate_K>();
                 namePlate.Setup(data.petName, DataManager_J.instance.gameData.selectedClassName);
             }
         }

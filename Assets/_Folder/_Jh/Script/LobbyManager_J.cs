@@ -42,10 +42,6 @@ public class LobbyManager_J : MonoBehaviour
 
     public void OnClickNewGame()
     {
-        if (File.Exists(saveFilePath))
-        {
-            File.Delete(saveFilePath);
-        }
         CreateTemporaryPetData();
 
         newGameButton.SetActive(false);
@@ -109,6 +105,11 @@ public class LobbyManager_J : MonoBehaviour
 
     public void OnSelectClass(string className)
     {
+        if (File.Exists(saveFilePath))
+        {
+            File.Delete(saveFilePath);
+        }
+
         List<PetStatusData_J> selectedPets = temporaryClassPets[className];
         Debug.Log($"[LobbyManager_J] OnSelectClass: {className}, selectedPets count: {selectedPets.Count}");
         // 2. GameManager에게 선택된 3마리의 데이터로 새 게임을 만들라고 명령
