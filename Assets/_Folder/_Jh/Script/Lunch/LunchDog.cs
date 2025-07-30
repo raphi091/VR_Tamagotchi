@@ -20,6 +20,8 @@ public class LunchDog : MonoBehaviour
     private NavMeshAgent agent;
     private FoodBowl foodBowl;
 
+    public FoodBowl FoodBowl => foodBowl;
+
 
     private void Awake()
     {
@@ -59,6 +61,8 @@ public class LunchDog : MonoBehaviour
     public void SetLunchFood(FoodBowl bowl)
     {
         foodBowl = bowl;
+        bowlPosition = bowl.transform;
+        waitPosition = bowl.transform.FindSlot("WaitPoint");
     }
 
     public void StartLunch()
@@ -66,7 +70,7 @@ public class LunchDog : MonoBehaviour
         StartCoroutine(LunchRoutine());
     }
 
-        private IEnumerator LunchRoutine()
+    private IEnumerator LunchRoutine()
     {
         if (bowlPosition == null)
         {
@@ -81,10 +85,15 @@ public class LunchDog : MonoBehaviour
             yield return null;
         }
 
-        Vector3 directionTobowl = bowlPosition.position - transform.position;
-        directionTobowl.y = 0;
-        Quaternion lookRotation = Quaternion.LookRotation(directionTobowl);
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotationSpeed * Time.deltaTime);
+        Vector3 directionToBowl = bowlPosition.position - transform.position;
+        directionToBowl.y = 0;
+        Quaternion targetRotation = Quaternion.LookRotation(directionToBowl);
+        while (Quaternion.Angle(transform.rotation, targetRotation) > 1.0f)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            yield return null;
+        }
+        transform.rotation = targetRotation;
 
         yield return null;
 
@@ -116,6 +125,7 @@ public class LunchDog : MonoBehaviour
 
         // 파티클 종료
         ParticlePoolManager_LES.Instance.StopParticles(currentMood);
+        petcontroller.currentIntimacy += 5f;
 
         // 식사 완료 알림
         LunchSceneManager.instance.OnDogFinished();

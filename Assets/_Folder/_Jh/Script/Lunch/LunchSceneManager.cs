@@ -29,11 +29,11 @@ public class LunchSceneManager : MonoBehaviour
         else
             SoundManager.Instance.PlayBGM(BGMTrackName.Lunch);
 
-        dogs = FindObjectsOfType<LunchDog>();
         foodBowls = FindObjectsOfType<FoodBowl>();
 
-        for (int i = 0; i < dogs.Length; i++)
+        for (int i = 0; i < GameManager.instance.petsInScene.Count; i++)
         {
+            dogs[i] = GameManager.instance.petsInScene[i].GetComponent<LunchDog>();
             dogs[i].SetLunchFood(foodBowls[i]);
             foodBowls[i].SetDog(dogs[i]);
         }
