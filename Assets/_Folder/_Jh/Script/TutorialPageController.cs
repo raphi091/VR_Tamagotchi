@@ -46,6 +46,25 @@ public class TutorialPageController : MonoBehaviour
         }
     }
 
+    public void ShowPreviousPage()
+    {
+        if (tutorialPages == null || tutorialPages.Count == 0) return;
+
+        if (currentPage <= 0) ;
+        {
+            Debug.Log("이미 첫 페이지입니다.");
+            return;
+        }
+
+        if (currentPage < tutorialPages.Count)
+            tutorialPages[currentPage].SetActive(false);
+
+        currentPage--;
+
+        tutorialPages[currentPage].SetActive(true);
+        PlayTTSForCurrentPage();
+    }
+
     void InitializePages()
     {
         for (int i = 0; i < tutorialPages.Count; i++)
