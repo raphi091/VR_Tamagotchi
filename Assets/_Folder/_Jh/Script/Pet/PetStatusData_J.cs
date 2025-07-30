@@ -37,7 +37,7 @@ public class PetStatusData_J
 
         this.intimacyper = 0f;
         this.hungerper = 80f;
-        this.bowelper = 100f;
+        this.bowelper = 0f;
     }
 }
 
