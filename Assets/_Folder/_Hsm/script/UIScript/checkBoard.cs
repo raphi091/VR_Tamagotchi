@@ -16,6 +16,12 @@ public class checkBoard : MonoBehaviour
     public Image[] intimacy_status =  new Image[3];
 
 
+    void Update()
+    {
+        Status();
+    }
+
+
     public void Status()
     {
 
@@ -32,7 +38,7 @@ public class checkBoard : MonoBehaviour
 
             Poopy_status[i].fillAmount =
                 GameManager.instance.petsInScene[i].currentBowel / 100f;
-            
+
             intimacy_status[i].fillAmount =
                 GameManager.instance.petsInScene[i].currentIntimacy / 100f;
         }
