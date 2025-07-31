@@ -3142,7 +3142,7 @@ MonoBehaviour:
   m_SelectEntered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 4267471111392845118}
         m_TargetAssemblyTypeName: TutorialPageController, Assembly-CSharp
         m_MethodName: ShowNextPage
         m_Mode: 1
@@ -4297,6 +4297,7 @@ GameObject:
   - component: {fileID: 4713139373742317483}
   - component: {fileID: 4312170415651465361}
   - component: {fileID: 7587026740483505690}
+  - component: {fileID: 4267471111392845118}
   m_Layer: 5
   m_Name: IndoorTutorial
   m_TagString: Untagged
@@ -4402,6 +4403,33 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &4267471111392845118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5716330046253733016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05bcebaf2a6d88446a982321ba90e6bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialPages:
+  - {fileID: 6684390896665017975}
+  - {fileID: 4242562807129210639}
+  - {fileID: 4772629607609954534}
+  - {fileID: 4027988108346767972}
+  - {fileID: 3540847626805991614}
+  - {fileID: 3670092761294747998}
+  - {fileID: 1674793808942746738}
+  - {fileID: 5032983499623554213}
+  - {fileID: 6735611008709560979}
+  - {fileID: 8990476233380190942}
+  - {fileID: 1344061805409264479}
+  - {fileID: 3221419238254936800}
+  - {fileID: 2322116387516666239}
+  tutorialRoot: {fileID: 5716330046253733016}
 --- !u!1 &5973375822590283182
 GameObject:
   m_ObjectHideFlags: 0
@@ -5799,9 +5827,9 @@ MonoBehaviour:
   m_SelectEntered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 4267471111392845118}
         m_TargetAssemblyTypeName: TutorialPageController, Assembly-CSharp
-        m_MethodName: ShowNextPage
+        m_MethodName: ShowPreviousPage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

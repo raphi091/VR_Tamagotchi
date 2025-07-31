@@ -3045,7 +3045,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1004434502569640193}
         m_TargetAssemblyTypeName: TutorialPageController, Assembly-CSharp
-        m_MethodName: ShowNextPage
+        m_MethodName: ShowPreviousPage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4865,8 +4865,6 @@ GameObject:
   - component: {fileID: 7602115575625529889}
   - component: {fileID: 5367763193495578382}
   - component: {fileID: 4237429976500505558}
-  - component: {fileID: 7359927555382717632}
-  - component: {fileID: 2601536035074361824}
   - component: {fileID: 1004434502569640193}
   m_Layer: 5
   m_Name: LunchTutorial
@@ -4956,46 +4954,6 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 0
---- !u!114 &7359927555382717632
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7257147166330282238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
---- !u!114 &2601536035074361824
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7257147166330282238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05bcebaf2a6d88446a982321ba90e6bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tutorialPages:
-  - {fileID: 5964040149231892880}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  tutorialRoot: {fileID: 7257147166330282238}
 --- !u!114 &1004434502569640193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5010,14 +4968,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorialPages:
   - {fileID: 5964040149231892880}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8053537234991511107}
+  - {fileID: 8197435940295172039}
+  - {fileID: 731203603026520206}
+  - {fileID: 7168592743985197871}
+  - {fileID: 2750503415551378867}
+  - {fileID: 3615508420398362067}
+  - {fileID: 1837271903963145901}
+  - {fileID: 38826512709252731}
+  - {fileID: 2904312372901199838}
+  - {fileID: 3956998626826531796}
+  - {fileID: 1445546541914956656}
+  - {fileID: 4549459146893678658}
   tutorialRoot: {fileID: 7257147166330282238}
 --- !u!1 &7550626581061838711
 GameObject:

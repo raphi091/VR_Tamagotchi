@@ -39750,7 +39750,7 @@ PrefabInstance:
     - target: {fileID: 4352723830618199253, guid: b7c0a4e373f8afb448d56d7adae352a2, type: 3}
       propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 7515735270900737158}
+      objectReference: {fileID: 0}
     - target: {fileID: 4352723830618199253, guid: b7c0a4e373f8afb448d56d7adae352a2, type: 3}
       propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ShowNextPage
@@ -39858,10 +39858,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7257147166330282238, guid: b7c0a4e373f8afb448d56d7adae352a2, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7515735270900737158}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7c0a4e373f8afb448d56d7adae352a2, type: 3}
 --- !u!23 &4265929741624467574
 MeshRenderer:
@@ -40162,11 +40159,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 566845904926104173}
   m_Mesh: {fileID: 4271315205850628305, guid: e96e8119f7cfddf4ba98eac4849aa70f, type: 3}
---- !u!1 &4954161561740050313 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7257147166330282238, guid: b7c0a4e373f8afb448d56d7adae352a2, type: 3}
-  m_PrefabInstance: {fileID: 4174962650405244975}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4957064822428199077
 GameObject:
   m_ObjectHideFlags: 0
@@ -41767,11 +41759,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7041211316845967499}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 180}
---- !u!1 &6680182979991703992 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5964040149231892880, guid: b7c0a4e373f8afb448d56d7adae352a2, type: 3}
-  m_PrefabInstance: {fileID: 4174962650405244975}
-  m_PrefabAsset: {fileID: 0}
 --- !u!64 &6681225942769745663
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -42546,29 +42533,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6073386054869055445}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7515735270900737158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4954161561740050313}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05bcebaf2a6d88446a982321ba90e6bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tutorialPages:
-  - {fileID: 6680182979991703992}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  tutorialRoot: {fileID: 4954161561740050313}
 --- !u!4 &7641756789615726567
 Transform:
   m_ObjectHideFlags: 0
