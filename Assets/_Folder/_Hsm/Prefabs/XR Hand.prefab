@@ -347,11 +347,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dc7c765a5200d042a51973a2d33400d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stepDistance: 0.5
-  characterController: {fileID: 8719917742578666408}
-  PlayerAudio: {fileID: 4176110929228849421}
-  indoorWalking: {fileID: 8300000, guid: dbc08626501d13e4bac622508194466c, type: 3}
-  outdoorWalking: {fileID: 8300000, guid: bd20143568510ff4a974d837f274aa1e, type: 3}
+  bodyTransform: {fileID: 0}
+  stepInterval: 0.5
+  minMoveThreshold: 0.001
+  sceneSets: []
 --- !u!82 &4176110929228849421
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2202,6 +2201,7 @@ MonoBehaviour:
   slider: {fileID: 1472900373996482168}
   menuAction: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   leftHandTransform: {fileID: 2200865434817839440}
+  clickbtn: {fileID: 8300000, guid: a03a5ca3b33266245b2e97c09297dc33, type: 3}
 --- !u!1 &929624076351545993
 GameObject:
   m_ObjectHideFlags: 0
