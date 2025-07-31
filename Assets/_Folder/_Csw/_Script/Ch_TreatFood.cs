@@ -11,7 +11,7 @@ public class Ch_TreatFood:MonoBehaviour
     {
         if (slices.Count==0)
         {
-            slices = GetComponentsInChildren<Transform>().Where(t=>t!=this.transform).ToList();
+            slices = GetComponentsInChildren<Transform>().Where(t=>t!=this.transform&&t.gameObject.GetComponent<Collider>()!=null).ToList();
         }
     }
     
