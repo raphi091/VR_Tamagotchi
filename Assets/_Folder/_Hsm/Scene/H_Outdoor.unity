@@ -8294,6 +8294,10 @@ PrefabInstance:
       propertyPath: m_PresetInfoIsWorld
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3191660578681858273, guid: 8950dbe7a0a823b4aafdc5b78cbc9dd1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5784598464459796370, guid: 8950dbe7a0a823b4aafdc5b78cbc9dd1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -8386,6 +8390,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OutdoorTutorial
       objectReference: {fileID: 0}
+    - target: {fileID: 8650090058921340338, guid: 8950dbe7a0a823b4aafdc5b78cbc9dd1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8416,7 +8424,8 @@ MonoBehaviour:
   TTS:
   - {fileID: 8300000, guid: 653a28aef293d9e4a9731fea6d328608, type: 3}
   - {fileID: 8300000, guid: 7a731fbf097c3cd4ba31a6dd3a0be89b, type: 3}
-  - {fileID: 8300000, guid: 04dd56bdd59c03648986a4249d9dbefb, type: 3}
+  - {fileID: 8300000, guid: 7b7e37172d8a6944cb7d468b472a2383, type: 3}
+  - {fileID: 8300000, guid: 440491451feb6c84389b137884c5ffe0, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
