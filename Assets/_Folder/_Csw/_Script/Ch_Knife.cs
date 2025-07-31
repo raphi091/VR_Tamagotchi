@@ -100,7 +100,7 @@ public class Ch_Knife : XRGrabInteractable
                  }
                  Setup_Slice_components(upperhull);
                  Setup_Slice_components(lowerhull);
-                 if (audioSource.isPlaying)
+                 if (!audioSource.isPlaying)
                  {
                      audioSource.Play();
                  }
