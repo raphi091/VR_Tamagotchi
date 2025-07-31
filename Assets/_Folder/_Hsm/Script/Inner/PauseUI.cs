@@ -21,6 +21,9 @@ public class PauseUI : MonoBehaviour
     [Header("Controller Reference")]
     public Transform leftHandTransform;          // 왼손 컨트롤러 기준 Ray 쏘는 위치
 
+    [Header("Sound")]
+    public AudioClip clickbtn;
+
     private XRInput input;
 
     private bool isPaused = false;
@@ -69,6 +72,8 @@ public class PauseUI : MonoBehaviour
 
     public void OpenMenu()
     {
+        SoundManager.Instance.PlaySFX(clickbtn);
+
         if (menu != null) menu.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
@@ -89,6 +94,8 @@ public class PauseUI : MonoBehaviour
 
     public void OnClickBGMControl()
     {
+        SoundManager.Instance.PlaySFX(clickbtn);
+
         if (pan != null)
         {
             pan.SetActive(true);
@@ -108,12 +115,16 @@ public class PauseUI : MonoBehaviour
 
     public void OnClickReturnToLobby()
     {
+        SoundManager.Instance.PlaySFX(clickbtn);
+
         ForceCloseAllMenus();
         SceneManager.LoadScene("H_Lobby");
     }
 
     public void OnClickExit()
     {
+        SoundManager.Instance.PlaySFX(clickbtn);
+
         ForceCloseAllMenus();
 
 #if UNITY_EDITOR

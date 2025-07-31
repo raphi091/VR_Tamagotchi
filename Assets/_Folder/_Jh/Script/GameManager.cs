@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
 
         // 현재 씬이 H_Lunch가 아닐 때만 데이터 저장 시도
         string currentScene = SceneManager.GetActiveScene().name;
-        if (currentScene != "H_Lunch")
+        if (currentScene != "H_Lobby")
         {
             try
             {

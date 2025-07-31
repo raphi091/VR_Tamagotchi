@@ -110,11 +110,13 @@ public class LunchDog : MonoBehaviour
         {
             ParticlePoolManager_LES.Instance.PlayParticle(MoodType.Good, particlepoint);
             currentMood = MoodType.Good;
+            petcontroller.currentIntimacy += 10f;
         }
         else
         {
             ParticlePoolManager_LES.Instance.PlayParticle(MoodType.Bad, particlepoint);
             currentMood = MoodType.Bad;
+            petcontroller.currentIntimacy -= 30f;
         }
 
         // 식사 완료 → 허기 회복
@@ -125,7 +127,6 @@ public class LunchDog : MonoBehaviour
 
         // 파티클 종료
         ParticlePoolManager_LES.Instance.StopParticles(currentMood);
-        petcontroller.currentIntimacy += 5f;
 
         // 식사 완료 알림
         LunchSceneManager.instance.OnDogFinished();

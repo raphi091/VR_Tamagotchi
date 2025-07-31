@@ -481,7 +481,7 @@ public class DogFSM_K : MonoBehaviour
 
         while (true)
         {
-            control.currentIntimacy += 0.2f;
+            control.currentIntimacy += 0.5f * Time.deltaTime;
             yield return null;
         }
     }
@@ -505,7 +505,7 @@ public class DogFSM_K : MonoBehaviour
 
         animator.SetBool("SIT", false);
 
-        control.currentIntimacy += 5;
+        control.currentIntimacy += 2f;
         EnterState(State.Interaction);
     }
 
@@ -528,7 +528,7 @@ public class DogFSM_K : MonoBehaviour
 
         animator.SetBool("LIE", false);
 
-        control.currentIntimacy += 5;
+        control.currentIntimacy += 3f;
         EnterState(State.Interaction);
     }
 
@@ -592,7 +592,7 @@ public class DogFSM_K : MonoBehaviour
         }
 
         // 5. 임무 완수 후 다시 상호작용 대기 상태로 복귀
-        control.currentIntimacy += 5;
+        control.currentIntimacy += 5f;
         EnterState(State.Interaction);
     }
 
@@ -621,9 +621,7 @@ public class DogFSM_K : MonoBehaviour
             isHunger = false;
 
             animator.SetTrigger("EAT");
-            control.currentIntimacy += 5;
-            control.currentIntimacy += 5;
-            control.currentIntimacy += 5;
+            control.currentIntimacy += 7f;
         }
     }
 
@@ -740,17 +738,21 @@ public class DogFSM_K : MonoBehaviour
     {
         var scene = SceneManager.GetActiveScene();
 
-        if (scene.name == "Indoor")
+        if (DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].indoorWalkSound != null &&
+            DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].outdoorWalkSound != null)
         {
-            dogAudio.loop = true;
-            dogAudio.clip = DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].indoorWalkSound;
-            dogAudio.Play();
-        }
-        else
-        {
-            dogAudio.loop = true;
-            dogAudio.clip = DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].outdoorWalkSound;
-            dogAudio.Play();
+            if (scene.name == "H_Indoor")
+            {
+                dogAudio.loop = true;
+                dogAudio.clip = DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].indoorWalkSound;
+                dogAudio.Play();
+            }
+            else
+            {
+                dogAudio.loop = true;
+                dogAudio.clip = DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].outdoorWalkSound;
+                dogAudio.Play();
+            }
         }
     }
 
