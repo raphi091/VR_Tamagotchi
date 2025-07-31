@@ -50,7 +50,7 @@ public class TutorialPageController : MonoBehaviour
     {
         if (tutorialPages == null || tutorialPages.Count == 0) return;
 
-        if (currentPage <= 0) ;
+        if (currentPage <= 0)
         {
             Debug.Log("이미 첫 페이지입니다.");
             return;

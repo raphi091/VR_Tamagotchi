@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Button_J : MonoBehaviour, H_UI
+public class NextPage_J : MonoBehaviour, H_UI
 {
     public void OnPress()
     {
