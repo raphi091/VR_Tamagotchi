@@ -81,11 +81,11 @@ public class Ch_Knife : XRGrabInteractable
                  int indexOfSlice=slice_objs.IndexOf(quad);
                  for (int i = 0; i < slice_objs.Count; i++)
                  {
-                     if (i < indexOfSlice&&Vector3.Angle(this.transform.forward,target.transform.up)>=90f)
+                     if (i < indexOfSlice&&Vector3.Angle(this.transform.forward,target.transform.up) >= 90f)
                      {
                          slice_objs[i].SetParent(upperhull.transform);
                      }
-                     else if(i>indexOfSlice&&Vector3.Angle(this.transform.forward, target.transform.up) >= 90f)
+                     else if (i > indexOfSlice&&Vector3.Angle(this.transform.forward, target.transform.up) >= 90f)
                      {
                          slice_objs[i].SetParent(lowerhull.transform);
                      }
@@ -93,7 +93,7 @@ public class Ch_Knife : XRGrabInteractable
                      {
                          slice_objs[i].SetParent(lowerhull.transform);
                      }
-                     else if(i>indexOfSlice&&Vector3.Angle(this.transform.forward, target.transform.up) >= 90f)
+                     else if (i > indexOfSlice&&Vector3.Angle(this.transform.forward, target.transform.up) < 90f)
                      {
                          slice_objs[i].SetParent(upperhull.transform);
                      }
