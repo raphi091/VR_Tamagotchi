@@ -65,11 +65,11 @@ public class PetController_J : MonoBehaviour
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "H_Indoor")
         {
             this.currentHunger = Random.Range(80f, 90f);
-            this.currentBowel = 0f;
+            this.currentBowel = Random.Range(0f, 20f);
         }
         else
         {
-            this.currentHunger = data.hungerper;
+            this.currentHunger = 100f;
             this.currentBowel = data.bowelper;
         }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,12 +20,18 @@ public class Report_K : MonoBehaviour
             petImages[i].sprite = DatabaseManager_J.instance.petProfiles[GameManager.instance.petsInScene[i].petData.modelIndex].petPicture;
             petNames[i].text = GameManager.instance.petsInScene[i].petData.petName;
 
+            float imacy = (float)Math.Truncate(GameManager.instance.petsInScene[i].petData.intimacyper);
+            if (imacy >= 100f)
+                imacy = 100f;
+            else if (imacy <= 0f)
+                imacy = 0f;
+
             if (GameManager.instance.petsInScene[i].petData.foodType.Equals(foodType.Dry))
-                petFoodandImacys[i].text = $"{GameManager.instance.petsInScene[i].petData.intimacyper}\n건식";
+                petFoodandImacys[i].text = $"{imacy}\n건식";
             else if (GameManager.instance.petsInScene[i].petData.foodType.Equals(foodType.Wet))
-                petFoodandImacys[i].text = $"{GameManager.instance.petsInScene[i].petData.intimacyper}\n습식";
+                petFoodandImacys[i].text = $"{imacy}\n습식";
             else
-                petFoodandImacys[i].text = $"{GameManager.instance.petsInScene[i].petData.intimacyper}\n생식";
+                petFoodandImacys[i].text = $"{imacy}\n생식";
 
             if (GameManager.instance.petsInScene[i].petData.gender.Equals(Gender.Male))
                 genderIcons[i].sprite = DatabaseManager_J.instance.maleIcon;

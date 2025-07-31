@@ -1,6 +1,6 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -39,8 +39,14 @@ public class checkBoard : MonoBehaviour
             Poopy_status[i].fillAmount =
                 GameManager.instance.petsInScene[i].currentBowel / 100f;
 
+            float imacy = (float)Math.Truncate(GameManager.instance.petsInScene[i].currentIntimacy);
+            if (imacy >= 100f)
+                imacy = 100f;
+            else if (imacy <= 0f)
+                imacy = 0f;
+
             intimacy_status[i].fillAmount =
-                GameManager.instance.petsInScene[i].currentIntimacy / 100f;
+                imacy / 100f;
         }
 
     }
