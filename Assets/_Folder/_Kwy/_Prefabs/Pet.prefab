@@ -178,10 +178,10 @@ MonoBehaviour:
   ToiletPoint: {fileID: 0}
   EatPoint: {fileID: 0}
   nametext: {fileID: 3096981699854211505}
-  comeClip: {fileID: 0}
-  SitClip: {fileID: 0}
-  LiedownClip: {fileID: 0}
-  fetchClip: {fileID: 0}
+  comeClip: {fileID: 8300000, guid: d1d32926b26a73b4098a401eb5a6c069, type: 3}
+  SitClip: {fileID: 8300000, guid: 1e6b61143525bc54cbb3fecc36cef78a, type: 3}
+  LiedownClip: {fileID: 8300000, guid: 5b4a97180c9b8e945bbba804c3f588cb, type: 3}
+  fetchClip: {fileID: 8300000, guid: b059837bfea64d64a82e58f9834055e3, type: 3}
   mouthpoint: {fileID: 0}
   particlepoint: {fileID: 0}
   player: {fileID: 0}
@@ -304,7 +304,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 7271272388459734831, guid: 021c72c101bd2f64e8093fc1975a013b, type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
