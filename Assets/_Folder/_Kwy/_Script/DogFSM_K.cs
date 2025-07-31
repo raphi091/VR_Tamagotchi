@@ -28,6 +28,7 @@ public class DogFSM_K : MonoBehaviour
     [SerializeField] private Transform ToiletPoint;
     [SerializeField] private Transform EatPoint;
     [SerializeField] private GameObject nametext;
+    [SerializeField] private AudioClip comeClip, SitClip, LiedownClip, fetchClip;
 
     public Transform mouthpoint;
     public Transform particlepoint;
@@ -491,6 +492,7 @@ public class DogFSM_K : MonoBehaviour
         // 상호작용 대기 상태일 때만 '앉아' 명령을 수행
         if (currentState == State.Interaction)
         {
+            SoundManager.Instance.PlaySFX(SitClip);
             EnterState(State.Sit);
         }
     }
@@ -514,6 +516,7 @@ public class DogFSM_K : MonoBehaviour
         // 상호작용 대기 상태일 때만 '엎드려' 명령을 수행
         if (currentState == State.Interaction)
         {
+            SoundManager.Instance.PlaySFX(LiedownClip);
             EnterState(State.Liedown);
         }
     }
@@ -536,6 +539,7 @@ public class DogFSM_K : MonoBehaviour
     {
         if (currentState == State.Interaction)
         {
+            SoundManager.Instance.PlaySFX(fetchClip);
             EnterState(State.Catch, target);
         }
     }
@@ -653,6 +657,7 @@ public class DogFSM_K : MonoBehaviour
         // 다른 중요한 상태(상호작용 중 등)가 아닐 때만 호출에 응답
         if (currentState == State.Wander || currentState == State.Playing)
         {
+            SoundManager.Instance.PlaySFX(comeClip);
             EnterState(State.Called);
         }
     }
