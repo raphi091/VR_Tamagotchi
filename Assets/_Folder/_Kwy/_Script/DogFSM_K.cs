@@ -716,6 +716,7 @@ public class DogFSM_K : MonoBehaviour
     {
         if (DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].strokSound != null)
         {
+            Debug.Log(1);
             dogAudio.loop = true;
             dogAudio.clip = DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].strokSound;
             dogAudio.Play();
@@ -728,6 +729,7 @@ public class DogFSM_K : MonoBehaviour
             DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].indoorWalkSound != null &&
             DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].outdoorWalkSound != null)
         {
+            Debug.Log(2);
             dogAudio.Stop();
             dogAudio.clip = null;
             dogAudio.loop = false;
@@ -741,6 +743,7 @@ public class DogFSM_K : MonoBehaviour
         if (DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].indoorWalkSound != null &&
             DatabaseManager_J.instance.petProfiles[control.petData.modelIndex].outdoorWalkSound != null)
         {
+            Debug.Log(3);
             if (scene.name == "H_Indoor")
             {
                 dogAudio.loop = true;
