@@ -178,6 +178,10 @@ MonoBehaviour:
   ToiletPoint: {fileID: 0}
   EatPoint: {fileID: 0}
   nametext: {fileID: 3096981699854211505}
+  comeClip: {fileID: 0}
+  SitClip: {fileID: 0}
+  LiedownClip: {fileID: 0}
+  fetchClip: {fileID: 0}
   mouthpoint: {fileID: 0}
   particlepoint: {fileID: 0}
   player: {fileID: 0}
@@ -345,7 +349,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
