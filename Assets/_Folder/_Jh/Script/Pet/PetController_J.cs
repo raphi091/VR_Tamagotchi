@@ -96,6 +96,10 @@ public class PetController_J : MonoBehaviour
                     col.size = new Vector3(0.2f, 0.35f, 0.5f);
                     break;
             }
+
+            fsm.snack = FindObjectOfType<Snack>();
+            if (fsm.snack != null)
+                fsm.snack.SetUp(false);
         }
 
         LunchDog lunchDog = GetComponent<LunchDog>();

@@ -4384,6 +4384,10 @@ PrefabInstance:
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7225419347306197634, guid: 58fb78fa60c710346add55721d42ae36, type: 3}
+      propertyPath: ToiletPoint
+      value: 
+      objectReference: {fileID: 772289777}
     - target: {fileID: 8630242933777381908, guid: 58fb78fa60c710346add55721d42ae36, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.23
@@ -4587,6 +4591,10 @@ PrefabInstance:
     - target: {fileID: 5716330046253733016, guid: c071ef8f44f65c645b0d8be0c3a7ff49, type: 3}
       propertyPath: m_Name
       value: IndoorTutorial
+      objectReference: {fileID: 0}
+    - target: {fileID: 5716330046253733016, guid: c071ef8f44f65c645b0d8be0c3a7ff49, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8163300005748124228, guid: c071ef8f44f65c645b0d8be0c3a7ff49, type: 3}
       propertyPath: m_Pivot.x
@@ -5721,9 +5729,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1088640999910205114, guid: 78960e9149892584c97c64753d51b066, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -6478536213147159724, guid: 32472b26e9c4a7f45b911fb2f1e500f1, type: 3}
     - target: {fileID: 1406890330919134263, guid: 78960e9149892584c97c64753d51b066, type: 3}
       propertyPath: m_Name
       value: XR Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1406890330919134263, guid: 78960e9149892584c97c64753d51b066, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1651873527773737796, guid: 78960e9149892584c97c64753d51b066, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7219,7 +7235,7 @@ PrefabInstance:
     - target: {fileID: 7225419347306197634, guid: 58fb78fa60c710346add55721d42ae36, type: 3}
       propertyPath: ToiletPoint
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 772289777}
     - target: {fileID: 8630242933777381908, guid: 58fb78fa60c710346add55721d42ae36, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.44
@@ -9166,7 +9182,7 @@ PrefabInstance:
     - target: {fileID: 7225419347306197634, guid: 58fb78fa60c710346add55721d42ae36, type: 3}
       propertyPath: ToiletPoint
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 772289777}
     - target: {fileID: 8630242933777381908, guid: 58fb78fa60c710346add55721d42ae36, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.97
@@ -12087,6 +12103,7 @@ SceneRoots:
   - {fileID: 1533430388}
   - {fileID: 1846091700}
   - {fileID: 960029352}
+  - {fileID: 1040116166}
   - {fileID: 1920835638}
   - {fileID: 1990175310}
   - {fileID: 1512109495}
@@ -12103,4 +12120,3 @@ SceneRoots:
   - {fileID: 1284013802}
   - {fileID: 119866115}
   - {fileID: 876173578}
-  - {fileID: 1040116166}

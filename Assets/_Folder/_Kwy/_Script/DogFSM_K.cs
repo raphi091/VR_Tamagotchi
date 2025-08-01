@@ -33,6 +33,7 @@ public class DogFSM_K : MonoBehaviour
     public Transform mouthpoint;
     public Transform particlepoint;
     public Transform player;
+    public Snack snack;
     [AsRange(0f, 1f)] public Vector2 Hunger = new Vector2(0.2f, 0.5f);
     [AsRange(0f, 1f)] public Vector2 Toilet = new Vector2(0.1f, 0.4f);
     public float sightRange = 1f;
@@ -225,37 +226,38 @@ public class DogFSM_K : MonoBehaviour
         agent.isStopped = true;
         agent.ResetPath();
         isWandering = false;
-        isCalled = false;
-        animator.SetBool("INTERACT", false);
 
         while (true)
         {
             yield return null;
 
-            if (IsPlayerInSight())
-            {
+            if (IsPlayerInSight()) 
+            { 
                 EnterState(State.InteractionRequest);
-                yield break;
+                yield break; 
             }
 
-            if (control.currentHunger <= 10f || isHunger)
+            if (control.currentHunger <= 10f || isHunger) 
             {
                 EnterState(State.Hunger);
                 yield break;
             }
 
-            if (control.currentBowel >= 90f && !isHunger && ToiletPoint != null)
-            {
+            if (control.currentBowel >= 90f && !isHunger && ToiletPoint != null) 
+            { 
                 EnterState(State.Toilet);
                 yield break;
             }
 
             if (isWandering)
             {
-                if (agent.remainingDistance < 0.5f)
+                if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
                 {
                     isWandering = false;
                     lastStateChangeTime = Time.time;
+
+                    agent.isStopped = true;
+                    agent.ResetPath();
                 }
             }
             else
@@ -263,38 +265,38 @@ public class DogFSM_K : MonoBehaviour
                 if (Time.time > lastStateChangeTime + 1f)
                 {
                     int randAction = Random.Range(0, 10);
-                    float rang;
-                    float movespeed;
-
                     if (randAction <= 5)
                     {
-                        if (control.currentIntimacy >= 80)
+                        float rang;
+                        float movespeed;
+
+                        if (control.currentIntimacy >= 66f)
                         {
                             rang = data.Active_MovingRang;
                             movespeed = data.Active_walkSpeed;
                         }
-                        else if (control.currentIntimacy >= 20)
+                        else if (control.currentIntimacy >= 33f)
+                        {
+                            rang = data.Sky_MovingRang;
+                            movespeed = data.Shy_walkSpeed;
+                        }
+                        else
                         {
                             rang = data.MovingRang;
                             movespeed = data.walkSpeed;
                         }
-                        else
-                        {
-                            rang = data.Sky_MovingRang;
-                            movespeed = data.Shy_walkSpeed;
-                        }           
-                        
+
                         Vector3 randomDirection = Random.insideUnitSphere * rang;
                         randomDirection += transform.position;
 
                         NavMeshHit hit;
-                        NavMesh.SamplePosition(randomDirection, out hit, rang, 1);
-                        Vector3 finalPosition = hit.position;
-
-                        agent.speed = movespeed;
-                        agent.SetDestination(finalPosition);
-                        agent.isStopped = false;
-                        isWandering = true;
+                        if (NavMesh.SamplePosition(randomDirection, out hit, rang, 1))
+                        {
+                            agent.speed = movespeed;
+                            agent.SetDestination(hit.position);
+                            agent.isStopped = false;
+                            isWandering = true;
+                        }
                     }
                     else if (randAction <= 8)
                     {
@@ -302,15 +304,12 @@ public class DogFSM_K : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("월!");
                         animator.SetTrigger("BARK");
-
+                        lastStateChangeTime = Time.time;
                         yield return new WaitForSeconds(4f);
                     }
                 }
             }
-
-            yield return null;
         }
     }
 
@@ -394,6 +393,7 @@ public class DogFSM_K : MonoBehaviour
         agent.isStopped = true;
         agent.ResetPath();
         ShowText(particlepoint.position);
+        PlayBark();
 
         while (true)
         {
@@ -429,6 +429,7 @@ public class DogFSM_K : MonoBehaviour
     {
         animator.SetBool("STROK", false);
         animator.SetBool("INTERACT", true);
+        PlayBark();
 
         while (isSelected)
         {
@@ -596,6 +597,7 @@ public class DogFSM_K : MonoBehaviour
         }
 
         // 5. 임무 완수 후 다시 상호작용 대기 상태로 복귀
+        PlayBark();
         control.currentIntimacy += 5f;
         EnterState(State.Interaction);
     }
@@ -605,10 +607,12 @@ public class DogFSM_K : MonoBehaviour
         Debug.Log($"{name}: 배고파요! 주인을 따라다닙니다.");
         isHunger = true;
         agent.isStopped = false;
+        snack.SetUp(true);
 
         while (isHunger)
         {
             // 0.25초마다 한 번씩 플레이어의 위치로 목적지를 갱신
+            PlayBark();
             agent.SetDestination(player.position);
             yield return new WaitForSeconds(0.25f);
         }
@@ -621,10 +625,12 @@ public class DogFSM_K : MonoBehaviour
         if (currentState == State.Hunger)
         {
             Debug.Log($"{name}: 간식 고맙습니다!");
+            PlayBark();
             control.currentHunger = 100f;
             isHunger = false;
 
             animator.SetTrigger("EAT");
+            snack.SetUp(false);
             control.currentIntimacy += 7f;
         }
     }
